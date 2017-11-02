@@ -1,0 +1,7 @@
+book_rater_rater:
+    resource: "@BookRaterRaterBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
