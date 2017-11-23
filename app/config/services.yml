@@ -29,10 +29,10 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    app.form.registration:
-        class: BookRater\RaterBundle\Form\RegistrationType
-        tags:
-            - { name: form.type, alias: app_user_registration }
+#    app.form.registration:
+#        class: BookRater\RaterBundle\Form\RegistrationType
+#        tags:
+#            - { name: form.type, alias: app_user_registration }
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

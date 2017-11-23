@@ -1,0 +1,10 @@
+{% extends "BookRaterRaterBundle::layout.html.twig" %}
+
+{% block title %}{{ author.lastName }}, {{ author.firstName }} {{ author.initial }}{% endblock %}
+{% block header %}View Author{% endblock %}
+{% block body %}
+    <p>Name: {{ author.firstName }} {{ author.initial }} {{ author.lastName }}</p>
+    <ul>
+
+    </ul>
+{% endblock %}

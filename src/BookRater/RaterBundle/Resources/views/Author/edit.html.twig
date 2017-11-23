@@ -1,0 +1,8 @@
+{% extends "@BookRaterRater/layout.html.twig" %}
+
+{% block title %}Edit {{ author.lastName }}, {{ author.firstName }}{% endblock %}
+{% block header %}Edit {{ author.lastName }}, {{ author.firstName }}{% endblock %}
+
+{% block body %}
+    {{ form(form) }}
+{% endblock %}

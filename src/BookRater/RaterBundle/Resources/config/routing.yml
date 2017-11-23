@@ -9,3 +9,29 @@ bookrater_about:
 bookrater_contact:
     path: /contact
     defaults: { _controller: BookRaterRaterBundle:Page:contact }
+
+bookrater_author_view:
+    path:     /author/view/{id}
+    defaults: { _controller: BookRaterRaterBundle:Author:view }
+    methods: [GET]
+    requirements:
+        id: \d+
+
+bookrater_author_create:
+    path:     /author/create
+    defaults: { _controller: BookRaterRaterBundle:Author:create }
+    methods: [GET, POST]
+
+bookrater_author_edit:
+    path:     /author/edit/{id}
+    defaults: { _controller: BookRaterRaterBundle:Author:edit }
+    methods: [GET, POST]
+    requirements:
+        id: \d+
+
+#bookrater_author_delete:
+#    path:     /author/delete/{id}
+#    defaults: { _controller: BookRaterRaterBundle:Author::delete }
+#    methods: [GET, DELETE]
+#    requirements:
+#        id: \d+

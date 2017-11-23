@@ -1,9 +1,15 @@
 {% extends '::base.html.twig' %}
+
 {% block sidebar %}
-    <ul>
-        <li><a href="#">Search</a></li>
-        <li><a href="#">Search</a></li>
-        <li><a href="#">Search</a></li>
-        <li><a href="#">Search</a></li>
-    </ul>
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Books"/>
+                <a href="#" class="input-group-addon"><i class="fa fa-search"></i></a>
+            </div>
+        </div>
+        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus-circle"></i> Add Review</a>
+        <a href="#" class="list-group-item list-group-item-action">Search</a>
+        <a href="#" class="list-group-item list-group-item-action">Search</a>
+    </div>
 {% endblock %}

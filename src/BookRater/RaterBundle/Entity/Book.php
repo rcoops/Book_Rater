@@ -203,11 +203,11 @@ class Book
     /**
      * Add author
      *
-     * @param \BookRater\RaterBundle\Entity\Author $author
+     * @param Author $author
      *
      * @return Book
      */
-    public function addAuthor(\BookRater\RaterBundle\Entity\Author $author)
+    public function addAuthor(Author $author)
     {
         $this->authors[] = $author;
 
@@ -217,9 +217,9 @@ class Book
     /**
      * Remove author
      *
-     * @param \BookRater\RaterBundle\Entity\Author $author
+     * @param Author $author
      */
-    public function removeAuthor(\BookRater\RaterBundle\Entity\Author $author)
+    public function removeAuthor(Author $author)
     {
         $this->authors->removeElement($author);
     }
@@ -237,11 +237,11 @@ class Book
     /**
      * Add review
      *
-     * @param \BookRater\RaterBundle\Entity\Review $review
+     * @param Review $review
      *
      * @return Book
      */
-    public function addReview(\BookRater\RaterBundle\Entity\Review $review)
+    public function addReview(Review $review)
     {
         $this->reviews[] = $review;
 
@@ -251,9 +251,9 @@ class Book
     /**
      * Remove review
      *
-     * @param \BookRater\RaterBundle\Entity\Review $review
+     * @param Review $review
      */
-    public function removeReview(\BookRater\RaterBundle\Entity\Review $review)
+    public function removeReview(Review $review)
     {
         $this->reviews->removeElement($review);
     }
