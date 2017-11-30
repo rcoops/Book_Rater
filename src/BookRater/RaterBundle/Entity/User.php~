@@ -20,6 +20,8 @@ final class User extends BaseUser
      */
     protected $id;
 
+    protected $name;
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
@@ -33,6 +35,9 @@ final class User extends BaseUser
         $this->reviews = new ArrayCollection();
     }
 
+    public function getName() {
+        return $this->name;
+    }
 
     /**
      * Add review

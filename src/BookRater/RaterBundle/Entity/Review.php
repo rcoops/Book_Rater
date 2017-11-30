@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +51,18 @@ final class Review
     private $bookReviewed;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_date", type="datetime")
+     */
+    private $created;
+
+    /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -126,7 +134,7 @@ final class Review
      *
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -153,6 +161,22 @@ final class Review
     public function getBookReviewed()
     {
         return $this->bookReviewed;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param DateTime $created
+     */
+    public function setCreated(DateTime $created)
+    {
+        $this->created = $created;
     }
 
 }

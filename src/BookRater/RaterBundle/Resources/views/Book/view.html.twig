@@ -1,10 +1,40 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
-{% block title %}{{ book.lastName }}, {{ book.firstName }} {{ book.initial }}{% endblock %}
-{% block header %}View Book{% endblock %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block header %}{% endblock %}
 {% block body %}
-    <p>Name: {{ book.firstName }} {{ book.initial }} {{ book.lastName }}</p>
-    <ul>
-
-    </ul>
+    <section class="well well-sm">
+        <header>
+            <h2>
+                {{ book.title }}
+            </h2>
+            <h4>
+                {% if book.authors is not empty %}
+                    {% set count = book.authors.count %}
+                    {{ book.authors[0].getDisplayName() }}
+                    {% for item in book.authors|slice(1, count - 1) if count > 1 %}
+                        ; {{ item.getDisplayName() }}
+                    {%  endfor %}
+                {% endif %}
+            </h4>
+        </header>
+        <p>
+            {% if (book.edition) %}
+                {{ book.edition }}
+                {% if book.edition == 1 %}
+                    st
+                {% elseif book.edition == 2 %}
+                    nd
+                {% elseif book.edition == 3 %}
+                    rd
+                {% else %}
+                    th
+                {%  endif %}
+                Edition
+            {% endif %}
+            {% if (book.publishDate) %}
+                , {{ book.publishDate|date('Y-m-d') }}
+            {% endif %}
+        </p>
+    </section>
 {% endblock %}

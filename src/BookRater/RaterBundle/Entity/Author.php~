@@ -141,13 +141,16 @@ final class Author
     /**
      * Add booksAuthored
      *
-     * @param Book $booksAuthored
+     * @param Book $bookAuthored
      *
      * @return Author
      */
-    public function addBooksAuthored(Book $booksAuthored)
+    public function addBookAuthored(Book $bookAuthored)
     {
-        $this->booksAuthored[] = $booksAuthored;
+        if (!$this->booksAuthored->contains($bookAuthored))
+        {
+            $this->booksAuthored[] = $bookAuthored;
+        }
 
         return $this;
     }
@@ -159,6 +162,11 @@ final class Author
      */
     public function removeBooksAuthored(Book $booksAuthored)
     {
+        if ($this->booksAuthored->contains($bookAuthored))
+        {
+            $bookAuthored->removeAuthor($this);
+        }
+
         $this->booksAuthored->removeElement($booksAuthored);
     }
 
@@ -170,6 +178,16 @@ final class Author
     public function getBooksAuthored()
     {
         return $this->booksAuthored;
+    }
+
+    public function getDisplayName()
+    {
+        $name = $this->getLastName() . ', ' . $this->getFirstName();
+        if ($this->initial)
+        {
+            return $name . ' ' . $this->initial;
+        }
+        return $name;
     }
 
 }

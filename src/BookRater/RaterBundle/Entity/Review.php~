@@ -3,6 +3,7 @@
 namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Review
@@ -48,6 +49,11 @@ final class Review
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews")
      */
     private $bookReviewed;
+
+    /**
+     * @var DateTime
+     */
+    private $created;
 
     /**
      * Get id

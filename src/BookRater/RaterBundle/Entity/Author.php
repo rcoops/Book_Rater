@@ -141,13 +141,16 @@ final class Author
     /**
      * Add booksAuthored
      *
-     * @param Book $booksAuthored
+     * @param Book $bookAuthored
      *
      * @return Author
      */
-    public function addBooksAuthored(Book $booksAuthored)
+    public function addBookAuthored(Book $bookAuthored)
     {
-        $this->booksAuthored[] = $booksAuthored;
+        if (!$this->booksAuthored->contains($bookAuthored))
+        {
+            $this->booksAuthored[] = $bookAuthored;
+        }
 
         return $this;
     }
@@ -155,10 +158,15 @@ final class Author
     /**
      * Remove booksAuthored
      *
-     * @param Book $booksAuthored
+     * @param Book $bookAuthored
      */
-    public function removeBooksAuthored(Book $booksAuthored)
+    public function removeBooksAuthored(Book $bookAuthored)
     {
+        if ($this->booksAuthored->contains($bookAuthored))
+        {
+            $bookAuthored->removeAuthor($this);
+        }
+
         $this->booksAuthored->removeElement($booksAuthored);
     }
 
@@ -182,4 +190,18 @@ final class Author
         return $name;
     }
 
+
+    /**
+     * Add booksAuthored
+     *
+     * @param \BookRater\RaterBundle\Entity\Book $booksAuthored
+     *
+     * @return Author
+     */
+    public function addBooksAuthored(Book $booksAuthored)
+    {
+        $this->booksAuthored[] = $booksAuthored;
+
+        return $this;
+    }
 }

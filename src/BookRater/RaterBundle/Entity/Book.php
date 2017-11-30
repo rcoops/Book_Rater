@@ -67,7 +67,7 @@ class Book
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
+     * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored", cascade={"persist"})
      */
     private $authors;
 
@@ -121,7 +121,7 @@ class Book
     /**
      * Get isbn13
      *
-     * @return int
+     * @return string
      */
     public function getIsbn13()
     {
@@ -209,6 +209,7 @@ class Book
      */
     public function addAuthor(Author $author)
     {
+        $author->addBookAuthored($this);
         $this->authors[] = $author;
 
         return $this;
@@ -221,6 +222,10 @@ class Book
      */
     public function removeAuthor(Author $author)
     {
+        if ($author->getBooksAuthored()->contains($this))
+        {
+            $author->removeBooksAuthored($this);
+        }
         $this->authors->removeElement($author);
     }
 
@@ -275,7 +280,7 @@ class Book
      *
      * @return Book
      */
-    public function setIsbn($isbn)
+    public function setIsbn(string $isbn)
     {
         $this->isbn = $isbn;
 
@@ -299,7 +304,7 @@ class Book
      *
      * @return Book
      */
-    public function setIsbn13($isbn13)
+    public function setIsbn13(string $isbn13)
     {
         $this->isbn13 = $isbn13;
 

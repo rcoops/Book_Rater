@@ -1,0 +1,19 @@
+{% extends "BookRaterRaterBundle::layout.html.twig" %}
+
+{% block title %}Home{% endblock %}
+{% block header %}Latest Additions{% endblock %}
+{% block body %}
+    {% for review in latestReviews %}
+        <article>
+            <h2><a href="{{ path('bookrater_review_view',{id : review.id}) }}">
+                    {{ review.bookReviewed.title| title }}
+                </a>
+            </h2>
+            <p>{{ review.rating }}</p>
+            <p>{{ review.reviewComments| nl2br }}</p>
+            <p>
+                <small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small>
+            </p>
+        </article>
+    {% endfor %}
+{% endblock %}

@@ -12,4 +12,10 @@ use \Doctrine\ORM\EntityRepository;
  */
 class BookRepository extends EntityRepository
 {
+
+    public function findAllQueryBuilder()
+    {
+        return $this->createQueryBuilder('book')
+            ->orderBy('book.title');
+    }
 }

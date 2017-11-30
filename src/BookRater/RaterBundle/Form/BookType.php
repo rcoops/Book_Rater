@@ -7,6 +7,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,14 +25,22 @@ class BookType extends AbstractType
             ->add('publisher')
             ->add('publishDate')
             ->add('edition')
-            ->add('authors', EntityType::class, [
-                'class' => 'BookRater\RaterBundle\Entity\Author',
-                'choice_label' => 'displayName',
-                'query_builder' => function(AuthorRepository $ar) {
-                    return $ar->findAllOrderedByName();
-                },
-                'placeholder' => 'Choose Author...'
-            ]);
+            ->add('authors', CollectionType::class, [
+                'entry_type' => AuthorType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete'=> true,
+            ])
+            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
+//            ->add('authors', EntityType::class, [
+//                'class' => 'BookRater\RaterBundle\Entity\Author',
+//                'choice_label' => 'displayName',
+//                'query_builder' => function(AuthorRepository $ar) {
+//                    return $ar->findAllOrderedByName();
+//                },
+//                'placeholder' => 'Choose Author...'
+//            ]);
 //            ->add('createAuthor', ButtonType::class, ['attr' => ['class' => 'btn btn-primary']]);
     }
     
@@ -41,10 +51,8 @@ class BookType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'authors' => ['Create...'],
                 'data_class' => 'BookRater\RaterBundle\Entity\Book'
-            ])
-            ->setAllowedTypes('authors', ['array']);
+            ]);
     }
 
     /**

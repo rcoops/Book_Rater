@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Sideclick\BootstrapModalBundle\SideclickBootstrapModalBundle(),
             new AppBundle\AppBundle(),
             new BookRater\RaterBundle\BookRaterRaterBundle(),
         ];

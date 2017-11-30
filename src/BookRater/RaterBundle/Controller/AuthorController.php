@@ -4,33 +4,26 @@ namespace BookRater\RaterBundle\Controller;
 
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Form\AuthorType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 
-class AuthorController extends Controller
+class AuthorController extends EntityController
 {
 
     /**
-     * @var ObjectManager
+     * @var \BookRater\RaterBundle\Repository\ReviewRepository|\Doctrine\ORM\EntityRepository
      */
-    private $entityManager;
-
-    /**
-     * @var \BookRater\RaterBundle\Repository\AuthorRepository|\Doctrine\ORM\EntityRepository
-     */
-    private $entryRepository;
+    protected $authorRepository;
 
     public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entityManager->getRepository('BookRaterRaterBundle:Author');
+        parent::__construct($entityManager);
+        $this->authorRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Author');
     }
 
     public function viewAction(int $id)
     {
-        $author = $this->entryRepository->find($id);
+        $author = $this->authorRepository->find($id);
 
         return $this->render('BookRaterRaterBundle:Author:view.html.twig', ['author' => $author]);
     }
@@ -54,8 +47,7 @@ class AuthorController extends Controller
 
     public function editAction(int $id, Request $request)
     {
-
-        $author = $this->entryRepository->find($id);
+        $author = $this->authorRepository->find($id);
 
         $form = $this->createForm(AuthorType::class, $author, [
             'action' => $request->getUri()
