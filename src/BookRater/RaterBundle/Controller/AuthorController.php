@@ -30,7 +30,7 @@ class AuthorController extends Controller
 
     public function viewAction(int $id)
     {
-        $author = $this->find($id);
+        $author = $this->entryRepository->find($id);
 
         return $this->render('BookRaterRaterBundle:Author:view.html.twig', ['author' => $author]);
     }
@@ -55,7 +55,7 @@ class AuthorController extends Controller
     public function editAction(int $id, Request $request)
     {
 
-        $author = $this->find($id);
+        $author = $this->entryRepository->find($id);
 
         $form = $this->createForm(AuthorType::class, $author, [
             'action' => $request->getUri()
@@ -67,15 +67,6 @@ class AuthorController extends Controller
         }
         return $this->render('BookRaterRaterBundle:Author:edit.html.twig',
             ['form' => $form->createView(), 'author' => $author]);
-    }
-
-    private function persistAndFlush(Author $author)
-    {
-    }
-
-    private function find(int $id)
-    {
-        return $this->entryRepository->find($id);
     }
 
 }

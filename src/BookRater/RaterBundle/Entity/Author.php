@@ -172,4 +172,14 @@ final class Author
         return $this->booksAuthored;
     }
 
+    public function getDisplayName()
+    {
+        $name = $this->getLastName() . ', ' . $this->getFirstName();
+        if ($this->initial)
+        {
+            return $name . ' ' . $this->initial;
+        }
+        return $name;
+    }
+
 }

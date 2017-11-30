@@ -12,4 +12,13 @@ use \Doctrine\ORM\EntityRepository;
  */
 class AuthorRepository extends EntityRepository
 {
+
+    public function findAllOrderedByName()
+    {
+        return $this->createQueryBuilder('author')
+            ->addOrderBy('author.lastName')
+            ->addOrderBy('author.firstName')
+            ->addOrderBy('author.initial');
+    }
+
 }

@@ -11,20 +11,39 @@ bookrater_contact:
     defaults: { _controller: BookRaterRaterBundle:Page:contact }
 
 bookrater_author_view:
-    path:     /author/view/{id}
+    path:     /view/author/{id}
     defaults: { _controller: BookRaterRaterBundle:Author:view }
     methods: [GET]
     requirements:
         id: \d+
 
 bookrater_author_create:
-    path:     /author/create
+    path:     /create/author
     defaults: { _controller: BookRaterRaterBundle:Author:create }
     methods: [GET, POST]
 
 bookrater_author_edit:
-    path:     /author/edit/{id}
+    path:     /edit/author/{id}
     defaults: { _controller: BookRaterRaterBundle:Author:edit }
+    methods: [GET, POST]
+    requirements:
+        id: \d+
+
+bookrater_book_view:
+    path:     /view/book/{id}
+    defaults: { _controller: BookRaterRaterBundle:Book:view }
+    methods: [GET]
+    requirements:
+        id: \d+
+
+bookrater_book_create:
+    path:     /create/book
+    defaults: { _controller: BookRaterRaterBundle:Book:create }
+    methods: [GET, POST]
+
+bookrater_book_edit:
+    path:     /edit/book/{id}
+    defaults: { _controller: BookRaterRaterBundle:Book:edit }
     methods: [GET, POST]
     requirements:
         id: \d+
