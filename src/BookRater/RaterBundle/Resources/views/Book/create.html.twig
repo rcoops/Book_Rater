@@ -10,98 +10,115 @@
     <script type="text/javascript" src="{{ asset_url }} "></script>
     {% endjavascripts %}
     <script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
-    <script type="application/javascript">
-        var $collectionHolder;
+    {#<script type="application/javascript">#}
+    {#var $collectionHolder;#}
 
-        // setup an "add a tag" link
-        var $addTagLink = $('<a href="#" class="btn btn-success">Add an Author</a>');
-        var $newLinkLi = $('<li></li>').append($addTagLink);
+    {#// setup an "add a tag" link#}
+    {#var $addTagLink = $('<a href="#" class="btn btn-success">Add an Author</a>');#}
+    {#var $newLinkLi = $('<li></li>').append($addTagLink);#}
 
-        jQuery(document).ready(function() {
-            // Get the ul that holds the collection of tags
-            $collectionHolder = $('ul.authors');
+    {#jQuery(document).ready(function() {#}
+    {#// Get the ul that holds the collection of tags#}
+    {#$collectionHolder = $('ul.authors');#}
 
-            // add the "add a tag" anchor and li to the tags ul
-            $collectionHolder.append($newLinkLi);
+    {#// add the "add a tag" anchor and li to the tags ul#}
+    {#$collectionHolder.append($newLinkLi);#}
 
-            // count the current form inputs we have (e.g. 2), use that as the new
-            // index when inserting a new item (e.g. 2)
-            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    {#// count the current form inputs we have (e.g. 2), use that as the new#}
+    {#// index when inserting a new item (e.g. 2)#}
+    {#$collectionHolder.data('index', $collectionHolder.find(':input').length);#}
 
-            $addTagLink.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
+    {#$addTagLink.on('click', function(e) {#}
+    {#// prevent the link from creating a "#" on the URL#}
+    {#e.preventDefault();#}
 
-                // add a new tag form (see next code block)
-                addAuthorForm($collectionHolder, $newLinkLi);
-            });
+    {#// add a new tag form (see next code block)#}
+    {#addAuthorForm($collectionHolder, $newLinkLi);#}
+    {#});#}
 
-            // add a delete link to all of the existing tag form li elements
-            $collectionHolder.find('li').each(function() {
-                addAuthorFormDeleteLink($(this));
-            });
-        });
+    {#// add a delete link to all of the existing tag form li elements#}
+    {#$collectionHolder.find('li').each(function() {#}
+    {#addAuthorFormDeleteLink($(this));#}
+    {#});#}
+    {#});#}
 
-        function addAuthorForm($collectionHolder, $newLinkLi) {
-            // Get the data-prototype explained earlier
-            var prototype = $collectionHolder.data('prototype');
-            // get the new index
-            var index = $collectionHolder.data('index');
+    {#function addAuthorForm($collectionHolder, $newLinkLi) {#}
+    {#// Get the data-prototype explained earlier#}
+    {#var prototype = $collectionHolder.data('prototype');#}
+    {#// get the new index#}
+    {#var index = $collectionHolder.data('index');#}
 
-            var newForm = prototype;
-//            // You need this only if you didn't set 'label' => false in your tags field in TaskType
-//            // Replace '__name__label__' in the prototype's HTML to
-//            // instead be a number based on how many items we have
-//            // newForm = newForm.replace(/__name__label__/g, index);
-//
-//            // Replace '__name__' in the prototype's HTML to
-//            // instead be a number based on how many items we have
-//            newForm = newForm.replace(/__name__/g, index);
+    {#var newForm = prototype;#}
+    {#//            // You need this only if you didn't set 'label' => false in your tags field in TaskType#}
+    {#//            // Replace '__name__label__' in the prototype's HTML to#}
+    {#//            // instead be a number based on how many items we have#}
+    {#//            // newForm = newForm.replace(/__name__label__/g, index);#}
+    {#//#}
+    {#//            // Replace '__name__' in the prototype's HTML to#}
+    {#//            // instead be a number based on how many items we have#}
+    {#//            newForm = newForm.replace(/__name__/g, index);#}
 
-            // increase the index with one for the next item
-            $collectionHolder.data('index', index + 1);
+    {#// increase the index with one for the next item#}
+    {#$collectionHolder.data('index', index + 1);#}
 
-            // Display the form in the page in an li, before the "Add a tag" link li
-            var $newFormLi = $('<li></li>').append(newForm);
-            $newLinkLi.before($newFormLi);
-        }
+    {#// Display the form in the page in an li, before the "Add a tag" link li#}
+    {#var $newFormLi = $('<li></li>').append(newForm);#}
+    {#$newLinkLi.before($newFormLi);#}
+    {#}#}
 
-        function addAuthorFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a href="#" class="btn btn-success">Remove Author</a>');
-            $tagFormLi.append($removeFormA);
+    {#function addAuthorFormDeleteLink($tagFormLi) {#}
+    {#var $removeFormA = $('<a href="#" class="btn btn-success">Remove Author</a>');#}
+    {#$tagFormLi.append($removeFormA);#}
 
-            $removeFormA.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
+    {#$removeFormA.on('click', function(e) {#}
+    {#// prevent the link from creating a "#" on the URL#}
+    {#e.preventDefault();#}
 
-                // remove the li for the tag form
-                $tagFormLi.remove();
-            });
-        }
-    </script>
+    {#// remove the li for the tag form#}
+    {#$tagFormLi.remove();#}
+    {#});#}
+    {#}#}
+    {#</script>#}
 {% endblock %}
 {% block header %}Add Book{% endblock %}
 {% block body %}
+    {#{{ form(form) }}#}
     {{ form_start(form) }}
     {{ form_row(form.title) }}
-    {{ form_row(form.isbn) }}
-    {{ form_row(form.isbn13) }}
     {{ form_row(form.publisher) }}
-    {{ form_row(form.publishDate) }}
-    {{ form_row(form.edition) }}
-    <ul class="authors" data-prototype="{{ form_widget(form.authors.vars.prototype)|e('html_attr') }}">
-        {% for author in form.authors %}
-            <li>
-                {{ form_row(author.firstName) }}
-                {{ form_row(author.lastName) }}
-                {{ form_row(author.initial) }}
-            </li>
-        {%  endfor %}
-    </ul>
+    <div class="form-group row">
+        <div class="col-md-6">
+            {{ form_row(form.isbn) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.isbn13) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            {{ form_row(form.authors) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.publishDate) }}
+        </div>
+        <div class="col-md-2">
+            {{ form_row(form.edition) }}
+        </div>
+    </div>
+    {#{{ form_label(form.authors) }}#}
+    {#<div class="form-group row">#}
+    {#<div class="col-md-10">#}
+    {#{{ form_widget(form.authors) }}#}
+    {#</div>#}
+    {#<div class="col-md-2">#}
+    {#{{ form_row(form.addAuthor) }}#}
+    {#</div>#}
+    {#</div>#}
+
     {{ form_end(form) }}
-    {#<div class="modal fade authors" id="emptyModal" data-prototype="{{ form_widget(form.authors.vars.prototype)|e('html_attr') }}"#}
-         {#tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-async data-target="#emptyModal">#}
-        {#<div class="modal-dialog">#}
-        {#</div>#}
+    {#<a href="#modal{{ path('bookrater_author_create') }}" class="btn btn-success" data-sideclick-modal-trigger>Create Author</a>#}
+    {#<div class="modal fade" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-async data-target="#emptyModal">#}
+    {#<div class="modal-dialog">#}
+    {#</div>#}
     {#</div>#}
 {% endblock %}

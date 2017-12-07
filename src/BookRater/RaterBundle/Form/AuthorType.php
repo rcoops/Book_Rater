@@ -18,8 +18,8 @@ class AuthorType extends AbstractType
     {
         $builder->add('lastName', TextType::class, ['required' => true])
             ->add('initial', TextType::class)
-            ->add('firstName', TextType::class, ['required' => true]);
-//            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
+            ->add('firstName', TextType::class, ['required' => true])
+            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }
     
     /**
