@@ -7,9 +7,15 @@
                 <input type="text" class="form-control" placeholder="Search Books"/>
                 <a href="#" class="input-group-addon"><i class="fa fa-search"></i></a>
             </div>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Authors"/>
+                <a href="#" class="input-group-addon"><i class="fa fa-search"></i></a>
+            </div>
         </div>
-        <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-plus-circle"></i> Add Review</a>
-        <a href="#" class="list-group-item list-group-item-action">Search</a>
-        <a href="#" class="list-group-item list-group-item-action">Search</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('bookrater_book_create') }}" class="list-group-item list-group-item-action"><i class="fa fa-plus-circle"></i> Add Book</a>
+            <a href="{{ path('bookrater_author_create') }}" class="list-group-item list-group-item-action"><i class="fa fa-plus-circle"></i> Add Author</a>
+            <a href="{{ path('bookrater_review_create') }}" class="list-group-item list-group-item-action"><i class="fa fa-plus-circle"></i> Add Review</a>
+        {% endif %}
     </div>
 {% endblock %}
