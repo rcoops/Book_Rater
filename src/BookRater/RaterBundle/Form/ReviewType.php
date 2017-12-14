@@ -6,6 +6,7 @@ use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Repository\BookRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,11 +23,11 @@ class ReviewType extends AbstractType
                 'class' => Book::class,
                 'choice_label' => 'title',
                 'query_builder' => function(BookRepository $ar) {
-                    return $ar->findAllQueryBuilder();
+                    return $ar->findAllOrderedByNameQB();
                 },
                 'placeholder' => 'Choose Book...'
             ])
-            ->add('rating')
+            ->add('rating', IntegerType::class, ['attr' => ['min' => 0, 'max' => 5]])
             ->add('reviewComments')
             ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }

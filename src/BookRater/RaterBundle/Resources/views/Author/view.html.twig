@@ -1,10 +1,21 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
-{% block title %}{{ author.lastName }}, {{ author.firstName }} {{ author.initial }}{% endblock %}
-{% block header %}View Author{% endblock %}
+{% block title %}{{ author.displayName }}{% endblock %}
 {% block body %}
-    <p>Name: {{ author.firstName }} {{ author.initial }} {{ author.lastName }}</p>
-    <ul>
-
-    </ul>
+    <header>
+        <h2>{{ author.displayName }}</h2>
+    </header>
+        <h3>Books Authored</h3>
+        <ul>
+            {% if author.booksAuthored is not empty %}
+                {% set count = author.booksAuthored.count %}
+                <li>{{ author.booksAuthored[0].title -}}</li>
+                {% for book in author.booksAuthored|slice(1, count - 1) if count > 1 %}
+                    <li>{{ book.title -}}</li>
+                {%  endfor %}
+            {% endif %}
+        </ul>
+    <p>
+        <a href="{{ path('bookrater_author_edit', {'id': author.id }) }}" class="btn btn-primary">Edit</a>
+    </p>
 {% endblock %}

@@ -33,9 +33,6 @@ class BookController extends EntityController
     {
         $book = new Book();
 
-        $author = new Author();
-        $book->getAuthors()->add($author);
-
         $form = $this->createForm(BookType::class, $book, [
             'action' => $request->getUri()]);
 
@@ -60,6 +57,8 @@ class BookController extends EntityController
 
         if($form->isValid()) {
             $this->entityManager->flush();
+
+            return $this->redirect($this->generateUrl('bookrater_book_view', ['id' => $book->getId()]));
         }
         return $this->render('BookRaterRaterBundle:Book:edit.html.twig',
             ['form' => $form->createView(), 'book' => $book]);

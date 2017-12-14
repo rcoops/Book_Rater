@@ -11,30 +11,31 @@
             <h4>
                 {% if book.authors is not empty %}
                     {% set count = book.authors.count %}
-                    {{ book.authors[0].getDisplayName() }}
+                    {{ book.authors[0].getDisplayName() -}}
                     {% for item in book.authors|slice(1, count - 1) if count > 1 %}
-                        ; {{ item.getDisplayName() }}
+                        {{- '; ' }}{{item.getDisplayName() -}}
                     {%  endfor %}
                 {% endif %}
             </h4>
         </header>
         <p>
-            {% if (book.edition) %}
-                {{ book.edition }}
+            {% if (book.edition) %} {# - necessary on both sides to remove whitespace between tags #}
+                {{ book.edition -}} {# -}} remove trailing whitespace between twig tags #}
+                {{- '' -}}
                 {% if book.edition == 1 %}
-                    st
+                    {{- 'st' }} {# {{- remove leading whitespace between twig tags #}
                 {% elseif book.edition == 2 %}
-                    nd
+                    {{- 'nd' }}
                 {% elseif book.edition == 3 %}
-                    rd
+                    {{- 'rd' }}
                 {% else %}
-                    th
+                    {{- 'th' }}
                 {%  endif %}
-                Edition
+                {{ 'Edition' -}}
             {% endif %}
-            {% if (book.publishDate) %}
-                , {{ book.publishDate|date('Y-m-d') }}
-            {% endif %}
+            {{- '' -}}
+            {% if (book.publishDate) %}, {{ book.publishDate|date('Y-m-d') }}{% endif %}
         </p>
+        <a href="{{ path('bookrater_book_edit', {'id': book.id }) }}" class="btn btn-primary">Edit</a>
     </section>
 {% endblock %}
