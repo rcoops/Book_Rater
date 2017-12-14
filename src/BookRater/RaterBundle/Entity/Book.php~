@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
@@ -32,6 +33,11 @@ class Book
     /**
      * @var string
      *
+     * @Assert\Regex(
+     *     pattern="/^\d{10}$/",
+     *     match=true,
+     *     message="ISBN must be a 10 digit number"
+     * )
      * @ORM\Column(name="isbn", type="string", unique=true)
      */
     private $isbn;
@@ -39,6 +45,11 @@ class Book
     /**
      * @var string
      *
+     * @Assert\Regex(
+     *     pattern="/^\d{3}-\d{10}$/",
+     *     match=true,
+     *     message="ISBN 13 must be a 13 digit number"
+     * )
      * @ORM\Column(name="isbn_13", type="string", nullable=true, unique=true)
      */
     private $isbn13;
@@ -310,4 +321,5 @@ class Book
 
         return $this;
     }
+
 }

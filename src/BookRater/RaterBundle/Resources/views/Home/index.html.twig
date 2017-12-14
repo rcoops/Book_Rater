@@ -5,15 +5,13 @@
 {% block body %}
     {% for review in latestReviews %}
         <article>
-            <h2><a href="{{ path('bookrater_review_view',{id : review.id}) }}">
+            <h2><a href="{{ path('bookrater_book_view', {id : review.bookReviewed.id}) }}">
                     {{ review.bookReviewed.title| title }}
                 </a>
             </h2>
-            <p>{{ review.rating }}</p>
+            <p><b>Rating:</b> {{ review.rating }}</p>
             <p>{{ review.reviewComments| nl2br }}</p>
-            <p>
-                <small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small>
-            </p>
+            <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
         </article>
     {% endfor %}
 {% endblock %}

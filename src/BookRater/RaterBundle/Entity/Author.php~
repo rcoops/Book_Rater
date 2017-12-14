@@ -158,9 +158,9 @@ final class Author
     /**
      * Remove booksAuthored
      *
-     * @param Book $booksAuthored
+     * @param Book $bookAuthored
      */
-    public function removeBooksAuthored(Book $booksAuthored)
+    public function removeBooksAuthored(Book $bookAuthored)
     {
         if ($this->booksAuthored->contains($bookAuthored))
         {
@@ -190,4 +190,18 @@ final class Author
         return $name;
     }
 
+
+    /**
+     * Add booksAuthored
+     *
+     * @param \BookRater\RaterBundle\Entity\Book $booksAuthored
+     *
+     * @return Author
+     */
+    public function addBooksAuthored(Book $booksAuthored)
+    {
+        $this->booksAuthored[] = $booksAuthored;
+
+        return $this;
+    }
 }

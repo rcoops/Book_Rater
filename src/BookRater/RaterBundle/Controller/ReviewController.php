@@ -47,6 +47,8 @@ class ReviewController extends EntityController
 
         if($form->isValid()) {
             $this->entityManager->flush();
+
+            return $this->redirect($this->generateUrl('bookrater_review_view', ['id' => $review->getId()]));
         }
         return $this->render('BookRaterRaterBundle:Review:edit.html.twig',
             ['form' => $form->createView(), 'review' => $review]);
@@ -66,7 +68,7 @@ class ReviewController extends EntityController
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_review_edit', ['id' => $review->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_review_view', ['id' => $review->getId()]));
         }
         return $this->render('BookRaterRaterBundle:Review:create.html.twig', ['form' => $form->createView()]);
     }

@@ -2,20 +2,24 @@
 
 {% block title %}{{ author.displayName }}{% endblock %}
 {% block body %}
-    <header>
-        <h2>{{ author.displayName }}</h2>
-    </header>
-        <h3>Books Authored</h3>
+    <section class="well well-sm">
+        <header>
+            <h2>{{ author.displayName }}</h2>
+            <a href="{{ path('bookrater_author_edit', {'id': author.id }) }}" class="btn btn-primary">Edit</a>
+        </header>
+    </section>
+    <section class="well well-sm">
+        <header><h3>Books Authored</h3></header>
         <ul>
             {% if author.booksAuthored is not empty %}
-                {% set count = author.booksAuthored.count %}
-                <li>{{ author.booksAuthored[0].title -}}</li>
-                {% for book in author.booksAuthored|slice(1, count - 1) if count > 1 %}
-                    <li>{{ book.title -}}</li>
+                {% for book in author.booksAuthored %}
+                    <li><a href="{{ path('bookrater_book_view', {'id': book.id }) }}">{{ book.title }}</a></li>
                 {%  endfor %}
+            {% else %}
+                <p>No books authored!</p>
             {% endif %}
         </ul>
+    </section>
     <p>
-        <a href="{{ path('bookrater_author_edit', {'id': author.id }) }}" class="btn btn-primary">Edit</a>
     </p>
 {% endblock %}

@@ -1,20 +1,17 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
 {% block title %}{{ book.title }}{% endblock %}
-{% block header %}{% endblock %}
+{% block header %}{{ book.title }}{% endblock %}
 {% block body %}
     <section class="well well-sm">
         <header>
-            <h2>
-                {{ book.title }}
-            </h2>
             <h4>
                 {% if book.authors is not empty %}
                     {% set count = book.authors.count %}
                     {{ book.authors[0].getDisplayName() -}}
                     {% for item in book.authors|slice(1, count - 1) if count > 1 %}
-                        {{- '; ' }}{{item.getDisplayName() -}}
-                    {%  endfor %}
+                        {{- '; ' }}{{ item.getDisplayName() -}}
+                    {% endfor %}
                 {% endif %}
             </h4>
         </header>
@@ -30,12 +27,30 @@
                     {{- 'rd' }}
                 {% else %}
                     {{- 'th' }}
-                {%  endif %}
+                {% endif %}
                 {{ 'Edition' -}}
             {% endif %}
             {{- '' -}}
-            {% if (book.publishDate) %}, {{ book.publishDate|date('Y-m-d') }}{% endif %}
+            {% if (book.publishDate) %}, {{ book.publishDate|date('d-m-Y') }}{% endif %}
         </p>
+        {# need other book attributes #}
         <a href="{{ path('bookrater_book_edit', {'id': book.id }) }}" class="btn btn-primary">Edit</a>
+    </section>
+    <section class="well well-sm">
+        <header>
+            <h3>Reviews</h3>
+            {% if book.reviews is not empty %}
+                <ul>
+                    {% for item in book.reviews %}
+                        <li>
+                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
+                            <small>{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews yet!</p>
+            {% endif %}
+        </header>
     </section>
 {% endblock %}

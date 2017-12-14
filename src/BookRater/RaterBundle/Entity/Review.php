@@ -25,6 +25,13 @@ final class Review
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="text")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="reviewComments", type="text")
      */
     private $reviewComments;
@@ -56,6 +63,13 @@ final class Review
      * @ORM\Column(name="created_date", type="datetime")
      */
     private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="edited_date", type="datetime", nullable=true)
+     */
+    private $edited;
 
     /**
      * Get id
@@ -179,4 +193,52 @@ final class Review
         $this->created = $created;
     }
 
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Review
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set edited
+     *
+     * @param \DateTime $edited
+     *
+     * @return Review
+     */
+    public function setEdited($edited)
+    {
+        $this->edited = $edited;
+
+        return $this;
+    }
+
+    /**
+     * Get edited
+     *
+     * @return \DateTime
+     */
+    public function getEdited()
+    {
+        return $this->edited;
+    }
 }

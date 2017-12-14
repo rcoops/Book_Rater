@@ -1,6 +1,8 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
-{% block title %}BookRaterRaterBundle:Review:view{% endblock %}
+
+{% block title %}{{ review.title }}{% endblock %}
+{% block header %}{{ review.title }}{% endblock %}
 
 {% block body %}
 <h1>Welcome to the Review:view page</h1>
