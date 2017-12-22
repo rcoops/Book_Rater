@@ -7,6 +7,7 @@ use BookRater\RaterBundle\Repository\BookRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,7 +28,11 @@ class ReviewType extends AbstractType
                 },
                 'placeholder' => 'Choose Book...'
             ])
-            ->add('rating', IntegerType::class, ['attr' => ['min' => 0, 'max' => 5]])
+            ->add('rating', RangeType::class, ['attr' => [
+                'min' => 1,
+                'max' => 5,
+                'onChange' => "updateText(this.value)"
+            ]])
             ->add('reviewComments')
             ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }

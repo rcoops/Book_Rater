@@ -4,12 +4,17 @@
 {% block header %}Latest Additions{% endblock %}
 {% block body %}
     {% for review in latestReviews %}
-        <article>
+        <article class="well well-sm">
             <h2><a href="{{ path('bookrater_book_view', {id : review.bookReviewed.id}) }}">
                     {{ review.bookReviewed.title| title }}
                 </a>
             </h2>
-            <p><b>Rating:</b> {{ review.rating }}</p>
+        <p>
+        <b>Rating:</b>
+            {% for i in 1..review.rating %}
+                <i class="fa fa-star"></i>
+            {% endfor %} ({{ review.rating -}}/5)
+        </p>
             <p>{{ review.reviewComments| nl2br }}</p>
             <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
         </article>
