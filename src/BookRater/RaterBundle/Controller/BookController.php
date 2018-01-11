@@ -6,6 +6,7 @@ use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Form\BookType;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 
 class BookController extends EntityController
@@ -62,6 +63,22 @@ class BookController extends EntityController
         }
         return $this->render('BookRaterRaterBundle:Book:edit.html.twig',
             ['form' => $form->createView(), 'book' => $book]);
+    }
+
+    public function listAction($page, $key, $type)
+    {
+        $rpp = $this->container->getParameter('books_per_page');
+
+        $repo = $this->entityManager->getRepository('BookRaterRaterBundle:Book');
+    }
+
+    public function searchBookAction(Request $request, string $titleFragment)
+    {
+        $books = $this->entityManager
+            ->getRepository('BookRaterRaterBundle:Book')
+            ->findAllTitleLike($titleFragment);
+        return $this->render('BookRaterRaterBundle:Home:index.html.twig',
+            ['bookSearchResults' => $books]);
     }
 
 }

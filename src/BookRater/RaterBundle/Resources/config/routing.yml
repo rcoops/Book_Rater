@@ -42,6 +42,12 @@ bookrater_book_edit:
     requirements:
         id: \d+
 
+bookrater_book_search:
+    path:     /
+    defaults: { _controller: BookRaterRaterBundle:Book:searchBook }
+#    requirements:
+#        id: \d+
+
 #bookrater_author_delete:
 #    path:     /author/delete/{id}
 #    defaults: { _controller: BookRaterRaterBundle:Author::delete }

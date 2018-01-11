@@ -2,7 +2,11 @@
 
 namespace BookRater\RaterBundle\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use \Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * BookRepository
@@ -13,9 +17,41 @@ use \Doctrine\ORM\EntityRepository;
 class BookRepository extends EntityRepository
 {
 
+    /**
+     * @var QueryBuilder
+     */
+    private $queryBuilder;
+
+    public function __construct($em, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+        $this->queryBuilder = $this->createQueryBuilder('book');
+    }
+
     public function findAllOrderedByNameQB()
     {
-        return $this->createQueryBuilder('book')
+        return $this->queryBuilder
             ->orderBy('book.title');
+    }
+
+    public function findAllTitleLike(string $titleFragment)
+    {
+        return $this->queryBuilder
+            ->select('book')
+            ->where($this->queryBuilder->expr()->like('book.title', "*:titleFragment*"))
+            ->orderBy('book.title')
+            ->setParameter('titleFragment', $titleFragment)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllAdsCustom($titleFragment = "", $currentPage = 1, $limit)
+    {
+        $query = $this->queryBuilder
+            ->select('book')
+            ->where($this->queryBuilder->expr()->like('book.title', "*:titleFragment*"))
+            ->orderBy('book.title')
+            ->setParameter('titleFragment', $titleFragment)
+            ->getQuery();
     }
 }
