@@ -13,13 +13,10 @@ use \Doctrine\ORM\EntityRepository;
 class ReviewRepository extends EntityRepository
 {
 
-    public function getLatest(int $limit = 10, int $offset = 0)
+    public function getLatestQuery()
     {
         return $this->createQueryBuilder('review')
             ->addOrderBy('review.created')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 }

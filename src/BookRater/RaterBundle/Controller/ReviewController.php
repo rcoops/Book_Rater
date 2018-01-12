@@ -21,13 +21,29 @@ class ReviewController extends EntityController
         $this->reviewRepository = $entityManager->getRepository('BookRaterRaterBundle:Review');
     }
 
-    public function indexAction()
+    public function listAction(Request $request)
     {
-        $latestReviews = $this->reviewRepository
-            ->getLatest();
-        return $this->render('BookRaterRaterBundle:Home:index.html.twig',
-            ['latestReviews' => $latestReviews]);
+        $query = $this->reviewRepository
+            ->getLatestQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        // parameters to template
+        return $this->render('AcmeMainBundle:Article:list.html.twig', array('pagination' => $pagination));
     }
+
+//    public function indexAction()
+//    {
+//        $latestReviews = $this->reviewRepository
+//            ->getLatest();
+//        return $this->render('BookRaterRaterBundle:Home:index.html.twig',
+//            ['latestReviews' => $latestReviews]);
+//    }
 
     public function viewAction(int $id)
     {
