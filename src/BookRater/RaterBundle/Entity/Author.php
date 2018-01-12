@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Author
@@ -25,6 +26,12 @@ final class Author
     /**
      * @var string
      *
+     * @Assert\NotNull(message="This field must be filled in")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z]+$/",
+     *     match=true,
+     *     message="First name must be one or more characters"
+     * )
      * @ORM\Column(name="firstName", type="string", length=255)
      */
     private $firstName;
@@ -32,6 +39,12 @@ final class Author
     /**
      * @var string
      *
+     * @Assert\NotNull(message="This field must be filled in")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z]+$/",
+     *     match=true,
+     *     message="Last name must be one or more characters"
+     * )
      * @ORM\Column(name="lastName", type="string", length=255)
      */
     private $lastName;

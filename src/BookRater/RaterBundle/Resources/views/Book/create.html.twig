@@ -13,7 +13,7 @@
 {% block header %}Add Book{% endblock %}
 {% block body %}
     {#{{ form(form) }}#}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_row(form.title) }}
     {{ form_row(form.publisher) }}
     <div class="form-group row">

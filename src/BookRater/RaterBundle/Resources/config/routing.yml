@@ -54,12 +54,16 @@ bookrater_book_search:
 #    methods: [GET, DELETE]
 #    requirements:
 #        id: \d+
-bookrater_review_index:
-    path:     /index/review
-    defaults: { _controller: BookRaterRaterBundle:Review:index }
+#bookrater_review_index:
+#    path:     /index/review
+#    defaults: { _controller: BookRaterRaterBundle:Review:index }
+
+bookrater_review_list:
+    path:     /reviews
+    defaults: { _controller: BookRaterRaterBundle:Review:list }
 
 bookrater_review_view:
-    path:     /view/reveiw/{id}
+    path:     /view/review/{id}
     defaults: { _controller: BookRaterRaterBundle:Review:view }
     requirements:
         id: \d+

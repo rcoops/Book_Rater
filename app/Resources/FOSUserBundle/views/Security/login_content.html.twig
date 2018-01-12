@@ -16,14 +16,12 @@
         <label for="password">{{ 'security.login.password'|trans }}</label>
         <input type="password" id="password" name="_password" required="required" class="form-control"/>
     </div>
-
-    <div class="form-check">
+    <div class="form-check col-xs-10">
         <label for="remember_me" class="form-check-label">{{ 'security.login.remember_me'|trans }}</label>
         <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="form-check-input"/>
     </div>
-
-    <div>
-        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary" />
+    <div class="col-xs-2">
+        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-success btn-block" />
     </div>
     <div>
         <a href="{{ path('fos_user_registration_register') }}">Not signed up? Click here to register</a>

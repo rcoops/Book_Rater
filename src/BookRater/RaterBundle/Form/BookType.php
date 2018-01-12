@@ -20,12 +20,9 @@ class BookType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', TextType::class, ['constraints' => [new NotBlank()]])
-            ->add('isbn', TextType::class,
-                ['attr' => ['onInvalid' => "setCustomValidity('ISBN must be a 10 digit number')"]])
-            ->add('isbn13', TextType::class,
-                ['attr' => ['onInvalid' => "setCustomValidity('ISBN 13 must follow this format xxx-xxxxxxxxxx')"]]
-            )
+        $builder->add('title', TextType::class)
+            ->add('isbn', TextType::class)
+            ->add('isbn13', TextType::class)
             ->add('publisher')
             ->add('publishDate', DateType::class, [
                 'format' => 'dd-MM-yyyy',
@@ -34,6 +31,7 @@ class BookType extends AbstractType
             ->add('edition', IntegerType::class, ['attr' => ['min' => 0]])
             ->add('authors', EntityType::class, [
                 'class' => 'BookRater\RaterBundle\Entity\Author',
+                'required' => false,
                 'choice_label' => 'displayName',
                 'by_reference' => false,
                 'multiple' => true,

@@ -4,7 +4,7 @@
 {% block header %}Edit {{ author.lastName }}, {{ author.firstName }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <div class="form-group row">
         <div class="col-md-5">
             {{ form_row(form.firstName) }}

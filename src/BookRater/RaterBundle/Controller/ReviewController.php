@@ -34,7 +34,7 @@ class ReviewController extends EntityController
         );
 
         // parameters to template
-        return $this->render('AcmeMainBundle:Article:list.html.twig', array('pagination' => $pagination));
+        return $this->render('@BookRaterRater/Review/list.html.twig', array('pagination' => $pagination));
     }
 
 //    public function indexAction()
@@ -84,7 +84,7 @@ class ReviewController extends EntityController
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_review_view', ['id' => $review->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_review_edit', ['id' => $review->getId()]));
         }
         return $this->render('BookRaterRaterBundle:Review:create.html.twig', ['form' => $form->createView()]);
     }

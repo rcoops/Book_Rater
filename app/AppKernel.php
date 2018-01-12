@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Sideclick\BootstrapModalBundle\SideclickBootstrapModalBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new AppBundle\AppBundle(),
+            new BookRater\RedirectBundle\BookRaterRedirectBundle(),
             new BookRater\RaterBundle\BookRaterRaterBundle(),
         ];
 

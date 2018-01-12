@@ -26,6 +26,7 @@ class Book
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Book title must be entered")
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -34,9 +35,9 @@ class Book
      * @var string
      *
      * @Assert\Regex(
-     *     pattern="/^\d{10}$/",
+     *     pattern="/^[a-zA-Z0-9]{10}$/",
      *     match=true,
-     *     message="ISBN must be a 10 digit number"
+     *     message="ISBN must be a combination of 10 digits/characters"
      * )
      * @ORM\Column(name="isbn", type="string", unique=true)
      */

@@ -19,7 +19,4 @@
             <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
         </article>
     {% endfor %}
-    {%  for book in bookSearchResults %}
-        <p>{{  book.title }}</p>
-    {% endfor %}
 {% endblock %}

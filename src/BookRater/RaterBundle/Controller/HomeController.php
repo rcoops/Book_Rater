@@ -9,7 +9,7 @@ class HomeController extends EntityController
     {
         $latestReviews = $this->entityManager
             ->getRepository('BookRaterRaterBundle:Review')
-            ->getLatest();
+            ->getLatestQuery()->getResult();
         return $this->render('BookRaterRaterBundle:Home:index.html.twig',
             ['latestReviews' => $latestReviews]);
     }

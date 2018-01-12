@@ -1,25 +1,35 @@
+{% extends "BookRaterRaterBundle::layout.html.twig" %}
+
+
+{% block title %}Reviews{% endblock %}
+{% block header %}Reviews{% endblock %}
+
+{% block body %}
 {# total items count #}
 <div class="count">
     {{ pagination.getTotalItemCount }}
 </div>
-<table>
-    <tr>
-        {# sorting of properties based on query components #}
-        <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}</th>
-        <th>{{ knp_pagination_sortable(pagination, 'Release', ['a.date', 'a.time']) }}</th>
-    </tr>
-
-    {# table body #}
-    {% for article in pagination %}
-        <tr {% if loop.index is odd %}class="color"{% endif %}>
-            <td>{{ article.id }}</td>
-            <td>{{ article.title }}</td>
-            <td>{{ article.date | date('Y-m-d') }}, {{ article.time | date('H:i:s') }}</td>
-        </tr>
-    {% endfor %}
-</table>
+{% for review in pagination %}
+    <article class="well well-sm">
+        <h2><a href="{{ path('bookrater_book_view', {id : review.bookReviewed.id}) }}">
+                {{ review.bookReviewed.title| title }}
+            </a>
+        </h2>
+        <p>
+            <b>Rating:</b>
+            {% for i in 1..review.rating %}
+                <i class="fa fa-star"></i>
+            {% endfor %}
+            {% for i in 1..(5 - review.rating) %}
+                <i class="fa fa-star-o"></i>
+            {% endfor %}
+        </p>
+        <p>{{ review.reviewComments| nl2br }}</p>
+        <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
+    </article>
+{% endfor %}
 {# display navigation #}
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
+{% endblock %}
