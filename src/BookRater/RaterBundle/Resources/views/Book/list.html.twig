@@ -9,7 +9,9 @@
         <tr>
             <th>Title</th>
             <th>Authors</th>
-            {#<th>First Name</th>#}
+            <th>Edition</th>
+            <th>Publisher</th>
+            <th>Published</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +24,6 @@
                         {% else %}
                             {{ book.title }}
                         {% endif %}
-
                     </a>
                 </td>
                 <td>
@@ -41,6 +42,25 @@
                         {% endfor %}
                     {% endif %}
                 </td>
+                <td>
+                    {% if (book.edition) %} {# - necessary on both sides to remove whitespace between tags #}
+                        {{ book.edition -}} {# -}} remove trailing whitespace between twig tags #}
+                        {{- '' -}}
+                        {% if book.edition == 1 %}
+                            {{- 'st' }} {# {{- remove leading whitespace between twig tags #}
+                        {% elseif book.edition == 2 %}
+                            {{- 'nd' }}
+                        {% elseif book.edition == 3 %}
+                            {{- 'rd' }}
+                        {% else %}
+                            {{- 'th' }}
+                        {% endif %}
+                        {{ 'Edition' -}}
+                    {% endif %}
+                    {{- '' -}}
+                </td>
+                <td>{{ book.publisher }}</td>
+                <td>{% if (book.publishDate) %} {{ book.publishDate|date('d-m-Y') }}{% endif %}</td>
                 {#<td>{{ author.initial }}</td>#}
                 {#<td>{{ author.firstName }}</td>#}
             </tr>

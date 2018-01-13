@@ -221,7 +221,6 @@ class Book
      */
     public function addAuthor(Author $author)
     {
-        dump($author); die;
         $author->addBookAuthored($this);
         $this->authors[] = $author;
 

@@ -56,7 +56,10 @@ class AuthorController extends EntityController
             $this->entityManager->persist($author);
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_author_view', ['id' => $author->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_author_view', [
+                'lastName' => $author->getLastName(),
+                'firstName' => $author->getFirstName()
+            ]));
         }
         return $this->render('BookRaterRaterBundle:Author:create.html.twig', ['form' => $form->createView()]);
     }
@@ -73,7 +76,10 @@ class AuthorController extends EntityController
         if($form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_author_view', ['id' => $author->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_author_view', [
+                'lastName' => $author->getLastName(),
+                'firstName' => $author->getFirstName()
+            ]));
         }
         return $this->render('BookRaterRaterBundle:Author:edit.html.twig',
             ['form' => $form->createView(), 'author' => $author]);

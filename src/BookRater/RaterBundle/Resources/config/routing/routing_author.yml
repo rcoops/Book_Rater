@@ -2,16 +2,16 @@ bookrater_author_list:
     path:     /
     defaults: { _controller: BookRaterRaterBundle:Author:list }
 
+bookrater_author_create:
+    path:     /create
+    defaults: { _controller: BookRaterRaterBundle:Author:create }
+
 bookrater_author_view:
-    path:     /view/{lastName}/{firstName}
+    path:     /{lastName}/{firstName}
     defaults: { _controller: BookRaterRaterBundle:Author:view }
     requirements:
         lastName: \w+
         firstName: \w+
-
-bookrater_author_create:
-    path:     /create
-    defaults: { _controller: BookRaterRaterBundle:Author:create }
 
 bookrater_author_edit:
     path:     /edit/{id}

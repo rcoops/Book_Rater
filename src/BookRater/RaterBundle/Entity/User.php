@@ -46,7 +46,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addReview(\BookRater\RaterBundle\Entity\Review $review)
+    public function addReview(Review $review)
     {
         $this->reviews[] = $review;
 
@@ -58,7 +58,7 @@ class User extends BaseUser
      *
      * @param \BookRater\RaterBundle\Entity\Review $review
      */
-    public function removeReview(\BookRater\RaterBundle\Entity\Review $review)
+    public function removeReview(Review $review)
     {
         $this->reviews->removeElement($review);
     }

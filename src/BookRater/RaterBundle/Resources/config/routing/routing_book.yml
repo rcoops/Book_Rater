@@ -2,13 +2,13 @@ bookrater_book_list:
     path:     /
     defaults: { _controller: BookRaterRaterBundle:Book:list }
 
-bookrater_book_view:
-    path:     /view/{title}
-    defaults: { _controller: BookRaterRaterBundle:Book:view }
-
 bookrater_book_create:
     path:     /create
     defaults: { _controller: BookRaterRaterBundle:Book:create }
+
+bookrater_book_view:
+    path:     /{title}
+    defaults: { _controller: BookRaterRaterBundle:Book:view }
 
 bookrater_book_edit:
     path:     /edit/{id}

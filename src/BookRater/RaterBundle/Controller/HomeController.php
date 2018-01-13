@@ -2,6 +2,8 @@
 
 namespace BookRater\RaterBundle\Controller;
 
+use BookRater\RaterBundle\Entity\Contact;
+use BookRater\RaterBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends EntityController
@@ -22,9 +24,9 @@ class HomeController extends EntityController
         return $this->render('BookRaterRaterBundle:Home:about.html.twig');
     }
 
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        return $this->render('BookRaterRaterBundle:Home:contact.html.twig');
+        return $this->render('BookRaterRaterBundle:Contact:contact.html.twig');
     }
 
 }

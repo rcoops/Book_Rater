@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Sideclick\BootstrapModalBundle\SideclickBootstrapModalBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new BookRater\RedirectBundle\BookRaterRedirectBundle(),
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new BookRater\RaterBundle\BookRaterRaterBundle(),
         ];
 
