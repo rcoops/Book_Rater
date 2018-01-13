@@ -6,7 +6,7 @@
 
 {% block body %}
     <article class="well well-sm">
-        <h2><a href="{{ path('bookrater_book_view', {id : review.bookReviewed.id}) }}">
+        <h2><a href="{{ path('bookrater_book_view', {'title' : review.bookReviewed.title }) }}">
                 {{ review.bookReviewed.title| title }}
             </a>
         </h2>
@@ -22,7 +22,7 @@
         <p>{{ review.reviewComments| nl2br }}</p>
         <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
         {% if is_granted("ROLE_USER") and review.user.username == app.user.username %}
-        <a href="{{ path('bookrater_book_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
+        <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
         {% endif %}
     </article>
 

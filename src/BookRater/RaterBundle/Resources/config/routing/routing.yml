@@ -1,0 +1,11 @@
+bookrater_home:
+    path:     /
+    defaults: { _controller: BookRaterRaterBundle:Home:index }
+
+bookrater_about:
+    path: /about
+    defaults: { _controller: BookRaterRaterBundle:Home:about }
+
+bookrater_contact:
+    path: /contact
+    defaults: { _controller: BookRaterRaterBundle:Home:contact }

@@ -15,8 +15,21 @@ class ReviewRepository extends EntityRepository
 
     public function getLatestQuery()
     {
-        return $this->createQueryBuilder('review')
+        $qb = $this->createQueryBuilder('review');
+        return $qb
             ->addOrderBy('review.created')
             ->getQuery();
     }
+
+    public function getLatestByBookTitleLike($titleLike)
+    {
+        $qb = $this->createQueryBuilder('review');
+        return $qb
+            ->leftJoin('review.bookReviewed', 'book_reviewed')
+            ->andWhere($qb->expr()->like('book_reviewed.title', ':titleLike'))
+            ->setParameter('titleLike', '%'.$titleLike.'%')
+            ->addOrderBy('review.created', 'DESC')
+            ->getQuery();
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Form;
 
+use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Repository\AuthorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -30,7 +31,7 @@ class BookType extends AbstractType
             ])
             ->add('edition', IntegerType::class, ['attr' => ['min' => 0]])
             ->add('authors', EntityType::class, [
-                'class' => 'BookRater\RaterBundle\Entity\Author',
+                'class' => Author::class,
                 'required' => false,
                 'choice_label' => 'displayName',
                 'by_reference' => false,

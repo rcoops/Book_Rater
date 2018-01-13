@@ -34,24 +34,14 @@ class BookRepository extends EntityRepository
             ->orderBy('book.title');
     }
 
-    public function findAllTitleLike(string $titleFragment)
+    public function findAllWhereTitleLike(string $titleFragment)
     {
         return $this->queryBuilder
             ->select('book')
-            ->where($this->queryBuilder->expr()->like('book.title', "*:titleFragment*"))
+            ->where($this->queryBuilder->expr()->like('book.title', ":titleFragment"))
             ->orderBy('book.title')
-            ->setParameter('titleFragment', $titleFragment)
+            ->setParameter('titleFragment', '%'.$titleFragment.'%')
             ->getQuery()
             ->getResult();
-    }
-
-    public function findAllAdsCustom($titleFragment = "", $currentPage = 1, $limit)
-    {
-        $query = $this->queryBuilder
-            ->select('book')
-            ->where($this->queryBuilder->expr()->like('book.title', "*:titleFragment*"))
-            ->orderBy('book.title')
-            ->setParameter('titleFragment', $titleFragment)
-            ->getQuery();
     }
 }

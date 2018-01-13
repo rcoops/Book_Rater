@@ -12,28 +12,5 @@
 {% endblock %}
 {% block header %}Add Book{% endblock %}
 {% block body %}
-    {#{{ form(form) }}#}
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.publisher) }}
-    <div class="form-group row">
-        <div class="col-md-6">
-            {{ form_row(form.isbn) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_row(form.isbn13) }}
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-md-6">
-            {{ form_row(form.authors) }}
-        </div>
-        <div class="col-md-4">
-            {{ form_row(form.publishDate) }}
-        </div>
-        <div class="col-md-2">
-            {{ form_row(form.edition) }}
-        </div>
-    </div>
-    {{ form_end(form) }}
+    {{ include('@BookRaterRater/Book/_form.html.twig') }}
 {% endblock %}

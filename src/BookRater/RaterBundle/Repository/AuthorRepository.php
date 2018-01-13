@@ -28,4 +28,19 @@ class AuthorRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findAllWhereNameLike($nameLike)
+    {
+        $qb = $this->findAllOrderedByNameQB();
+        return $qb
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('author.firstName', ':nameLike'),
+                    $qb->expr()->like('author.lastName', ':nameLike')
+                )
+            )
+            ->setParameter('nameLike', '%'.$nameLike.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

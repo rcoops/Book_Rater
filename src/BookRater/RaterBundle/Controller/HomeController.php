@@ -2,16 +2,19 @@
 
 namespace BookRater\RaterBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class HomeController extends EntityController
 {
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $latestReviews = $this->entityManager
             ->getRepository('BookRaterRaterBundle:Review')
-            ->getLatestQuery()->getResult();
+            ->getLatestQuery();
+        $pagination = $this->paginate($latestReviews, $request);
         return $this->render('BookRaterRaterBundle:Home:index.html.twig',
-            ['latestReviews' => $latestReviews]);
+            ['pagination' => $pagination]);
     }
 
     public function aboutAction()

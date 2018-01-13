@@ -11,7 +11,7 @@ class AuthorController extends EntityController
 {
 
     /**
-     * @var \BookRater\RaterBundle\Repository\ReviewRepository|\Doctrine\ORM\EntityRepository
+     * @var \BookRater\RaterBundle\Repository\AuthorRepository|\Doctrine\ORM\EntityRepository
      */
     protected $authorRepository;
 
@@ -21,9 +21,25 @@ class AuthorController extends EntityController
         $this->authorRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Author');
     }
 
-    public function viewAction(int $id)
+    public function listAction(Request $request)
     {
-        $author = $this->authorRepository->find($id);
+        $query = $this->authorRepository
+            ->findAllWhereNameLike("");
+
+        $pagination = $this->paginate($query, $request);
+
+        // parameters to template
+        return $this->render('@BookRaterRater/Author/list.html.twig',[
+            'pagination' => $pagination
+        ]);
+    }
+
+    public function viewAction(string $lastName, string $firstName)
+    {
+        $author = $this->authorRepository->findOneBy([
+            'lastName' => $lastName,
+            'firstName' => $firstName
+        ]);
 
         return $this->render('BookRaterRaterBundle:Author:view.html.twig', ['author' => $author]);
     }

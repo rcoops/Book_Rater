@@ -177,10 +177,10 @@ final class Author
     {
         if ($this->booksAuthored->contains($bookAuthored))
         {
-            $bookAuthored->removeAuthor($this);
+            $bookAuthored->getAuthors()->removeElement($this);
         }
 
-        $this->booksAuthored->removeElement($booksAuthored);
+        $this->booksAuthored->removeElement($bookAuthored);
     }
 
     /**
@@ -203,7 +203,6 @@ final class Author
         return $name;
     }
 
-
     /**
      * Add booksAuthored
      *
@@ -217,4 +216,5 @@ final class Author
 
         return $this;
     }
+
 }

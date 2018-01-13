@@ -13,7 +13,7 @@
         <ul>
             {% if author.booksAuthored is not empty %}
                 {% for book in author.booksAuthored %}
-                    <li><a href="{{ path('bookrater_book_view', {'id': book.id }) }}">{{ book.title }}</a></li>
+                    <li><a href="{{ path('bookrater_book_view', {'title': book.title }) }}">{{ book.title }}</a></li>
                 {%  endfor %}
             {% else %}
                 <p>No books authored!</p>

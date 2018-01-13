@@ -221,6 +221,7 @@ class Book
      */
     public function addAuthor(Author $author)
     {
+        dump($author); die;
         $author->addBookAuthored($this);
         $this->authors[] = $author;
 
@@ -234,11 +235,7 @@ class Book
      */
     public function removeAuthor(Author $author)
     {
-        if ($author->getBooksAuthored()->contains($this))
-        {
-            $author->removeBooksAuthored($this);
-        }
-        $this->authors->removeElement($author);
+        $author->removeBooksAuthored($this);
     }
 
     /**

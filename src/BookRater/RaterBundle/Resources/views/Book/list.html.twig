@@ -1,0 +1,50 @@
+{% extends "@BookRaterRater/layout.html.twig" %}
+
+{% block title %}Books{% endblock %}
+{% block header %}Books{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Authors</th>
+            {#<th>First Name</th>#}
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in pagination %}
+            <tr>
+                <td>
+                    <a href="{{ path('bookrater_book_view', {'title': book.title}) }}">
+                        {% if book.title|length > 30 %}
+                            {{ book.title | slice(0,30) ~ '...' }}
+                        {% else %}
+                            {{ book.title }}
+                        {% endif %}
+
+                    </a>
+                </td>
+                <td>
+                    {% if book.authors is not empty %}
+                        {% set count = book.authors.count %}
+                        <a href="{{ path('bookrater_author_view', {
+                            'lastName': book.authors[0].lastName,
+                            'firstName': book.authors[0].firstName,
+                        }) }}">{{ book.authors[0].getDisplayName() -}}</a>
+                        {% for author in book.authors|slice(1, count - 1) if count > 1 %}
+                            {{- '; ' }}
+                            <a href="{{ path('bookrater_author_view', {
+                                'lastName': author.lastName,
+                                'firstName': author.firstName,
+                            }) }}">{{ author.getDisplayName() -}}</a>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                {#<td>{{ author.initial }}</td>#}
+                {#<td>{{ author.firstName }}</td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

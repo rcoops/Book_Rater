@@ -23,9 +23,9 @@ class BookController extends EntityController
         $this->bookRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Book');
     }
 
-    public function viewAction(int $id)
+    public function viewAction(string $title)
     {
-        $book = $this->bookRepository->find($id);
+        $book = $this->bookRepository->findOneBy(['title' => $title]);
 
         return $this->render('BookRaterRaterBundle:Book:view.html.twig', ['book' => $book]);
     }
@@ -44,7 +44,7 @@ class BookController extends EntityController
             $this->entityManager->persist($book);
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_book_view', ['id' => $book->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));
         }
         return $this->render('BookRaterRaterBundle:Book:create.html.twig', ['form' => $form->createView()]);
     }
@@ -59,26 +59,23 @@ class BookController extends EntityController
         if($form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_book_view', ['id' => $book->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));
         }
         return $this->render('BookRaterRaterBundle:Book:edit.html.twig',
             ['form' => $form->createView(), 'book' => $book]);
     }
 
-    public function listAction($page, $key, $type)
+    public function listAction(Request $request, string $title = "")
     {
-        $rpp = $this->container->getParameter('books_per_page');
+        $query = $this->bookRepository
+            ->findAllWhereTitleLike($title);
 
-        $repo = $this->entityManager->getRepository('BookRaterRaterBundle:Book');
-    }
+        $pagination = $this->paginate($query, $request);
 
-    public function searchBookAction(Request $request, string $titleFragment)
-    {
-        $books = $this->entityManager
-            ->getRepository('BookRaterRaterBundle:Book')
-            ->findAllTitleLike($titleFragment);
-        return $this->render('BookRaterRaterBundle:Home:index.html.twig',
-            ['bookSearchResults' => $books]);
+        // parameters to template
+        return $this->render('@BookRaterRater/Book/list.html.twig',[
+            'pagination' => $pagination
+        ]);
     }
 
 }

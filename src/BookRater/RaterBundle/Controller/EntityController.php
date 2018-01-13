@@ -21,16 +21,14 @@ class EntityController extends Controller
         $this->entityManager = $entityManager;
     }
 
-    public function paginate($dql, $page = 1, $limit = 10)
+    public function paginate($query, $request)
     {
-        $paginator = new Paginator($dql);
-        $paginator->setUseOutputWalkers(false);
-
-        $paginator->getQuery()
-            ->setFirstResult($limit * ($page - 1)) // Offset
-            ->setMaxResults($limit); // Limit
-
-        return $paginator;
+        return $this->get('knp_paginator')->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
     }
+
 
 }

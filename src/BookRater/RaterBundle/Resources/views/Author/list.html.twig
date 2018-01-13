@@ -1,0 +1,32 @@
+{% extends "@BookRaterRater/layout.html.twig" %}
+
+{% block title %}Authors{% endblock %}
+{% block header %}Authors{% endblock %}
+
+{% block body %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Link</th>
+        <th>Last Name</th>
+        <th>Initial</th>
+        <th>First Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for author in pagination %}
+        <tr>
+            <td>
+                <a href="{{ path('bookrater_author_view', {
+                    'lastName': author.lastName,
+                    'firstName': author.firstName,
+                }) }}">{{ author.displayName }}</a>
+            </td>
+            <td>{{ author.lastName }}</td>
+            <td>{{ author.initial }}</td>
+            <td>{{ author.firstName }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

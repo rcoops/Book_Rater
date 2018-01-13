@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div class="form-group row">
+    <div class="col-md-12">
+        {{ form_row(form.title) }}
+    </div>
+    <div class="col-md-10">
+        {{ form_row(form.bookReviewed) }}
+    </div>
+    <div class="col-md-2">
+        {{ form_row(form.rating) }}
+    </div>
+</div>
+{{ form_row(form.reviewComments) }}
+{{ form_end(form) }}
