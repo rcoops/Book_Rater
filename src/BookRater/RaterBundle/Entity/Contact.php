@@ -20,7 +20,7 @@ class Contact
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="BookRater\RaterBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="BookRater\RaterBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

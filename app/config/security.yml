@@ -41,3 +41,4 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/create/, role: ROLE_USER }
         - { path: ^/edit/, role: ROLE_USER }
+        - { path: ^/contact, role: ROLE_USER }
