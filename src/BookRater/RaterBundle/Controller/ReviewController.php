@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Controller;
 
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\ReviewType;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,6 +50,8 @@ class ReviewController extends EntityController
         $form->handleRequest($request);
 
         if($form->isValid()) {
+            $review->setEdited(new DateTime());
+
             $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('bookrater_review_view', ['id' => $review->getId()]));
@@ -67,7 +70,7 @@ class ReviewController extends EntityController
         if ($form->isValid())
         {
             $review->setUser($this->getUser());
-            $review->setCreated(new \DateTime());
+            $review->setCreated(new DateTime());
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 

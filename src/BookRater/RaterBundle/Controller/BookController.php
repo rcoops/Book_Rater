@@ -5,6 +5,7 @@ namespace BookRater\RaterBundle\Controller;
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Form\BookType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,10 +42,17 @@ class BookController extends EntityController
 
         if ($form->isValid())
         {
-            $this->entityManager->persist($book);
-            $this->entityManager->flush();
+            try {
+                $this->entityManager->persist($book);
+                $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));
+                return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));
+            } catch (UniqueConstraintViolationException $e) { // thrown because of the unique constraint I put on title + edition
+                $this->addFlash(
+                    'error',
+                    'This book already exists! Please edit the original or change the title/edition.'
+                );
+            }
         }
         return $this->render('BookRaterRaterBundle:Book:create.html.twig', ['form' => $form->createView()]);
     }

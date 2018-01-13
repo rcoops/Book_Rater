@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contact
 {
-
 
     /**
      * @ORM\Id
@@ -34,6 +34,13 @@ class Contact
      * @ORM\Column(type="text")
      */
     private $message;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_date", type="datetime", nullable=true)
+     */
+    private $created;
 
     /**
      * Get id
@@ -93,5 +100,20 @@ class Contact
         $this->message = $message;
     }
 
+    /**
+     * @return DateTime
+     */
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param DateTime $created
+     */
+    public function setCreated(DateTime $created)
+    {
+        $this->created = $created;
+    }
 
 }

@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Controller;
 
 use BookRater\RaterBundle\Entity\Contact;
 use BookRater\RaterBundle\Form\ContactType;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,11 @@ class ContactController extends EntityController
         $this->contactRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Contact');
     }
 
+    public function listAction()
+    {
+//        $this->contactRepository->createQueryBuilder('message')->addOrderBy('m')
+    }
+
     public function createAction(Request $request)
     {
         $contact = new Contact();
@@ -31,6 +37,7 @@ class ContactController extends EntityController
 
         if ($form->isValid()) {
             $contact->setUser($this->getUser());
+            $contact->setCreated(new DateTime());
 
             $this->entityManager->persist($contact);
             $this->entityManager->flush();
@@ -44,20 +51,13 @@ class ContactController extends EntityController
 
     private function sendResponse(Contact $contact)
     {
-        $mailer = \Swift_Mailer::newInstance(
-            \Swift_SmtpTransport::newInstance()
-                ->setUsername($this->getParameter('mailer_user'))
-                ->setPassword($this->getParameter('mailer_password'))
-                ->setHost($this->getParameter('mailer_host'))
-                ->setPort($this->getParameter('mailer_port'))
-                ->setEncryption('tls')
-        );
         $message = \Swift_Message::newInstance()
             ->setSubject($contact->getSubject())
             ->setFrom('noreply@bookrater.co.uk')
-            ->setTo('rcoops84@hotmail.com')//$contact->getUser()->getEmailCanonical())
+            ->setTo($contact->getUser()->getEmailCanonical())
             ->setBody($this->renderView('@BookRaterRater/Contact/email.html.twig',[
-                'name' => $contact->getUser()->getUsername()
+                'name' => $contact->getUser()->getUsername(),
+                'message' => $contact->getMessage()
             ]),'text/html');
 
         $this->get('mailer')->send($message);

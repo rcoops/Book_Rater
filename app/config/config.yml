@@ -75,6 +75,11 @@ swiftmailer:
     encryption: '%mailer_encryption%'
     port: '%mailer_port%'
     spool: { type: memory }
+    auth_mode: '%mailer_auth_mode%'
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
 
 assetic:
     assets:
@@ -83,13 +88,21 @@ assetic:
                 - '../app/Resources/public/css/*'
 
 fos_user:
+    service:
+        mailer: fos_user.mailer.twig_swift
     db_driver: orm
     firewall_name: main
     user_class: BookRater\RaterBundle\Entity\User
     from_email:
         address: "%mailer_user%"
-        sender_name: "%mailer_user%"
-#    registration:
+        sender_name: Book Rater
+    resetting:
+        email:
+            template: password
+    registration:
+        confirmation:
+            enabled: true
+            template: FOSUserBundle:Registration:email.txt.twig
 #        form:
 #            type: BookRater\RaterBundle\Form\RegistrationType
 

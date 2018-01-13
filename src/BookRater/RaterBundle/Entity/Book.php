@@ -4,12 +4,13 @@ namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
  *
- * @ORM\Table(name="book")
+ * @ORM\Table(name="book", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
  */
 class Book

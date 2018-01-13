@@ -9,3 +9,7 @@ bookrater_about:
 bookrater_contact:
     path: /contact
     defaults: { _controller: BookRaterRaterBundle:Contact:create }
+
+bookrater_messages:
+    path: /admin/messages
+    defaults: { _controller: BookRaterRaterBundle:Contact:list }
