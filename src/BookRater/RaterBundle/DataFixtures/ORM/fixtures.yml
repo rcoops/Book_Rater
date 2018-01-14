@@ -1,0 +1,39 @@
+BookRater\RaterBundle\Entity\User:
+    user_1:
+        username (unique): 'rcoops'
+        usernameCanonical: '<$username>'
+        email (unique): 'rcoops84@hotmail.com'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: 'rcoops'
+    user_2:
+        username (unique): 'admin'
+        usernameCanonical: '<$username>'
+        email (unique): 'bookraterrater@gmail.com'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: 'admin'
+        roles: [ROLE_ADMIN]
+    user_{3..10}:
+        username (unique): '<username()>'
+        usernameCanonical: '<$username>'
+        email (unique): '<email()>'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: '<password()>'
+
+BookRater\RaterBundle\Entity\Author:
+    author_{1..30}:
+        firstName (unique): '<firstName()>'
+        lastName (unique): '<lastName()>'
+        initial: "<regexify('[A-Z ]{0,2}')>"
+
+BookRater\RaterBundle\Entity\Book:
+    book_{1..20}:
+        title (unique): '<sentence($nbWords = 4, $variableNbWords = true)>'
+        isbn (unique): "<regexify('[0-9]{10}')>"
+        isbn13 (unique): "<regexify('[0-9]{3}-[0-9]{10}')>"
+        publisher: '<company()>'
+        publishDate: "<dateTime($max = 'now', $timezone = null)>"
+        edition: '<numberBetween($min = 1, $max = 5)>'
+        authors: '<numberBetween(1, 2)>x @author*'

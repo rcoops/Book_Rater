@@ -5,7 +5,9 @@
     <section class="well well-sm">
         <header>
             <h2>{{ author.displayName }}</h2>
-            <a href="{{ path('bookrater_author_edit', {'id': author.id }) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ path('bookrater_author_edit', {
+                'firstName': author.firstName, 'lastName': author.lastName
+            }) }}" class="btn btn-primary">Edit</a>
         </header>
     </section>
     <section class="well well-sm">

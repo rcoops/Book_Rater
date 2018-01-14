@@ -64,9 +64,12 @@ class AuthorController extends EntityController
         return $this->render('BookRaterRaterBundle:Author:create.html.twig', ['form' => $form->createView()]);
     }
 
-    public function editAction(int $id, Request $request)
+    public function editAction(string $lastName, string $firstName, Request $request)
     {
-        $author = $this->authorRepository->find($id);
+        $author = $this->authorRepository->findOneBy([
+            'lastName' => $lastName,
+            'firstName' => $firstName
+        ]);
 
         $form = $this->createForm(AuthorType::class, $author, [
             'action' => $request->getUri()

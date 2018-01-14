@@ -10,11 +10,12 @@ bookrater_author_view:
     path:     /{lastName}/{firstName}
     defaults: { _controller: BookRaterRaterBundle:Author:view }
     requirements:
-        lastName: \w+
+        lastName: "[A-Za-z']+"
         firstName: \w+
 
 bookrater_author_edit:
-    path:     /edit/{id}
+    path:     /edit/{lastName}/{firstName}
     defaults: { _controller: BookRaterRaterBundle:Author:edit }
     requirements:
-        id: \d+
+        lastName: "[A-Za-z']+"
+        firstName: \w+
