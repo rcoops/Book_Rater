@@ -8,6 +8,7 @@ use BookRater\RaterBundle\Form\BookType;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class BookController extends EntityController
@@ -73,17 +74,32 @@ class BookController extends EntityController
             ['form' => $form->createView(), 'book' => $book]);
     }
 
-    public function listAction(Request $request, string $title = "")
+    public function listAction(Request $request)
     {
+        $filter = $request->query->get('filter');
+        $filters = $this->entityManager->getFilters()
+            ->enable('book_like');
+        $filters->setParameter('filter', $filter);
+
         $query = $this->bookRepository
-            ->findAllWhereTitleLike($title);
+            ->findAll();
 
         $pagination = $this->paginate($query, $request);
 
-        // parameters to template
         return $this->render('@BookRaterRater/Book/list.html.twig',[
             'pagination' => $pagination
         ]);
+    }
+
+    public function filter(string $filter = '', Request $request)
+    {
+        $params = $request->query->all();
+        if ($filter)
+        {
+            $params = array_merge($params, ['filter' => $filter]);
+        }
+
+        $this->redirect($this->generateUrl($request->attributes->get('_route'), $params));
     }
 
 }

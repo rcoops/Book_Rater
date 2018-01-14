@@ -2,8 +2,8 @@
 
 namespace BookRater\RaterBundle\Controller;
 
-use BookRater\RaterBundle\Entity\Contact;
-use BookRater\RaterBundle\Form\ContactType;
+use BookRater\RaterBundle\Entity\Message;
+use BookRater\RaterBundle\Form\MessageType;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends EntityController

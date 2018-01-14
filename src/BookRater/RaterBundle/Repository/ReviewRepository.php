@@ -17,7 +17,7 @@ class ReviewRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('review');
         return $qb
-            ->addOrderBy('review.created')
+            ->addOrderBy('review.created', 'DESC')
             ->getQuery();
     }
 

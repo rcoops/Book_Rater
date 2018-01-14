@@ -4,5 +4,5 @@
 {% block header %}Edit {{ book.title }}{% endblock %}
 
 {% block body %}
-    {{ include('@BookRaterRater/Book/_form.html.twig') }}
+    {{ include('@BookRaterRater/Book/_form.html.twig', {submitText: 'Update'}) }}
 {% endblock %}

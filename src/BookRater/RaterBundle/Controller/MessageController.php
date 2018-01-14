@@ -2,63 +2,65 @@
 
 namespace BookRater\RaterBundle\Controller;
 
-use BookRater\RaterBundle\Entity\Contact;
-use BookRater\RaterBundle\Form\ContactType;
+use BookRater\RaterBundle\Entity\Message;
+use BookRater\RaterBundle\Form\MessageType;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-class ContactController extends EntityController
+class MessageController extends EntityController
 {
 
     /**
-     * @var \BookRater\RaterBundle\Repository\ContactRepository|\Doctrine\ORM\EntityRepository
+     * @var \BookRater\RaterBundle\Repository\MessageRepository|\Doctrine\ORM\EntityRepository
      */
-    protected $contactRepository;
+    protected $messageRepository;
 
     public function __construct(EntityManager $entityManager)
     {
         parent::__construct($entityManager);
-        $this->contactRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Contact');
+        $this->messageRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Message');
     }
 
-    public function listAction()
+    public function listAction(Request $request)
     {
-//        $this->contactRepository->createQueryBuilder('message')
-//            ->addOrderBy('message.created', 'DESC');
-//
-//        return new Response();
+        $query = $this->messageRepository->findAll();
+
+        $pagination = $this->paginate($query, $request);
+
+        return $this->render('@BookRaterRater/Message/list.html.twig',[
+            'pagination' => $pagination
+        ]);
     }
 
     public function createAction(Request $request)
     {
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact, ['action' => $request->getUri()]);
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message, ['action' => $request->getUri()]);
         # Handle form response
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $contact->setUser($this->getUser());
-            $contact->setCreated(new DateTime());
+            $message->setUser($this->getUser());
+            $message->setCreated(new DateTime());
 
-            $this->entityManager->persist($contact);
+            $this->entityManager->persist($message);
             $this->entityManager->flush();
 
-            $this->sendResponse($contact);
+            $this->sendResponse($message);
 
-            return $this->render('BookRaterRaterBundle:Contact:success.html.twig');
+            return $this->render('BookRaterRaterBundle:Message:success.html.twig');
         }
-        return $this->render('BookRaterRaterBundle:Contact:contact.html.twig', ['form' => $form->createView()]);
+        return $this->render('BookRaterRaterBundle:Message:contact.html.twig', ['form' => $form->createView()]);
     }
 
-    private function sendResponse(Contact $contact)
+    private function sendResponse(Message $contact)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($contact->getSubject())
             ->setFrom('noreply@bookrater.co.uk')
             ->setTo($contact->getUser()->getEmailCanonical())
-            ->setBody($this->renderView('@BookRaterRater/Contact/email.html.twig',[
+            ->setBody($this->renderView('@BookRaterRater/Message/email.html.twig',[
                 'name' => $contact->getUser()->getUsername(),
                 'message' => $contact->getMessage()
             ]),'text/html');

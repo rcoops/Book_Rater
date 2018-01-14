@@ -4,5 +4,5 @@
 {% block header %}Add Author{% endblock %}
 
 {% block body %}
-    {{ include('@BookRaterRater/Author/_form.html.twig') }}
+    {{ include('@BookRaterRater/Author/_form.html.twig', {submitText: 'Create'}) }}
 {% endblock %}

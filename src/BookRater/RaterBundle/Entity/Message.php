@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="contact")
+ * @ORM\Table(name="message")
  */
-class Contact
+class Message
 {
 
     /**
@@ -41,6 +41,11 @@ class Contact
      * @ORM\Column(name="created_date", type="datetime", nullable=true)
      */
     private $created;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isRead = false;
 
     /**
      * Get id
@@ -114,6 +119,22 @@ class Contact
     public function setCreated(DateTime $created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisRead()
+    {
+        return $this->isRead;
+    }
+
+    /**
+     * @param mixed $isRead
+     */
+    public function setIsRead($isRead)
+    {
+        $this->isRead = $isRead;
     }
 
 }

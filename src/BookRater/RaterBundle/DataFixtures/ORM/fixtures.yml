@@ -48,7 +48,7 @@ BookRater\RaterBundle\Entity\Review:
         created: "<dateTime($max = 'now', $timezone = null)>"
         edited: "30%? <dateTime($max = 'now', $timezone = null)>"
 
-BookRater\RaterBundle\Entity\Contact:
+BookRater\RaterBundle\Entity\Message:
     contact_{1..52}:
         user: '@user*'
         subject: '<sentence($nbWords = 3, $variableNbWords = true)>'

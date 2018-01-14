@@ -4,6 +4,18 @@
 {% block header %}Books{% endblock %}
 
 {% block body %}
+    <div class="count">
+        <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
+    </div>
+    <div>
+        <form class="form-inline" name="input" action="" method="post">
+            <input type="text" name="name" class="form-control" placeholder="Title, Author ..."/>
+
+            <input type="submit" name="submit" value="Filter" class="btn btn-primary">
+        </form>
+    </div>
+    {# display navigation #}
+    <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -67,4 +79,8 @@
         {% endfor %}
         </tbody>
     </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}

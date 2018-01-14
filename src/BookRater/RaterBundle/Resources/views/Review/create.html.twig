@@ -4,5 +4,5 @@
 
 {% block header %}Add New Review{% endblock %}
 {% block body %}
-    {{ include('@BookRaterRater/Review/_form.html.twig') }}
+    {{ include('@BookRaterRater/Review/_form.html.twig', {submitText: 'Create'}) }}
 {% endblock %}

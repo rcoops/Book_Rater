@@ -4,6 +4,12 @@
 {% block header %}Authors{% endblock %}
 
 {% block body %}
+    <div class="count">
+        <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -29,4 +35,8 @@
     {% endfor %}
     </tbody>
 </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}

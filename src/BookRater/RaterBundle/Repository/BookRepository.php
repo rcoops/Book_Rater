@@ -17,31 +17,40 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class BookRepository extends EntityRepository
 {
 
-    /**
-     * @var QueryBuilder
-     */
-    private $queryBuilder;
-
-    public function __construct($em, Mapping\ClassMetadata $class)
-    {
-        parent::__construct($em, $class);
-        $this->queryBuilder = $this->createQueryBuilder('book');
-    }
-
     public function findAllOrderedByNameQB()
     {
-        return $this->queryBuilder
+        return $this->createQueryBuilder('book')
             ->orderBy('book.title');
     }
 
     public function findAllWhereTitleLike(string $titleFragment)
     {
-        return $this->queryBuilder
+        $qb = $this->createQueryBuilder('book');
+        return $qb
             ->select('book')
-            ->where($this->queryBuilder->expr()->like('book.title', ":titleFragment"))
+            ->where($qb->expr()->like('book.title', ":titleFragment"))
             ->orderBy('book.title')
             ->setParameter('titleFragment', '%'.$titleFragment.'%')
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByFilter($filter = '')
+    {
+        $qb = $this->createQueryBuilder('book');
+
+        if ($filter) {
+            $qb->innerJoin('book.authors', 'book_author')
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('book.title', ':filter'),
+                        $qb->expr()->like('book_author.firstName', ':filter'),
+                        $qb->expr()->like('book_author.lastName', ':filter')
+                    )
+                )
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        $qb->addOrderBy('book.title', 'DESC');
+    }
+
 }

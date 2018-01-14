@@ -10,4 +10,9 @@
         {{ form_row(form.lastName) }}
     </div>
 </div>
+<div class="form-group row">
+    <div class="col-md-12">
+        {{ form_widget(form.submit, { 'label': submitText }) }}
+    </div>
+</div>
 {{ form_end(form) }}

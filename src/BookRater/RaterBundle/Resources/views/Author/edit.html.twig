@@ -4,5 +4,5 @@
 {% block header %}Edit {{ author.lastName }}, {{ author.firstName }}{% endblock %}
 
 {% block body %}
-    {{ include('@BookRaterRater/Author/_form.html.twig') }}
+    {{ include('@BookRaterRater/Author/_form.html.twig', {submitText: 'Update'}) }}
 {% endblock %}

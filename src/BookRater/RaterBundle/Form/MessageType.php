@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContactType extends AbstractType
+class MessageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subject', TextType::class, ['label'=> 'subject','attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
-            ->add('message', TextareaType::class, ['label'=> 'message','attr' => ['class' => 'form-control']])
+            ->add('subject', TextType::class, ['label'=> 'Subject','attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
+            ->add('message', TextareaType::class, ['label'=> 'Message','attr' => ['class' => 'form-control']])
             ->add('Save', SubmitType::class, ['label'=> 'submit', 'attr' => ['class' => 'btn btn-primary', 'style' => 'margin-top:15px']]);
     }
 
