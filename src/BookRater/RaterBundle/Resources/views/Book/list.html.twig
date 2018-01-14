@@ -4,17 +4,17 @@
 {% block header %}Books{% endblock %}
 
 {% block body %}
-    {% set placeholder = 'Book title/Author name...' %}
+    {% set placeholder = 'Title/Author...' %}
     {% set route = 'bookrater_book_list' %}
     {% block list_control %}{{ parent() }}{% endblock list_control %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Title</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Title', 'book.title') }}</th>
             <th>Authors</th>
-            <th>Edition</th>
-            <th>Publisher</th>
-            <th>Published</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
         </tr>
         </thead>
         <tbody>

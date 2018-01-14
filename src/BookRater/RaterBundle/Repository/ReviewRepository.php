@@ -19,10 +19,12 @@ class ReviewRepository extends EntityRepository
                     ->andWhere(
                         $qb->expr()->orX(
                             $qb->expr()->like('review_book.title', ':filter'),
-                            $qb->expr()->like('review_user.username', ':filter')
+                            $qb->expr()->like('review_user.username', ':filter'),
+                            $qb->expr()->eq('review.rating', ':num')
                         )
-                    )
-                    ->setParameter('filter', '%'.$filter.'%');
+                    );
+                $qb->setParameter('filter', '%'.$filter.'%');
+                $qb->setParameter('num', $filter);
             }
         return $qb->getQuery();
     }

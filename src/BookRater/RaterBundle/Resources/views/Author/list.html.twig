@@ -4,16 +4,16 @@
 {% block header %}Authors{% endblock %}
 
 {% block body %}
-    {% set placeholder = 'Author first name / last name...' %}
+    {% set placeholder = 'First/Last name...' %}
     {% set route = 'bookrater_author_list' %}
     {% block list_control %}{{ parent() }}{% endblock list_control %}
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Link</th>
-            <th>Last Name</th>
-            <th>Initial</th>
-            <th>First Name</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Last Name', 'author.lastName') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Initial', 'author.initial') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'First Name', 'author.firstName') }}</th>
         </tr>
         </thead>
         <tbody>
