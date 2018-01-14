@@ -23,21 +23,9 @@ class BookRepository extends EntityRepository
             ->orderBy('book.title');
     }
 
-    public function findAllWhereTitleLike(string $titleFragment)
+    public function findAllByFilter($filter = null)
     {
-        $qb = $this->createQueryBuilder('book');
-        return $qb
-            ->select('book')
-            ->where($qb->expr()->like('book.title', ":titleFragment"))
-            ->orderBy('book.title')
-            ->setParameter('titleFragment', '%'.$titleFragment.'%')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findAllByFilter($filter = '')
-    {
-        $qb = $this->createQueryBuilder('book');
+        $qb = $this->findAllOrderedByNameQB();
 
         if ($filter) {
             $qb->innerJoin('book.authors', 'book_author')
@@ -49,8 +37,8 @@ class BookRepository extends EntityRepository
                     )
                 )
                 ->setParameter('filter', '%'.$filter.'%');
-        }
-        $qb->addOrderBy('book.title', 'DESC');
+        };
+        return $qb->getQuery();
     }
 
 }

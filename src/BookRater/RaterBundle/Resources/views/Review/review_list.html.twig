@@ -1,14 +1,14 @@
 {# total items count #}
-<div class="count">
-    <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
-</div>
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
+{#<div class="count">#}
+    {#<span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>#}
+{#</div>#}
+{#<div class="navigation">#}
+    {#{{ knp_pagination_render(pagination) }}#}
+{#</div>#}
 {% for review in pagination %}
     {% include('@BookRaterRater/Review/view_content.html.twig') %}
 {% endfor %}
 {# display navigation #}
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
+{#<div class="navigation">#}
+    {#{{ knp_pagination_render(pagination) }}#}
+{#</div>#}

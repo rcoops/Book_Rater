@@ -4,6 +4,8 @@
 {% block header %}Books{% endblock %}
 
 {% block body %}
+    {% set placeholder = 'Book title/Author name...' %}
+    {% set route = 'bookrater_book_list' %}
     {% block list_control %}{{ parent() }}{% endblock list_control %}
     <table class="table table-striped">
         <thead>

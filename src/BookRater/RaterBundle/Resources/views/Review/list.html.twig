@@ -1,9 +1,12 @@
-{% extends "BookRaterRaterBundle::layout.html.twig" %}
-
+{% extends "BookRaterRaterBundle::list.html.twig" %}
 
 {% block title %}Reviews{% endblock %}
 {% block header %}Reviews{% endblock %}
 
 {% block body %}
-{{ include('@BookRaterRater/Review/review_list.html.twig') }}
+    {% set placeholder = 'Username/Book title...' %}
+    {% set route = 'bookrater_review_list' %}
+    {% block list_control %}{{ parent() }}{% endblock list_control %}
+    {{ include('@BookRaterRater/Review/review_list.html.twig') }}
+    {% block pagination_bottom %}{{ parent() }}{% endblock pagination_bottom %}
 {% endblock %}

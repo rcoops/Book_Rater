@@ -24,10 +24,10 @@ class ReviewController extends EntityController
 
     public function listAction(Request $request)
     {
-        $query = $this->reviewRepository
-            ->getLatestByBookTitleLike("");
+        $filter = $request->query->get('filter');
 
-        // parameters to template
+        $query = $this->reviewRepository->getLatestByFilter($filter);
+
         return $this->render('@BookRaterRater/Review/list.html.twig', [
             'pagination' => $this->paginate($query, $request)
         ]);

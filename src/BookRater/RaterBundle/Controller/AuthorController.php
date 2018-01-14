@@ -23,8 +23,8 @@ class AuthorController extends EntityController
 
     public function listAction(Request $request)
     {
-        $query = $this->authorRepository
-            ->findAllWhereNameLike("");
+        $filter = $request->query->get('filter');
+        $query = $this->authorRepository->findAllByFilter($filter);
 
         $pagination = $this->paginate($query, $request);
 

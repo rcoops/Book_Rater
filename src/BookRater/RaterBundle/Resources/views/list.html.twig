@@ -12,8 +12,8 @@
             {#<div class="count">#}
                 {#<span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>#}
             {#</div>#}
-            <input id="filter" type="text" name="name" class="form-control" placeholder="Title"/>
-            <button onclick="filterResults('bookrater_book_list')" class="btn btn-primary">Filter</button>
+            <input id="filter" type="text" name="name" class="form-control" placeholder="{{ placeholder }}"/>
+            <button onclick="filterResults('{{ route }}')" class="btn btn-primary">Filter</button>
         </div>
         {# display navigation #}
         <div class="navigation">{{ knp_pagination_render(pagination) }}</div>

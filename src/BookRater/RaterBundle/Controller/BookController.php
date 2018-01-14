@@ -15,7 +15,7 @@ class BookController extends EntityController
 {
 
     /**
-     * @var \BookRater\RaterBundle\Repository\ReviewRepository|\Doctrine\ORM\EntityRepository
+     * @var \BookRater\RaterBundle\Repository\BookRepository|\Doctrine\ORM\EntityRepository
      */
     protected $bookRepository;
 
@@ -77,13 +77,8 @@ class BookController extends EntityController
     public function listAction(Request $request)
     {
         $filter = $request->query->get('filter');
-        dump($filter);
-        $filters = $this->entityManager->getFilters()
-            ->enable('book_like');
-        $filters->setParameter('filter', $filter);
-
         $query = $this->bookRepository
-            ->findAll();
+            ->findAllByFilter($filter);
 
         $pagination = $this->paginate($query, $request);
 

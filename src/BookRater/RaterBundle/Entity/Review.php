@@ -25,9 +25,9 @@ final class Review
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text")
+     * @ORM\Column(name="review_title", type="text")
      */
-    private $title;
+    private $reviewTitle;
 
     /**
      * @var string
@@ -197,13 +197,13 @@ final class Review
     /**
      * Set title
      *
-     * @param string $title
+     * @param string $reviewTitle
      *
      * @return Review
      */
-    public function setTitle($title)
+    public function setReviewTitle($reviewTitle)
     {
-        $this->title = $title;
+        $this->reviewTitle = $reviewTitle;
 
         return $this;
     }
@@ -213,9 +213,9 @@ final class Review
      *
      * @return string
      */
-    public function getTitle()
+    public function getReviewTitle()
     {
-        return $this->title;
+        return $this->reviewTitle;
     }
 
     /**

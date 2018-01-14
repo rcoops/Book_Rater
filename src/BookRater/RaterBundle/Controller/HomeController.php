@@ -13,7 +13,7 @@ class HomeController extends EntityController
     {
         $latestReviews = $this->entityManager
             ->getRepository('BookRaterRaterBundle:Review')
-            ->getLatestQuery();
+            ->getLatestByFilter();
         $pagination = $this->paginate($latestReviews, $request);
         return $this->render('BookRaterRaterBundle:Home:index.html.twig',
             ['pagination' => $pagination]);

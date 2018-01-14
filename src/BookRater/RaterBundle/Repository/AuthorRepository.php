@@ -21,26 +21,20 @@ class AuthorRepository extends EntityRepository
             ->addOrderBy('author.initial');
     }
 
-    public function findAllOrderedByName()
-    {
-        return $this->findAllOrderedByNameQB()
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findAllWhereNameLike($nameLike)
+    public function findAllByFilter($filter = null)
     {
         $qb = $this->findAllOrderedByNameQB();
-        return $qb
-            ->andWhere(
-                $qb->expr()->orX(
-                    $qb->expr()->like('author.firstName', ':nameLike'),
-                    $qb->expr()->like('author.lastName', ':nameLike')
+
+        if ($filter) {
+            $qb->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('author.firstName', ':filter'),
+                        $qb->expr()->like('author.lastName', ':filter')
+                    )
                 )
-            )
-            ->setParameter('nameLike', '%'.$nameLike.'%')
-            ->getQuery()
-            ->getResult();
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb->getQuery();
     }
 
 }
