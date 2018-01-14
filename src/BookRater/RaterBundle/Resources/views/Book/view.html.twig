@@ -43,7 +43,7 @@
                 <ul>
                     {% for item in book.reviews %}
                         <li>
-                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
+                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.reviewTitle }}</a>
                             <small>{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
                         </li>
                     {% endfor %}

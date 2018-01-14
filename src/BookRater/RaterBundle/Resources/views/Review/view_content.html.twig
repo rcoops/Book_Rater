@@ -32,5 +32,6 @@
     </p>
     {% if is_granted("ROLE_USER") and review.user.username == app.user.username or is_granted("ROLE_ADMIN") %}
         <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
+        <a href="{{ path('bookrater_review_delete', {'id': review.id}) }}" class="btn btn-danger">Delete</a>
     {% endif %}
 </article>
