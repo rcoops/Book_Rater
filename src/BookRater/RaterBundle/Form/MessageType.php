@@ -2,7 +2,7 @@
 
 namespace BookRater\RaterBundle\Form;
 
-use BookRater\RaterBundle\Entity\Contact;
+use BookRater\RaterBundle\Entity\Message;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,7 +29,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Contact::class
+            'data_class' => Message::class
         ]);
     }
 
