@@ -1,0 +1,37 @@
+{% for review in pagination %}
+    <article class="well well-sm">
+        <header>
+            <h2>
+                <a href="{{ path('bookrater_review_view', {'id' : review.id }) }}">
+                    {{ review.reviewTitle | title }}
+                </a>
+            </h2>
+        </header>
+        <p>Book:
+            <a href="{{ path('bookrater_book_view', {'title' : review.bookReviewed.title }) }}">
+                {{ review.bookReviewed.title| title }}
+            </a>
+        </p>
+        <p>
+            <b>Rating:</b>
+            {% for i in 1..review.rating %}
+                <i class="fa fa-star"></i>
+            {% endfor %}
+            {% for i in 1..(5 - review.rating) if review.rating < 5 %}
+                <i class="fa fa-star-o"></i>
+            {% endfor %}
+        </p>
+        <p>{{ review.reviewComments| nl2br }}</p>
+        <p>
+            <small>
+                Created by {{ review.user }} at {{ review.created | date('H:i d/m/y') -}}
+                {% if review.edited %}
+                    {{- ', edited:' }} {{ review.edited | date('H:i d/m/y') }}
+                {% endif %}
+            </small>
+        </p>
+        {% if is_granted("ROLE_USER") and review.user.username == app.user.username or is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
+        {% endif %}
+    </article>
+{% endfor %}

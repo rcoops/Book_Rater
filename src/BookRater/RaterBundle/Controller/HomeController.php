@@ -24,9 +24,9 @@ class HomeController extends EntityController
         return $this->render('BookRaterRaterBundle:Home:about.html.twig');
     }
 
-    public function contactAction(Request $request)
+    public function contactAction()
     {
-        return $this->render('BookRaterRaterBundle:Contact:contact.html.twig');
+        return $this->render('BookRaterRaterBundle:Message:contact.html.twig');
     }
 
 }

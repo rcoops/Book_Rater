@@ -2,7 +2,6 @@
 
 {% block title %}Home{% endblock %}
 {% block header %}Latest Additions{% endblock %}
-
 {% block body %}
-    {{ include('@BookRaterRater/Review/review_list.html.twig') }}
+    {% include '@BookRaterRater/Review/review_list.html.twig' %}
 {% endblock %}
