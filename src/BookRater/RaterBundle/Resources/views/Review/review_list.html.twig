@@ -1,31 +1,12 @@
 {# total items count #}
 <div class="count">
-    {{ pagination.getTotalItemCount }}
+    <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
+</div>
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
 </div>
 {% for review in pagination %}
-    <article class="well well-sm">
-        <h2>
-            <a href="{{ path('bookrater_review_view', {'id' : review.id }) }}">
-                {{ review.title | title }}
-            </a>
-        </h2>
-        <p>Book:
-            <a href="{{ path('bookrater_book_view', {'title' : review.bookReviewed.title }) }}">
-                {{ review.bookReviewed.title| title }}
-            </a>
-        </p>
-        <p>
-            <b>Rating:</b>
-            {% for i in 1..review.rating %}
-                <i class="fa fa-star"></i>
-            {% endfor %}
-            {% for i in 1..(5 - review.rating) if review.rating < 5 %}
-                <i class="fa fa-star-o"></i>
-            {% endfor %}
-        </p>
-        <p>{{ review.reviewComments| nl2br }}</p>
-        <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
-    </article>
+    {% include('@BookRaterRater/Review/view_content.html.twig') %}
 {% endfor %}
 {# display navigation #}
 <div class="navigation">

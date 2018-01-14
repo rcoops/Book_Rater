@@ -25,7 +25,10 @@ class ContactController extends EntityController
 
     public function listAction()
     {
-//        $this->contactRepository->createQueryBuilder('message')->addOrderBy('m')
+//        $this->contactRepository->createQueryBuilder('message')
+//            ->addOrderBy('message.created', 'DESC');
+//
+//        return new Response();
     }
 
     public function createAction(Request $request)

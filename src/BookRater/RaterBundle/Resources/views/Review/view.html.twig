@@ -1,29 +1,7 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
-
 {% block title %}{{ review.title }}{% endblock %}
-{% block header %}{{ review.title }}{% endblock %}
 
 {% block body %}
-    <article class="well well-sm">
-        <h2><a href="{{ path('bookrater_book_view', {'title' : review.bookReviewed.title }) }}">
-                {{ review.bookReviewed.title| title }}
-            </a>
-        </h2>
-        <p>
-            <b>Rating:</b>
-            {% for i in 1..review.rating %}
-                <i class="fa fa-star"></i>
-            {% endfor %}
-            {% for i in 1..(5 - review.rating) %}
-                <i class="fa fa-star-o"></i>
-            {% endfor %}
-        </p>
-        <p>{{ review.reviewComments| nl2br }}</p>
-        <p><small>Created by {{ review.user }} at {{ review.created| date('H:i d/m/y') }}</small></p>
-        {% if is_granted("ROLE_USER") and review.user.username == app.user.username %}
-        <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
-        {% endif %}
-    </article>
-
+    {% include('@BookRaterRater/Review/view_content.html.twig') %}
 {% endblock %}
