@@ -1,0 +1,26 @@
+{% extends '@BookRaterRater/layout.html.twig' %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock javascript %}
+{% block body %}
+    {% block list_control %}
+        <div class="form-inline">
+            <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
+            {#<div class="count">#}
+                {#<span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>#}
+            {#</div>#}
+            <input id="filter" type="text" name="name" class="form-control" placeholder="Title"/>
+            <button onclick="filterResults('bookrater_book_list')" class="btn btn-primary">Filter</button>
+        </div>
+        {# display navigation #}
+        <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
+    {% endblock list_control %}
+    {% block pagination_bottom %}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endblock pagination_bottom %}
+{% endblock body %}

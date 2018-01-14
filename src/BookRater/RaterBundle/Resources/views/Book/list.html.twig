@@ -1,18 +1,10 @@
-{% extends "@BookRaterRater/layout.html.twig" %}
+{% extends "@BookRaterRater/list.html.twig" %}
 
 {% block title %}Books{% endblock %}
 {% block header %}Books{% endblock %}
 
 {% block body %}
-    <div class="count">
-        <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
-    </div>
-    <div>
-        <input id="filter" type="text" name="name" class="form-control" placeholder="Title, Author ..."/>
-        <button onclick="filterResults('bookrater_book_list')" class="btn btn-primary">Filter</button>
-    </div>
-    {# display navigation #}
-    <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
+    {% block list_control %}{{ parent() }}{% endblock list_control %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -76,11 +68,5 @@
         {% endfor %}
         </tbody>
     </table>
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script src="{{ asset('') }}">
+    {% block pagination_bottom %}{{ parent() }}{% endblock pagination_bottom %}
 {% endblock %}
