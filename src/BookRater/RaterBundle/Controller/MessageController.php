@@ -24,7 +24,7 @@ class MessageController extends EntityController
 
     public function listAction(Request $request)
     {
-        $query = $this->messageRepository->findAll();
+        $query = $this->messageRepository->findUnreadMessages();
 
         $pagination = $this->paginate($query, $request);
 

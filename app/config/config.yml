@@ -119,3 +119,19 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+easy_admin:
+    site_name: 'BookRater Admin'
+    design:
+        color_scheme: 'light'
+    entities:
+        Review:
+            class: BookRater\RaterBundle\Entity\Review
+        Book:
+            class: BookRater\RaterBundle\Entity\Book
+        Author:
+            class: BookRater\RaterBundle\Entity\Author
+        User:
+            class: BookRater\RaterBundle\Entity\User
+        Message:
+            class: BookRater\RaterBundle\Entity\Message

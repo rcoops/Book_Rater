@@ -7,10 +7,13 @@ use Doctrine\ORM\EntityRepository;
 class MessageRepository extends EntityRepository
 {
 
-    public function findAll()
+    public function findUnreadMessages()
     {
-        $this->createQueryBuilder('message')
+        $qb = $this->createQueryBuilder('message');
+        return $qb
+            ->andWhere($qb->expr()->eq('message.isRead', ':isRead'))
             ->addOrderBy('message.created', 'DESC')
+            ->setParameter('isRead', false)
             ->getQuery()
             ->getResult();
     }

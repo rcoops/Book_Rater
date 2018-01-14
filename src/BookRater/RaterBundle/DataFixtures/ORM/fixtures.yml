@@ -40,9 +40,9 @@ BookRater\RaterBundle\Entity\Book:
 
 BookRater\RaterBundle\Entity\Review:
     review_{1..186}:
-        title: '<sentence($nbWords = 4, $variableNbWords = true)>'
+        reviewTitle: '<sentence($nbWords = 4, $variableNbWords = true)>'
         reviewComments: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
-        rating: "<regexify('[1-5]')>"
+        rating: "<numberBetween($min = 1, $max = 5)>"
         user: '@user*'
         bookReviewed: '@book*'
         created: "<dateTime($max = 'now', $timezone = null)>"
@@ -54,3 +54,4 @@ BookRater\RaterBundle\Entity\Message:
         subject: '<sentence($nbWords = 3, $variableNbWords = true)>'
         message: '<paragraph($nbSentences = 3, $variableNbSentences = true)>'
         created: "<dateTime($max = 'now', $timezone = null)>"
+        isRead: '50%? 1'

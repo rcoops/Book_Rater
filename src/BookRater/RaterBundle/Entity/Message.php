@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="message")
+ * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
  */
 class Message
 {
@@ -43,9 +44,9 @@ class Message
     private $created;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true, options={"default": false})
      */
-    private $isRead = false;
+    private $isRead;
 
     /**
      * Get id
@@ -134,7 +135,7 @@ class Message
      */
     public function setIsRead($isRead)
     {
-        $this->isRead = $isRead;
+        $this->isRead = $isRead === null ? false : true;
     }
 
 }
