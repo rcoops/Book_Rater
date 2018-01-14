@@ -79,16 +79,16 @@ class ReviewController extends EntityController
         return $this->render('BookRaterRaterBundle:Review:create.html.twig', ['form' => $form->createView()]);
     }
 
-    public function deleteAction(int $id)
+    public function deleteAction(int $id, Request $request)
     {
         $review = $this->reviewRepository->find($id);
         if ($review)
         {
             $this->entityManager->remove($review);
             $this->entityManager->flush();
+            $this->addFlash('delete_success', 'Review with id: '.$id.' has successfully been deleted!');
         }
-
-        return $this->render('BookRaterRaterBundle:Review:delete.html.twig');
+        return $this->redirectToRoute('bookrater_home');
     }
 
 }

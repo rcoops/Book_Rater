@@ -3,5 +3,10 @@
 {% block title %}Home{% endblock %}
 {% block header %}Latest Additions{% endblock %}
 {% block body %}
+    {% for message in app.flashes('delete_success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     {% include '@BookRaterRater/Review/review_list.html.twig' %}
 {% endblock %}
