@@ -21,7 +21,7 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
+            ->add('review_title', TextType::class)
             ->add('bookReviewed', EntityType::class, [
                 'class' => Book::class,
                 'choice_label' => 'title',
