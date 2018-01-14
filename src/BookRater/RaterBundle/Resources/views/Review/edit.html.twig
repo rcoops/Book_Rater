@@ -1,7 +1,7 @@
 {% extends "@BookRaterRater/layout.html.twig" %}
 
-{% block title %}Edit {{ review.title }}{% endblock %}
-{% block header %}Edit {{ review.title }}{% endblock %}
+{% block title %}Edit {{ review.reviewTitle }}{% endblock %}
+{% block header %}Edit {{ review.reviewTitle }}{% endblock %}
 
 {% block body %}
     {{ include('@BookRaterRater/Review/_form.html.twig', {submitText: 'Update'}) }}

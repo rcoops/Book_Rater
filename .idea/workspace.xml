@@ -6,19 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/bookrater.iml" afterPath="$PROJECT_DIR$/.idea/bookrater.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view_content.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/MessageController.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/MessageController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/DataFixtures/ORM/fixtures.yml" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/DataFixtures/ORM/fixtures.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Message.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Message.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/MessageRepository.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/MessageRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Message/list.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Message/list.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,12 +43,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="fixtures.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/DataFixtures/ORM/fixtures.yml">
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="23" />
+            <state relative-caret-position="560">
+              <caret line="34" column="57" lean-forward="false" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+              <folding>
+                <element signature="e#12#44#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/list.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding>
+                <element signature="e#12#50#0#Twig" expanded="true" />
+                <element signature="e#146#191#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="review_list.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="48" lean-forward="true" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_content.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view_content.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/create.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#12#50#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,87 +132,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthorController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/AuthorController.php">
+      <file leaf-file-name="login.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="31" column="54" lean-forward="false" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Author.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Author.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/MessageController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="21" column="95" lean-forward="false" selection-start-line="21" selection-start-column="95" selection-end-line="21" selection-end-column="95" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#52#93#0#PHP" expanded="true" />
-                <element signature="e#861#901#0#PHP" expanded="true" />
-                <element signature="e#1531#1579#1#PHP" expanded="true" />
-                <element signature="e#1621#1669#0#PHP" expanded="true" />
-                <element signature="e#2019#2060#0#PHP" expanded="true" />
+                <element signature="e#12#37#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Message.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Message.php">
+      <file leaf-file-name="login_content.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login_content.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="50" column="7" lean-forward="false" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="124" column="11" lean-forward="false" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BookController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/BookController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1460">
-              <caret line="80" column="26" lean-forward="false" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MessageRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/MessageRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/list.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="12" column="80" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="80" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -213,8 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/ContactController.php" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Contact/contact.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Form/MessageType.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Doctrine/BookFilter.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Pagination/pagination.html.twig" />
@@ -224,7 +218,6 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Author/create.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Author/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/create.html.twig" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Profile/edit_content.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_book.yml" />
         <option value="$PROJECT_DIR$/app/Resources/public/js/redirect.js" />
@@ -241,7 +234,6 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/ReviewController.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Book.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Review.php" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view_content.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/AuthorRepository.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/BookRepository.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Author/list.html.twig" />
@@ -251,7 +243,6 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/list.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Home/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Form/ReviewType.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/_form.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Author/_form.html.twig" />
@@ -264,6 +255,11 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/DataFixtures/ORM/fixtures.yml" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Message.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view.html.twig" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view_content.html.twig" />
       </list>
     </option>
   </component>
@@ -396,6 +392,36 @@
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FOSUserBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FOSUserBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FOSUserBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
@@ -603,12 +629,12 @@
       <workItem from="1515848986747" duration="6407000" />
       <workItem from="1515855017164" duration="9892000" />
       <workItem from="1515922942716" duration="5604000" />
-      <workItem from="1515928596501" duration="33588000" />
+      <workItem from="1515928596501" duration="34672000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153800000" />
+    <option name="totallyTimeSpent" value="154884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="-4" width="1873" height="1084" extended-state="6" />
@@ -650,72 +676,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="79" lean-forward="false" selection-start-line="6" selection-start-column="79" selection-end-line="6" selection-end-column="79" />
-          <folding>
-            <element signature="e#12#50#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding>
-            <element signature="e#12#44#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="77" />
-          <folding>
-            <element signature="e#12#44#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/create.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="77" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="77" />
-          <folding>
-            <element signature="e#12#50#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/_form.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/view.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-404">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#12#50#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/jsrouting-bundle/Controller/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/public/js/redirect.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -830,14 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Book.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -889,16 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-          <folding>
-            <element signature="e#12#48#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/ReviewRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
@@ -915,14 +857,6 @@
             <element signature="e#12#50#0#Twig" expanded="false" />
             <element signature="e#174#218#0#Twig" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,16 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Message/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-          <folding>
-            <element signature="e#12#44#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/BookController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1460">
@@ -1094,6 +1018,105 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="124" column="11" lean-forward="false" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="10" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="34" column="57" lean-forward="false" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/create.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#12#50#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Message/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding>
+            <element signature="e#12#44#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/view.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#12#50#0#Twig" expanded="true" />
+            <element signature="e#146#191#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+          <folding>
+            <element signature="e#12#44#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Review/review_list.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="48" lean-forward="true" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
           <folding />
         </state>
       </provider>
