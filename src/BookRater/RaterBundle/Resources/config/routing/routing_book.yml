@@ -1,6 +1,8 @@
 bookrater_book_list:
     path:     /list
     defaults: { _controller: BookRaterRaterBundle:Book:list }
+    options:
+        expose: true
 
 bookrater_book_create:
     path:     /create

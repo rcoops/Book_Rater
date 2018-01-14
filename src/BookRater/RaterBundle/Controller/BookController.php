@@ -77,6 +77,7 @@ class BookController extends EntityController
     public function listAction(Request $request)
     {
         $filter = $request->query->get('filter');
+        dump($filter);
         $filters = $this->entityManager->getFilters()
             ->enable('book_like');
         $filters->setParameter('filter', $filter);
