@@ -46,7 +46,7 @@ BookRater\RaterBundle\Entity\Review:
         user: '@user*'
         bookReviewed: '@book*'
         created: "<dateTime($max = 'now', $timezone = null)>"
-        edited: "30%? <dateTime($max = 'now', $timezone = null)>"
+        edited: "30%? <dateTimeBetween($created, 'now')>"
 
 BookRater\RaterBundle\Entity\Message:
     contact_{1..52}:

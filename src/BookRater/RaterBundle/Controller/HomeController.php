@@ -11,6 +11,7 @@ class HomeController extends EntityController
 
     public function indexAction(Request $request)
     {
+        dump(now()); die;
         $latestReviews = $this->entityManager
             ->getRepository('BookRaterRaterBundle:Review')
             ->getLatestByFilter();
