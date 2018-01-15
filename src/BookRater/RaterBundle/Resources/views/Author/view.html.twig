@@ -1,10 +1,10 @@
 {% extends "BookRaterRaterBundle::layout.html.twig" %}
 
-{% block title %}{{ author.displayName }}{% endblock %}
+{% block title %}{{ author }}{% endblock %}
 {% block body %}
     <section class="well well-sm">
         <header>
-            <h2>{{ author.displayName }}</h2>
+            <h2>{{ author }}</h2>
             <a href="{{ path('bookrater_author_edit', {
                 'firstName': author.firstName, 'lastName': author.lastName
             }) }}" class="btn btn-primary">Edit</a>

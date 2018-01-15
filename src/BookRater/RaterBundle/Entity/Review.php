@@ -241,4 +241,10 @@ final class Review
     {
         return $this->edited;
     }
+
+
+    public function __toString()
+    {
+        return $this->reviewTitle;
+    }
 }

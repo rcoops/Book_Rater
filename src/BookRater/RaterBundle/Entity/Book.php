@@ -80,14 +80,14 @@ class Book
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
      */
     private $authors;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Review", mappedBy="bookReviewed")
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="bookReviewed", cascade={"remove"})
      */
     private $reviews;
 
@@ -318,6 +318,11 @@ class Book
         $this->isbn13 = $isbn13;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
 }

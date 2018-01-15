@@ -59,7 +59,7 @@ final class Author
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
+     * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors", cascade={"remove"})
      * @ORM\JoinTable(name="author_books")
      */
     private $booksAuthored;
@@ -215,6 +215,16 @@ final class Author
         $this->booksAuthored[] = $booksAuthored;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        $name = $this->getLastName() . ', ' . $this->getFirstName();
+        if ($this->initial)
+        {
+            return $name . ' ' . $this->initial;
+        }
+        return $name;
     }
 
 }

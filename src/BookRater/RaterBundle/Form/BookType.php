@@ -33,7 +33,6 @@ class BookType extends AbstractType
             ->add('authors', EntityType::class, [
                 'class' => Author::class,
                 'required' => false,
-                'choice_label' => 'displayName',
                 'by_reference' => false,
                 'multiple' => true,
                 'query_builder' => function(AuthorRepository $ar) {

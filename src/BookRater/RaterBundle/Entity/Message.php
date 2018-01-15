@@ -21,7 +21,7 @@ class Message
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BookRater\RaterBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="BookRater\RaterBundle\Entity\User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -72,6 +72,17 @@ class Message
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+
+    /**
+     * Remove user
+     *
+     * @param User $user
+     */
+    public function removeUser(User $user)
+    {
+        $user->removeMessage($this);
     }
 
     /**
@@ -125,7 +136,7 @@ class Message
     /**
      * @return mixed
      */
-    public function getisRead()
+    public function getIsRead()
     {
         return $this->isRead;
     }
@@ -133,9 +144,14 @@ class Message
     /**
      * @param mixed $isRead
      */
-    public function setIsRead($isRead)
+    public function setIsRead($isRead = false)
     {
-        $this->isRead = $isRead === null ? false : true;
+        $this->isRead = !$isRead ? false : true; // required to deal with null passed by fixtures
+    }
+
+    public function __toString()
+    {
+        return $this->subject;
     }
 
 }

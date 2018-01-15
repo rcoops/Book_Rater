@@ -8,9 +8,9 @@
             <h4>
                 {% if book.authors is not empty %}
                     {% set count = book.authors.count %}
-                    {{ book.authors[0].getDisplayName() -}}
-                    {% for item in book.authors|slice(1, count - 1) if count > 1 %}
-                        {{- '; ' }}{{ item.getDisplayName() -}}
+                    {{ book.authors[0] -}}
+                    {% for author in book.authors|slice(1, count - 1) if count > 1 %}
+                        {{- '; ' }}{{ author -}}
                     {% endfor %}
                 {% endif %}
             </h4>

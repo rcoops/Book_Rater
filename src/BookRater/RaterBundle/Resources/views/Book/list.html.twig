@@ -35,13 +35,13 @@
                         <a href="{{ path('bookrater_author_view', {
                             'lastName': book.authors[0].lastName,
                             'firstName': book.authors[0].firstName,
-                        }) }}">{{ book.authors[0].getDisplayName() -}}</a>
+                        }) }}">{{ book.authors[0] -}}</a>
                         {% for author in book.authors|slice(1, count - 1) if count > 1 %}
                             {{- '; ' }}
                             <a href="{{ path('bookrater_author_view', {
                                 'lastName': author.lastName,
                                 'firstName': author.firstName,
-                            }) }}">{{ author.getDisplayName() -}}</a>
+                            }) }}">{{ author -}}</a>
                         {% endfor %}
                     {% endif %}
                 </td>

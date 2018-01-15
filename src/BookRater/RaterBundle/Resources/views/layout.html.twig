@@ -15,4 +15,11 @@
             <a href="{{ path('bookrater_review_create') }}" class="list-group-item list-group-item-action">New Review<i class="fa fa-plus-circle pull-right"></i></a>
         </div>
     {% endif %}
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="list-group">
+            <div class="list-group-item list-group-item-warning">Admin Panel</div>
+            <a href="{{ path('bookrater_messages') }}" class="list-group-item list-group-item-action">View Unread Messages<i class="fa fa-plus-circle pull-right"></i></a>
+            <a href="{{ path('easyadmin') }}" class="list-group-item list-group-item-action">Easy Admin<i class="fa fa-plus-circle pull-right"></i></a>
+        </div>
+    {% endif %}
 {% endblock %}

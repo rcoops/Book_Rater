@@ -43,6 +43,7 @@ class MessageController extends EntityController
         if ($form->isValid()) {
             $message->setUser($this->getUser());
             $message->setCreated(new DateTime());
+            $message->setIsRead();
 
             $this->entityManager->persist($message);
             $this->entityManager->flush();
