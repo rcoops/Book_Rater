@@ -10,8 +10,6 @@ parameters:
     database_name: stb098_bookrater
     database_user: stb098
     database_password: '*stb098*'
-    # You should uncomment this if you want to use pdo_sqlite
-    #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
     mailer_transport: smtp
     mailer_host: smtp.gmail.com

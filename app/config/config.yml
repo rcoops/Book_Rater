@@ -4,8 +4,6 @@ imports:
     - { resource: services.yml }
     - { resource: "@BookRaterRaterBundle/Resources/config/services.yml" }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
 
@@ -38,11 +36,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-#    form:
-#        resources: ['bootstrap_3_layout.html.twig']
     form_themes:
         - bootstrap_3_layout.html.twig
-
 
 # Doctrine Configuration
 doctrine:
@@ -54,12 +49,6 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #path: '%database_path%'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -103,8 +92,6 @@ fos_user:
         confirmation:
             enabled: true
             template: FOSUserBundle:Registration:email.txt.twig
-#        form:
-#            type: BookRater\RaterBundle\Form\RegistrationType
 
 knp_paginator:
     page_range: 5                       # number of links showed in the pagination menu (e.g: you have 10 pages, a page_range of 3, on the 5th page you'll see links to page 4, 5, 6)
