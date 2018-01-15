@@ -45,7 +45,7 @@ BookRater\RaterBundle\Entity\Review:
         rating: "<numberBetween($min = 1, $max = 5)>"
         user: '@user*'
         bookReviewed: '@book*'
-        created: "<dateTime($max = 'now', $timezone = null)>"
+        created: "<dateTimeBetween($bookReviewed->getPublishDate(), 'now')>"
         edited: "30%? <dateTimeBetween($created, 'now')>"
 
 BookRater\RaterBundle\Entity\Message:
