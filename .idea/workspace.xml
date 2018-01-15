@@ -5,9 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/BookController.php" line="77" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BookRater/FixturesBundle/DataFixtures/ORM/fixtures.yml" afterPath="$PROJECT_DIR$/src/BookRater/FixturesBundle/DataFixtures/ORM/fixtures.yml" />
-    </list>
+    <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -483,7 +481,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165986000" />
+    <option name="totallyTimeSpent" value="166074000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="875" y="198" width="1875" height="1092" extended-state="6" />
