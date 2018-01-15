@@ -1,3 +1,6 @@
+imports:
+    - { resource: '../../src/BookRater/FixturesBundle/Resources/config/services.yml' }
+
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
@@ -39,8 +42,3 @@ services:
         autowire: true
         tags:
             - { name: kernel.event_subscriber }
-
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'

@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new BookRater\RedirectBundle\BookRaterRedirectBundle(),
+            new BookRater\FixturesBundle\BookRaterFixturesBundle(),
             new BookRater\RaterBundle\BookRaterRaterBundle(),
         ];
 

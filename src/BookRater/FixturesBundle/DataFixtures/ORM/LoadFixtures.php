@@ -1,6 +1,6 @@
 <?php
 
-namespace BookRater\RaterBundle\DataFixtures\ORM;
+namespace BookRater\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Bundle\FixturesBundle\ORMFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -11,7 +11,7 @@ class LoadFixtures implements ORMFixtureInterface
 
     public function load(ObjectManager $objectManager)
     {
-        Fixtures::load(__DIR__.'/fixtures.yml', $objectManager);
+        Fixtures::load(__DIR__ . '/fixtures.yml', $objectManager);
     }
 
 }

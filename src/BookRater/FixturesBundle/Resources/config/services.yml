@@ -1,0 +1,3 @@
+services:
+  BookRater\FixturesBundle\DataFixtures\ORM\LoadFixtures:
+      tags: [doctrine.fixture.orm]

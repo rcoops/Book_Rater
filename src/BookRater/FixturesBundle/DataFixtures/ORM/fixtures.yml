@@ -1,0 +1,57 @@
+BookRater\RaterBundle\Entity\User:
+    user_1:
+        username (unique): 'rcoops'
+        usernameCanonical: '<$username>'
+        email (unique): 'rcoops84@hotmail.com'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: 'rcoops'
+    user_2:
+        username (unique): 'admin'
+        usernameCanonical: '<$username>'
+        email (unique): 'bookraterrater@gmail.com'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: 'admin'
+        roles: [ROLE_ADMIN]
+    user_{3..10}:
+        username (unique): '<username()>'
+        usernameCanonical: '<$username>'
+        email (unique): '<email()>'
+        emailCanonical: '<$email>'
+        enabled: '1'
+        plainPassword: '<password()>'
+
+BookRater\RaterBundle\Entity\Author:
+    author_{1..40}:
+        firstName (unique): '<firstName()>'
+        lastName (unique): '<lastName()>'
+        initial: "<regexify('[A-Z ]{0,2}')>"
+
+BookRater\RaterBundle\Entity\Book:
+    book_{1..50}:
+        title (unique): '<sentence($nbWords = 4, $variableNbWords = true)>'
+        isbn (unique): "<regexify('[0-9]{10}')>"
+        isbn13 (unique): "<regexify('[0-9]{3}-[0-9]{10}')>"
+        publisher: '<company()>'
+        publishDate: "<dateTime($max = 'now', $timezone = null)>"
+        edition: '<numberBetween($min = 1, $max = 5)>'
+        authors: '<numberBetween(1, 2)>x @author*'
+
+BookRater\RaterBundle\Entity\Review:
+    review_{1..186}:
+        reviewTitle: '<sentence($nbWords = 4, $variableNbWords = true)>'
+        reviewComments: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
+        rating: "<numberBetween($min = 1, $max = 5)>"
+        user: '@user*'
+        bookReviewed: '@book*'
+        created: "<dateTime($max = 'now', $timezone = null)>"
+        edited: "30%? <dateTime($max = 'now', $timezone = null)>"
+
+BookRater\RaterBundle\Entity\Message:
+    contact_{1..52}:
+        user: '@user*'
+        subject: '<sentence($nbWords = 3, $variableNbWords = true)>'
+        message: '<paragraph($nbSentences = 3, $variableNbSentences = true)>'
+        created: "<dateTime($max = 'now', $timezone = null)>"
+        isRead: '50%? 1'
