@@ -320,6 +320,30 @@ class Book
         return $this;
     }
 
+    public function displayEdition()
+    {
+        $postFix = 'th';
+        switch ($this->edition)
+        {
+            case 1:
+                $postFix = 'st';
+                break;
+            case 2:
+                $postFix = 'nd';
+                break;
+            case 3:
+                $postFix = 'rd';
+                break;
+            default: //nothing
+        }
+        return $this->edition.$postFix.' Edition';
+    }
+
+    public function displayAuthors()
+    {
+        return join('; ', $this->authors->toArray());
+    }
+
     public function __toString()
     {
         return $this->title;

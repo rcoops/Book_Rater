@@ -1,5 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     {{ form_widget(form) }}
 <div>
@@ -7,3 +6,18 @@
     <a href="{{ path('fos_user_change_password') }}" class="btn btn-danger pull-right">Change my password</a>
 </div>
 {{ form_end(form) }}
+<div class="well well-sm" style="margin-top: 1em">
+    <header><h3 class="h3">My Reviews</h3></header>
+    {% if form.vars.data.reviews is not empty %}
+        <ul>
+            {% for item in form.vars.data.reviews | sort %}
+                <li>
+                    <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.reviewTitle }}</a>
+                    <small>- Created {{ item.created|date('d-m-Y') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews yet!</p>
+    {% endif %}
+</div>

@@ -1,7 +1,7 @@
 {# used in show, list and homepage #}
 <article class="well well-sm">
     <header>
-        <h2>
+        <h2 class="h2">
             <a href="{{ path('bookrater_review_view', {'id' : review.id }) }}">
                 {{ review.reviewTitle | title }}
             </a>
@@ -13,7 +13,7 @@
         </a>
     </p>
     <p>
-        <b>Rating:</b>
+        <strong>Rating:</strong>
         {% for i in 1..review.rating %}
             <i class="fa fa-star"></i>
         {% endfor %}

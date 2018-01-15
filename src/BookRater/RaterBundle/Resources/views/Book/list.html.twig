@@ -31,41 +31,14 @@
                 </td>
                 <td>
                     {% if book.authors is not empty %}
-                        {% set count = book.authors.count %}
-                        <a href="{{ path('bookrater_author_view', {
-                            'lastName': book.authors[0].lastName,
-                            'firstName': book.authors[0].firstName,
-                        }) }}">{{ book.authors[0] -}}</a>
-                        {% for author in book.authors|slice(1, count - 1) if count > 1 %}
-                            {{- '; ' }}
-                            <a href="{{ path('bookrater_author_view', {
-                                'lastName': author.lastName,
-                                'firstName': author.firstName,
-                            }) }}">{{ author -}}</a>
-                        {% endfor %}
+                        {{ book.displayAuthors }}
                     {% endif %}
                 </td>
                 <td>
-                    {% if (book.edition) %} {# - necessary on both sides to remove whitespace between tags #}
-                        {{ book.edition -}} {# -}} remove trailing whitespace between twig tags #}
-                        {{- '' -}}
-                        {% if book.edition == 1 %}
-                            {{- 'st' }} {# {{- remove leading whitespace between twig tags #}
-                        {% elseif book.edition == 2 %}
-                            {{- 'nd' }}
-                        {% elseif book.edition == 3 %}
-                            {{- 'rd' }}
-                        {% else %}
-                            {{- 'th' }}
-                        {% endif %}
-                        {{ 'Edition' -}}
-                    {% endif %}
-                    {{- '' -}}
+                    {% if (book.edition) %}{{ book.displayEdition -}}{% endif %}
                 </td>
                 <td>{{ book.publisher }}</td>
                 <td>{% if (book.publishDate) %} {{ book.publishDate|date('d-m-Y') }}{% endif %}</td>
-                {#<td>{{ author.initial }}</td>#}
-                {#<td>{{ author.firstName }}</td>#}
             </tr>
         {% endfor %}
         </tbody>

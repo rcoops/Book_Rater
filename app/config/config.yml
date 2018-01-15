@@ -75,6 +75,9 @@ assetic:
         css:
             inputs:
                 - '../app/Resources/public/css/*'
+        js:
+            inputs:
+                - '../app/Resources/public/js/*'
 
 fos_user:
     service:

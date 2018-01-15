@@ -79,7 +79,7 @@ class ReviewController extends EntityController
         return $this->render('BookRaterRaterBundle:Review:create.html.twig', ['form' => $form->createView()]);
     }
 
-    public function deleteAction(int $id, Request $request)
+    public function deleteAction(int $id)
     {
         $review = $this->reviewRepository->find($id);
         if ($review)
