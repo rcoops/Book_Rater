@@ -1,5 +1,6 @@
 imports:
-    - { resource: '../../src/BookRater/FixturesBundle/Resources/config/services.yml' }
+    - { resource: '@BookRaterFixturesBundle/Resources/config/services.yml' }
+    - { resource: '@BookRaterRedirectBundle/Resources/config/services.yml' }
 
 parameters:
     #parameter_name: value
@@ -14,9 +15,3 @@ services:
         class: BookRater\RaterBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
-
-    app.redirect_after_registration_subscriber:
-        class: BookRater\RedirectBundle\EventListener\RedirectAfterRegistrationSubscriber
-        autowire: true
-        tags:
-            - { name: kernel.event_subscriber }

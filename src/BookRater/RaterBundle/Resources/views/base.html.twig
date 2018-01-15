@@ -38,8 +38,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('bookrater_about') }}">About  <i class="fa fa-question-circle"></i></a></li>
-                    <li><a href="{{ path('bookrater_contact') }}">Contact <i class="fa fa-envelope-open"></i></a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path('bookrater_contact') }}">Contact <i class="fa fa-envelope-open"></i></a></li>
                         <li>
                             <a href="{{ path('fos_user_profile_edit') }}">
                                 Profile <i class="fa fa-user-circle"></i>
@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-8">
-                    <p>Book Rater <i class="fa fa-copyright"></i></p>
+                    <p>BookRater <i class="fa fa-copyright"> 2018</i></p>
                 </div>
                 <div class="col-xs-4">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

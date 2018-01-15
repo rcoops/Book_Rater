@@ -21,7 +21,7 @@ class MessageType extends AbstractType
         $builder
             ->add('subject', TextType::class, ['label'=> 'Subject','attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
             ->add('message', TextareaType::class, ['label'=> 'Message','attr' => ['class' => 'form-control']])
-            ->add('Save', SubmitType::class, ['label'=> 'submit', 'attr' => ['class' => 'btn btn-primary', 'style' => 'margin-top:15px']]);
+            ->add('Send', SubmitType::class, ['attr' => ['class' => 'btn btn-primary', 'style' => 'margin-top:15px']]);
     }
 
     /**

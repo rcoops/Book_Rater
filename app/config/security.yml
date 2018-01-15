@@ -10,7 +10,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -36,6 +36,10 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/create/, role: ROLE_USER }
-        - { path: ^/edit/, role: ROLE_USER }
+        - { path: ^/author/create, role: ROLE_USER }
+        - { path: ^/author/edit, role: ROLE_USER }
+        - { path: ^/book/create, role: ROLE_USER }
+        - { path: ^/book/edit, role: ROLE_USER }
+        - { path: ^/review/create, role: ROLE_USER }
+        - { path: ^/review/edit, role: ROLE_USER }
         - { path: ^/contact, role: ROLE_USER }

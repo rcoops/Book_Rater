@@ -86,7 +86,7 @@ class ReviewController extends EntityController
         {
             $this->entityManager->remove($review);
             $this->entityManager->flush();
-            $this->addFlash('delete_success', 'Review with id: '.$id.' has successfully been deleted!');
+            $this->addFlash('success', 'Review with id: '.$id.' has successfully been deleted!');
         }
         return $this->redirectToRoute('bookrater_home');
     }
