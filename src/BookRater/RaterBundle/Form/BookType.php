@@ -37,8 +37,7 @@ class BookType extends AbstractType
                 'multiple' => true,
                 'query_builder' => function(AuthorRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
-                },
-                'placeholder' => 'Choose Author...'
+                }
             ])
             ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
     }

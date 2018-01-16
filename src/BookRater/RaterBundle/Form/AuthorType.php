@@ -23,13 +23,11 @@ class AuthorType extends AbstractType
             ->add('firstName', TextType::class, ['required' => true])
             ->add('booksAuthored', EntityType::class, [
                 'class' => 'BookRater\RaterBundle\Entity\Book',
-                'choice_label' => 'title',
                 'by_reference' => false,
                 'multiple' => true,
                 'query_builder' => function(BookRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
                 },
-                'placeholder' => 'Choose Book...'
             ])
             ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }
