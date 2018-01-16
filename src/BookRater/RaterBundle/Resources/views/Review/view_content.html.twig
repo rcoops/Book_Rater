@@ -14,9 +14,7 @@
     </p>
     <p>
         <strong>Rating:</strong>
-        {% for i in 1..review.rating %}
-            <i class="fa fa-star"></i>
-        {% endfor %}
+        {% for i in 1..review.rating %}<i class="fa fa-star"></i>{% endfor %}
         {% for i in 1..(5 - review.rating) if review.rating < 5 %}
             <i class="fa fa-star-o"></i>
         {% endfor %}
