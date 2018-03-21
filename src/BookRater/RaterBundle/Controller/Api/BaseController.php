@@ -1,6 +1,6 @@
 <?php
 
-namespace BookRater\RaterBundle\Controller;
+namespace BookRater\RaterBundle\Controller\Api;
 
 use BookRater\RaterBundle\Api\ApiProblem;
 use BookRater\RaterBundle\Api\ApiProblemException;

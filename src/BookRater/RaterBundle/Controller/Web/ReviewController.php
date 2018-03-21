@@ -1,6 +1,6 @@
 <?php
 
-namespace BookRater\RaterBundle\Controller;
+namespace BookRater\RaterBundle\Controller\Web;
 
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\ReviewType;

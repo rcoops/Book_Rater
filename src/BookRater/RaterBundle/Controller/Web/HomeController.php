@@ -1,6 +1,6 @@
 <?php
 
-namespace BookRater\RaterBundle\Controller;
+namespace BookRater\RaterBundle\Controller\Web;
 
 use BookRater\RaterBundle\Entity\Message;
 use BookRater\RaterBundle\Form\MessageType;

@@ -1,15 +1,15 @@
 bookrater_home:
     path:     /
-    defaults: { _controller: BookRaterRaterBundle:Home:index }
+    defaults: { _controller: BookRaterRaterBundle:Web\Home:index }
 
 bookrater_about:
     path: /about
-    defaults: { _controller: BookRaterRaterBundle:Home:about }
+    defaults: { _controller: BookRaterRaterBundle:Web\Home:about }
 
 bookrater_contact:
     path: /contact
-    defaults: { _controller: BookRaterRaterBundle:Message:create }
+    defaults: { _controller: BookRaterRaterBundle:Web\Message:create }
 
 bookrater_messages:
     path: /admin/messages
-    defaults: { _controller: BookRaterRaterBundle:Message:list }
+    defaults: { _controller: BookRaterRaterBundle:Web\Message:list }

@@ -1,19 +1,19 @@
 bookrater_book_list:
     path:     /list
-    defaults: { _controller: BookRaterRaterBundle:Book:list }
+    defaults: { _controller: BookRaterRaterBundle:Web\Book:list }
     options:
         expose: true
 
 bookrater_book_create:
     path:     /create
-    defaults: { _controller: BookRaterRaterBundle:Book:create }
+    defaults: { _controller: BookRaterRaterBundle:Web\Book:create }
 
 bookrater_book_view:
     path:     /{title}
-    defaults: { _controller: BookRaterRaterBundle:Book:view }
+    defaults: { _controller: BookRaterRaterBundle:Web\Book:view }
 
 bookrater_book_edit:
     path:     /edit/{id}
-    defaults: { _controller: BookRaterRaterBundle:Book:edit }
+    defaults: { _controller: BookRaterRaterBundle:Web\Book:edit }
     requirements:
         id: \d+

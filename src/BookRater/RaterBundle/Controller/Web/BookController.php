@@ -1,6 +1,6 @@
 <?php
 
-namespace BookRater\RaterBundle\Controller;
+namespace BookRater\RaterBundle\Controller\Web;
 
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;

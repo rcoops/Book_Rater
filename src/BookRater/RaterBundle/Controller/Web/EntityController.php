@@ -1,7 +1,7 @@
 <?php
 
 
-namespace BookRater\RaterBundle\Controller;
+namespace BookRater\RaterBundle\Controller\Web;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
@@ -29,6 +29,5 @@ class EntityController extends Controller
             10 /* limit per page */
         );
     }
-
 
 }

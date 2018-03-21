@@ -1,23 +1,23 @@
 bookrater_author_list:
     path:     /
-    defaults: { _controller: BookRaterRaterBundle:Author:list }
+    defaults: { _controller: BookRaterRaterBundle:Web\Author:list }
     options:
         expose: true
 
 bookrater_author_create:
     path:     /create
-    defaults: { _controller: BookRaterRaterBundle:Author:create }
+    defaults: { _controller: BookRaterRaterBundle:Web\Author:create }
 
 bookrater_author_view:
     path:     /{lastName}/{firstName}
-    defaults: { _controller: BookRaterRaterBundle:Author:view }
+    defaults: { _controller: BookRaterRaterBundle:Web\Author:view }
     requirements:
         lastName: "[A-Za-z']+"
         firstName: \w+
 
 bookrater_author_edit:
     path:     /edit/{lastName}/{firstName}
-    defaults: { _controller: BookRaterRaterBundle:Author:edit }
+    defaults: { _controller: BookRaterRaterBundle:Web\Author:edit }
     requirements:
         lastName: "[A-Za-z']+"
         firstName: \w+
