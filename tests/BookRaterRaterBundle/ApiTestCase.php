@@ -1,10 +1,8 @@
 <?php
 
-namespace AppBundle\Test;
+namespace Tests\BookRaterRaterBundle;
 
-use AppBundle\Entity\Programmer;
-use AppBundle\Entity\Project;
-use AppBundle\Entity\User;
+use BookRater\RaterBundle\Entity\User;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
 use Exception;
@@ -17,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use Throwable;
 
 class ApiTestCase extends KernelTestCase
 {
@@ -26,7 +24,7 @@ class ApiTestCase extends KernelTestCase
     /**
      * @var array
      */
-    private static $history = array();
+    private static $history = [];
 
     /**
      * @var Client
@@ -77,7 +75,7 @@ class ApiTestCase extends KernelTestCase
     {
         $this->client = self::$staticClient;
         // reset the history
-        self::$history = array();
+        self::$history = [];
 
         $this->purgeDatabase();
     }
@@ -90,7 +88,11 @@ class ApiTestCase extends KernelTestCase
         // purposefully not calling parent class, which shuts down the kernel
     }
 
-    protected function onNotSuccessfulTest(Exception $e)
+    /**
+     * @param Throwable $e
+     * @throws Throwable
+     */
+    protected function onNotSuccessfulTest(Throwable $e)
     {
         if ($lastResponse = $this->getLastResponse()) {
             $this->printDebug('');
@@ -164,7 +166,7 @@ class ApiTestCase extends KernelTestCase
                 }
 
                 // finds the h1 and h2 tags and prints them only
-                foreach ($crawler->filter('h1, h2')->extract(array('_text')) as $header) {
+                foreach ($crawler->filter('h1, h2')->extract(['_text']) as $header) {
                     // avoid these meaningless headers
                     if (strpos($header, 'Stack Trace') !== false) {
                         continue;
@@ -269,6 +271,13 @@ class ApiTestCase extends KernelTestCase
         return $last['response'];
     }
 
+    /**
+     * @param $username
+     * @param string $plainPassword
+     * @return User
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     protected function createUser($username, $plainPassword = 'foo')
     {
         $user = new User();
@@ -285,7 +294,7 @@ class ApiTestCase extends KernelTestCase
         return $user;
     }
 
-    protected function getAuthorizedHeaders($username, $headers = array())
+    protected function getAuthorizedHeaders($username, $headers = [])
     {
         $token = $this->getService('lexik_jwt_authentication.encoder')
             ->encode(['username' => $username]);
@@ -293,52 +302,6 @@ class ApiTestCase extends KernelTestCase
         $headers['Authorization'] = 'Bearer '.$token;
 
         return $headers;
-    }
-
-    protected function createProgrammer(array $data, $ownerUsername = null)
-    {
-        if ($ownerUsername) {
-            $owner = $this->getEntityManager()
-                ->getRepository('AppBundle:User')
-                ->findOneBy(['username' => $ownerUsername]);
-        } else {
-            $owner = $this->getEntityManager()
-                ->getRepository('AppBundle:User')
-                ->findAny();
-        }
-
-        $data = array_merge(array(
-            'powerLevel' => rand(0, 10),
-            'user' => $owner,
-            'avatarNumber' => rand(1, 6)
-        ), $data);
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $programmer = new Programmer();
-        foreach ($data as $key => $value) {
-            $accessor->setValue($programmer, $key, $value);
-        }
-
-        $this->getEntityManager()->persist($programmer);
-        $this->getEntityManager()->flush();
-
-        return $programmer;
-    }
-
-    /**
-     * @param string $name
-     * @return Project
-     */
-    protected function createProject($name)
-    {
-        $project = new Project();
-        $project->setName($name);
-        $project->setDifficultyLevel(rand(1, 10));
-
-        $this->getEntityManager()->persist($project);
-        $this->getEntityManager()->flush();
-
-        return $project;
     }
 
     /**

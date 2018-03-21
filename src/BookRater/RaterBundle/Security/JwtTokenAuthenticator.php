@@ -61,7 +61,7 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
         $username = $data['username'];
 
         return $this->em
-            ->getRepository('AppBundle:User')
+            ->getRepository('BookRaterRaterBundle:User')
             ->findOneBy(['username' => $username]);
     }
 

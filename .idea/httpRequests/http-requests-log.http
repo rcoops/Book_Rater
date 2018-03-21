@@ -1,0 +1,72 @@
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T040337.200.json
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T040158.500.html
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T040101.500.html
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T035917.500.html
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T035913.500.html
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T034233.500.html
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T034138.404.txt
+
+###
+
+POST http://localhost:8000/api/tokens
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic YWRtaW46YWRtaW4=
+
+<> 2018-03-21T033714.404.txt
+
+###
+

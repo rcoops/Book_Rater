@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="battle_api_token")
+ * @ORM\Table(name="api_token")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\ApiTokenRepository")
  */
 class ApiToken

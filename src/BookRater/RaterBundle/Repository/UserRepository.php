@@ -17,4 +17,16 @@ class UserRepository extends EntityRepository
         return $this->findOneBy(['username' => $username]);
     }
 
+    /**
+     * @return User
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findAny()
+    {
+        return $this->createQueryBuilder('u')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 }

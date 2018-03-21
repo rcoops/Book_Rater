@@ -129,6 +129,10 @@ easy_admin:
         Message:
             class: BookRater\RaterBundle\Entity\Message
 
+fos_rest:
+    routing_loader:
+        default_format: json
+
 lexik_jwt_authentication:
     private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
     public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'

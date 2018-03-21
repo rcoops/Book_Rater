@@ -5,6 +5,7 @@ namespace BookRater\RaterBundle\Controller\Web;
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Form\AuthorType;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class AuthorController extends EntityController
@@ -15,7 +16,11 @@ class AuthorController extends EntityController
      */
     protected $authorRepository;
 
-    public function __construct(EntityManager $entityManager)
+    /**
+     * AuthorController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->authorRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Author');
