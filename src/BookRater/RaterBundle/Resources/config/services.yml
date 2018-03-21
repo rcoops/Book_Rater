@@ -8,7 +8,7 @@ services:
         resource: '../../*'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
-        exclude: '../../{Entity,Repository,Tests}'
+        exclude: '../../{Entity,Api/ApiProblem*,Pagination/PaginatedCollection}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
@@ -16,3 +16,30 @@ services:
         resource: '../../Controller'
         public: true
         tags: ['controller.service_arguments']
+
+#    app.form.registration:
+#        class: BookRater\RaterBundle\Form\RegistrationType
+#        tags:
+#            - { name: form.type, alias: app_user_registration }
+#
+    BookRater\RaterBundle\EventListener\ApiExceptionSubscriber:
+        arguments: ['%kernel.debug%', '@BookRater\RaterBundle\Api\ResponseFactory', '@logger']
+        tags:
+            - { name: kernel.event_subscriber }
+#
+#    pagination_factory:
+#        class: BookRater\RaterBundle\Pagination\PaginationFactory
+#        arguments: ['@router']
+#
+#    link_serialization_subscriber:
+#        class: BookRater\RaterBundle\Serializer\LinkSerializationSubscriber
+#        arguments: ['@router', '@annotation_reader']
+#        tags:
+#            - { name: jms_serializer.event_subscriber }
+#
+    jwt_token_authenticator: '@BookRater\RaterBundle\Security\JwtTokenAuthenticator'
+#
+#    api.response_factory:
+#        class: BookRater\RaterBundle\Api\ResponseFactory
+#
+    custom_hateoas_json_serializer: '@BookRater\RaterBundle\Serializer\CustomHATEOASJsonSerializer'

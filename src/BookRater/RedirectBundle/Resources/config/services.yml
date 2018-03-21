@@ -1,6 +1,6 @@
 services:
     app.redirect_after_registration_subscriber:
         class: BookRater\RedirectBundle\EventListener\RedirectFOSUserSubscriber
-        autowire: true
+        arguments: ['@router']
         tags:
             - { name: kernel.event_subscriber }

@@ -10,8 +10,3 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-
-    app.form.registration:
-        class: BookRater\RaterBundle\Form\RegistrationType
-        tags:
-            - { name: form.type, alias: app_user_registration }
