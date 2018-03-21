@@ -323,8 +323,7 @@ class Book
     public function displayEdition()
     {
         $postFix = 'th';
-        switch ($this->edition)
-        {
+        switch ($this->edition) {
             case 1:
                 $postFix = 'st';
                 break;
@@ -336,12 +335,26 @@ class Book
                 break;
             default: //nothing
         }
-        return $this->edition.$postFix.' Edition';
+        return $this->edition . $postFix . ' Edition';
     }
 
     public function displayAuthors()
     {
         return join('; ', $this->authors->toArray());
+    }
+
+    /**
+     *
+     * @return float|int
+     */
+    public function getRating()
+    {
+        $reviewRatings = $this->reviews
+            ->map(function (Review $review) {
+                return $review->getRating();
+            })
+            ->toArray();
+        return array_sum($reviewRatings) / count($reviewRatings);
     }
 
     public function __toString()

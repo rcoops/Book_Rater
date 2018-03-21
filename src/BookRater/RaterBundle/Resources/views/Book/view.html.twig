@@ -14,6 +14,14 @@
             {{- '' -}}
             {% if (book.publishDate) %}, {{ book.publishDate|date('d-m-Y') }}{% endif %}
         </p>
+        <p>
+            <strong>Rating:</strong>
+            {% set rating = book.rating|number_format %}
+            {% for i in 1..rating %}<i class="fa fa-star"></i>{% endfor %}
+            {% for i in 1..(5 - rating) if rating < 5 %}
+                <i class="fa fa-star-o"></i>
+            {% endfor %}
+        </p>
         <a href="{{ path('bookrater_book_edit', {'id': book.id }) }}" class="btn btn-primary">Edit</a>
     </section>
     <section class="well well-sm">
