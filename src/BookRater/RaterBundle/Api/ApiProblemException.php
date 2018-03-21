@@ -19,7 +19,7 @@ class ApiProblemException extends HttpException
      * @param array $headers
      * @param int $code
      */
-    public function __construct(ApiProblem $apiProblem, \Exception $previous = null, array $headers = array(), $code = 0)
+    public function __construct(ApiProblem $apiProblem, \Exception $previous = null, array $headers = [], $code = 0)
     {
         $this->apiProblem = $apiProblem;
         $statusCode = $apiProblem->getStatusCode();

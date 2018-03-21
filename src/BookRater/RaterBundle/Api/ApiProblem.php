@@ -13,10 +13,10 @@ class ApiProblem
     const TYPE_VALIDATION_ERROR = 'validation_error';
     const TYPE_INVALID_REQUEST_BODY_FORMAT = 'invalid_body_format';
 
-    private static $titles = array(
+    private static $titles = [
         self::TYPE_VALIDATION_ERROR => 'There was a validation error',
         self::TYPE_INVALID_REQUEST_BODY_FORMAT => 'Invalid JSON format sent',
-    );
+    ];
 
     private $statusCode;
 
@@ -24,7 +24,7 @@ class ApiProblem
 
     private $title;
 
-    private $extraData = array();
+    private $extraData = [];
 
     public function __construct($statusCode, $type = null)
     {
@@ -53,11 +53,11 @@ class ApiProblem
     {
         return array_merge(
             $this->extraData,
-            array(
+            [
                 'status' => $this->statusCode,
                 'type' => $this->type,
                 'title' => $this->title,
-            )
+            ]
         );
     }
 

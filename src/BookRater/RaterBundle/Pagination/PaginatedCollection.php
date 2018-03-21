@@ -10,7 +10,7 @@ class PaginatedCollection
 
     private $count;
 
-    private $_links = array();
+    private $_links = [];
 
     public function __construct(array $items, $totalItems)
     {

@@ -34,7 +34,7 @@ class LinkSerializationSubscriber implements EventSubscriberInterface
         $annotations = $this->annotationReader
             ->getClassAnnotations(new \ReflectionObject($object));
 
-        $links = array();
+        $links = [];
         foreach ($annotations as $annotation) {
             if ($annotation instanceof Link) {
                 $uri = $this->router->generate(
@@ -46,7 +46,7 @@ class LinkSerializationSubscriber implements EventSubscriberInterface
         }
 
         if ($links) {
-            $visitor->addData('_links', $links);
+            $visitor->setData('_links', $links);
         }
     }
 
@@ -54,7 +54,7 @@ class LinkSerializationSubscriber implements EventSubscriberInterface
     {
         foreach ($params as $key => $param) {
             $params[$key] = $this->expressionLanguage
-                ->evaluate($param, array('object' => $object));
+                ->evaluate($param, ['object' => $object]);
         }
 
         return $params;
@@ -62,12 +62,13 @@ class LinkSerializationSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            array(
+        return [
+            [
                 'event' => 'serializer.post_serialize',
                 'method' => 'onPostSerialize',
                 'format' => 'json',
-            )
-        );
+            ]
+        ];
     }
+
 }

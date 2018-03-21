@@ -78,9 +78,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::EXCEPTION => 'onKernelException'
-        );
+        return [KernelEvents::EXCEPTION => 'onKernelException'];
     }
 
     /**
@@ -92,7 +90,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     {
         $message = sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine());
         $isCritical = !$exception instanceof HttpExceptionInterface || $exception->getStatusCode() >= 500;
-        $context = array('exception' => $exception);
+        $context = ['exception' => $exception];
         if ($isCritical) {
             $this->logger->critical($message, $context);
         } else {
