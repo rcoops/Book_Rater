@@ -19,6 +19,8 @@ use Throwable;
 
 class ApiTestCase extends KernelTestCase
 {
+    private const BASE_URI = '/api/v1'; // single entry point for all api calls
+
     private static $staticClient;
 
     /**
@@ -335,6 +337,61 @@ class ApiTestCase extends KernelTestCase
     protected function adjustUri($uri)
     {
         return '/app_test.php'.$uri;
+    }
+
+    /**
+     * Convenience method for prepending the base api uri to the path
+     * @param string $uri
+     * @param array $options
+     * @return ResponseInterface
+     */
+    protected function post(string $uri, array $options = [])
+    {
+        return $this->client->post(self::BASE_URI.$uri, $options);
+    }
+
+    /**
+     * Convenience method for prepending the base api uri to the path
+     * @param string $uri
+     * @param array $options
+     * @return ResponseInterface
+     */
+    protected function get(string $uri, array $options = [])
+    {
+        return $this->client->get(self::BASE_URI.$uri, $options);
+    }
+
+    /**
+     * Convenience method for prepending the base api uri to the path
+     * @param string $uri
+     * @param array $options
+     * @return ResponseInterface
+     */
+    protected function put(string $uri, array $options = [])
+    {
+        return $this->client->put(self::BASE_URI.$uri, $options);
+    }
+
+    /**
+     * Convenience method for prepending the base api uri to the path
+     * @param string $uri
+     * @param array $options
+     * @return ResponseInterface
+     */
+    protected function patch(string $uri, array $options = [])
+    {
+        return $this->client->patch(self::BASE_URI.$uri, $options);
+    }
+
+    /**
+     * Convenience method for prepending the base api uri to the path
+     * @param string $uri
+     * @param array $options
+     * @return ResponseInterface
+     */
+    protected function delete(string $uri, array $options = [])
+    {
+        return $this->client->delete(self::BASE_URI.$uri, $options);
     }
 
 }

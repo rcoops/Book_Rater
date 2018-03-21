@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
+// Used only for REST
 class JwtTokenAuthenticator extends AbstractGuardAuthenticator
 {
     private $jwtEncoder;

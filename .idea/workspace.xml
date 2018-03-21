@@ -6,10 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1df8ea09-6333-43c9-b234-7e8941575aec.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/1df8ea09-6333-43c9-b234-7e8941575aec.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/DoctrineMigrations/Version20180321180226.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/data_test.db3" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
+      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php" />
+      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" />
+      <change beforePath="$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php" afterPath="$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php" />
+      <change beforePath="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" afterPath="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -76,51 +81,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="config_test.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_test.yml">
+      <file leaf-file-name="CustomHATEOASJsonSerializer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Serializer/CustomHATEOASJsonSerializer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="108">
+              <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApiToken.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php">
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config_prod.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config_dev.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-106">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApiExceptionSubscriber.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ApiExceptionSubscriber.php">
+      <file leaf-file-name="routing_api.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_api.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="18">
+              <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -129,32 +114,48 @@
       <file leaf-file-name="TokenController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding>
-                <element signature="e#733#760#1#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="162">
+              <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JwtTokenAuthenticator.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php">
+      <file leaf-file-name="TokenControllerTest.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="92" column="5" lean-forward="true" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
-              <folding>
-                <element signature="e#2084#2111#1#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="108">
+              <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="ApiTestCase.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="90">
+              <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Client.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="14" column="3" lean-forward="false" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1064">
+              <caret line="143" column="35" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -270,21 +271,21 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Test/ResponseAsserter.php" />
         <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/ResponseAsserter.php" />
         <option value="$PROJECT_DIR$/phpunit.xml.dist" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/AuthorController.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php" />
         <option value="$PROJECT_DIR$/app/config/config_test.yml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_api.yml" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
         <option value="$PROJECT_DIR$/app/config/routing_test.yml" />
-        <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" />
-        <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php" />
         <option value="$PROJECT_DIR$/web/app_test.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/HomeController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
+        <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" />
+        <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php" />
       </list>
     </option>
   </component>
@@ -294,7 +295,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" max_simultaneous_connections="2" xdebug_force_break_when_outside_project="false" />
+  <component name="PhpDebugGeneral" max_simultaneous_connections="2" xdebug_force_break_when_outside_project="false" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="a01a9a3e-47b8-4c2a-ac24-93447782a9ba" name="localhost" port="8000" use_path_mappings="true" />
@@ -419,12 +420,13 @@
           <State>
             <id />
           </State>
-        </expanded-state>
-        <selected-state>
           <State>
-            <id>AngularJS</id>
+            <id>PHP</id>
           </State>
-        </selected-state>
+          <State>
+            <id>UndefinedPHP</id>
+          </State>
+        </expanded-state>
       </profile-state>
     </entry>
   </component>
@@ -457,6 +459,18 @@
               <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
               <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="DoctrineMigrations" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
@@ -570,7 +584,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/phpunit.xml.dist" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="SearchEverywhereHistoryKey" value="HC&#9;null&#9;null&#10;TC&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Controller/Api/TokenController.php&#10;router_tes&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/vendor/friendsofsymfony/jsrouting-bundle/Resources/js/router_test.html&#10;RListener&#9;null&#9;null&#10;ApiT&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Entity/ApiToken.php&#10;UserR&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Repository/UserRepository.php&#10;EC&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Controller/Web/EntityController.php&#10;CH&#9;FILE&#9;file:///home/rick/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Serializer/CustomHATEOASJsonSerializer.php&#10;lat&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Resources/views/layout.html.twig&#10;Message&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Entity/Message.php&#10;U&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Entity/User.php&#10;RevC&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/ReviewController.php&#10;delete&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Resources/views/Review/delete.html.twig&#10;fix&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/DataFixtures/ORM/fixtures.yml&#10;MC&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/MessageController.php&#10;RT&#9;null&#9;null&#10;Re&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Repository/ReviewRepository.php&#10;AC&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/AuthorController.php&#10;Review&#9;null&#9;null&#10;ReviewCon&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/ReviewController.php&#10;BookC&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/BookController.php&#10;ContactC&#9;null&#9;null&#10;Contact&#9;null&#9;null&#10;check_email.html.twig&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/check_email.html.twig&#10;check_email&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/app/Resources/FOSUserBundle/views/Registration/check_email.html.twig&#10;change_pas&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/vendor/friendsofsymfony/user-bundle/Resources/views/ChangePassword/change_password.html.twig&#10;Faker&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/vendor/nelmio/alice/src/Nelmio/Alice/Instances/Processor/Methods/Faker.php&#10;Aut&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/AuthorController.php&#10;Book&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Entity/Book.php&#10;User&#9;null&#9;null&#10;request_content&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/app/Resources/FOSUserBundle/views/Resetting/request_content.html.twig&#10;request&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/app/Resources/FOSUserBundle/views/Resetting/request.html.twig&#10;login_con&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/app/Resources/FOSUserBundle/views/Security/login_content.html.twig&#10;RegistrationCon&#9;null&#9;null&#10;AuthorC&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/src/BookRater/RaterBundle/Controller/AuthorController.php&#10;app.&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/web/app_dev.php&#10;param&#9;FILE&#9;file:///home/rick/PhpstormProjects/BookRater/app/config/parameters.yml&#10;BT&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/src/BookRater/RaterBundle/Form/BookType.php&#10;bas&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/app/Resources/views/base.html.twig&#10;side&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/web/bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js&#10;reg&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register.html.twig&#10;login&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login.html.twig&#10;login.&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login.html.twig&#10;register_conte&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register_content.html.twig&#10;login_content&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig&#10;register.h&#9;FILE&#9;file:///home/stb098/PhpstormProjects/bookrater/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register.html.twig" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/app/config/parameters.yml" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
@@ -634,13 +648,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.TokenControllerTest">
+    <configuration name="TokenControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\BookRaterRaterBundle\Controller\Api\TokenControllerTest" file="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" scope="Class" />
+    </configuration>
     <configuration name="TokenControllerTest.testPOSTCreateToken" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\BookRaterRaterBundle\Controller\Api\TokenControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" method="testPOSTCreateToken" scope="Method" use_alternative_configuration_file="true" />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="PHPUnit.TokenControllerTest.testPOSTCreateToken" />
+      <item index="1" class="java.lang.String" itemvalue="PHPUnit.TokenControllerTest" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="PHPUnit.TokenControllerTest.testPOSTCreateToken" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="PHPUnit.TokenControllerTest" />
+        <item index="1" class="java.lang.String" itemvalue="PHPUnit.TokenControllerTest.testPOSTCreateToken" />
       </list>
     </recent_temporary>
   </component>
@@ -685,50 +707,51 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 52m 26s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 28m 18s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 54m 59s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 29m 10s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 55m 09s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 31m 39s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 55m 58s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 31m 49s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 56m 07s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 39m 08s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 57m 23s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 41m 36s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 16h 57m 32s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 17h 12m 10s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 17h 13m 52s.xml">
-      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="TokenControllerTest - 2018.03.21 at 19h 41m 52s.xml">
+      <configuration name="TokenControllerTest" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
     <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 17h 17m 09s.xml">
       <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 18h 13m 09s.xml">
+      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TokenControllerTest_testPOSTCreateToken - 2018.03.21 at 18h 15m 10s.xml">
+      <configuration name="TokenControllerTest.testPOSTCreateToken" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197933000" />
+    <option name="totallyTimeSpent" value="200922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3148936" sideWeight="0.51724136" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.50636417" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2849285" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32893288" sideWeight="0.49363586" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31353134" sideWeight="0.4827586" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17376868" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31353134" sideWeight="0.47592697" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17376868" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32927504" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -788,7 +811,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
@@ -829,158 +852,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Repository/ApiTokenRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/1a02fc13-abb5-4a26-a31f-a3985e520ed8/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e8804c92-1295-4685-89c5-c39724eb4349/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/1df8ea09-6333-43c9-b234-7e8941575aec/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/User/UserInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-538">
-          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Encoder/UserPasswordEncoder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/AuthorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_review.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/AuthorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="68" lean-forward="false" selection-start-line="14" selection-start-column="68" selection-end-line="14" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_book.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="23" column="63" lean-forward="false" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="133" column="28" lean-forward="false" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_api.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="72" lean-forward="false" selection-start-line="1" selection-start-column="72" selection-end-line="1" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="33" lean-forward="false" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing_test.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/sebastian/comparator/src/NumericComparator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -1017,14 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="23" column="42" lean-forward="false" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="61" column="20" lean-forward="false" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1130,17 +993,7 @@
         <state relative-caret-position="378">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#693#736#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="e#733#760#1#PHP" expanded="true" />
+            <element signature="e#693#736#1#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1150,16 +1003,6 @@
         <state relative-caret-position="288">
           <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="53" column="38" lean-forward="false" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="38" />
-          <folding>
-            <element signature="e#46#84#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1178,22 +1021,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/3f8d5a14/e8804c92-1295-4685-89c5-c39724eb4349/main.users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.migration_versions">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1216,28 +1044,234 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        <state relative-caret-position="288">
+          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="92" column="5" lean-forward="true" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
+        <state relative-caret-position="108">
+          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
           <folding>
-            <element signature="e#2084#2111#1#PHP" expanded="true" />
+            <element signature="e#2106#2133#1#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180114220006.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517145862681" expanded="true" signature="567:634" ph="ALTER TABLE message... " />
+            <marker date="1517145862681" expanded="true" signature="943:1019" ph="ALTER TABLE message... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180321180047.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180321180154.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.migration_versions">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180321180226.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1521655346682" expanded="true" signature="567:820" ph="CREATE TABLE... api_token" />
+            <marker date="1521655346682" expanded="true" signature="847:947" ph="ALTER TABLE api_token... " />
+            <marker date="1521655346682" expanded="true" signature="1256:1276" ph="DROP TABLE a... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180113165420.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517145862681" expanded="true" signature="567:803" ph="CREATE TABLE... contact" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180113174708.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517145862681" expanded="true" signature="567:620" ph="ALTER TABLE contact... " />
+            <marker date="1517145862681" expanded="true" signature="929:961" ph="ALTER TABLE contact... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180113182135.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517145862681" expanded="true" signature="567:661" ph="ALTER TABLE contact... " />
+            <marker date="1517145862681" expanded="true" signature="970:1071" ph="ALTER TABLE contact... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180113202831.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517145862681" expanded="true" signature="567:625" ph="ALTER TABLE contact... " />
+            <marker date="1517145862681" expanded="true" signature="934:971" ph="ALTER TABLE contact... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/DoctrineMigrations/Version20180113215827.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="32" lean-forward="true" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.author">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.author_books">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.book">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/ApiToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Serializer/LinkSerializationSubscriber.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-776">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/routing/routing_api.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Serializer/CustomHATEOASJsonSerializer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="143" column="35" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/psr/http-message/src/UriInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/psr/http-message/src/ResponseInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-448">
+          <caret line="19" column="10" lean-forward="false" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="14" column="3" lean-forward="false" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/ApiTestCase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
           <folding />
         </state>
       </provider>

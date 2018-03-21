@@ -87,4 +87,5 @@ class ApiToken
     {
         $this->token = $token;
     }
+
 }

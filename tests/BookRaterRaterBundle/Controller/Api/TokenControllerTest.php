@@ -6,6 +6,7 @@ use Tests\BookRaterRaterBundle\ApiTestCase;
 
 class TokenControllerTest extends ApiTestCase
 {
+
     /**
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -13,10 +14,10 @@ class TokenControllerTest extends ApiTestCase
      */
     public function testPOSTCreateToken()
     {
-        $this->createUser('weaverryan', 'I<3Pizza');
+        $this->createUser('mr_test', 'MostSecretestPassword');
 
-        $response = $this->client->post('/api/tokens', [
-            'auth' => ['weaverryan', 'I<3Pizza']
+        $response = $this->post('/tokens', [
+            'auth' => ['mr_test', 'MostSecretestPassword']
         ]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyExists(
@@ -32,10 +33,10 @@ class TokenControllerTest extends ApiTestCase
      */
     public function testPOSTTokenInvalidCredentials()
     {
-        $this->createUser('weaverryan', 'I<3Pizza');
+        $this->createUser('mr_test', 'MostSecretestPassword');
 
-        $response = $this->client->post('/api/tokens', [
-            'auth' => ['weaverryan', 'IH8Pizza']
+        $response = $this->post('/tokens', [
+            'auth' => ['mr_test', 'NotAsSecretestPassword']
         ]);
         $this->assertEquals(401, $response->getStatusCode());
         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
@@ -43,4 +44,5 @@ class TokenControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Unauthorized');
         $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'Invalid credentials.');
     }
+
 }
