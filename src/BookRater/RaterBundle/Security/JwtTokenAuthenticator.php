@@ -5,6 +5,7 @@ namespace BookRater\RaterBundle\Security;
 use BookRater\RaterBundle\Api\ApiProblem;
 use BookRater\RaterBundle\Api\ResponseFactory;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
     private $em;
     private $responseFactory;
 
-    public function __construct(JWTEncoderInterface $jwtEncoder, EntityManager $em, ResponseFactory $responseFactory)
+    public function __construct(JWTEncoderInterface $jwtEncoder, EntityManagerInterface $em, ResponseFactory $responseFactory)
     {
         $this->jwtEncoder = $jwtEncoder;
         $this->em = $em;

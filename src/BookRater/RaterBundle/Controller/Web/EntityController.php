@@ -3,11 +3,8 @@
 
 namespace BookRater\RaterBundle\Controller\Web;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EntityController extends Controller
 {

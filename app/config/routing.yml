@@ -28,3 +28,13 @@ easy_admin_bundle:
 book_rater_api:
     resource: "@BookRaterRaterBundle/Resources/config/routing/routing_api.yml"
     prefix: /api/v1
+
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }

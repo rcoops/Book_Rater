@@ -5,7 +5,7 @@ namespace BookRater\RaterBundle\Controller\Web;
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\ReviewType;
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReviewController extends EntityController
@@ -16,7 +16,7 @@ class ReviewController extends EntityController
      */
     protected $reviewRepository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->reviewRepository = $entityManager->getRepository('BookRaterRaterBundle:Review');

@@ -32,6 +32,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
 
             logout:       true
+            logout_on_user_change: true
             anonymous:    true
             remember_me:
                 secret:   '%secret%'

@@ -2,13 +2,10 @@
 
 namespace BookRater\RaterBundle\Controller\Web;
 
-use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Form\BookType;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class BookController extends EntityController
@@ -19,7 +16,7 @@ class BookController extends EntityController
      */
     protected $bookRepository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->bookRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Book');

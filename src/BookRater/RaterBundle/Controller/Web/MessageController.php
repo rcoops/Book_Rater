@@ -5,7 +5,7 @@ namespace BookRater\RaterBundle\Controller\Web;
 use BookRater\RaterBundle\Entity\Message;
 use BookRater\RaterBundle\Form\MessageType;
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class MessageController extends EntityController
@@ -16,7 +16,7 @@ class MessageController extends EntityController
      */
     protected $messageRepository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct($entityManager);
         $this->messageRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Message');
