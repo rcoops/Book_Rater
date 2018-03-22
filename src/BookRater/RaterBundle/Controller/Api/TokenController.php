@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
-class TokenController extends BaseController
+class TokenController extends BaseApiController
 {
     /**
      * @Route("/tokens")
@@ -42,4 +42,10 @@ class TokenController extends BaseController
 
         return new JsonResponse(['token' => $token]);
     }
+
+    protected function getGroups()
+    {
+        return [];
+    }
+
 }

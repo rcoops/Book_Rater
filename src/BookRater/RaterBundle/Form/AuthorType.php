@@ -3,6 +3,7 @@
 namespace BookRater\RaterBundle\Form;
 
 use BookRater\RaterBundle\Entity\Author;
+use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Repository\BookRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,27 +19,43 @@ class AuthorType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('lastName', TextType::class, ['required' => true])
-            ->add('initial', TextType::class, ['required' => false])
-            ->add('firstName', TextType::class, ['required' => true])
+        $builder
+            ->add('lastName', TextType::class, [
+                'required' => true,
+                'disabled' => $options['is_edit'], // do not allow changes on update
+            ])
+            ->add('initial', TextType::class, [
+                'required' => false
+            ])
+            ->add('firstName', TextType::class, [
+                'required' => true,
+                'disabled' => $options['is_edit'], // do not allow changes on update
+            ])
             ->add('booksAuthored', EntityType::class, [
-                'class' => 'BookRater\RaterBundle\Entity\Book',
+                'class' => Book::class,
                 'by_reference' => false,
                 'multiple' => true,
-                'query_builder' => function(BookRepository $ar) {
+                'query_builder' => function (BookRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
                 },
+                'disabled' => $options['is_api']
             ])
-            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn-primary',
+                ],
+                'disabled' => $options['is_api']
+            ]);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Author::class
+            'data_class' => Author::class,
+            'is_api' => false,
         ]);
     }
 

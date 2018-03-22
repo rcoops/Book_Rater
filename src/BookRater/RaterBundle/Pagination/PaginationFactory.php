@@ -26,12 +26,12 @@ class PaginationFactory
         $pagerfanta->setMaxPerPage(10);
         $pagerfanta->setCurrentPage($page);
 
-        $programmers = [];
+        $items = [];
         foreach ($pagerfanta->getCurrentPageResults() as $result) {
-            $programmers[] = $result;
+            $items[] = $result;
         }
 
-        $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
+        $paginatedCollection = new PaginatedCollection($items, $pagerfanta->getNbResults());
 
         // make sure query parameters are included in pagination links
         $routeParams = array_merge($routeParams, $request->query->all());

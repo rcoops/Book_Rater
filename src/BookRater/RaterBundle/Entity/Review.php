@@ -4,12 +4,17 @@ namespace BookRater\RaterBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Review
  *
  * @ORM\Table(name="review")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\ReviewRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 final class Review
 {
@@ -19,6 +24,8 @@ final class Review
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose
      */
     private $id;
 
@@ -26,6 +33,8 @@ final class Review
      * @var string
      *
      * @ORM\Column(name="review_title", type="text")
+     *
+     * @Serializer\Expose
      */
     private $reviewTitle;
 
@@ -33,6 +42,8 @@ final class Review
      * @var string
      *
      * @ORM\Column(name="reviewComments", type="text")
+     *
+     * @Serializer\Expose
      */
     private $reviewComments;
 
@@ -40,6 +51,8 @@ final class Review
      * @var int
      *
      * @ORM\Column(name="rating", type="integer")
+     *
+     * @Serializer\Expose
      */
     private $rating;
 
@@ -47,6 +60,9 @@ final class Review
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
+     *
+     * @Serializer\Groups({"reviews"})
+     * @Serializer\Expose
      */
     private $user;
 
@@ -54,6 +70,9 @@ final class Review
      * @var Book
      *
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews")
+     *
+     * @Serializer\Groups({"reviews"})
+     * @Serializer\Expose
      */
     private $bookReviewed;
 
@@ -61,6 +80,8 @@ final class Review
      * @var \DateTime
      *
      * @ORM\Column(name="created_date", type="datetime")
+     *
+     * @Serializer\Expose
      */
     private $created;
 
@@ -68,6 +89,8 @@ final class Review
      * @var \DateTime
      *
      * @ORM\Column(name="edited_date", type="datetime", nullable=true)
+     *
+     * @Serializer\Expose
      */
     private $edited;
 

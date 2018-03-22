@@ -4,11 +4,16 @@ namespace BookRater\RaterBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="message")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Message
 {
@@ -21,8 +26,12 @@ class Message
     private $id;
 
     /**
+     *
+     * @Assert\NotNull(message="User must be included.")
+     *
      * @ORM\ManyToOne(targetEntity="BookRater\RaterBundle\Entity\User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
      */
     private $user;
 

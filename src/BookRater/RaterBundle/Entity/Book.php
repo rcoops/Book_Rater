@@ -5,10 +5,14 @@ namespace BookRater\RaterBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
+ *
+ * @Serializer\ExclusionPolicy("all")
  *
  * @ORM\Table(name="book", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
@@ -21,6 +25,8 @@ class Book
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose
      */
     private $id;
 
@@ -28,7 +34,10 @@ class Book
      * @var string
      *
      * @Assert\NotBlank(message="Book title must be entered")
+     *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Serializer\Expose
      */
     private $title;
 
@@ -40,7 +49,10 @@ class Book
      *     match=true,
      *     message="ISBN must be a combination of 10 digits/characters"
      * )
+     *
      * @ORM\Column(name="isbn", type="string", unique=true)
+     *
+     * @Serializer\Expose
      */
     private $isbn;
 
@@ -53,6 +65,8 @@ class Book
      *     message="ISBN 13 must be a 13 digit number"
      * )
      * @ORM\Column(name="isbn_13", type="string", nullable=true, unique=true)
+     *
+     * @Serializer\Expose
      */
     private $isbn13;
 
@@ -60,6 +74,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="publisher", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Expose
      */
     private $publisher;
 
@@ -67,6 +83,8 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="publish_date", type="datetime", nullable=true)
+     *
+     * @Serializer\Expose
      */
     private $publishDate;
 
@@ -74,6 +92,8 @@ class Book
      * @var int
      *
      * @ORM\Column(name="edition", type="integer", nullable=true)
+     *
+     * @Serializer\Expose
      */
     private $edition;
 
@@ -81,6 +101,9 @@ class Book
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
+     *
+     * @Serializer\Groups({"books"})
+     * @Serializer\Expose
      */
     private $authors;
 
@@ -88,6 +111,9 @@ class Book
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Review", mappedBy="bookReviewed", cascade={"remove"})
+     *
+     * @Serializer\Groups({"books"})
+     * @Serializer\Expose
      */
     private $reviews;
 

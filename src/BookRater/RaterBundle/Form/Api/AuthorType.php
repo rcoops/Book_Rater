@@ -2,55 +2,41 @@
 
 namespace BookRater\RaterBundle\Form\Api;
 
-use BookRater\RaterBundle\Entity\Author;
-use BookRater\RaterBundle\Repository\BookRepository;
+use BookRater\RaterBundle\Entity\Book;
+use BookRater\RaterBundle\Form\AuthorType as ParentAuthorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AuthorType extends AbstractType
+class AuthorType extends ParentAuthorType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $programmers = $options['programmers'];
+        parent::buildForm($builder, $options);
 
-        $builder->add('lastName', TextType::class, ['required' => true])
-            ->add('initial', TextType::class, ['required' => false])
-            ->add('firstName', TextType::class, ['required' => true])
-            ->add('booksAuthoredIds', EntityType::class, [
-                'class' => 'BookRater\RaterBundle\Entity\Book',
-                'by_reference' => false,
+        $builder
+            ->add('bookIds', EntityType::class, [
+                'class' => Book::class,
                 'property_path' => 'booksAuthored',
                 'multiple' => true,
-                'query_builder' => function(BookRepository $ar) use ($programmers) {
-                    return $ar->findAllOrderedByNameQB();
-                },
             ]);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
-            'data_class' => Author::class
+            'csrf_protection' => false,
+            'is_api' => true,
+            'is_edit' => false,
         ]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'bookrater_raterbundle_author';
-    }
-
 
 }

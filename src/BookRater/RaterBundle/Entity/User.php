@@ -6,10 +6,15 @@ namespace BookRater\RaterBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -17,15 +22,26 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Groups({"admin"})
+     * @Serializer\Expose
      */
     protected $id;
 
+    /**
+     * @var string name
+     *
+     * @Serializer\Expose
+     */
     protected $name;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Review", mappedBy="user", cascade={"remove"})
+     *
+     * @Serializer\Groups({"users"})
+     * @Serializer\Expose
      */
     private $reviews;
 
@@ -33,6 +49,9 @@ class User extends BaseUser
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"remove"})
+     *
+     * @Serializer\Groups({"admin"})
+     * @Serializer\Expose
      */
     private $messages;
 

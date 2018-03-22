@@ -153,5 +153,3 @@ nelmio_api_doc:
         default:
             path_patterns: # an array of regexps
                 - ^/api(?!/doc.*$)
-#            host_patterns:
-#                - ^api\.

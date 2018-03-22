@@ -20,8 +20,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
 use BookRater\RaterBundle\Entity\User;
 
-abstract class BaseController extends Controller
+abstract class BaseApiController extends Controller
 {
+
     /**
      * Is the current user logged in?
      *
@@ -121,23 +122,19 @@ abstract class BaseController extends Controller
             ->getRepository('BookRaterRaterBundle:ApiToken');
     }
 
-    protected function createApiResponse($data, $statusCode = 200)
+    private function createApiResponseWithGroups($data, $statusCode = 200, $format = 'json', array $groups = [])
     {
-        $json = $this->serialize($data);
+        $json = $this->serialize($data, $format, $groups);
 
         return new Response($json, $statusCode, ['Content-Type' => 'application/hal+json']);
     }
 
-    protected function serialize($data, $format = 'json')
+    protected function serialize($data, $format, array $groups = [])
     {
         $context = new SerializationContext();
         $context->setSerializeNull(true);
 
-        $request = $this->get('request_stack')->getCurrentRequest();
-        $groups = ['Default'];
-        if ($request->query->get('deep')) {
-            $groups[] = 'deep';
-        }
+        $groups[] = 'Default';
         $context->setGroups($groups);
 
         return $this->container->get('jms_serializer')
@@ -186,6 +183,19 @@ abstract class BaseController extends Controller
         $apiProblem->set('errors', $errors);
 
         throw new ApiProblemException($apiProblem);
+    }
+
+    protected abstract function getGroups();
+
+    /**
+     * @param $data
+     * @param int $statusCode
+     * @param string $format
+     * @return Response
+     */
+    protected function createApiResponse($data, $statusCode = 200, $format = 'json')
+    {
+        return $this->createApiResponseWithGroups($data, $statusCode, $format, $this->getGroups());
     }
 
 }

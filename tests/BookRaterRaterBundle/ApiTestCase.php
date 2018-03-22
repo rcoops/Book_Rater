@@ -2,10 +2,13 @@
 
 namespace Tests\BookRaterRaterBundle;
 
+use BookRater\RaterBundle\Entity\Author;
+use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Entity\User;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
-use Exception;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -15,11 +18,13 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Throwable;
+use TypeError;
 
 class ApiTestCase extends KernelTestCase
 {
-    private const BASE_URI = '/api/v1'; // single entry point for all api calls
+    protected const BASE_API_URI = '/api/v1'; // single entry point for all api calls
 
     private static $staticClient;
 
@@ -276,11 +281,12 @@ class ApiTestCase extends KernelTestCase
     /**
      * @param $username
      * @param string $plainPassword
+     * @param bool $isAdmin
      * @return User
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    protected function createUser($username, $plainPassword = 'foo')
+    protected function createUser($username, $plainPassword = 'foo', $isAdmin = false)
     {
         $user = new User();
         $user->setUsername($username);
@@ -288,6 +294,11 @@ class ApiTestCase extends KernelTestCase
         $password = $this->getService('security.password_encoder')
             ->encodePassword($user, $plainPassword);
         $user->setPassword($password);
+        $user->setEnabled(true);
+
+        if ($isAdmin) {
+            $user->addRole('ROLE_ADMIN');
+        }
 
         $em = $this->getEntityManager();
         $em->persist($user);
@@ -296,14 +307,66 @@ class ApiTestCase extends KernelTestCase
         return $user;
     }
 
-    protected function getAuthorizedHeaders($username, $headers = [])
+
+    /**
+     * @param array $data
+     * @return Book
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws TypeError
+     */
+    protected function createBook(array $data)
     {
-        $token = $this->getService('lexik_jwt_authentication.encoder')
-            ->encode(['username' => $username]);
+        // Set defaults if not given
+        $data = array_merge([
+            'title' => 'Best Book Ever',
+            'isbn' => '0123456789',
+            'isbn13' => '012-0123456789',
+            'edition' => 1,
+            'publisher' => 'Awesome Books Publishing Inc.',
+            'publishDate' => new \DateTime('now'),
+        ], $data);
 
-        $headers['Authorization'] = 'Bearer '.$token;
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $book = new Book();
+        foreach ($data as $key => $value) {
+            $accessor->setValue($book, $key, $value);
+        }
 
-        return $headers;
+        $em = $this->getEntityManager();
+        $em->persist($book);
+        $em->flush();
+
+        return $book;
+    }
+
+    /**
+     * @param array $data
+     * @return Author
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws TypeError
+     */
+    protected function createAuthor(array $data)
+    {
+        $data = array_merge([
+            'firstName' => 'Testy',
+            'lastName' => 'Testface',
+            'initial' => 'M C',
+        ], $data);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $author = new Author();
+        foreach ($data as $key => $value) {
+            $accessor->setValue($author, $key, $value);
+        }
+
+        $em = $this->getEntityManager();
+        $em->persist($author);
+        $em->flush();
+
+        return $author;
+
     }
 
     /**
@@ -339,6 +402,16 @@ class ApiTestCase extends KernelTestCase
         return '/app_test.php'.$uri;
     }
 
+    protected function getAuthorizedHeaders($username, $headers = array())
+    {
+        $token = $this->getService('lexik_jwt_authentication.encoder')
+            ->encode(['username' => $username]);
+
+        $headers['Authorization'] = 'Bearer '.$token;
+
+        return $headers;
+    }
+
     /**
      * Convenience method for prepending the base api uri to the path
      * @param string $uri
@@ -347,7 +420,7 @@ class ApiTestCase extends KernelTestCase
      */
     protected function post(string $uri, array $options = [])
     {
-        return $this->client->post(self::BASE_URI.$uri, $options);
+        return $this->client->post(self::BASE_API_URI.$uri, $options);
     }
 
     /**
@@ -358,7 +431,7 @@ class ApiTestCase extends KernelTestCase
      */
     protected function get(string $uri, array $options = [])
     {
-        return $this->client->get(self::BASE_URI.$uri, $options);
+        return $this->client->get(self::BASE_API_URI.$uri, $options);
     }
 
     /**
@@ -369,7 +442,7 @@ class ApiTestCase extends KernelTestCase
      */
     protected function put(string $uri, array $options = [])
     {
-        return $this->client->put(self::BASE_URI.$uri, $options);
+        return $this->client->put(self::BASE_API_URI.$uri, $options);
     }
 
     /**
@@ -380,7 +453,7 @@ class ApiTestCase extends KernelTestCase
      */
     protected function patch(string $uri, array $options = [])
     {
-        return $this->client->patch(self::BASE_URI.$uri, $options);
+        return $this->client->patch(self::BASE_API_URI.$uri, $options);
     }
 
     /**
@@ -391,7 +464,7 @@ class ApiTestCase extends KernelTestCase
      */
     protected function delete(string $uri, array $options = [])
     {
-        return $this->client->delete(self::BASE_URI.$uri, $options);
+        return $this->client->delete(self::BASE_API_URI.$uri, $options);
     }
 
 }

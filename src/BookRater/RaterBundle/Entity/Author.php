@@ -4,13 +4,34 @@ namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Author
  *
- * @ORM\Table(name="author")
+ * @Hateoas\Relation(
+ *     "self",
+ *     href=@Hateoas\Route(
+ *       "api_authors_show",
+ *       parameters = { "lastName" = "expr(object.getLastName())",
+ *         "firstName" = "expr(object.getFirstName())" }
+ *     )
+ * )
+ * @Hateoas\Relation(
+ *     "books",
+ *     href=@Hateoas\Route(
+ *         "api_authors_books_list",
+ *         parameters = { "lastName" = "expr(object.getLastName())",
+ *         "firstName" = "expr(object.getFirstName())" }
+ *     )
+ * )
+ *
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\AuthorRepository")
+ * @ORM\Table(name="author")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 final class Author
 {
@@ -18,34 +39,42 @@ final class Author
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     *
+     * @Serializer\Expose
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Assert\NotNull(message="This field must be filled in")
+     * @Assert\NotBlank(message="First name must not be blank.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z]+$/",
      *     match=true,
-     *     message="First name must be one or more characters"
+     *     message="First name must consist of letters only."
      * )
+     *
      * @ORM\Column(name="firstName", type="string", length=255)
+     *
+     * @Serializer\Expose
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @Assert\NotNull(message="This field must be filled in")
+     * @Assert\NotBlank(message="Last name must not be blank.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z]+$/",
      *     match=true,
-     *     message="Last name must be one or more characters"
+     *     message="Last name must consist of letters only."
      * )
+     *
      * @ORM\Column(name="lastName", type="string", length=255)
+     *
+     * @Serializer\Expose
      */
     private $lastName;
 
@@ -53,14 +82,19 @@ final class Author
      * @var string
      *
      * @ORM\Column(name="initial", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Expose
      */
     private $initial;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors", cascade={"remove"})
      * @ORM\JoinTable(name="author_books")
+     * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
+     *
+     * @Serializer\Groups({"authors"})
+     * @Serializer\Expose
      */
     private $booksAuthored;
 
@@ -160,8 +194,7 @@ final class Author
      */
     public function addBookAuthored(Book $bookAuthored)
     {
-        if (!$this->booksAuthored->contains($bookAuthored))
-        {
+        if (!$this->booksAuthored->contains($bookAuthored)) {
             $this->booksAuthored[] = $bookAuthored;
         }
 
@@ -175,8 +208,7 @@ final class Author
      */
     public function removeBooksAuthored(Book $bookAuthored)
     {
-        if ($this->booksAuthored->contains($bookAuthored))
-        {
+        if ($this->booksAuthored->contains($bookAuthored)) {
             $bookAuthored->getAuthors()->removeElement($this);
         }
 
@@ -184,9 +216,7 @@ final class Author
     }
 
     /**
-     * Get booksAuthored
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection|Book[]
      */
     public function getBooksAuthored()
     {
@@ -196,8 +226,7 @@ final class Author
     public function getDisplayName()
     {
         $name = $this->getLastName() . ', ' . $this->getFirstName();
-        if ($this->initial)
-        {
+        if ($this->initial) {
             return $name . ' ' . $this->initial;
         }
         return $name;
@@ -220,8 +249,7 @@ final class Author
     public function __toString()
     {
         $name = $this->getLastName() . ', ' . $this->getFirstName();
-        if ($this->initial)
-        {
+        if ($this->initial) {
             return $name . ' ' . $this->initial;
         }
         return $name;

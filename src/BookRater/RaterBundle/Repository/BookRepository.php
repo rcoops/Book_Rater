@@ -2,6 +2,8 @@
 
 namespace BookRater\RaterBundle\Repository;
 
+use BookRater\RaterBundle\Entity\Author;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use \Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping;
@@ -39,6 +41,27 @@ class BookRepository extends EntityRepository
                 ->setParameter('filter', '%'.$filter.'%');
         };
         return $qb->getQuery();
+    }
+
+    public function createQueryBuilderForBooks(ArrayCollection $books)
+    {
+        $qb = $this->createQueryBuilder('book');
+        return $qb
+            ->andWhere(
+                $qb->expr()->in('book.id', ':bookIds')
+            )
+            ->setParameter('bookIds', $books);
+    }
+
+    public function createQueryBuilderForAuthor(Author $author)
+    {
+        $qb = $this->createQueryBuilder('book');
+        return $qb
+            ->innerJoin('book.authors', 'author')
+            ->andWhere(
+                $qb->expr()->eq('author.id', ':author')
+            )
+            ->setParameter('author', $author->getId());
     }
 
 }
