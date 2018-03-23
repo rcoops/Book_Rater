@@ -15,6 +15,7 @@
             <th>{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
+            <th>Rating</th>
         </tr>
         </thead>
         <tbody>
@@ -31,7 +32,7 @@
                 </td>
                 <td>
                     {% if book.authors is not empty %}
-                        {{ book.displayAuthors }}
+                        {{ book.authors|join('; ') }}
                     {% endif %}
                 </td>
                 <td>
@@ -39,6 +40,14 @@
                 </td>
                 <td>{{ book.publisher }}</td>
                 <td>{% if (book.publishDate) %} {{ book.publishDate|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    {% if book.rating is null %}
+                        Not yet rated!
+                    {% else %}
+                        {% set rating = book.rating|number_format %}
+                        {{ rating }} / 5
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

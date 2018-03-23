@@ -376,20 +376,18 @@ class Book
         }
         return $this->edition . $postFix . ' Edition';
     }
-//
-//    public function displayAuthors()
-//    {
-//        return join('; ', $this->authors->toArray());
-//    }
 
-    public function getRating()
+    /**
+     * @return float|null
+     */
+    public function getRating() : ?float
     {
         $reviewRatings = $this->reviews
             ->map(function (Review $review) {
                 return $review->getRating();
             })
             ->toArray();
-        return array_sum($reviewRatings) / count($reviewRatings);
+        return $reviewRatings ? array_sum($reviewRatings) / count($reviewRatings) : null;
     }
 
     /**
