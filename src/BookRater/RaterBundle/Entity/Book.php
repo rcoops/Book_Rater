@@ -390,12 +390,6 @@ class Book
     public function getAverageRating() : ?int
     {
         return $this->averageRating;
-//        $reviewRatings = $this->reviews
-//            ->map(function (Review $review) {
-//                return $review->getRating();
-//            })
-//            ->toArray();
-//        return $reviewRatings ? array_sum($reviewRatings) / count($reviewRatings) : null;
     }
 
     /**
