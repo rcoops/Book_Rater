@@ -10,12 +10,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class PaginationFactory
 {
-    private $router;
-
-    public function __construct(RouterInterface $router)
-    {
-        $this->router = $router;
-    }
 
     public function createCollection(QueryBuilder $qb, Request $request, $route, array $routeParams = [])
     {

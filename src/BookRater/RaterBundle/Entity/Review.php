@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="review")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\ReviewRepository")
+ * @ORM\EntityListeners({"BookRater\RaterBundle\EventListener\ReviewListener"})
  *
  * @Serializer\ExclusionPolicy("all")
  */

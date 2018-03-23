@@ -15,12 +15,9 @@ services:
     BookRater\RaterBundle\Controller\:
         resource: '../../Controller/*'
         public: true
+        autowire: true
+        autoconfigure: true
         tags: ['controller.service_arguments']
-
-#    app.form.registration:
-#        class: BookRater\RaterBundle\Form\RegistrationType
-#        tags:
-#            - { name: form.type, alias: app_user_registration }
 #
     BookRater\RaterBundle\EventListener\ApiExceptionSubscriber:
         arguments: ['%kernel.debug%', '@BookRater\RaterBundle\Api\ResponseFactory', '@logger']
@@ -29,3 +26,8 @@ services:
 
     jwt_token_authenticator: '@BookRater\RaterBundle\Security\JwtTokenAuthenticator'
     custom_hateoas_json_serializer: '@BookRater\RaterBundle\Serializer\CustomHATEOASJsonSerializer'
+
+    BookRater\RaterBundle\EventListener\ReviewListener:
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener, entity_manager: custom }

@@ -1,6 +1,7 @@
 imports:
     - { resource: '@BookRaterFixturesBundle/Resources/config/services.yml' }
     - { resource: '@BookRaterRedirectBundle/Resources/config/services.yml' }
+    - { resource: '@BookRaterRaterBundle/Resources/config/services.yml' }
 
 parameters:
     #parameter_name: value

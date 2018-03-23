@@ -24,7 +24,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
     private $em;
     private $responseFactory;
 
-    public function __construct(JWTEncoderInterface $jwtEncoder, EntityManagerInterface $em, ResponseFactory $responseFactory)
+    public function __construct(JWTEncoderInterface $jwtEncoder, EntityManagerInterface $em,
+                                ResponseFactory $responseFactory)
     {
         $this->jwtEncoder = $jwtEncoder;
         $this->em = $em;

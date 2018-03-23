@@ -5,6 +5,7 @@ namespace BookRater\RaterBundle\Controller\Web;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\RouterInterface;
 
 class EntityController extends Controller
 {
@@ -14,6 +15,10 @@ class EntityController extends Controller
      */
     protected $entityManager;
 
+    /**
+     * EntityController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

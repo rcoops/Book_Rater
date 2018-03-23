@@ -20,10 +20,10 @@
         </p>
         <p>
             <strong>Rating:</strong>
-            {% if book.rating is null %}
+            {% if book.averageRating is null %}
                 Not yet rated!
             {% else %}
-                {% set rating = book.rating|number_format %}
+                {% set rating = book.averageRating|number_format %}
                 {% for i in 1..5 %}
                     {% if i <= rating %}
                         <i class="fa fa-star"></i>
