@@ -1,9 +1,4 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
     BookRater\RaterBundle\:
         resource: '../../*'
         # you can exclude directories or files
@@ -15,12 +10,9 @@ services:
     BookRater\RaterBundle\Controller\:
         resource: '../../Controller/*'
         public: true
+        autowire: true
+        autoconfigure: true
         tags: ['controller.service_arguments']
-
-#    app.form.registration:
-#        class: BookRater\RaterBundle\Form\RegistrationType
-#        tags:
-#            - { name: form.type, alias: app_user_registration }
 #
     BookRater\RaterBundle\EventListener\ApiExceptionSubscriber:
         arguments: ['%kernel.debug%', '@BookRater\RaterBundle\Api\ResponseFactory', '@logger']

@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@BookRaterRaterBundle/Resources/config/services.yml" }
 
 parameters:
     # a hack - should be configurable under jms_serializer, but the property_naming.id

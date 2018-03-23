@@ -41,10 +41,10 @@
                 <td>{{ book.publisher }}</td>
                 <td>{% if (book.publishDate) %} {{ book.publishDate|date('d-m-Y') }}{% endif %}</td>
                 <td>
-                    {% if book.rating is null %}
+                    {% if book.averageRating is null %}
                         Not yet rated!
                     {% else %}
-                        {% set rating = book.rating|number_format %}
+                        {% set rating = book.averageRating|number_format %}
                         {{ rating }} / 5
                     {% endif %}
                 </td>

@@ -119,6 +119,13 @@ class Book
      */
     private $reviews;
 
+    /**
+     * @var null|int
+     *
+     * @ORM\Column(name="average_rating", type="integer", nullable=true)
+     */
+    private $averageRating = null;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -378,16 +385,29 @@ class Book
     }
 
     /**
-     * @return float|null
+     * @return int|null
      */
-    public function getRating() : ?float
+    public function getAverageRating() : ?int
     {
-        $reviewRatings = $this->reviews
-            ->map(function (Review $review) {
-                return $review->getRating();
-            })
-            ->toArray();
-        return $reviewRatings ? array_sum($reviewRatings) / count($reviewRatings) : null;
+        return $this->averageRating;
+//        $reviewRatings = $this->reviews
+//            ->map(function (Review $review) {
+//                return $review->getRating();
+//            })
+//            ->toArray();
+//        return $reviewRatings ? array_sum($reviewRatings) / count($reviewRatings) : null;
+    }
+
+    /**
+     * @param null|float $averageRating
+     *
+     * @return Book
+     */
+    public function setAverageRating(?float $averageRating) : Book
+    {
+        $this->averageRating = (int) $averageRating;
+
+        return $this;
     }
 
     /**
