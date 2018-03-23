@@ -3,6 +3,7 @@
 namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
@@ -79,7 +80,7 @@ final class Author
     private $lastName;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(name="initial", type="string", length=255, nullable=true)
      *
@@ -88,7 +89,7 @@ final class Author
     private $initial;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var Collection
      *
      * @ORM\JoinTable(name="author_books")
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
@@ -108,7 +109,7 @@ final class Author
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -120,7 +121,7 @@ final class Author
      *
      * @return Author
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName(string $firstName) : Author
     {
         $this->firstName = $firstName;
 
@@ -130,9 +131,9 @@ final class Author
     /**
      * Get firstName
      *
-     * @return string
+     * @return null|string
      */
-    public function getFirstName()
+    public function getFirstName() : ?string
     {
         return $this->firstName;
     }
@@ -144,7 +145,7 @@ final class Author
      *
      * @return Author
      */
-    public function setLastName(string $lastName)
+    public function setLastName(string $lastName) : Author
     {
         $this->lastName = $lastName;
 
@@ -154,9 +155,9 @@ final class Author
     /**
      * Get lastName
      *
-     * @return string
+     * @return null|string
      */
-    public function getLastName()
+    public function getLastName() : ?string
     {
         return $this->lastName;
     }
@@ -164,11 +165,11 @@ final class Author
     /**
      * Set initial
      *
-     * @param string $initial
+     * @param null|string $initial
      *
      * @return Author
      */
-    public function setInitial(string $initial)
+    public function setInitial(?string $initial) : Author
     {
         $this->initial = $initial;
 
@@ -178,9 +179,9 @@ final class Author
     /**
      * Get initial
      *
-     * @return string
+     * @return null|string
      */
-    public function getInitial()
+    public function getInitial() : ?string
     {
         return $this->initial;
     }
@@ -192,7 +193,7 @@ final class Author
      *
      * @return Author
      */
-    public function addBookAuthored(Book $bookAuthored)
+    public function addBooksAuthored(Book $bookAuthored) : Author
     {
         if (!$this->booksAuthored->contains($bookAuthored)) {
             $this->booksAuthored[] = $bookAuthored;
@@ -205,48 +206,32 @@ final class Author
      * Remove booksAuthored
      *
      * @param Book $bookAuthored
+     *
+     * @return Author
      */
-    public function removeBooksAuthored(Book $bookAuthored)
+    public function removeBooksAuthored(Book $bookAuthored) : Author
     {
         if ($this->booksAuthored->contains($bookAuthored)) {
             $bookAuthored->getAuthors()->removeElement($this);
         }
 
         $this->booksAuthored->removeElement($bookAuthored);
-    }
-
-    /**
-     * @return ArrayCollection|Book[]
-     */
-    public function getBooksAuthored()
-    {
-        return $this->booksAuthored;
-    }
-
-    public function getDisplayName()
-    {
-        $name = $this->getLastName() . ', ' . $this->getFirstName();
-        if ($this->initial) {
-            return $name . ' ' . $this->initial;
-        }
-        return $name;
-    }
-
-    /**
-     * Add booksAuthored
-     *
-     * @param \BookRater\RaterBundle\Entity\Book $booksAuthored
-     *
-     * @return Author
-     */
-    public function addBooksAuthored(Book $booksAuthored)
-    {
-        $this->booksAuthored[] = $booksAuthored;
 
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @return Collection|Book[]
+     */
+    public function getBooksAuthored() : Collection
+    {
+        return $this->booksAuthored;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() : string
     {
         $name = $this->getLastName() . ', ' . $this->getFirstName();
         if ($this->initial) {

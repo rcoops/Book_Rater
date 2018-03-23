@@ -267,7 +267,7 @@ class AuthorControllerTest extends ApiTestCase
             ]
         ];
 
-        $response = $this->put('/authors/Kent/Clerk', [
+        $response = $this->patch('/authors/Kent/Clerk', [
             'body' => json_encode($data),
             'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);

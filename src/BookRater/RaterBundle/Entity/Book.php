@@ -2,7 +2,9 @@
 
 namespace BookRater\RaterBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Hateoas\Configuration\Annotation as Hateoas;
@@ -80,7 +82,7 @@ class Book
     private $publisher;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="publish_date", type="datetime", nullable=true)
      *
@@ -98,7 +100,7 @@ class Book
     private $edition;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var Collection|Author[]
      *
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
      *
@@ -108,7 +110,7 @@ class Book
     private $authors;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var Collection|Review[]
      *
      * @ORM\OneToMany(targetEntity="Review", mappedBy="bookReviewed", cascade={"remove"})
      *
@@ -128,7 +130,7 @@ class Book
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -136,11 +138,11 @@ class Book
     /**
      * Set title
      *
-     * @param string $title
+     * @param null|string $title
      *
      * @return Book
      */
-    public function setTitle(string $title)
+    public function setTitle(?string $title) : Book
     {
         $this->title = $title;
 
@@ -150,9 +152,9 @@ class Book
     /**
      * Get title
      *
-     * @return string
+     * @return null|string
      */
-    public function getTitle()
+    public function getTitle() : ?string
     {
         return $this->title;
     }
@@ -160,9 +162,9 @@ class Book
     /**
      * Get isbn13
      *
-     * @return string
+     * @return null|string
      */
-    public function getIsbn13()
+    public function getIsbn13() : ?string
     {
         return $this->isbn13;
     }
@@ -170,11 +172,11 @@ class Book
     /**
      * Set publisher
      *
-     * @param string $publisher
+     * @param null|string $publisher
      *
      * @return Book
      */
-    public function setPublisher($publisher)
+    public function setPublisher(?string $publisher) : Book
     {
         $this->publisher = $publisher;
 
@@ -184,9 +186,9 @@ class Book
     /**
      * Get publisher
      *
-     * @return string
+     * @return null|string
      */
-    public function getPublisher()
+    public function getPublisher() : ?string
     {
         return $this->publisher;
     }
@@ -194,11 +196,11 @@ class Book
     /**
      * Set publishDate
      *
-     * @param \DateTime $publishDate
+     * @param null|DateTime $publishDate
      *
      * @return Book
      */
-    public function setPublishDate($publishDate)
+    public function setPublishDate(?DateTime $publishDate) : Book
     {
         $this->publishDate = $publishDate;
 
@@ -208,9 +210,9 @@ class Book
     /**
      * Get publishDate
      *
-     * @return \DateTime
+     * @return null|DateTime
      */
-    public function getPublishDate()
+    public function getPublishDate() : ?DateTime
     {
         return $this->publishDate;
     }
@@ -218,11 +220,11 @@ class Book
     /**
      * Set edition
      *
-     * @param integer $edition
+     * @param null|int $edition
      *
      * @return Book
      */
-    public function setEdition($edition)
+    public function setEdition(?int $edition) : Book
     {
         $this->edition = $edition;
 
@@ -232,9 +234,9 @@ class Book
     /**
      * Get edition
      *
-     * @return int
+     * @return null|int
      */
-    public function getEdition()
+    public function getEdition() : ?int
     {
         return $this->edition;
     }
@@ -246,9 +248,9 @@ class Book
      *
      * @return Book
      */
-    public function addAuthor(Author $author)
+    public function addAuthor(Author $author) : Book
     {
-        $author->addBookAuthored($this);
+        $author->addBooksAuthored($this);
         $this->authors[] = $author;
 
         return $this;
@@ -258,18 +260,22 @@ class Book
      * Remove author
      *
      * @param Author $author
+     *
+     * @return Book
      */
-    public function removeAuthor(Author $author)
+    public function removeAuthor(Author $author) : Book
     {
         $author->removeBooksAuthored($this);
+
+        return $this;
     }
 
     /**
      * Get authors
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Author[]
      */
-    public function getAuthors()
+    public function getAuthors() : Collection
     {
         return $this->authors;
     }
@@ -281,7 +287,7 @@ class Book
      *
      * @return Book
      */
-    public function addReview(Review $review)
+    public function addReview(Review $review) : Book
     {
         $this->reviews[] = $review;
 
@@ -292,18 +298,22 @@ class Book
      * Remove review
      *
      * @param Review $review
+     *
+     * @return Book
      */
-    public function removeReview(Review $review)
+    public function removeReview(Review $review) : Book
     {
         $this->reviews->removeElement($review);
+
+        return $this;
     }
 
     /**
      * Get reviews
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Review[]
      */
-    public function getReviews()
+    public function getReviews() : Collection
     {
         return $this->reviews;
     }
@@ -311,11 +321,11 @@ class Book
     /**
      * Set isbn
      *
-     * @param string $isbn
+     * @param null|string $isbn
      *
      * @return Book
      */
-    public function setIsbn(string $isbn)
+    public function setIsbn(?string $isbn) : Book
     {
         $this->isbn = $isbn;
 
@@ -325,9 +335,9 @@ class Book
     /**
      * Get isbn
      *
-     * @return string
+     * @return null|string
      */
-    public function getIsbn()
+    public function getIsbn() : ?string
     {
         return $this->isbn;
     }
@@ -335,18 +345,21 @@ class Book
     /**
      * Set isbn13
      *
-     * @param string $isbn13
+     * @param null|string $isbn13
      *
      * @return Book
      */
-    public function setIsbn13(string $isbn13)
+    public function setIsbn13(?string $isbn13) : Book
     {
         $this->isbn13 = $isbn13;
 
         return $this;
     }
 
-    public function displayEdition()
+    /**
+     * @return string
+     */
+    public function displayEdition() : string
     {
         $postFix = 'th';
         switch ($this->edition) {
@@ -363,16 +376,12 @@ class Book
         }
         return $this->edition . $postFix . ' Edition';
     }
+//
+//    public function displayAuthors()
+//    {
+//        return join('; ', $this->authors->toArray());
+//    }
 
-    public function displayAuthors()
-    {
-        return join('; ', $this->authors->toArray());
-    }
-
-    /**
-     *
-     * @return float|int
-     */
     public function getRating()
     {
         $reviewRatings = $this->reviews
@@ -383,7 +392,10 @@ class Book
         return array_sum($reviewRatings) / count($reviewRatings);
     }
 
-    public function __toString()
+    /**
+     * @return null|string
+     */
+    public function __toString() : ?string
     {
         return $this->title;
     }
