@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Book.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Book.php" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Review.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Review.php" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" />
+      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php" />
       <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/list.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/list.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/view.html.twig" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/view.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,21 +74,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ApiExceptionSubscriber.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ApiExceptionSubscriber.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="JwtTokenAuthenticator.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+            <state relative-caret-position="0">
+              <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -105,48 +87,60 @@
       <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <state relative-caret-position="468">
+              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <file leaf-file-name="fixtures.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/FixturesBundle/DataFixtures/ORM/fixtures.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+            <state relative-caret-position="475">
+              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EntityController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="342">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding>
+                <element signature="e#57#97#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appDevDebugProjectContainer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/appDevDebugProjectContainer.php">
+      <file leaf-file-name="ReviewListener.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3726">
-              <caret line="207" column="111" lean-forward="false" selection-start-line="207" selection-start-column="85" selection-end-line="207" selection-end-column="111" />
+            <state relative-caret-position="144">
+              <caret line="25" column="20" lean-forward="false" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getReviewControllerService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/getReviewControllerService.php">
+      <file leaf-file-name="parameters.yml.dist" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="22" column="14" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -290,13 +284,13 @@
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Book.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/view.html.twig" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/list.html.twig" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml" />
       </list>
     </option>
   </component>
@@ -466,177 +460,90 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FixturesBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FixturesBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="DataFixtures" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="FixturesBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="DataFixtures" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ORM" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Web" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="EventListener" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="BookRater" type="b2602c69:ProjectViewProjectNode" />
               <item name="BookRater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="RaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Serializer" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="tests" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="tests" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="BookRaterRaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="tests" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="BookRaterRaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="tests" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="BookRaterRaterBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="cache" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="cache" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="dev" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="cache" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="dev" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ContainerTs1l0xl" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="var" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="logs" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bookrater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bookrater" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -814,31 +721,44 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235163000" />
+    <option name="totallyTimeSpent" value="235772000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="875" y="198" width="1853" height="1055" extended-state="6" />
+    <frame x="875" y="198" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33370227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33778015" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.50636417" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32927504" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924226" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958494" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31463146" sideWeight="0.4827586" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3143483" sideWeight="0.4827586" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39933994" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.50636417" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2849285" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31463146" sideWeight="0.4827586" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33370227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Tail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32927504" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32673267" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958494" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39933994" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -884,27 +804,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php</url>
-          <line>51</line>
+          <line>50</line>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php</url>
-          <line>62</line>
+          <line>61</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php</url>
-          <line>73</line>
+          <line>72</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php</url>
-          <line>78</line>
+          <line>77</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php</url>
-          <line>40</line>
+          <line>39</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
       </breakpoints>
@@ -965,20 +885,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-336">
-          <caret line="6" column="40" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Form/RegistrationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
@@ -986,27 +892,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.book">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.review">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.book" />
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.users" />
+    <entry file="das://table:/3f8d5a14/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.review" />
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/PropertyAccess/PropertyAccessor.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1103,13 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/FixturesBundle/DataFixtures/ORM/fixtures.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Form/ReviewType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-216">
@@ -1144,7 +1025,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="5543" column="88" lean-forward="false" selection-start-line="5543" selection-start-column="88" selection-end-line="5543" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,27 +1042,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/var/logs/dev.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-1080">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/var/logs/dev.log" />
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/ContainerAwareTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="26" column="1" lean-forward="false" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-          <folding>
-            <element signature="e#135#173#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1220,7 +1084,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="23" lean-forward="false" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1269,8 +1132,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Security/JwtTokenAuthenticator.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1291,42 +1154,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml">
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/appDevDebugProjectContainer.php" />
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/getReviewControllerService.php" />
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="342">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#57#97#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/appDevDebugProjectContainer.php">
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/EventListener/ReviewListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3726">
-          <caret line="207" column="111" lean-forward="false" selection-start-line="207" selection-start-column="85" selection-end-line="207" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/var/cache/dev/ContainerTs1l0xl/getReviewControllerService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="144">
+          <caret line="25" column="20" lean-forward="false" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+        <state relative-caret-position="144">
+          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="12" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Web/EntityController.php">
+    <entry file="das://table:/b53c89d4/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.book">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/b53c89d4/1df8ea09-6333-43c9-b234-7e8941575aec/stb098_bookrater.review">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="468">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BookRater/FixturesBundle/DataFixtures/ORM/fixtures.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding />
         </state>
       </provider>

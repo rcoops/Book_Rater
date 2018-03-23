@@ -23,9 +23,8 @@ use Doctrine\ORM\Mapping\PreUpdate;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class ReviewListener implements ContainerAwareInterface
+class ReviewListener
 {
-    use ContainerAwareTrait;
 
     /**
      * @var EntityManagerInterface
