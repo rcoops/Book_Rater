@@ -54,4 +54,4 @@ BookRater\RaterBundle\Entity\Message:
         subject: '<sentence($nbWords = 3, $variableNbWords = true)>'
         message: '<paragraph($nbSentences = 3, $variableNbSentences = true)>'
         created: "<dateTime($max = 'now', $timezone = null)>"
-        isRead: '50%? 1'
+        isRead: '<numberBetween(0, 1)>'

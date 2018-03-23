@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="message")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
  *
@@ -19,6 +18,8 @@ class Message
 {
 
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -26,33 +27,39 @@ class Message
     private $id;
 
     /**
+     * @var User
      *
      * @Assert\NotNull(message="User must be included.")
      *
-     * @ORM\ManyToOne(targetEntity="BookRater\RaterBundle\Entity\User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *
      */
     private $user;
 
     /**
+     * @var null|string
+     *
      * @ORM\Column(type="string")
      */
     private $subject;
 
     /**
+     * @var null|string
+     *
      * @ORM\Column(type="text")
      */
     private $message;
 
     /**
-     * @var \DateTime
+     * @var null|DateTime
      *
      * @ORM\Column(name="created_date", type="datetime", nullable=true)
      */
     private $created;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(type="boolean", nullable=true, options={"default": false})
      */
     private $isRead;
@@ -62,7 +69,7 @@ class Message
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -70,60 +77,75 @@ class Message
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser() : User
     {
         return $this->user;
     }
 
     /**
      * @param User $user
+     *
+     * @return Message
      */
-    public function setUser(User $user)
+    public function setUser(User $user) : Message
     {
         $this->user = $user;
-    }
 
+        return $this;
+    }
 
     /**
      * Remove user
      *
      * @param User $user
+     *
+     * @return Message
      */
-    public function removeUser(User $user)
+    public function removeUser(User $user) : Message
     {
         $user->removeMessage($this);
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
-    public function getSubject()
+    public function getSubject() : ?string
     {
         return $this->subject;
     }
 
     /**
-     * @param mixed $subject
+     * @param null|string $subject
+     *
+     * @return Message
      */
-    public function setSubject($subject)
+    public function setSubject(?string $subject) : Message
     {
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getMessage()
+    public function getMessage() : ?string
     {
         return $this->message;
     }
 
     /**
-     * @param string $message
+     * @param null|string $message
+     *
+     * @return Message
      */
-    public function setMessage(string $message)
+    public function setMessage(?string $message) : Message
     {
         $this->message = $message;
+
+        return $this;
     }
 
     /**
@@ -135,30 +157,41 @@ class Message
     }
 
     /**
-     * @param DateTime $created
+     * @param null|DateTime $created
+     *
+     * @return Message
      */
-    public function setCreated(DateTime $created)
+    public function setCreated(?DateTime $created) : Message
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return null|bool
      */
-    public function getIsRead()
+    public function getIsRead() : ?bool
     {
         return $this->isRead;
     }
 
     /**
-     * @param mixed $isRead
+     * @param null|bool $isRead
+     *
+     * @return Message
      */
-    public function setIsRead($isRead = false)
+    public function setIsRead(?bool $isRead = false) : Message
     {
-        $this->isRead = !$isRead ? false : true; // required to deal with null passed by fixtures
+        $this->isRead = $isRead;
+
+        return $this;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString() : string
     {
         return $this->subject;
     }
