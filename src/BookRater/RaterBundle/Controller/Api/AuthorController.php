@@ -134,7 +134,7 @@ class AuthorController extends BaseApiController
      * @throws NonUniqueResultException
      *
      * @Route("/authors/{lastName}/{firstName}")
-     * @Method("PUT")
+     * @Method({"PUT", "PATCH"})
      *
      * @Security("is_granted('ROLE_USER')")
      */
@@ -183,11 +183,13 @@ class AuthorController extends BaseApiController
             $em->flush();
         }
 
+        // Doesn't matter if the author was there or not - because it isn't now which is what we wanted
         return $this->createApiResponse(null, 204);
     }
 
     /**
      * @Route("/authors/{lastName}/{firstName}/books", name="api_authors_books_list")
+     * @Method("GET")
      * @param Author $author
      * @param Request $request
      * @return Response

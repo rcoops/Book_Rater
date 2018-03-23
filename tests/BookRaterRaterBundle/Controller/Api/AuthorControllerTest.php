@@ -237,6 +237,60 @@ class AuthorControllerTest extends ApiTestCase
     /**
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws \TypeError
+     * @throws \Exception
+     */
+    public function testPATCHAuthor()
+    {
+        $this->createUser('mr_test', 'MostSecretestPassword');
+        $book = $this->createBook([
+            'title' => 'A Great Book',
+        ]);
+        $otherBook = $this->createBook([
+            'title' => 'This one wasn\'t so great',
+            'isbn' => '0123456780',
+            'isbn13' => '012-0123456780',
+        ]);
+
+        $this->createAuthor([
+            'firstName' => 'Clerk',
+            'lastName' => 'Kent',
+            'initial' => 'P',
+            'booksAuthored' => [
+                $book,
+            ]
+        ]);
+
+        $data = [
+            'bookIds' => [
+                $otherBook->getId(),
+            ]
+        ];
+
+        $response = $this->put('/authors/Kent/Clerk', [
+            'body' => json_encode($data),
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
+        ]);
+        $this->assertEquals(200, $response->getStatusCode());
+        // Unchanged due to restrictions (will be ignored by form)
+        $this->asserter()->assertResponsePropertyEquals($response, 'lastName', 'Kent');
+        $this->asserter()->assertResponsePropertyEquals($response, 'firstName', 'Clerk');
+        // Not changed or cleared due to patch
+        $this->asserter()->assertResponsePropertyEquals($response, 'initial', 'P');
+        // Changed
+        $this->asserter()->assertResponsePropertyExists($response, 'booksAuthored');
+        $this->asserter()->assertResponsePropertyIsArray($response, 'booksAuthored');
+        $this->asserter()->assertResponsePropertyCount($response, 'booksAuthored', 1);
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'booksAuthored[0].title',
+            'This one wasn\'t so great'
+        );
+    }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
      * @throws \Throwable
      * @throws \TypeError
      */

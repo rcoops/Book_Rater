@@ -35,7 +35,6 @@ class AuthorType extends ParentAuthorType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'is_api' => true,
-            'is_edit' => false,
         ]);
     }
 

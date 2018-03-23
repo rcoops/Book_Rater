@@ -55,6 +55,7 @@ class AuthorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Author::class,
+            'is_edit' => false,
             'is_api' => false,
         ]);
     }
