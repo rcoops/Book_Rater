@@ -79,8 +79,8 @@ class Review
      *
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews")
      *
-     * @Serializer\Groups({"reviews"})
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews"})
      *
      * @SWG\Property(description="The book being reviewed.")
      */
@@ -92,8 +92,8 @@ class Review
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
      *
-     * @Serializer\Groups({"reviews"})
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews"})
      *
      * @SWG\Property(description="The creator of the review.")
      */

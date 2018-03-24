@@ -2,20 +2,28 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Swagger\Annotations as SWG;
 
 class TokenController extends BaseApiController
 {
     /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     *
+     * @throws JWTEncodeFailureException
+     *
      * @Route("/tokens")
      * @Method("POST")
-     * @param Request $request
-     * @return JsonResponse
-     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
+     *
+     * @SWG\Response(response="201", description="the token")
      */
     public function newTokenAction(Request $request)
     {
@@ -40,7 +48,7 @@ class TokenController extends BaseApiController
                 'exp' => time() + 3600 // 1 hour expiration
             ]);
 
-        return new JsonResponse(['token' => $token]);
+        return new JsonResponse(['token' => $token], 201);
     }
 
     protected function getGroups()

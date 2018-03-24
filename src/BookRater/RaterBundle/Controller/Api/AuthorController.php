@@ -6,6 +6,7 @@ use BookRater\RaterBundle\Form\Api\AuthorType;
 use BookRater\RaterBundle\Form\Api\Update\UpdateAuthorType;
 use BookRater\RaterBundle\Pagination\PaginationFactory;
 use Doctrine\ORM\NonUniqueResultException;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -40,16 +41,14 @@ class AuthorController extends BaseApiController
      *
      * @return Response
      *
-     * @Route("/authors")
-     * @Method("POST")
+     * @Rest\Post("/authors")
      *
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Response(
      *     response=201,
-     *     description="Returns the rewards of an user",
+     *     description="Creates a new author.",
      *     @SWG\Schema(
-     *         type="array",
      *         @Model(type=Author::class)
      *     )
      * )

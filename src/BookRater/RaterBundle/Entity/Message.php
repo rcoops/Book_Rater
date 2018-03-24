@@ -25,6 +25,8 @@ class Message
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      *
+     * @Serializer\Expose
+     *
      * @SWG\Property(description="The unique identifier of the message.")
      */
     private $id;
@@ -34,6 +36,9 @@ class Message
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"messages"})
      *
      * @SWG\Property(description="The creator of the message.")
      */
@@ -46,6 +51,8 @@ class Message
      *
      * @ORM\Column(type="string")
      *
+     * @Serializer\Expose
+     *
      * @SWG\Property(description="A brief description of the message content.")
      */
     private $subject;
@@ -57,6 +64,8 @@ class Message
      *
      * @ORM\Column(type="text")
      *
+     * @Serializer\Expose
+     *
      * @SWG\Property(description="The message's main content.")
      */
     private $message;
@@ -64,8 +73,11 @@ class Message
     /**
      * @var DateTime
      *
-     *
      * @ORM\Column(name="created_date", type="datetime")
+     *
+     * @Serializer\Expose
+     *
+     * @SWG\Property(description="The date and time on which the review was created.")
      */
     private $created;
 
@@ -73,6 +85,10 @@ class Message
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default": false})
+     *
+     * @Serializer\Expose
+     *
+     * @SWG\Property(description="Whether or not the message has been marked as read by admin")
      */
     private $isRead = false;
 
