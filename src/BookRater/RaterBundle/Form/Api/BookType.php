@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rick
- * Date: 24/03/18
- * Time: 17:37
- */
 
 namespace BookRater\RaterBundle\Form\Api;
 use BookRater\RaterBundle\Entity\Author;
+use BookRater\RaterBundle\EventListener\CustomFormEventSubscriber;
 use BookRater\RaterBundle\Form\BookType as BaseBookType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,8 +22,8 @@ class BookType extends BaseBookType
                 'class' => Author::class,
                 'property_path' => 'authors',
                 'multiple' => true,
-            ]);
-
+            ])
+            ->addEventSubscriber(new CustomFormEventSubscriber());
     }
 
     /**

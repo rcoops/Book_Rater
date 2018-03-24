@@ -67,13 +67,13 @@ class AuthorController extends BaseApiController
         $this->persistAuthor($author);
         $response = $this->createApiResponse($author, 201);
 
-        $programmerUrl = $this->generateUrl(
+        $authorUrl = $this->generateUrl(
             'api_authors_show', [
                 'lastName' => $author->getLastName(),
                 'firstName' => $author->getFirstName(),
             ]
         );
-        $response->headers->set('Location', $programmerUrl);
+        $response->headers->set('Location', $authorUrl);
         return $response;
     }
 

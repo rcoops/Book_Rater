@@ -1,17 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rick
- * Date: 24/03/18
- * Time: 17:32
- */
 
 namespace BookRater\RaterBundle\Controller\Api;
 
-
 use BookRater\RaterBundle\Entity\Book;
+use BookRater\RaterBundle\Form\Api\BookType;
 use BookRater\RaterBundle\Pagination\PaginationFactory;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends BaseApiController
 {
@@ -34,7 +34,7 @@ class BookController extends BaseApiController
      *
      * @return Response
      *
-     * @Rest\Post("/authors")
+     * @Rest\Post("/books")
      *
      * @Security("is_granted('ROLE_USER')")
      *
@@ -42,9 +42,9 @@ class BookController extends BaseApiController
      *     responses={
      *         @SWG\Response(
      *             response=201,
-     *             description="Creates a new author.",
+     *             description="Creates a new book.",
      *             @SWG\Schema(
-     *                 @Model(type=Author::class)
+     *                 @Model(type=Book::class)
      *             )
      *         )
      *     }
@@ -52,31 +52,31 @@ class BookController extends BaseApiController
      */
     public function newAction(Request $request)
     {
-        $author = new Book();
-        $form = $this->createForm(AuthorType::class, $author);
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
         $this->processForm($request, $form);
 
         if (!$form->isValid()) {
             $this->throwApiProblemValidationException($form);
         }
 
-        $this->persistAuthor($author);
-        $response = $this->createApiResponse($author, 201);
+        $this->persistBook($book);
+        $response = $this->createApiResponse($book, 201);
 
-        $programmerUrl = $this->generateUrl(
-            'api_authors_show', [
-                'lastName' => $author->getLastName(),
-                'firstName' => $author->getFirstName(),
-            ]
-        );
-        $response->headers->set('Location', $programmerUrl);
+//        $bookUrl = $this->generateUrl(
+//            'api_books_show', [
+//                'lastName' => $book->getLastName(),
+//                'firstName' => $book->getFirstName(),
+//            ]
+//        );
+//        $response->headers->set('Location', $bookUrl);
         return $response;
     }
 
     /**
      * @param Book $book
      */
-    private function persistAuthor(Book $book): void
+    private function persistBook(Book $book): void
     {
         $em = $this->getDoctrine()->getManager();
         $em->persist($book);

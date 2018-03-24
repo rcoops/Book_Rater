@@ -22,6 +22,9 @@ services:
     BookRater\RaterBundle\EventListener\ApiExceptionSubscriber:
         arguments: ['%kernel.debug%', '@BookRater\RaterBundle\Api\ResponseFactory', '@logger']
         tags:
+            - { name: kernel.event_subscriber, event: kernel.exception }
+    BookRater\RaterBundle\EventListener\CustomFormEventSubscriber:
+        tags:
             - { name: kernel.event_subscriber }
 
     jwt_token_authenticator: '@BookRater\RaterBundle\Security\JwtTokenAuthenticator'

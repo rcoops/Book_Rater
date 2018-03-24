@@ -5,3 +5,7 @@ api_token:
 api_author:
     resource: '@BookRaterRaterBundle/Controller/Api/AuthorController.php'
     type:     annotation
+
+api_book:
+    resource: '@BookRaterRaterBundle/Controller/Api/BookController.php'
+    type:     annotation
