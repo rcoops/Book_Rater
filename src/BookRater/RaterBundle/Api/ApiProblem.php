@@ -3,9 +3,13 @@
 namespace BookRater\RaterBundle\Api;
 
 use Symfony\Component\HttpFoundation\Response;
+use Swagger\Annotations as SWG;
 
 /**
- * A wrapper for holding data to be used for a application/problem+json response
+ * Class ApiProblem
+ * @package BookRater\RaterBundle\Api
+ *
+ * @SWG\Definition(required={"statusCode","type","title"})
  */
 class ApiProblem
 {
@@ -18,10 +22,22 @@ class ApiProblem
         self::TYPE_INVALID_REQUEST_BODY_FORMAT => 'Invalid JSON format sent',
     ];
 
+    /**
+     * @var int
+     * @SWG\Property(type="integer")
+     */
     private $statusCode;
 
+    /**
+     * @var string
+     * @SWG\Property()
+     */
     private $type;
 
+    /**
+     * @var string
+     * @SWG\Property()
+     */
     private $title;
 
     private $extraData = [];
