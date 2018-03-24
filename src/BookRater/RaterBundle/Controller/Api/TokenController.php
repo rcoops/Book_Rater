@@ -26,10 +26,20 @@ class TokenController extends BaseApiController
      * @SWG\Post(
      *     produces={"application/json"},
      *     parameters={
-     *         @SWG\Parameter(in="header", name="Authorization", type="string", description="Basic auth"),
+     *         @SWG\Parameter(in="header", name="Authorization", type="string",
+     *             description="Basic auth: ('Basic' followed by base 64 encoded '[username]:[password]' e.g. 'Basic dXNlcjpwYXNzd29yZA==')"
+     *         ),
      *     },
      *     security={@SWG\SecurityScheme(type="basic", name="Authorization")},
-     *     responses={@SWG\Response(response="201", description="A JWT Bearer token to be used for authorization.")}
+     *     responses={
+     *         @SWG\Response(
+     *             response="201",
+     *             description="A JWT Bearer token to be used for authorization.",
+     *             schema=@SWG\Schema(
+     *                type="object", properties={@SWG\Property(property="token", type="string")}
+     *             )
+     *         )
+     *     }
      * )
      */
     public function newTokenAction(Request $request)

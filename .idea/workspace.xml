@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2949a9fb-bc49-4990-9eae-18b5a6f30a2d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/DoctrineMigrations/Test/Version20180324154248.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_test.yml" afterPath="$PROJECT_DIR$/app/config/config_test.yml" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/AuthorController.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/AuthorController.php" />
       <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
-      <change beforePath="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" afterPath="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" />
-      <change beforePath="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" afterPath="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,12 +60,22 @@
       <file leaf-file-name="TokenController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+            <state relative-caret-position="128">
+              <caret line="28" column="79" lean-forward="false" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
               <folding>
                 <element signature="e#56#106#0#PHP" expanded="true" />
-                <element signature="e#1265#1292#1#PHP" expanded="true" />
+                <element signature="e#1638#1665#1#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Parameter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Parameter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2574">
+              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -210,11 +213,11 @@
         <option value="$PROJECT_DIR$/app/Resources/public/js/updateNum.js" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Review.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Entity/Message.php" />
-        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/AuthorController.php" />
         <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Pagination/PaginationFactory.php" />
         <option value="$PROJECT_DIR$/tests/BookRaterRaterBundle/Controller/Api/TokenControllerTest.php" />
         <option value="$PROJECT_DIR$/app/config/config_test.yml" />
+        <option value="$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php" />
       </list>
     </option>
   </component>
@@ -825,7 +828,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269143000" />
+    <option name="totallyTimeSpent" value="270115000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -988,14 +991,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="91" column="38" lean-forward="false" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Resources/views/Book/view.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1069,14 +1064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Parameter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1219,14 +1206,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Operation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-828">
@@ -1247,14 +1226,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Schema.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-954">
-          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1394,13 +1365,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Response.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-297">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Property.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Schema.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-837">
+          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/zircote/swagger-php/src/Annotations/Parameter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2574">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/BookRater/RaterBundle/Controller/Api/TokenController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <state relative-caret-position="128">
+          <caret line="28" column="79" lean-forward="false" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
           <folding>
             <element signature="e#56#106#0#PHP" expanded="true" />
-            <element signature="e#1265#1292#1#PHP" expanded="true" />
+            <element signature="e#1638#1665#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
