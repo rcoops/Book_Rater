@@ -4,17 +4,18 @@ namespace BookRater\RaterBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Swagger\Annotations as SWG;
 
 /**
- * @ORM\Table(name="api_token")
+ * @ORM\Table(name="api_tokens")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\ApiTokenRepository")
  */
 class ApiToken
 {
     /**
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 

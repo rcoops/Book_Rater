@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Swagger\Annotations as SWG;
 
 /**
  * Author
@@ -29,21 +30,23 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     )
  * )
  *
+ * @ORM\Table(name="authors")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\AuthorRepository")
- * @ORM\Table(name="author")
  *
  * @Serializer\ExclusionPolicy("all")
  */
-final class Author
+class Author
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The unique identifier of the book.")
      */
     private $id;
 
@@ -57,7 +60,7 @@ final class Author
      *     message="First name must consist of letters only."
      * )
      *
-     * @ORM\Column(name="firstName", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
      */
@@ -73,16 +76,16 @@ final class Author
      *     message="Last name must consist of letters only."
      * )
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
      */
     private $lastName;
 
     /**
-     * @var null|string
+     * @var string|null
      *
-     * @ORM\Column(name="initial", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
      */
@@ -131,7 +134,7 @@ final class Author
     /**
      * Get firstName
      *
-     * @return null|string
+     * @return string|null
      */
     public function getFirstName() : ?string
     {
@@ -155,7 +158,7 @@ final class Author
     /**
      * Get lastName
      *
-     * @return null|string
+     * @return string|null
      */
     public function getLastName() : ?string
     {
@@ -165,7 +168,7 @@ final class Author
     /**
      * Set initial
      *
-     * @param null|string $initial
+     * @param string|null $initial
      *
      * @return Author
      */
@@ -179,7 +182,7 @@ final class Author
     /**
      * Get initial
      *
-     * @return null|string
+     * @return string|null
      */
     public function getInitial() : ?string
     {

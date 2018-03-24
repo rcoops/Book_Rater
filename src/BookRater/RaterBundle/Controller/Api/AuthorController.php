@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthorController extends BaseApiController
 {
 
-    private const groups = ['authors'];
+    private const GROUPS = ['authors'];
 
     /**
      * @var PaginationFactory
@@ -238,7 +238,7 @@ class AuthorController extends BaseApiController
 
     protected function getGroups()
     {
-        return self::groups;
+        return self::GROUPS;
     }
 
 }

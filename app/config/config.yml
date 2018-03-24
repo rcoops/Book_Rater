@@ -148,6 +148,15 @@ nelmio_api_doc:
             title: Book Rater
             description: The Web Application for... Rating Books
             version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
+
     areas:
         default:
             path_patterns: # an array of regexps

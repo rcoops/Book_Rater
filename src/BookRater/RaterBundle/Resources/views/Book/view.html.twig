@@ -16,7 +16,7 @@
                 {{ book.displayEdition -}}
             {% endif %}
             {{- '' -}}
-            {% if (book.publishDate) %}, {{ book.publishDate|date('d-m-Y') }}{% endif %}
+            {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}{{ book.publishDate|date('d-m-Y') }}{% endif %}
         </p>
         <p>
             <strong>Rating:</strong>
@@ -26,9 +26,9 @@
                 {% set rating = book.averageRating|number_format %}
                 {% for i in 1..5 %}
                     {% if i <= rating %}
-                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star" style="color: gold"></i>
                     {% else %}
-                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o" style="color: gold"></i>
                     {% endif %}
                 {% endfor %}
             {% endif %}
@@ -42,8 +42,8 @@
                 <ul>
                     {% for item in book.reviews %}
                         <li>
-                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.reviewTitle }}</a>
-                            - {{ item.rating }} / 5 <i class="fa fa-star"></i> -
+                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
+                            - {{ item.rating }} / 5 <i class="fa fa-star" style="color: gold"></i> -
                             <small>{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
                         </li>
                     {% endfor %}

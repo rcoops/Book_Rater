@@ -15,7 +15,7 @@ class ReviewRepository extends EntityRepository
 
         if ($filter) {
             $qb->innerJoin('review.user', 'review_user')
-                ->innerJoin('review.bookReviewed', 'review_book')
+                ->innerJoin('review.book', 'review_book')
                 ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->like('review_book.title', ':filter'),
@@ -39,7 +39,7 @@ class ReviewRepository extends EntityRepository
 
         return $qb
             ->andWhere(
-                $qb->expr()->eq('review.bookReviewed', ':book')
+                $qb->expr()->eq('review.book', ':book')
             )
             ->setParameter('book', $book->getId())
             ->getQuery()

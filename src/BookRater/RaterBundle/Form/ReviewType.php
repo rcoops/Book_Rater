@@ -21,8 +21,8 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('review_title', TextType::class)
-            ->add('bookReviewed', EntityType::class, [
+            ->add('title', TextType::class)
+            ->add('book', EntityType::class, [
                 'class' => Book::class,
                 'choice_label' => 'title',
                 'query_builder' => function(BookRepository $ar) {
@@ -33,9 +33,15 @@ class ReviewType extends AbstractType
             ->add('rating', RangeType::class, ['attr' => [
                 'min' => 1,
                 'max' => 5,
-                'onChange' => "updateText(this.value)"
+                'onchange' => "updateNum(this.value)",
             ]])
-            ->add('reviewComments')
+            ->add('ratingNum', TextType::class, [
+                'data' => 3,
+                'mapped' => false,
+                'label_format' => ' ',
+                'disabled' => true,
+            ])
+            ->add('comments')
             ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn-primary']]);
     }
     

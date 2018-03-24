@@ -48,7 +48,7 @@ class ReviewListener
      */
     public function postPersistHandler(Review $review, LifecycleEventArgs $event)
     {
-        $this->updateBookRating($review->getBookReviewed());
+        $this->updateBookRating($review->getBook());
     }
 
     /**
@@ -59,7 +59,7 @@ class ReviewListener
      */
     public function postUpdateHandler(Review $review, LifecycleEventArgs $event)
     {
-        $this->updateBookRating($review->getBookReviewed());
+        $this->updateBookRating($review->getBook());
     }
 
     /**
@@ -70,7 +70,7 @@ class ReviewListener
      */
     public function postRemoveHandler(Review $review, LifecycleEventArgs $event)
     {
-        $this->updateBookRating($review->getBookReviewed());
+        $this->updateBookRating($review->getBook());
     }
 
     private function updateBookRating(Book $book)

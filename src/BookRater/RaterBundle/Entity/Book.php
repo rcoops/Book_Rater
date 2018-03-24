@@ -10,13 +10,12 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Swagger\Annotations as SWG;
 
 /**
- * Book
- *
  * @Serializer\ExclusionPolicy("all")
  *
- * @ORM\Table(name="book", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
+ * @ORM\Table(name="books", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
  */
 class Book
@@ -24,80 +23,96 @@ class Book
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The unique identifier of the book.")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Book title must be entered")
+     * @Assert\NotBlank(message="Book title must be entered.")
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The book's full title.")
      */
     private $title;
 
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="ISBN must be entered")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9]{10}$/",
      *     match=true,
      *     message="ISBN must be a combination of 10 digits/characters"
      * )
      *
-     * @ORM\Column(name="isbn", type="string", unique=true)
+     * @ORM\Column(type="string", length=15, unique=true)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The book's unique 10 digit International Standard Book Number.")
      */
     private $isbn;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Assert\Regex(
-     *     pattern="/^\d{3}-\d{10}$/",
+     *     pattern="/^\d{13}$/",
      *     match=true,
-     *     message="ISBN 13 must be a 13 digit number"
+     *     message="ISBN 13 must 13 digits."
      * )
-     * @ORM\Column(name="isbn_13", type="string", nullable=true, unique=true)
+     *
+     * @ORM\Column(name="isbn_13", type="string", length=15, nullable=true, unique=true)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The book's unique 13 digit International Standard Book Number.")
      */
-    private $isbn13;
+    private $isbn13 = null;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="publisher", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The company that published this edition of the book.")
      */
-    private $publisher;
+    private $publisher = null;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      *
-     * @ORM\Column(name="publish_date", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The date that this publication of the book was published.")
      */
-    private $publishDate;
+    private $publishDate = null;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="edition", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The edition number for this publication of the book.")
      */
-    private $edition;
+    private $edition = null;
 
     /**
      * @var Collection|Author[]
@@ -106,23 +121,31 @@ class Book
      *
      * @Serializer\Groups({"books"})
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="The book's author or authors.")
      */
     private $authors;
 
     /**
      * @var Collection|Review[]
      *
-     * @ORM\OneToMany(targetEntity="Review", mappedBy="bookReviewed", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="book", cascade={"remove"})
      *
      * @Serializer\Groups({"books"})
      * @Serializer\Expose
+     *
+     * @SWG\Property(description="All site reviews of this book.")
      */
     private $reviews;
 
     /**
-     * @var null|int
+     * @var int|null
      *
-     * @ORM\Column(name="average_rating", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Serializer\Expose
+     *
+     * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.")
      */
     private $averageRating = null;
 
@@ -143,23 +166,9 @@ class Book
     }
 
     /**
-     * Set title
-     *
-     * @param null|string $title
-     *
-     * @return Book
-     */
-    public function setTitle(?string $title) : Book
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * Get title
      *
-     * @return null|string
+     * @return string|null
      */
     public function getTitle() : ?string
     {
@@ -167,9 +176,47 @@ class Book
     }
 
     /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Book
+     */
+    public function setTitle(string $title) : Book
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get isbn
+     *
+     * @return string|null
+     */
+    public function getIsbn() : ?string
+    {
+        return $this->isbn;
+    }
+
+    /**
+     * Set isbn
+     *
+     * @param string $isbn
+     *
+     * @return Book
+     */
+    public function setIsbn(string $isbn) : Book
+    {
+        $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    /**
      * Get isbn13
      *
-     * @return null|string
+     * @return string|null
      */
     public function getIsbn13() : ?string
     {
@@ -177,9 +224,33 @@ class Book
     }
 
     /**
+     * Set isbn13
+     *
+     * @param string|null $isbn13
+     *
+     * @return Book
+     */
+    public function setIsbn13(?string $isbn13) : Book
+    {
+        $this->isbn13 = $isbn13;
+
+        return $this;
+    }
+
+    /**
+     * Get publisher
+     *
+     * @return string|null
+     */
+    public function getPublisher() : ?string
+    {
+        return $this->publisher;
+    }
+
+    /**
      * Set publisher
      *
-     * @param null|string $publisher
+     * @param string|null $publisher
      *
      * @return Book
      */
@@ -191,19 +262,19 @@ class Book
     }
 
     /**
-     * Get publisher
+     * Get publishDate
      *
-     * @return null|string
+     * @return DateTime|null
      */
-    public function getPublisher() : ?string
+    public function getPublishDate() : ?DateTime
     {
-        return $this->publisher;
+        return $this->publishDate;
     }
 
     /**
      * Set publishDate
      *
-     * @param null|DateTime $publishDate
+     * @param DateTime|null $publishDate
      *
      * @return Book
      */
@@ -215,19 +286,40 @@ class Book
     }
 
     /**
-     * Get publishDate
+     * Get edition
      *
-     * @return null|DateTime
+     * @return int|null
      */
-    public function getPublishDate() : ?DateTime
+    public function getEdition() : ?int
     {
-        return $this->publishDate;
+        return $this->edition;
+    }
+
+    /**
+     * @return string
+     */
+    public function displayEdition() : string
+    {
+        $postFix = 'th';
+        switch ($this->edition) {
+            case 1:
+                $postFix = 'st';
+                break;
+            case 2:
+                $postFix = 'nd';
+                break;
+            case 3:
+                $postFix = 'rd';
+                break;
+            default: //nothing
+        }
+        return $this->edition . $postFix . ' Edition';
     }
 
     /**
      * Set edition
      *
-     * @param null|int $edition
+     * @param int|null $edition
      *
      * @return Book
      */
@@ -239,13 +331,13 @@ class Book
     }
 
     /**
-     * Get edition
+     * Get authors
      *
-     * @return null|int
+     * @return Collection|Author[]
      */
-    public function getEdition() : ?int
+    public function getAuthors() : Collection
     {
-        return $this->edition;
+        return $this->authors;
     }
 
     /**
@@ -278,13 +370,13 @@ class Book
     }
 
     /**
-     * Get authors
+     * Get reviews
      *
-     * @return Collection|Author[]
+     * @return Collection|Review[]
      */
-    public function getAuthors() : Collection
+    public function getReviews() : Collection
     {
-        return $this->authors;
+        return $this->reviews;
     }
 
     /**
@@ -316,75 +408,6 @@ class Book
     }
 
     /**
-     * Get reviews
-     *
-     * @return Collection|Review[]
-     */
-    public function getReviews() : Collection
-    {
-        return $this->reviews;
-    }
-
-    /**
-     * Set isbn
-     *
-     * @param null|string $isbn
-     *
-     * @return Book
-     */
-    public function setIsbn(?string $isbn) : Book
-    {
-        $this->isbn = $isbn;
-
-        return $this;
-    }
-
-    /**
-     * Get isbn
-     *
-     * @return null|string
-     */
-    public function getIsbn() : ?string
-    {
-        return $this->isbn;
-    }
-
-    /**
-     * Set isbn13
-     *
-     * @param null|string $isbn13
-     *
-     * @return Book
-     */
-    public function setIsbn13(?string $isbn13) : Book
-    {
-        $this->isbn13 = $isbn13;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function displayEdition() : string
-    {
-        $postFix = 'th';
-        switch ($this->edition) {
-            case 1:
-                $postFix = 'st';
-                break;
-            case 2:
-                $postFix = 'nd';
-                break;
-            case 3:
-                $postFix = 'rd';
-                break;
-            default: //nothing
-        }
-        return $this->edition . $postFix . ' Edition';
-    }
-
-    /**
      * @return int|null
      */
     public function getAverageRating() : ?int
@@ -393,7 +416,7 @@ class Book
     }
 
     /**
-     * @param null|float $averageRating
+     * @param float|null $averageRating
      *
      * @return Book
      */
@@ -405,7 +428,7 @@ class Book
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function __toString() : ?string
     {

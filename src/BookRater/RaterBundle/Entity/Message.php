@@ -7,9 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Swagger\Annotations as SWG;
 
 /**
- * @ORM\Table(name="message")
+ * @ORM\Table(name="messages")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
  *
  * @Serializer\ExclusionPolicy("all")
@@ -23,46 +24,57 @@ class Message
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @SWG\Property(description="The unique identifier of the message.")
      */
     private $id;
 
     /**
      * @var User
      *
-     * @Assert\NotNull(message="User must be included.")
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @SWG\Property(description="The creator of the message.")
      */
     private $user;
 
     /**
-     * @var null|string
+     * @var string
+     *
+     * @Assert\NotBlank(message="The message must have a subject.")
      *
      * @ORM\Column(type="string")
+     *
+     * @SWG\Property(description="A brief description of the message content.")
      */
     private $subject;
 
     /**
-     * @var null|string
+     * @var string
+     *
+     * @Assert\NotBlank(message="The message must have content.")
      *
      * @ORM\Column(type="text")
+     *
+     * @SWG\Property(description="The message's main content.")
      */
     private $message;
 
     /**
-     * @var null|DateTime
+     * @var DateTime
      *
-     * @ORM\Column(name="created_date", type="datetime", nullable=true)
+     *
+     * @ORM\Column(name="created_date", type="datetime")
      */
     private $created;
 
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", nullable=true, options={"default": false})
+     * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $isRead;
+    private $isRead = false;
 
     /**
      * Get id
@@ -109,7 +121,7 @@ class Message
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSubject() : ?string
     {
@@ -117,7 +129,7 @@ class Message
     }
 
     /**
-     * @param null|string $subject
+     * @param string|null $subject
      *
      * @return Message
      */
@@ -129,7 +141,7 @@ class Message
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getMessage() : ?string
     {
@@ -137,7 +149,7 @@ class Message
     }
 
     /**
-     * @param null|string $message
+     * @param string|null $message
      *
      * @return Message
      */
@@ -157,7 +169,7 @@ class Message
     }
 
     /**
-     * @param null|DateTime $created
+     * @param DateTime|null $created
      *
      * @return Message
      */
@@ -169,7 +181,7 @@ class Message
     }
 
     /**
-     * @return null|bool
+     * @return bool|null
      */
     public function getIsRead() : ?bool
     {
@@ -177,7 +189,7 @@ class Message
     }
 
     /**
-     * @param null|bool $isRead
+     * @param bool|null $isRead
      *
      * @return Message
      */
