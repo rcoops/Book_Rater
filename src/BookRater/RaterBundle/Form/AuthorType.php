@@ -12,8 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AuthorType extends AbstractType
+class AuthorType extends AbstractWebType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -24,9 +25,7 @@ class AuthorType extends AbstractType
                 'required' => true,
                 'disabled' => $options['is_edit'], // do not allow changes on update
             ])
-            ->add('initial', TextType::class, [
-                'required' => false
-            ])
+            ->add('initial')
             ->add('firstName', TextType::class, [
                 'required' => true,
                 'disabled' => $options['is_edit'], // do not allow changes on update
@@ -38,13 +37,13 @@ class AuthorType extends AbstractType
                 'query_builder' => function (BookRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
                 },
-                'disabled' => $options['is_api']
+                'disabled' => $options['is_api'],
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn-primary',
+                    'class' => 'btn btn-primary',
                 ],
-                'disabled' => $options['is_api']
+                'disabled' => $options['is_api'],
             ]);
     }
 
@@ -53,10 +52,9 @@ class AuthorType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
         $resolver->setDefaults([
             'data_class' => Author::class,
-            'is_edit' => false,
-            'is_api' => false,
         ]);
     }
 
@@ -67,6 +65,5 @@ class AuthorType extends AbstractType
     {
         return 'bookrater_raterbundle_author';
     }
-
 
 }
