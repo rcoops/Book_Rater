@@ -22,13 +22,10 @@ class AuthorController extends BaseApiController
 
     private const GROUPS = ['authors'];
 
-    /**
-     * @var PaginationFactory
-     */
+    /** @var PaginationFactory */
     private $paginationFactory;
 
     /**
-     * AuthorController constructor.
      * @param PaginationFactory $paginationFactory
      */
     public function __construct(PaginationFactory $paginationFactory)
@@ -45,12 +42,16 @@ class AuthorController extends BaseApiController
      *
      * @Security("is_granted('ROLE_USER')")
      *
-     * @SWG\Response(
-     *     response=201,
-     *     description="Creates a new author.",
-     *     @SWG\Schema(
-     *         @Model(type=Author::class)
-     *     )
+     * @SWG\Post(
+     *     responses={
+     *         @SWG\Response(
+     *             response=201,
+     *             description="Creates a new author.",
+     *             @SWG\Schema(
+     *                 @Model(type=Author::class)
+     *             )
+     *         )
+     *     }
      * )
      */
     public function newAction(Request $request)
@@ -82,8 +83,7 @@ class AuthorController extends BaseApiController
      *
      * @return Response
      *
-     * @Route("/authors/{lastName}/{firstName}", name="api_authors_show")
-     * @Method("GET")
+     * @Rest\Get("/authors/{lastName}/{firstName}", name="api_authors_show")
      */
     public function showAction(string $lastName, string $firstName)
     {
@@ -106,8 +106,7 @@ class AuthorController extends BaseApiController
      *
      * @return Response
      *
-     * @Route("/authors", name="api_authors_collection")
-     * @Method("GET")
+     * @Rest\Get("/authors", name="api_authors_collection")
      */
     public function listAction(Request $request)
     {
@@ -166,8 +165,7 @@ class AuthorController extends BaseApiController
      *
      * @throws NonUniqueResultException
      *
-     * @Route("/authors/{lastName}/{firstName}")
-     * @Method("DELETE")
+     * @Rest\Delete("/authors/{lastName}/{firstName}")
      *
      * @Security("is_granted('ROLE_ADMIN')")
      */
@@ -187,11 +185,11 @@ class AuthorController extends BaseApiController
     }
 
     /**
-     * @Route("/authors/{lastName}/{firstName}/books", name="api_authors_books_list")
-     * @Method("GET")
      * @param Author $author
      * @param Request $request
      * @return Response
+     *
+     * @Rest\Get("/authors/{lastName}/{firstName}/books", name="api_authors_books_list")
      */
     public function booksListAction(Author $author, Request $request)
     {
@@ -212,7 +210,7 @@ class AuthorController extends BaseApiController
     /**
      * @param Author $author
      */
-    public function persistAuthor(Author $author): void
+    private function persistAuthor(Author $author): void
     {
         $em = $this->getDoctrine()->getManager();
         $em->persist($author);
@@ -227,7 +225,7 @@ class AuthorController extends BaseApiController
      * @param string $lastName
      * @param string $firstName
      */
-    public function throwAuthorNotFoundException(string $lastName, string $firstName): void
+    private function throwAuthorNotFoundException(string $lastName, string $firstName): void
     {
         throw $this->createNotFoundException(sprintf(
             'No author found with last name: "%s" & first name: "%s"',

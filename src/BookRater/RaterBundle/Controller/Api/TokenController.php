@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,10 +21,16 @@ class TokenController extends BaseApiController
      *
      * @throws JWTEncodeFailureException
      *
-     * @Route("/tokens")
-     * @Method("POST")
+     * @Rest\Post("/tokens")
      *
-     * @SWG\Response(response="201", description="the token")
+     * @SWG\Post(
+     *     produces={"application/json"},
+     *     parameters={
+     *         @SWG\Parameter(in="header", name="Authorization", type="string", description="Basic auth"),
+     *     },
+     *     security={@SWG\SecurityScheme(type="basic", name="Authorization")},
+     *     responses={@SWG\Response(response="201", description="A JWT Bearer token to be used for authorization.")}
+     * )
      */
     public function newTokenAction(Request $request)
     {
