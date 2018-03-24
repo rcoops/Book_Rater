@@ -2,10 +2,10 @@
 
 namespace BookRater\RaterBundle\Form\Api\Update;
 
-use BookRater\RaterBundle\Form\Api\AuthorType;
+use BookRater\RaterBundle\Form\Api\BookType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UpdateAuthorType extends AuthorType
+class UpdateBookType extends BookType
 {
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,31 +1,34 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: rick
+ * Date: 24/03/18
+ * Time: 17:37
+ */
 
 namespace BookRater\RaterBundle\Form\Api;
-
-use BookRater\RaterBundle\Entity\Book;
-use BookRater\RaterBundle\Form\AuthorType as BaseAuthorType;
+use BookRater\RaterBundle\Entity\Author;
+use BookRater\RaterBundle\Form\BookType as BaseBookType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AuthorType extends BaseAuthorType
+class BookType extends BaseBookType
 {
 
     use ApiTypeTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('bookIds', EntityType::class, [
-                'class' => Book::class,
-                'property_path' => 'booksAuthored',
+            ->add('authorIds', EntityType::class, [
+                'class' => Author::class,
+                'property_path' => 'authors',
                 'multiple' => true,
             ]);
+
     }
 
     /**

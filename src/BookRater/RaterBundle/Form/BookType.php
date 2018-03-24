@@ -3,6 +3,7 @@
 namespace BookRater\RaterBundle\Form;
 
 use BookRater\RaterBundle\Entity\Author;
+use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Repository\AuthorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,43 +15,58 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class BookType extends AbstractType
+class BookType extends AbstractWebType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', TextType::class)
-            ->add('isbn', TextType::class)
-            ->add('isbn13', TextType::class)
+        $builder
+            ->add('title', TextType::class, [
+                'disabled' => $options['is_edit'],
+            ])// do not allow changes on update)
+            ->add('isbn', TextType::class, [
+                'disabled' => $options['is_edit'],
+            ])
+            ->add('isbn13')
             ->add('publisher')
             ->add('publishDate', DateType::class, [
                 'format' => 'dd-MM-yyyy',
-                'years' => range(date('Y'), 1500)
+                'years' => range(date('Y'), 1500),
             ])
-            ->add('edition', IntegerType::class, ['attr' => ['min' => 0]])
+            ->add('edition', IntegerType::class, [
+                'attr' => [
+                    'min' => 1,
+                ]
+            ])
             ->add('authors', EntityType::class, [
                 'class' => Author::class,
                 'required' => false,
                 'by_reference' => false,
                 'multiple' => true,
-                'query_builder' => function(AuthorRepository $ar) {
+                'query_builder' => function (AuthorRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
-                }
+                },
+                'disabled' => $options['is_api'],
             ])
-            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ],
+                'disabled' => $options['is_api'],
+            ]);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'data_class' => 'BookRater\RaterBundle\Entity\Book'
-            ]);
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'data_class' => Book::class,
+        ]);
     }
 
     /**
