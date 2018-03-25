@@ -22,17 +22,6 @@ class AuthorController extends BaseApiController
 
     private const GROUPS = ['authors'];
 
-    /** @var PaginationFactory */
-    private $paginationFactory;
-
-    /**
-     * @param PaginationFactory $paginationFactory
-     */
-    public function __construct(PaginationFactory $paginationFactory)
-    {
-        $this->paginationFactory = $paginationFactory;
-    }
-
     /**
      * @param Request $request
      *

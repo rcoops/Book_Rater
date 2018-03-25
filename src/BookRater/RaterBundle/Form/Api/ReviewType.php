@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewType extends BaseReviewType
 {
-
     use ApiTypeTrait;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -25,7 +24,7 @@ class ReviewType extends BaseReviewType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-        $this->configureOptions($resolver);
+        $this->configureApiOptions($resolver);
     }
 
 }

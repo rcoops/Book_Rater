@@ -1,11 +1,16 @@
-api_token:
+api_tokens:
     resource: '@BookRaterRaterBundle/Controller/Api/TokenController.php'
     type:     annotation
 
-api_author:
+api_authors:
     resource: '@BookRaterRaterBundle/Controller/Api/AuthorController.php'
     type:     annotation
 
-api_book:
+api_books:
     resource: '@BookRaterRaterBundle/Controller/Api/BookController.php'
     type:     annotation
+
+api_reviews:
+    resource: '@BookRaterRaterBundle/Controller/Api/ReviewController.php'
+    type:     annotation
+

@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Controller\Api;
 
 use BookRater\RaterBundle\Api\ApiProblem;
 use BookRater\RaterBundle\Api\ApiProblemException;
+use BookRater\RaterBundle\Pagination\PaginationFactory;
 use BookRater\RaterBundle\Repository\ApiTokenRepository;
 use BookRater\RaterBundle\Repository\AuthorRepository;
 use BookRater\RaterBundle\Repository\BookRepository;
@@ -22,6 +23,17 @@ use BookRater\RaterBundle\Entity\User;
 
 abstract class BaseApiController extends Controller
 {
+
+    /** @var PaginationFactory */
+    protected $paginationFactory;
+
+    /**
+     * @param PaginationFactory $paginationFactory
+     */
+    public function __construct(PaginationFactory $paginationFactory)
+    {
+        $this->paginationFactory = $paginationFactory;
+    }
 
     /**
      * Is the current user logged in?
