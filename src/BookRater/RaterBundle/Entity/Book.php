@@ -13,10 +13,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Swagger\Annotations as SWG;
 
 /**
- * @Serializer\ExclusionPolicy("all")
+ * @Hateoas\Relation(
+ *     "self",
+ *     href=@Hateoas\Route(
+ *       "api_books_show",
+ *       parameters = { "id" = "expr(object.getId())" }
+ *     )
+ * )
+ * @Hateoas\Relation(
+ *     "authors",
+ *     href=@Hateoas\Route(
+ *         "api_books_authors_list",
+ *         parameters = { "id" = "expr(object.getId())" }
+ *     )
+ * )
+ * @Hateoas\Relation(
+ *     "reviews",
+ *     href=@Hateoas\Route(
+ *         "api_books_reviews_list",
+ *         parameters = { "id" = "expr(object.getId())" }
+ *     )
+ * )
  *
  * @ORM\Table(name="books", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Book
 {

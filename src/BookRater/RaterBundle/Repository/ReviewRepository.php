@@ -35,15 +35,19 @@ class ReviewRepository extends EntityRepository
      */
     public function findAllByBook(Book $book)
     {
-        $qb = $this->createQueryBuilder('review');
+        return $this->createQueryBuilderForBook($book)
+            ->getQuery()
+            ->execute();
+    }
 
+    public function createQueryBuilderForBook(Book $book)
+    {
+        $qb = $this->createQueryBuilder('review');
         return $qb
             ->andWhere(
                 $qb->expr()->eq('review.book', ':book')
             )
-            ->setParameter('book', $book->getId())
-            ->getQuery()
-            ->execute();
+            ->setParameter('book', $book->getId());
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Repository;
 
+use BookRater\RaterBundle\Entity\Book;
 use \Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
@@ -66,6 +67,17 @@ class AuthorRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function createQueryBuilderForBook(Book $book)
+    {
+        $qb = $this->createQueryBuilder('author');
+        return $qb
+            ->innerJoin('author.booksAuthored', 'books')
+            ->andWhere(
+                $qb->expr()->eq('books.id', ':book')
+            )
+            ->setParameter('book', $book->getId());
     }
 
 }

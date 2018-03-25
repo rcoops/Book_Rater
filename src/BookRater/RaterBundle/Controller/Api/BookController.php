@@ -44,7 +44,7 @@ class BookController extends BaseApiController
      *             response=201,
      *             description="Creates a new book.",
      *             @SWG\Schema(
-     *                 @Model(type=Book::class)
+     *                 @Model(type=Book::class, groups="books")
      *             )
      *         )
      *     }
@@ -63,14 +63,87 @@ class BookController extends BaseApiController
         $this->persistBook($book);
         $response = $this->createApiResponse($book, 201);
 
-//        $bookUrl = $this->generateUrl(
-//            'api_books_show', [
-//                'lastName' => $book->getLastName(),
-//                'firstName' => $book->getFirstName(),
-//            ]
-//        );
-//        $response->headers->set('Location', $bookUrl);
+        $bookUrl = $this->generateUrl(
+            'api_books_show', [
+                'id' => $book->getId(),
+            ]
+        );
+        $response->headers->set('Location', $bookUrl);
         return $response;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Response
+     *
+     * @Rest\Get("/books/{id}", name="api_books_show")
+     *
+     * @SWG\Get(
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="Returns the representation of a book resource.",
+     *             @SWG\Schema(
+     *                 @Model(type=Book::class, groups="books")
+     *             )
+     *         )
+     *     }
+     * )
+     */
+    public function showAction(int $id)
+    {
+        $book = $this->getBookRepository()->find($id);
+
+        if (!$book) {
+            $this->throwBookNotFoundException($id);
+        }
+
+        return $this->createApiResponse($book);
+    }
+
+    /**
+     * @param Book $book
+     * @param Request $request
+     * @return Response
+     *
+     * @Rest\Get("/books/{id}/books", name="api_books_authors_list")
+     */
+    public function authorsListAction(Book $book, Request $request)
+    {
+        $qb = $this->getAuthorRepository()
+            ->createQueryBuilderForBook($book);
+        $collection = $this->paginationFactory->createCollection(
+            $qb,
+            $request,
+            'api_books_authors_list',
+            [
+                'id' => $book->getId(),
+            ]
+        );
+        return $this->createApiResponse($collection);
+    }
+
+    /**
+     * @param Book $book
+     * @param Request $request
+     * @return Response
+     *
+     * @Rest\Get("/books/{id}/reviews", name="api_books_reviews_list")
+     */
+    public function reviewsListAction(Book $book, Request $request)
+    {
+        $qb = $this->getReviewRepository()
+            ->createQueryBuilderForBook($book);
+        $collection = $this->paginationFactory->createCollection(
+            $qb,
+            $request,
+            'api_books_reviews_list',
+            [
+                'id' => $book->getId(),
+            ]
+        );
+        return $this->createApiResponse($collection);
     }
 
     /**
@@ -85,6 +158,14 @@ class BookController extends BaseApiController
             $em->persist($author);
         }
         $em->flush();
+    }
+
+    /**
+     * @param int $id
+     */
+    private function throwBookNotFoundException(int $id) : void
+    {
+        throw $this->createNotFoundException(sprintf('No book found with id: "%s"', $id));
     }
 
     protected function getGroups()

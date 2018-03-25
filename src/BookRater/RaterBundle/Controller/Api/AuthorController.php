@@ -48,7 +48,7 @@ class AuthorController extends BaseApiController
      *             response=201,
      *             description="Creates a new author.",
      *             @SWG\Schema(
-     *                 @Model(type=Author::class)
+     *                 @Model(type=Author::class, groups="authors")
      *             )
      *         )
      *     }
@@ -96,9 +96,7 @@ class AuthorController extends BaseApiController
             $this->throwAuthorNotFoundException($lastName, $firstName);
         }
 
-        $response = $this->createApiResponse($author);
-
-        return $response;
+        return $this->createApiResponse($author);
     }
 
     /**

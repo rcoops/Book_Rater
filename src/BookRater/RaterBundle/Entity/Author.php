@@ -11,8 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Swagger\Annotations as SWG;
 
 /**
- * Author
- *
  * @Hateoas\Relation(
  *     "self",
  *     href=@Hateoas\Route(
