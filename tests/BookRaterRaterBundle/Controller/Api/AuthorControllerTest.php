@@ -11,9 +11,6 @@ class AuthorControllerTest extends ApiTestCase
 {
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \TypeError
      * @throws \Exception
      */
     public function testPOSTAuthor()
@@ -180,9 +177,6 @@ class AuthorControllerTest extends ApiTestCase
     }
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \TypeError
      * @throws \Exception
      */
     public function testPUTAuthor()
@@ -235,9 +229,6 @@ class AuthorControllerTest extends ApiTestCase
     }
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \TypeError
      * @throws \Exception
      */
     public function testPATCHAuthor()
@@ -272,9 +263,6 @@ class AuthorControllerTest extends ApiTestCase
             'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);
         $this->assertEquals(200, $response->getStatusCode());
-        // Unchanged due to restrictions (will be ignored by form)
-        $this->asserter()->assertResponsePropertyEquals($response, 'lastName', 'Kent');
-        $this->asserter()->assertResponsePropertyEquals($response, 'firstName', 'Clerk');
         // Not changed or cleared due to patch
         $this->asserter()->assertResponsePropertyEquals($response, 'initial', 'P');
         // Changed
@@ -289,12 +277,9 @@ class AuthorControllerTest extends ApiTestCase
     }
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \Throwable
-     * @throws \TypeError
+     * @throws \Exception
      */
-    public function testDELETEProgrammer()
+    public function testDELETEAuthor()
     {
         $book = $this->createBook([
             'title' => 'A Great Book',
@@ -359,7 +344,7 @@ class AuthorControllerTest extends ApiTestCase
         $this->createUser('mr_test', 'MostSecretestPassword');
 
         $data = [
-            'firstName' => 'Coolington',
+            'title' => 'Just a Title',
         ];
 
         $response = $this->post('/authors', [
@@ -456,9 +441,7 @@ EOF;
     }
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws \TypeError
+     * @throws \Exception
      */
     public function testDELETERequiresAdminAuthentication()
     {
@@ -473,6 +456,9 @@ EOF;
         $this->assertEquals(401, $response->getStatusCode());
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testBadToken()
     {
         $response = $this->post('/authors', [
@@ -483,6 +469,10 @@ EOF;
         ]);
         $this->assertEquals(401, $response->getStatusCode());
         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
+        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Unauthorized');
+        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
+        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'Invalid token');
+        $this->debugResponse($response);
     }
 
 }

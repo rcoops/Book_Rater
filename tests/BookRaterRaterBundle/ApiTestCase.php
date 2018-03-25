@@ -4,7 +4,9 @@ namespace Tests\BookRaterRaterBundle;
 
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
+use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Entity\User;
+use DateTime;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
@@ -282,9 +284,10 @@ class ApiTestCase extends KernelTestCase
      * @param $username
      * @param string $plainPassword
      * @param bool $isAdmin
+     *
      * @return User
-     * @throws ORMException
-     * @throws OptimisticLockException
+     *
+     * @throws \Exception
      */
     protected function createUser($username, $plainPassword = 'foo', $isAdmin = false)
     {
@@ -310,10 +313,10 @@ class ApiTestCase extends KernelTestCase
 
     /**
      * @param array $data
+     *
      * @return Book
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws TypeError
+     *
+     * @throws \Exception
      */
     protected function createBook(array $data)
     {
@@ -342,10 +345,10 @@ class ApiTestCase extends KernelTestCase
 
     /**
      * @param array $data
+     *
      * @return Author
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @throws TypeError
+     *
+     * @throws \Exception
      */
     protected function createAuthor(array $data)
     {
@@ -366,7 +369,35 @@ class ApiTestCase extends KernelTestCase
         $em->flush();
 
         return $author;
+    }
 
+    /**
+     * @param array $data
+     *
+     * @return Review
+     *
+     * @throws \Exception
+     */
+    protected function createReview(array $data)
+    {
+        $data = array_merge([
+            'title' => 'My Most Favouritest Book',
+            'comments' => 'This is my most favouritest book. I especially like the pictures.',
+            'rating' => 5,
+            'created' => new DateTime('now'),
+        ], $data);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $review = new Review();
+        foreach ($data as $key => $value) {
+            $accessor->setValue($review, $key, $value);
+        }
+
+        $em = $this->getEntityManager();
+        $em->persist($review);
+        $em->flush();
+
+        return $review;
     }
 
     /**
@@ -389,20 +420,7 @@ class ApiTestCase extends KernelTestCase
         return $this->getService('doctrine.orm.entity_manager');
     }
 
-    /**
-     * Call this when you want to compare URLs in a test
-     *
-     * (since the returned URL's will have /app_test.php in front)
-     *
-     * @param string $uri
-     * @return string
-     */
-    protected function adjustUri($uri)
-    {
-        return '/app_test.php'.$uri;
-    }
-
-    protected function getAuthorizedHeaders($username, $headers = array())
+    protected function getAuthorizedHeaders($username, $headers = [])
     {
         $token = $this->getService('lexik_jwt_authentication.encoder')
             ->encode(['username' => $username]);
@@ -413,9 +431,23 @@ class ApiTestCase extends KernelTestCase
     }
 
     /**
-     * Convenience method for prepending the base api uri to the path
+     * Convenience method for adjusting urls to match test environment.
+     *
+     * @param string $uri
+     *
+     * @return string
+     */
+    protected function adjustUri($uri) : string
+    {
+        return '/app_test.php'.$uri;
+    }
+
+    /**
+     * Convenience method for pre-pending the base api uri to the path on guzzle POST requests
+     *
      * @param string $uri
      * @param array $options
+     *
      * @return ResponseInterface
      */
     protected function post(string $uri, array $options = [])
@@ -424,9 +456,11 @@ class ApiTestCase extends KernelTestCase
     }
 
     /**
-     * Convenience method for prepending the base api uri to the path
+     * Convenience method for pre-pending the base api uri to the path on guzzle GET requests
+     *
      * @param string $uri
      * @param array $options
+     *
      * @return ResponseInterface
      */
     protected function get(string $uri, array $options = [])
@@ -435,9 +469,11 @@ class ApiTestCase extends KernelTestCase
     }
 
     /**
-     * Convenience method for prepending the base api uri to the path
+     * Convenience method for pre-pending the base api uri to the path on guzzle PUT requests
+     *
      * @param string $uri
      * @param array $options
+     *
      * @return ResponseInterface
      */
     protected function put(string $uri, array $options = [])
@@ -446,9 +482,11 @@ class ApiTestCase extends KernelTestCase
     }
 
     /**
-     * Convenience method for prepending the base api uri to the path
+     * Convenience method for pre-pending the base api uri to the path on guzzle PATCH requests
+     *
      * @param string $uri
      * @param array $options
+     *
      * @return ResponseInterface
      */
     protected function patch(string $uri, array $options = [])
@@ -457,9 +495,11 @@ class ApiTestCase extends KernelTestCase
     }
 
     /**
-     * Convenience method for prepending the base api uri to the path
+     * Convenience method for pre-pending the base api uri to the path on guzzle DELETE requests
+     *
      * @param string $uri
      * @param array $options
+     *
      * @return ResponseInterface
      */
     protected function delete(string $uri, array $options = [])

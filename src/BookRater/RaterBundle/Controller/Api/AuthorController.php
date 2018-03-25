@@ -115,9 +115,7 @@ class AuthorController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_authors_collection');
 
-        $response = $this->createApiResponse($paginatedCollection, 200);
-
-        return $response;
+        return $this->createApiResponse($paginatedCollection, 200);
     }
 
     /**

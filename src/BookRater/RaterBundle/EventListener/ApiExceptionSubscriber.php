@@ -21,7 +21,6 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     private $logger;
 
     /**
-     * ApiExceptionSubscriber constructor.
      * @param bool $debug
      * @param ResponseFactory $responseFactory
      * @param LoggerInterface $logger
@@ -54,17 +53,12 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
         if ($e instanceof ApiProblemException) {
             $apiProblem = $e->getApiProblem();
         } else {
-
-
-            $apiProblem = new ApiProblem(
-                $statusCode
-            );
+            $apiProblem = new ApiProblem($statusCode);
 
             /*
              * If it's an HttpException message (e.g. for 404, 403),
-             * we'll say as a rule that the exception message is safe
-             * for the client. Otherwise, it could be some sensitive
-             * low-level exception, which should *not* be exposed
+             * it's probably safe for a user. Otherwise, it could be
+             * some sensitive low-level exception, which they shouldn't see
              */
             if ($e instanceof HttpExceptionInterface) {
                 $apiProblem->set('detail', $e->getMessage());

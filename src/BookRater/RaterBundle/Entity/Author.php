@@ -116,6 +116,16 @@ class Author
     }
 
     /**
+     * Get firstName
+     *
+     * @return string|null
+     */
+    public function getFirstName() : ?string
+    {
+        return $this->firstName;
+    }
+
+    /**
      * Set firstName
      *
      * @param string $firstName
@@ -130,13 +140,13 @@ class Author
     }
 
     /**
-     * Get firstName
+     * Get lastName
      *
      * @return string|null
      */
-    public function getFirstName() : ?string
+    public function getLastName() : ?string
     {
-        return $this->firstName;
+        return $this->lastName;
     }
 
     /**
@@ -154,13 +164,13 @@ class Author
     }
 
     /**
-     * Get lastName
+     * Get initial
      *
      * @return string|null
      */
-    public function getLastName() : ?string
+    public function getInitial() : ?string
     {
-        return $this->lastName;
+        return $this->initial;
     }
 
     /**
@@ -178,13 +188,11 @@ class Author
     }
 
     /**
-     * Get initial
-     *
-     * @return string|null
+     * @return Collection|Book[]
      */
-    public function getInitial() : ?string
+    public function getBooksAuthored() : Collection
     {
-        return $this->initial;
+        return $this->booksAuthored;
     }
 
     /**
@@ -219,14 +227,6 @@ class Author
         $this->booksAuthored->removeElement($bookAuthored);
 
         return $this;
-    }
-
-    /**
-     * @return Collection|Book[]
-     */
-    public function getBooksAuthored() : Collection
-    {
-        return $this->booksAuthored;
     }
 
     /**

@@ -71,7 +71,7 @@ class Book
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="ISBN must be entered")
+     * @Assert\NotBlank(message="ISBN must be entered.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9]{10}$/",
      *     match=true,

@@ -8,8 +8,6 @@ class TokenControllerTest extends ApiTestCase
 {
 
     /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Exception
      */
     public function testPOSTCreateToken()
@@ -27,8 +25,6 @@ class TokenControllerTest extends ApiTestCase
     }
 
     /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Exception
      */
     public function testPOSTTokenInvalidCredentials()

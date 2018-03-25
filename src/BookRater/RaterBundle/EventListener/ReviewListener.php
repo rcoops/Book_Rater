@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rick
- * Date: 23/03/18
- * Time: 09:20
- */
 
 namespace BookRater\RaterBundle\EventListener;
-
 
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Entity\Review;

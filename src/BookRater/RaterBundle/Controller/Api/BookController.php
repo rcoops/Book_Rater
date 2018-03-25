@@ -4,10 +4,13 @@ namespace BookRater\RaterBundle\Controller\Api;
 
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Form\Api\BookType;
+use BookRater\RaterBundle\Form\Api\Update\UpdateBookType;
 use BookRater\RaterBundle\Pagination\PaginationFactory;
+use Doctrine\ORM\NonUniqueResultException;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
@@ -100,6 +103,79 @@ class BookController extends BaseApiController
         }
 
         return $this->createApiResponse($book);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Rest\Get("/books", name="api_books_collection")
+     */
+    public function listAction(Request $request)
+    {
+        $filter = $request->query->get('filter');
+
+        $qb = $this->getBookRepository()
+            ->findAllByFilterQueryBuilder($filter);
+        $paginatedCollection = $this->paginationFactory
+            ->createCollection($qb, $request, 'api_books_collection');
+
+        return $this->createApiResponse($paginatedCollection, 200);
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/books/{id}")
+     * @Method({"PUT", "PATCH"})
+     *
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function updateAction(int $id, Request $request)
+    {
+        /** @var Book|null $book */
+        $book = $this->getBookRepository()->find($id);
+
+        if (!$book) {
+            $this->throwBookNotFoundException($id);
+        }
+
+        $form = $this->createForm(UpdateBookType::class, $book);
+        $this->processForm($request, $form);
+        if (!$form->isValid()) {
+            $this->throwApiProblemValidationException($form);
+        }
+
+        $this->persistBook($book);
+
+        return $this->createApiResponse($book);
+    }
+
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @Rest\Delete("/books/{id}")
+     *
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function deleteAction(int $id)
+    {
+        $book = $this->getBookRepository()->find($id);
+
+        if ($book) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($book);
+            $em->flush();
+        }
+
+        // Doesn't matter if the book was there or not - because it isn't now which is what we wanted
+        return $this->createApiResponse(null, 204);
     }
 
     /**

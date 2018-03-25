@@ -21,16 +21,22 @@ class BookRepository extends EntityRepository
 
     public function findAllOrderedByNameQB()
     {
-        return $this->createQueryBuilder('book')
+        return $this->findAllQueryBuilder()
             ->orderBy('book.title');
     }
 
     public function findAllByFilter($filter = null)
     {
-        $qb = $this->findAllOrderedByNameQB();
+        $qb = $this->findAllByFilterQueryBuilder($filter);
 
+        return $qb->getQuery();
+    }
+
+    public function findAllByFilterQueryBuilder($filter = null)
+    {
+        $qb = $this->findAllOrderedByNameQB();
         if ($filter) {
-            $qb->innerJoin('book.authors', 'book_author')
+            $qb->leftJoin('book.authors', 'book_author')
                 ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->like('book.title', ':filter'),
@@ -39,8 +45,13 @@ class BookRepository extends EntityRepository
                     )
                 )
                 ->setParameter('filter', '%'.$filter.'%');
-        };
-        return $qb->getQuery();
+        }
+        return $qb;
+    }
+
+    public function findAllQueryBuilder()
+    {
+        return $this->createQueryBuilder('book');
     }
 
     public function createQueryBuilderForBooks(ArrayCollection $books)

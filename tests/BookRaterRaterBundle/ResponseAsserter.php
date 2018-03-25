@@ -38,7 +38,7 @@ class ResponseAsserter extends Assert
      * Asserts the specific propertyPath is in the JSON response
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @throws \Exception
      */
     public function assertResponsePropertyExists(ResponseInterface $response, $propertyPath)
@@ -51,7 +51,7 @@ class ResponseAsserter extends Assert
      * Asserts the given property path does *not* exist
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @throws \Exception
      */
     public function assertResponsePropertyDoesNotExist(ResponseInterface $response, $propertyPath)
@@ -71,7 +71,7 @@ class ResponseAsserter extends Assert
      * Asserts the response JSON property equals the given value
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @param mixed $expectedValue
      * @throws \Exception
      */
@@ -94,7 +94,7 @@ class ResponseAsserter extends Assert
      * Asserts the response property is an array
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @throws \Exception
      */
     public function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
@@ -106,7 +106,7 @@ class ResponseAsserter extends Assert
      * Asserts the given response property (probably an array) has the expected "count"
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @param integer $expectedCount
      * @throws \Exception
      */
@@ -121,7 +121,7 @@ class ResponseAsserter extends Assert
      * e.g. "Hello world!" contains "world"
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @param mixed $expectedValue
      * @throws \Exception
      */
@@ -146,7 +146,7 @@ class ResponseAsserter extends Assert
      * This will explode if the value does not exist
      *
      * @param ResponseInterface $response
-     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
+     * @param string $propertyPath e.g. firstName, reviews[0].user.username
      * @return mixed
      * @throws \Exception
      */
