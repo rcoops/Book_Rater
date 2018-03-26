@@ -32,12 +32,14 @@ class AuthorController extends BaseApiController
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Post(
+     *     tags={"Authors"},
+     *             description="Creates a new author resource.",
      *     responses={
      *         @SWG\Response(
      *             response=201,
-     *             description="Creates a new author.",
+     *             description="A representation of the author resource created.",
      *             @SWG\Schema(
-     *                 @Model(type=Author::class, groups="authors")
+     *                 @Model(type=Author::class, groups={"authors"})
      *             )
      *         )
      *     }
@@ -55,14 +57,10 @@ class AuthorController extends BaseApiController
 
         $this->persistAuthor($author);
         $response = $this->createApiResponse($author, 201);
-
-        $authorUrl = $this->generateUrl(
-            'api_authors_show', [
-                'lastName' => $author->getLastName(),
-                'firstName' => $author->getFirstName(),
-            ]
-        );
-        $response->headers->set('Location', $authorUrl);
+        $this->setLocationHeader($response, 'api_authors_show', [
+            'lastName' => $author->getLastName(),
+            'firstName' => $author->getFirstName(),
+        ]);
         return $response;
     }
 
@@ -73,6 +71,19 @@ class AuthorController extends BaseApiController
      * @return Response
      *
      * @Rest\Get("/authors/{lastName}/{firstName}", name="api_authors_show")
+     *
+     * @SWG\Get(
+     *     tags={"Authors"},
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the author resource queried for.",
+     *             @SWG\Schema(
+     *                 @Model(type=Author::class, groups={"authors"})
+     *             )
+     *         )
+     *     }
+     * )
      */
     public function showAction(string $lastName, string $firstName)
     {
@@ -85,7 +96,13 @@ class AuthorController extends BaseApiController
             $this->throwAuthorNotFoundException($lastName, $firstName);
         }
 
-        return $this->createApiResponse($author);
+        $response = $this->createApiResponse($author);
+        $this->setLocationHeader($response, 'api_authors_show', [
+            'lastName' => $author->getLastName(),
+            'firstName' => $author->getFirstName(),
+        ]);
+
+        return $response;
     }
 
     /**
@@ -94,6 +111,17 @@ class AuthorController extends BaseApiController
      * @return Response
      *
      * @Rest\Get("/authors", name="api_authors_collection")
+     *
+     * @SWG\Get(
+     *     tags={"Authors"},
+     *     description="Returns a (filtered) collection of author resources.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A (filtered) collection of author resources."
+     *         )
+     *     }
+     * )
      */
     public function listAction(Request $request)
     {
@@ -104,7 +132,7 @@ class AuthorController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_authors_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200);
+        return $this->createApiResponse($paginatedCollection);
     }
 
     /**
@@ -120,6 +148,34 @@ class AuthorController extends BaseApiController
      * @Method({"PUT", "PATCH"})
      *
      * @Security("is_granted('ROLE_USER')")
+     *
+     * @SWG\Put(
+     *     tags={"Authors"},
+     *     description="Updates an author, requiring a full representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the author resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Author::class, groups={"authors"})
+     *             )
+     *         )
+     *     }
+     * )
+     *
+     * @SWG\Patch(
+     *     tags={"Authors"},
+     *     description="Updates an author, requiring only a part representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the author resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Author::class, groups={"authors"})
+     *             )
+     *         )
+     *     }
+     * )
      */
     public function updateAction(string $lastName, string $firstName, Request $request)
     {
@@ -138,7 +194,13 @@ class AuthorController extends BaseApiController
 
         $this->persistAuthor($author);
 
-        return $this->createApiResponse($author);
+        $response = $this->createApiResponse($author);
+        $this->setLocationHeader($response, 'api_authors_show', [
+            'lastName' => $author->getLastName(),
+            'firstName' => $author->getFirstName(),
+        ]);
+
+        return $response;
     }
 
 
@@ -153,6 +215,14 @@ class AuthorController extends BaseApiController
      * @Rest\Delete("/authors/{lastName}/{firstName}")
      *
      * @Security("is_granted('ROLE_ADMIN')")
+     *
+     * @SWG\Delete(
+     *     tags={"Authors"},
+     *     description="Removes an author from the system.",
+     *     responses={
+     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
+     *     }
+     * )
      */
     public function deleteAction(string $lastName, string $firstName)
     {
@@ -175,6 +245,17 @@ class AuthorController extends BaseApiController
      * @return Response
      *
      * @Rest\Get("/authors/{lastName}/{firstName}/books", name="api_authors_books_list")
+     *
+     * @SWG\Get(
+     *     tags={"Authors"},
+     *     description="Returns a collection of books that the author has authored.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A collection of books that the author has authored."
+     *         )
+     *     }
+     * )
      */
     public function booksListAction(Author $author, Request $request)
     {

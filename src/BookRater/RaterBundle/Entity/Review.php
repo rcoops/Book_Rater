@@ -27,6 +27,7 @@ class Review
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="The unique identifier of the review.")
      */
@@ -40,6 +41,7 @@ class Review
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="A short description summarising the review.")
      */
@@ -53,6 +55,7 @@ class Review
      * @ORM\Column(type="text")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="A commentary of the book being reviewed.")
      */
@@ -67,6 +70,7 @@ class Review
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="The review's rating of the book from 1 to 5.")
      */
@@ -80,7 +84,7 @@ class Review
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews"})
+     * @Serializer\Groups({"reviews", "authors", "messages", "users"})
      *
      * @SWG\Property(description="The book being reviewed.")
      */
@@ -93,7 +97,7 @@ class Review
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews"})
+     * @Serializer\Groups({"reviews", "books", "authors", "messages"})
      *
      * @SWG\Property(description="The creator of the review.")
      */
@@ -106,6 +110,7 @@ class Review
      * @ORM\Column(name="created_date", type="datetime")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="The date and time on which the review was created.")
      */
@@ -117,6 +122,7 @@ class Review
      * @ORM\Column(name="edited_date", type="datetime", nullable=true)
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "users"})
      *
      * @SWG\Property(description="The date and time on which the review was last edited.")
      */

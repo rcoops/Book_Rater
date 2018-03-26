@@ -36,19 +36,6 @@ use Swagger\Annotations as SWG;
 class Author
 {
     /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
-     *
-     * @Serializer\Expose
-     *
-     * @SWG\Property(description="The unique identifier of the book.")
-     */
-    private $id;
-
-    /**
      * @var string
      *
      * @Assert\NotBlank(message="First name must not be blank.")
@@ -61,8 +48,23 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
      */
     private $firstName;
+
+    /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     *
+     * @SWG\Property(description="The unique identifier of the book.")
+     */
+    private $id;
 
     /**
      * @var string
@@ -77,6 +79,9 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     *
+     * @SWG\Property(description="The author's last name.")
      */
     private $lastName;
 
@@ -86,6 +91,9 @@ class Author
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     *
+     * @SWG\Property(description="The author's initial(s) if they have any.")
      */
     private $initial;
 
@@ -95,8 +103,10 @@ class Author
      * @ORM\JoinTable(name="author_books")
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
      *
-     * @Serializer\Groups({"authors"})
      * @Serializer\Expose
+     * @Serializer\Groups({"authors", "reviews", "messages", "users"})
+     *
+     * @SWG\Property(description="A collection of all books that the author has written.")
      */
     private $booksAuthored;
 

@@ -26,6 +26,7 @@ class Message
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"messages", "books", "authors", "reviews", "users"})
      *
      * @SWG\Property(description="The unique identifier of the message.")
      */
@@ -38,7 +39,7 @@ class Message
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"messages"})
+     * @Serializer\Groups({"messages", "books", "authors", "reviews"})
      *
      * @SWG\Property(description="The creator of the message.")
      */
@@ -52,6 +53,7 @@ class Message
      * @ORM\Column(type="string")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"messages", "books", "authors", "reviews", "users"})
      *
      * @SWG\Property(description="A brief description of the message content.")
      */
@@ -65,6 +67,7 @@ class Message
      * @ORM\Column(type="text")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"messages", "books", "authors", "reviews", "users"})
      *
      * @SWG\Property(description="The message's main content.")
      */
@@ -76,6 +79,7 @@ class Message
      * @ORM\Column(name="created_date", type="datetime")
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"messages", "books", "authors", "reviews", "users"})
      *
      * @SWG\Property(description="The date and time on which the review was created.")
      */
@@ -87,6 +91,7 @@ class Message
      * @ORM\Column(type="boolean", options={"default": false})
      *
      * @Serializer\Expose
+     * @Serializer\Groups({"messages", "books", "authors", "reviews", "users"})
      *
      * @SWG\Property(description="Whether or not the message has been marked as read by admin")
      */

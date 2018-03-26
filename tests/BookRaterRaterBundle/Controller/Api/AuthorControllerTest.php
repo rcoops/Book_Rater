@@ -34,14 +34,15 @@ class AuthorControllerTest extends ApiTestCase
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
-        $this->assertTrue($response->hasHeader('Location'));
-        $this->assertEquals('application/hal+json', $response->getHeader('Content-Type')[0]);
-        $this->assertStringEndsWith(self::BASE_API_URI.'/authors/Wayne/Bruce', $response->getHeader('Location')[0]);
-        $this->asserter()->assertResponsePropertyExists($response, 'lastName');
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/authors/Wayne/Bruce');
+        $this->asserter()->assertResponseHeaderEquals($response, 'Content-Type', 'application/hal+json');
+        $this->asserter()->assertResponsePropertiesExist($response, [
+            'lastName',
+            'firstName',
+            'booksAuthored',
+        ]);
         $this->asserter()->assertResponsePropertyEquals($response, 'lastName', 'Wayne');
-        $this->asserter()->assertResponsePropertyExists($response, 'firstName');
         $this->asserter()->assertResponsePropertyEquals($response, 'firstName', 'Bruce');
-        $this->asserter()->assertResponsePropertyExists($response, 'booksAuthored');
         $this->asserter()->assertResponsePropertyIsArray($response, 'booksAuthored');
         $this->asserter()->assertResponsePropertyCount($response, 'booksAuthored', 1);
         $this->asserter()->assertResponsePropertyEquals($response, 'booksAuthored[0].title', 'A Great Book');
@@ -73,6 +74,7 @@ class AuthorControllerTest extends ApiTestCase
         $response = $this->get('/authors/Wayne/Bruce');
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/authors/Wayne/Bruce');
         $this->asserter()->assertResponsePropertiesExist($response, [
             'firstName',
             'lastName',
@@ -214,6 +216,7 @@ class AuthorControllerTest extends ApiTestCase
             'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);
         $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/authors/Kent/Clerk');
         // Unchanged due to restrictions (will be ignored by form)
         $this->asserter()->assertResponsePropertyEquals($response, 'lastName', 'Kent');
         $this->asserter()->assertResponsePropertyEquals($response, 'firstName', 'Clerk');
@@ -263,6 +266,7 @@ class AuthorControllerTest extends ApiTestCase
             'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);
         $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/authors/Kent/Clerk');
         // Not changed or cleared due to patch
         $this->asserter()->assertResponsePropertyEquals($response, 'initial', 'P');
         // Changed
@@ -344,7 +348,7 @@ class AuthorControllerTest extends ApiTestCase
         $this->createUser('mr_test', 'MostSecretestPassword');
 
         $data = [
-            'title' => 'Just a Title',
+            'firstName' => 'Coolington',
         ];
 
         $response = $this->post('/authors', [
@@ -472,7 +476,6 @@ EOF;
         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Unauthorized');
         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
         $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'Invalid token');
-        $this->debugResponse($response);
     }
 
 }

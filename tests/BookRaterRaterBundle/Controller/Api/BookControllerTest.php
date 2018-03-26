@@ -38,17 +38,13 @@ class BookControllerTest extends ApiTestCase
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
-        $this->assertTrue($response->hasHeader('Location'));
-        $this->assertStringEndsWith(self::BASE_API_URI . '/books/1', $response->getHeader('Location')[0]);
-        $this->assertEquals('application/hal+json', $response->getHeader('Content-Type')[0]);
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/books/1');
+        $this->asserter()->assertResponseHeaderEquals($response, 'Content-Type', 'application/hal+json');
         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'The Importance of Adequate Toilet Facilities');
         $this->asserter()->assertResponsePropertyEquals($response, 'isbn', '0123456789');
         $this->asserter()->assertResponsePropertyEquals($response, 'isbn13', '9780123456789');
         $this->asserter()->assertResponsePropertyEquals($response, 'publisher', 'Cool Publishing Co.');
-        $this->assertStringStartsWith(
-            '1984-08-24',
-            $this->asserter()->readResponseProperty($response, 'publishDate')
-        ); // TODO reformat date on exit...
+        $this->asserter()->assertResponsePropertyEquals($response, 'publishDate', '1984-08-24');
         $this->asserter()->assertResponsePropertyEquals($response, 'edition', 1);
         $this->asserter()->assertResponsePropertyIsArray($response, 'authors');
         $this->asserter()->assertResponsePropertyCount($response, 'authors', 1);
@@ -92,6 +88,47 @@ class BookControllerTest extends ApiTestCase
             '_links.self',
             $this->adjustUri(self::BASE_API_URI . '/books/1')
         );
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testGETBookGroupSerialization()
+    {
+        $book = $this->createBook([
+            'title' => 'A Great Book',
+        ]);
+        $this->createAuthor([
+            'firstName' => 'Bruce',
+            'lastName' => 'Wayne',
+            'initial' => '',
+            'booksAuthored' => [
+                $book,
+            ]
+        ]);
+        $this->createReview([
+            'title' => 'It was ok',
+            'book' => $book,
+        ]);
+
+        $response = $this->get('/books/1');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertiesExist($response, [
+            'title',
+            'isbn',
+            'isbn13',
+            'edition',
+            'publisher',
+            'publishDate',
+            'authors',
+            'reviews',
+            'averageRating',
+        ]);
+        $this->asserter()->assertResponsePropertyExists($response, 'authors[0].firstName');
+        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'authors[0].booksAuthored');
+        $this->asserter()->assertResponsePropertyExists($response, 'reviews[0].title');
+        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'reviews[0].book');
     }
 
     /**
@@ -230,10 +267,7 @@ class BookControllerTest extends ApiTestCase
         // Changes allowed
         $this->asserter()->assertResponsePropertyEquals($response, 'isbn13', '9780120120120');
         $this->asserter()->assertResponsePropertyEquals($response, 'publisher', 'New Publishing Inc.');
-        $this->assertStringStartsWith(
-            '2010-12-24',
-            $this->asserter()->readResponseProperty($response, 'publishDate')
-        ); // TODO reformat date on exit...
+        $this->asserter()->assertResponsePropertyEquals($response, 'publishDate', '2010-12-24');
         $this->asserter()->assertResponsePropertyEquals($response, 'edition', '2');
         $this->asserter()->assertResponsePropertyExists($response, 'authors');
         $this->asserter()->assertResponsePropertyIsArray($response, 'authors');

@@ -31,12 +31,14 @@ class BookController extends BaseApiController
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Post(
+     *     tags={"Books"},
+     *     description="Creates a new book resource.",
      *     responses={
      *         @SWG\Response(
      *             response=201,
-     *             description="Creates a new book.",
+     *             description="A representation of the book resource created.",
      *             @SWG\Schema(
-     *                 @Model(type=Book::class, groups="books")
+     *                 @Model(type=Book::class, groups={"books"})
      *             )
      *         )
      *     }
@@ -53,14 +55,12 @@ class BookController extends BaseApiController
         }
 
         $this->persistBook($book);
-        $response = $this->createApiResponse($book, 201);
 
-        $bookUrl = $this->generateUrl(
-            'api_books_show', [
-                'id' => $book->getId(),
-            ]
-        );
-        $response->headers->set('Location', $bookUrl);
+        $response = $this->createApiResponse($book, 201);
+        $this->setLocationHeader($response, 'api_books_show', [
+            'id' => $book->getId(),
+        ]);
+
         return $response;
     }
 
@@ -72,12 +72,14 @@ class BookController extends BaseApiController
      * @Rest\Get("/books/{id}", name="api_books_show")
      *
      * @SWG\Get(
+     *     tags={"Books"},
+     *     description="Returns a representation of the book resource queried for.",
      *     responses={
      *         @SWG\Response(
      *             response=200,
-     *             description="Returns the representation of a book resource.",
+     *             description="A representation of the book resource queried for.",
      *             @SWG\Schema(
-     *                 @Model(type=Book::class, groups="books")
+     *                 @Model(type=Book::class, groups={"books"})
      *             )
      *         )
      *     }
@@ -91,7 +93,12 @@ class BookController extends BaseApiController
             $this->throwBookNotFoundException($id);
         }
 
-        return $this->createApiResponse($book);
+        $response = $this->createApiResponse($book);
+        $this->setLocationHeader($response, 'api_books_show', [
+            'id' => $book->getId(),
+        ]);
+
+        return $response;
     }
 
     /**
@@ -100,6 +107,27 @@ class BookController extends BaseApiController
      * @return Response
      *
      * @Rest\Get("/books", name="api_books_collection")
+     *
+     * @SWG\Get(
+     *     tags={"Books"},
+     *     description="Returns a (filtered) collection of book resources.",
+     *     parameters={
+     *         @SWG\Parameter(
+     *             in="query",
+     *             name="filter",
+     *             type="string",
+     *             description="An optional filter by book title or author first/last name."),
+     *     },
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A (filtered) collection of book resources.",
+     *             @SWG\Schema(
+     *                 @Model(type=Book::class, groups={"books"})
+     *             )
+     *         )
+     *     }
+     * )
      */
     public function listAction(Request $request)
     {
@@ -110,7 +138,7 @@ class BookController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_books_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200);
+        return $this->createApiResponse($paginatedCollection);
     }
 
     /**
@@ -123,6 +151,33 @@ class BookController extends BaseApiController
      * @Method({"PUT", "PATCH"})
      *
      * @Security("is_granted('ROLE_USER')")
+     *
+     * @SWG\Put(
+     *     tags={"Books"},
+     *     description="Updates a book, requiring a full representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the book resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Book::class, groups={"books"})
+     *             )
+     *         )
+     *     }
+     * )
+     * @SWG\Patch(
+     *     tags={"Books"},
+     *     description="Updates a book, requiring only a part representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the book resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Book::class, groups={"books"})
+     *             )
+     *         )
+     *     }
+     * )
      */
     public function updateAction(int $id, Request $request)
     {
@@ -141,7 +196,12 @@ class BookController extends BaseApiController
 
         $this->persistBook($book);
 
-        return $this->createApiResponse($book);
+        $response = $this->createApiResponse($book);
+        $this->setLocationHeader($response, 'api_books_show', [
+            'id' => $book->getId(),
+        ]);
+
+        return $response;
     }
 
 
@@ -152,6 +212,14 @@ class BookController extends BaseApiController
      * @Rest\Delete("/books/{id}")
      *
      * @Security("is_granted('ROLE_ADMIN')")
+     *
+     * @SWG\Delete(
+     *     tags={"Books"},
+     *     description="Removes a book from the system.",
+     *     responses={
+     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
+     *     }
+     * )
      */
     public function deleteAction(int $id)
     {
@@ -172,8 +240,20 @@ class BookController extends BaseApiController
      * @param Request $request
      * @return Response
      *
-     * @Rest\Get("/books/{id}/books", name="api_books_authors_list")
+     * @Rest\Get("/books/{id}/authors", name="api_books_authors_list")
+     *
+     * @SWG\Get(
+     *     tags={"Books"},
+     *     description="Returns a collection of the book's authors.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A collection of the book's authors.",
+     *         )
+     *     }
+     * )
      */
+    // TODO schema for collection?
     public function authorsListAction(Book $book, Request $request)
     {
         $qb = $this->getAuthorRepository()
@@ -195,6 +275,20 @@ class BookController extends BaseApiController
      * @return Response
      *
      * @Rest\Get("/books/{id}/reviews", name="api_books_reviews_list")
+     *
+     * @SWG\Get(
+     *     tags={"Books"},
+     *     description="Returns a collection of the book's reviews.",
+     *     parameters={
+     *         @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book resource."),
+     *     },
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A collection of the book's reviews.",
+     *         )
+     *     }
+     * )
      */
     public function reviewsListAction(Book $book, Request $request)
     {

@@ -8,10 +8,9 @@ use \Doctrine\ORM\EntityRepository;
 class ReviewRepository extends EntityRepository
 {
 
-    public function getLatestByFilter($filter = null)
+    public function findAllQueryBuilder($filter = null)
     {
-        $qb = $this->createQueryBuilder('review')
-            ->addOrderBy('review.created', 'DESC');
+        $qb = $this->createQueryBuilder('review');
 
         if ($filter) {
             $qb->innerJoin('review.user', 'review_user')
@@ -26,7 +25,14 @@ class ReviewRepository extends EntityRepository
             $qb->setParameter('filter', '%' . $filter . '%');
             $qb->setParameter('num', $filter);
         }
-        return $qb->getQuery();
+        return $qb;
+    }
+
+    public function getLatestByFilter($filter = null)
+    {
+        return $this->findAllQueryBuilder($filter)
+            ->addOrderBy('review.created', 'DESC')
+            ->getQuery();
     }
 
     /**

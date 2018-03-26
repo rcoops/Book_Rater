@@ -210,4 +210,14 @@ abstract class BaseApiController extends Controller
         return $this->createApiResponseWithGroups($data, $statusCode, $format, $this->getGroups());
     }
 
+    /**
+     * @param Response $response
+     * @param string $route
+     * @param array $routeParams
+     */
+    protected function setLocationHeader(Response $response, string $route, array $routeParams): void
+    {
+        $response->headers->set('Location', $this->generateUrl($route, $routeParams));
+    }
+
 }

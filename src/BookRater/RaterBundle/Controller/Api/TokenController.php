@@ -23,6 +23,7 @@ class TokenController extends BaseApiController
      *
      * @Rest\Post("/tokens")
      * @SWG\Post(
+     *     tags={"Tokens"},
      *     produces={"application/json"},
      *     parameters={
      *         @SWG\Parameter(in="header", name="Authorization", type="string",

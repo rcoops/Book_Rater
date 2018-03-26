@@ -4,9 +4,9 @@ namespace Tests\BookRaterRaterBundle;
 
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\Exception\RuntimeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
@@ -178,4 +178,26 @@ class ResponseAsserter extends Assert
             ), 0, $e);
         }
     }
+
+    /**
+     * @param ResponseInterface $response
+     * @param string $uriSuffix
+     */
+    public function assertResponseLocationHeaderEndswith(ResponseInterface $response, string $uriSuffix)
+    {
+        $this->assertTrue($response->hasHeader('Location'));
+        $this->assertStringEndsWith($uriSuffix, $response->getHeader('Location')[0]);
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param string $header
+     * @param string $value
+     */
+    public function assertResponseHeaderEquals(ResponseInterface $response, string $header, string $value)
+    {
+        $this->assertTrue($response->hasHeader($header));
+        $this->assertEquals($value, $response->getHeader($header)[0]);
+    }
+
 }
