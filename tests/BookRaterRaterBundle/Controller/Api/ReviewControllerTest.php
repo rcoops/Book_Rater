@@ -203,4 +203,124 @@ class ReviewControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals($response, 'count', 5);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testPUTReview()
+    {
+        $user = $this->createUser('mr_test');
+
+        $book = $this->createBook([
+            'title' => 'A Great Book',
+        ]);
+
+        $this->createReview([
+            'title' => 'My Most Favouritest Book',
+            'comments' => 'This is my most favouritest book. I especially like the pictures.',
+            'rating' => 5,
+            'book' => $book,
+            'user' => $user,
+        ]);
+
+        $data = [
+            'title' => 'My Favourite Book',
+            'comments' => 'This is my favourite book. The illustrations lend eloquence to the overall theme.',
+            'rating' => 4,
+        ];
+
+        $response = $this->put('/reviews/1', [
+            'body' => json_encode($data),
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'My Favourite Book');
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'comments',
+            'This is my favourite book. The illustrations lend eloquence to the overall theme.');
+        $this->asserter()->assertResponsePropertyEquals($response, 'rating', '4');
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testPATCHBook()
+    {
+        $user = $this->createUser('mr_test');
+
+        $book = $this->createBook([
+            'title' => 'A Great Book',
+        ]);
+
+        $this->createReview([
+            'title' => 'My Most Favouritest Book',
+            'comments' => 'This is my most favouritest book. I especially like the pictures.',
+            'rating' => 5,
+            'book' => $book,
+            'user' => $user,
+        ]);
+
+        $data = [
+            'rating' => 4,
+        ];
+
+        $response = $this->patch('/reviews/1', [
+            'body' => json_encode($data),
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        // Unchanged and not cleared due to PATCH
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'title',
+            'My Most Favouritest Book'
+        );
+        // Changed
+        $this->asserter()->assertResponsePropertyEquals($response, 'rating', '4');
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testDELETEReview()
+    {
+        $user = $this->createUser(
+            'mr_test',
+            'I know how to correctly make a password'
+        );
+
+        $book = $this->createBook([]);
+
+        $this->createReview([
+            'book' => $book,
+            'user' => $user,
+        ]);
+
+        $response = $this->delete('/reviews/1', [
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
+        ]);
+        $this->assertEquals(204, $response->getStatusCode());
+
+        $this->getEntityManager()->clear(); // Clear the em to force real db querying
+
+        $review = $this->getEntityManager()->getRepository('BookRaterRaterBundle:Review')
+            ->find(1);
+        $this->assertNull($review);
+        $book = $this->getEntityManager()->getRepository('BookRaterRaterBundle:Book')
+            ->find(1);
+        $this->assertNotNull($book);
+    }
+
+    public function testPUTRequiresOwnerOrAdmin()
+    {
+
+    }
+
+    public function testDELETERequiresOwnerOrAdmin()
+    {
+
+    }
+
 }

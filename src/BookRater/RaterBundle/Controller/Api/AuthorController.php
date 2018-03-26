@@ -218,7 +218,7 @@ class AuthorController extends BaseApiController
      *
      * @SWG\Delete(
      *     tags={"Authors"},
-     *     description="Removes an author from the system.",
+     *     description="Removes an author resource from the system.",
      *     responses={
      *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
      *     }

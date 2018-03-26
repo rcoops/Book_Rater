@@ -204,7 +204,6 @@ class BookController extends BaseApiController
         return $response;
     }
 
-
     /**
      * @param int $id
      * @return Response
@@ -215,7 +214,7 @@ class BookController extends BaseApiController
      *
      * @SWG\Delete(
      *     tags={"Books"},
-     *     description="Removes a book from the system.",
+     *     description="Removes a book resource from the system.",
      *     responses={
      *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
      *     }

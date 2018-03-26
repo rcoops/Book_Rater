@@ -4,23 +4,37 @@ namespace BookRater\RaterBundle\Controller\Api;
 
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\Api\ReviewType;
+use BookRater\RaterBundle\Form\Api\Update\UpdateReviewType;
+use BookRater\RaterBundle\Pagination\PaginationFactory;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Psr\Http\Message\ResponseInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * Class ReviewController
- * @package BookRater\RaterBundle\Controller\Api
- * @SWG\Swagger()
- */
 class ReviewController extends BaseApiController
 {
 
     private const GROUPS = ['reviews'];
+
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    public function __construct(PaginationFactory $paginationFactory, AuthorizationCheckerInterface $authorizationChecker)
+    {
+        parent::__construct($paginationFactory);
+
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
 
     /**
      * @param Request $request
@@ -130,6 +144,99 @@ class ReviewController extends BaseApiController
             ->createCollection($qb, $request, 'api_reviews_collection');
 
         return $this->createApiResponse($paginatedCollection);
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/reviews/{id}")
+     * @Method({"PUT", "PATCH"})
+     *
+     * @SWG\Put(
+     *     tags={"Reviews"},
+     *     description="Updates a review, requiring a full representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             ref="update_review_response",
+     *             response=200,
+     *             description="A representation of the review resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Review::class, groups={"reviews"})
+     *             )
+     *         )
+     *     }
+     * )
+     * @SWG\Patch(
+     *     tags={"Review"},
+     *     description="Updates a review, requiring only a part representation of the resource.",
+     *     responses={
+     *         @SWG\Response(
+     *             response=200,
+     *             description="A representation of the review resource updated.",
+     *             @SWG\Schema(
+     *                 @Model(type=Review::class, groups={"reviews"})
+     *             )
+     *         )
+     *     }
+     * )
+     */
+    public function updateAction(int $id, Request $request)
+    {
+        /** @var Review $review */
+        $review = $this->getReviewRepository()->find($id);
+
+        if (!$review) {
+            $this->throwReviewNotFoundException($id);
+        } else if (!$this->authorizationChecker->isGranted('OWNER', $review)) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $form = $this->createForm(UpdateReviewType::class, $review);
+        $this->processForm($request, $form);
+        if (!$form->isValid()) {
+            $this->throwApiProblemValidationException($form);
+        }
+
+        $this->persistReview($review);
+
+        $response = $this->createApiResponse($review);
+        $this->setLocationHeader($response, 'api_books_show', [
+            'id' => $review->getId(),
+        ]);
+
+        return $response;
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @Rest\Delete("/reviews/{id}")
+     *
+     * @SWG\Delete(
+     *     tags={"Reviews"},
+     *     description="Removes a review resource from the system.",
+     *     responses={
+     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
+     *     }
+     * )
+     */
+    public function deleteAction(int $id)
+    {
+        $review = $this->getReviewRepository()->find($id);
+        if ($review) {
+            if (!$this->authorizationChecker->isGranted('OWNER', $review)) {
+                throw new AccessDeniedHttpException();
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($review);
+            $em->flush();
+        }
+
+        return $this->createApiResponse(null, 204);
     }
 
     /**
