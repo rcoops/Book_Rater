@@ -14,3 +14,6 @@ api_reviews:
     resource: '@BookRaterRaterBundle/Controller/Api/ReviewController.php'
     type:     annotation
 
+api_users:
+    resource: '@BookRaterRaterBundle/Controller/Api/UserController.php'
+    type:     annotation

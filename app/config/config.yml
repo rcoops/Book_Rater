@@ -161,3 +161,10 @@ nelmio_api_doc:
         default:
             path_patterns: # an array of regexps
                 - ^/api(?!/doc.*$)
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: FOS\UserBundle
+                path: '%kernel.root_dir%/config/serializer/FOSUB'

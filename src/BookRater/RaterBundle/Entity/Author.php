@@ -35,6 +35,21 @@ use Swagger\Annotations as SWG;
  */
 class Author
 {
+
+    /**
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
+     *
+     * @SWG\Property(description="The unique identifier of the author.")
+     */
+    private $id;
+
     /**
      * @var string
      *
@@ -48,23 +63,9 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
      */
     private $firstName;
-
-    /**
-     * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
-     *
-     * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
-     *
-     * @SWG\Property(description="The unique identifier of the book.")
-     */
-    private $id;
 
     /**
      * @var string
@@ -79,7 +80,7 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The author's last name.")
      */
@@ -91,7 +92,7 @@ class Author
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "users"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The author's initial(s) if they have any.")
      */
@@ -104,7 +105,7 @@ class Author
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="A collection of all books that the author has written.")
      */

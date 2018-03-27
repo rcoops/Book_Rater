@@ -23,10 +23,40 @@ class UserRepository extends EntityRepository
      */
     public function findAny()
     {
-        return $this->createQueryBuilder('u')
+        return $this->findAllQueryBuilder()
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param $identifier
+     * @return mixed|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findByIdentifier($identifier)
+    {
+        if (!$identifier) {
+            return null;
+        }
+        $qb = $this->findAllQueryBuilder();
+        return $qb
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->eq('user.id', ':identifier'),
+                    $qb->expr()->eq('user.username', ':identifier'),
+                    $qb->expr()->eq('user.emailCanonical', ':identifier')
+                )
+            )
+            ->setParameter('identifier', $identifier)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findAllQueryBuilder()
+    {
+        return $this->createQueryBuilder('user')
+            ->addOrderBy('user.id');
     }
 
 }

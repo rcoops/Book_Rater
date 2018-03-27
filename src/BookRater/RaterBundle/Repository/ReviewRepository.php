@@ -3,6 +3,7 @@
 namespace BookRater\RaterBundle\Repository;
 
 use BookRater\RaterBundle\Entity\Book;
+use BookRater\RaterBundle\Entity\User;
 use \Doctrine\ORM\EntityRepository;
 
 class ReviewRepository extends EntityRepository
@@ -54,6 +55,16 @@ class ReviewRepository extends EntityRepository
                 $qb->expr()->eq('review.book', ':book')
             )
             ->setParameter('book', $book->getId());
+    }
+
+    public function createQueryBuilderForUser(User $user)
+    {
+        $qb = $this->createQueryBuilder('review');
+        return $qb
+            ->andWhere(
+                $qb->expr()->eq('review.user', ':user')
+            )
+            ->setParameter('user', $user->getId());
     }
 
 }

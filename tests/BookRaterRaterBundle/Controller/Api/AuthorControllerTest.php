@@ -357,11 +357,11 @@ class AuthorControllerTest extends ApiTestCase
         ]);
 
         $this->assertEquals(400, $response->getStatusCode());
-        $this->asserter()->assertResponsePropertiesExist($response, array(
+        $this->asserter()->assertResponsePropertiesExist($response, [
             'type',
             'title',
             'errors',
-        ));
+        ]);
         $this->asserter()->assertResponsePropertyExists($response, 'errors.lastName');
         $this->asserter()->assertResponsePropertyEquals($response, 'errors.lastName[0]', 'Last name must not be blank.');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.firstName');
@@ -377,11 +377,11 @@ class AuthorControllerTest extends ApiTestCase
             'headers' => $this->getAuthorizedHeaders('mr_test')
         ]);
 
-        $this->asserter()->assertResponsePropertiesExist($response, array(
+        $this->asserter()->assertResponsePropertiesExist($response, [
             'type',
             'title',
             'errors',
-        ));
+        ]);
         $this->asserter()->assertResponsePropertyExists($response, 'errors.firstName');
         $this->asserter()->assertResponsePropertyEquals($response, 'errors.firstName[0]', 'First name must consist of letters only.');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.lastName');

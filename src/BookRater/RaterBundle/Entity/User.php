@@ -1,10 +1,10 @@
 <?php
-// src/BookRater/RaterBundle/Entity/User.php
 
 namespace BookRater\RaterBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use FOS\UserBundle\Model\GroupInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
@@ -13,6 +13,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Swagger\Annotations as SWG;
 
 /**
+ * @Hateoas\Relation(
+ *     "self",
+ *     href=@Hateoas\Route(
+ *       "api_users_show",
+ *       parameters = { "identifier" = "expr(object.getId())" }
+ *     ),
+ *     exclusion=@Hateoas\Exclusion(groups={"admin"})
+ * )
+ * @Hateoas\Relation(
+ *     "reviews",
+ *     href=@Hateoas\Route(
+ *       "api_users_reviews_list",
+ *       parameters = { "identifier" = "expr(object.getUsername())" }
+ *     )
+ * )
+ * @Hateoas\Relation(
+ *     "messages",
+ *     href=@Hateoas\Route(
+ *       "api_users_messages_list",
+ *       parameters = { "id" = "expr(object.getId())" }
+ *     ),
+ *     exclusion=@Hateoas\Exclusion(groups={"admin"})
+ * )
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\UserRepository")
  *
@@ -27,8 +50,8 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      *
-     * @Serializer\Groups({"admin"})
      * @Serializer\Expose
+     * @Serializer\Groups({"admin"})
      *
      * @SWG\Property(description="The unique identifier of the user.")
      */
@@ -40,7 +63,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Review", mappedBy="user", cascade={"remove"})
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"users", "books", "authors", "messages", "reviews"})
+     * @Serializer\Groups({"books", "authors", "messages", "admin"})
      *
      * @SWG\Property(description="A list of all reviews created by the user.")
      */
@@ -64,14 +87,6 @@ class User extends BaseUser
 
         $this->reviews = new ArrayCollection();
         $this->messages = new ArrayCollection();
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName() : ?string
-    {
-        return $this->name;
     }
 
     /**

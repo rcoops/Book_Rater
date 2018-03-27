@@ -50,7 +50,7 @@ class Book
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The unique identifier of the book.")
      */
@@ -64,7 +64,7 @@ class Book
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The book's full title.")
      */
@@ -83,7 +83,7 @@ class Book
      * @ORM\Column(type="string", length=15, unique=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The book's unique 10 digit International Standard Book Number.")
      */
@@ -101,7 +101,7 @@ class Book
      * @ORM\Column(name="isbn_13", type="string", length=15, nullable=true, unique=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The book's unique 13 digit International Standard Book Number.")
      */
@@ -113,7 +113,7 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The company that published this edition of the book.")
      */
@@ -125,7 +125,7 @@ class Book
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The date that this publication of the book was published.")
      *
@@ -139,7 +139,7 @@ class Book
      * @ORM\Column(type="integer", nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The edition number for this publication of the book.")
      */
@@ -151,7 +151,7 @@ class Book
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The book's author or authors.")
      */
@@ -163,7 +163,7 @@ class Book
      * @ORM\OneToMany(targetEntity="Review", mappedBy="book", cascade={"remove"})
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "messages", "admin"})
      *
      * @SWG\Property(description="All site reviews of this book.")
      */
@@ -175,7 +175,7 @@ class Book
      * @ORM\Column(type="integer", nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "users"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      *
      * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.")
      */

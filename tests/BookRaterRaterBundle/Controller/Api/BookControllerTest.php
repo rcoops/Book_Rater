@@ -388,6 +388,7 @@ class BookControllerTest extends ApiTestCase
         ]);
 
         $response = $this->get('/books/1');
+
         $authorsUri = $this->asserter()->readResponseProperty($response, '_links.authors');
         $reviewsUri = $this->asserter()->readResponseProperty($response, '_links.reviews');
 
@@ -415,15 +416,15 @@ class BookControllerTest extends ApiTestCase
 
         $response = $this->post('/books', [
             'body' => json_encode($data),
-            'headers' => $this->getAuthorizedHeaders('mr_test')
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);
 
         $this->assertEquals(400, $response->getStatusCode());
-        $this->asserter()->assertResponsePropertiesExist($response, array(
+        $this->asserter()->assertResponsePropertiesExist($response, [
             'type',
             'title',
             'errors',
-        ));
+        ]);
         $this->asserter()->assertResponsePropertyEquals($response, 'errors.isbn[0]', 'ISBN must be entered.');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.title');
 
@@ -435,14 +436,14 @@ class BookControllerTest extends ApiTestCase
 
         $response = $this->post('/books', [
             'body' => json_encode($data),
-            'headers' => $this->getAuthorizedHeaders('mr_test')
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
         ]);
 
-        $this->asserter()->assertResponsePropertiesExist($response, array(
+        $this->asserter()->assertResponsePropertiesExist($response, [
             'type',
             'title',
             'errors',
-        ));
+        ]);
         $this->asserter()->assertResponsePropertyEquals($response, 'errors.isbn13[0]', 'ISBN 13 must 13 digits.');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.title');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.isbn');

@@ -35,7 +35,6 @@ class ReviewController extends BaseApiController
         $this->authorizationChecker = $authorizationChecker;
     }
 
-
     /**
      * @param Request $request
      *
@@ -160,7 +159,6 @@ class ReviewController extends BaseApiController
      *     description="Updates a review, requiring a full representation of the resource.",
      *     responses={
      *         @SWG\Response(
-     *             ref="update_review_response",
      *             response=200,
      *             description="A representation of the review resource updated.",
      *             @SWG\Schema(
@@ -170,7 +168,7 @@ class ReviewController extends BaseApiController
      *     }
      * )
      * @SWG\Patch(
-     *     tags={"Review"},
+     *     tags={"Reviews"},
      *     description="Updates a review, requiring only a part representation of the resource.",
      *     responses={
      *         @SWG\Response(
@@ -203,7 +201,7 @@ class ReviewController extends BaseApiController
         $this->persistReview($review);
 
         $response = $this->createApiResponse($review);
-        $this->setLocationHeader($response, 'api_books_show', [
+        $this->setLocationHeader($response, 'api_reviews_show', [
             'id' => $review->getId(),
         ]);
 
