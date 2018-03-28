@@ -14,27 +14,27 @@ use Swagger\Annotations as SWG;
 
 /**
  * @Hateoas\Relation(
- *     "self",
- *     href=@Hateoas\Route(
- *       "api_users_show",
- *       parameters = { "identifier" = "expr(object.getId())" }
- *     ),
- *     exclusion=@Hateoas\Exclusion(groups={"admin"})
+ *   "self",
+ *   href=@Hateoas\Route(
+ *     "api_users_show",
+ *     parameters = { "identifier" = "expr(object.getId())" }
+ *   ),
+ *   exclusion=@Hateoas\Exclusion(groups={"admin"})
  * )
  * @Hateoas\Relation(
- *     "reviews",
- *     href=@Hateoas\Route(
- *       "api_users_reviews_list",
- *       parameters = { "identifier" = "expr(object.getUsername())" }
- *     )
+ *   "reviews",
+ *   href=@Hateoas\Route(
+ *     "api_users_reviews_list",
+ *     parameters = { "identifier" = "expr(object.getUsername())" }
+ *   )
  * )
  * @Hateoas\Relation(
- *     "messages",
- *     href=@Hateoas\Route(
- *       "api_users_messages_list",
- *       parameters = { "id" = "expr(object.getId())" }
- *     ),
- *     exclusion=@Hateoas\Exclusion(groups={"admin"})
+ *   "messages",
+ *   href=@Hateoas\Route(
+ *     "api_users_messages_list",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   ),
+ *   exclusion=@Hateoas\Exclusion(groups={"admin"})
  * )
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\UserRepository")
@@ -80,6 +80,30 @@ class User extends BaseUser
      * @SWG\Property(description="A list of all messages created by he user.")
      */
     private $messages;
+
+    /**
+     * @Serializer\SerializedName("_links")
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     *
+     * @SWG\Property(
+     *   type="object",
+     *   description="A series of resource urls conforming to application/hal+json standards",
+     *   @SWG\Property(type="string", property="self", description="A relative url to this resource."),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="reviews",
+     *     description="A relative url to the reviews associated with this resource.",
+     *   ),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="messages",
+     *     description="A relative url to the messages associated with this resource.",
+     *   ),
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $links;
 
     public function __construct()
     {

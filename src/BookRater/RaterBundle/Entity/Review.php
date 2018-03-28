@@ -11,18 +11,26 @@ use Swagger\Annotations as SWG;
 
 /**
  * @Hateoas\Relation(
- *     "self",
- *     href=@Hateoas\Route(
- *       "api_reviews_show",
- *       parameters = { "id" = "expr(object.getId())" }
- *     )
+ *   "self",
+ *   href=@Hateoas\Route(
+ *     "api_reviews_show",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
  * )
  * @Hateoas\Relation(
- *     "book",
- *     href=@Hateoas\Route(
- *         "api_books_show",
- *         parameters = { "id" = "expr(object.getId())" }
- *     )
+ *   "user",
+ *   href=@Hateoas\Route(
+ *     "api_users_show",
+ *     parameters = { "identifier" = "expr(object.getId())" }
+ *   ),
+ *   exclusion=@Hateoas\Exclusion(groups={"admin"})
+ * )
+ * @Hateoas\Relation(
+ *   "book",
+ *   href=@Hateoas\Route(
+ *     "api_books_show",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
  * )
  *
  * @ORM\Table(name="reviews")
@@ -137,6 +145,30 @@ class Review
      * @SWG\Property(description="The date and time on which the review was last edited.")
      */
     private $edited;
+
+    /**
+     * @Serializer\SerializedName("_links")
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     *
+     * @SWG\Property(
+     *   type="object",
+     *   description="A series of resource urls conforming to application/hal+json standards",
+     *   @SWG\Property(type="string", property="self", description="A relative url to this resource."),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="user",
+     *     description="A relative url to the book associated with this resource.",
+     *   ),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="book",
+     *     description="A relative url to the book associated with this resource.",
+     *   ),
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $links;
 
     /**
      * @return int

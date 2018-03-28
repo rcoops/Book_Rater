@@ -10,6 +10,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Swagger\Annotations as SWG;
 
 /**
+ * @Hateoas\Relation(
+ *   "self",
+ *   href=@Hateoas\Route(
+ *     "api_reviews_show",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
+ * )
+ * @Hateoas\Relation(
+ *   "user",
+ *   href=@Hateoas\Route(
+ *     "api_users_show",
+ *     parameters = { "identifier" = "expr(object.getId())" }
+ *   ),
+ *   exclusion=@Hateoas\Exclusion(groups={"admin"})
+ * )
  * @ORM\Table(name="messages")
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
  *
@@ -93,6 +108,25 @@ class Message
      * @SWG\Property(description="Whether or not the message has been marked as read by admin")
      */
     private $isRead = false;
+
+    /**
+     * @Serializer\SerializedName("_links")
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     *
+     * @SWG\Property(
+     *   type="object",
+     *   description="A series of resource urls conforming to application/hal+json standards",
+     *   @SWG\Property(type="string", property="self", description="A relative url to this resource."),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="user",
+     *     description="A relative url to the user associated with this resource.",
+     *   ),
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $links;
 
     /**
      * Get id

@@ -14,25 +14,25 @@ use Swagger\Annotations as SWG;
 
 /**
  * @Hateoas\Relation(
- *     "self",
- *     href=@Hateoas\Route(
- *       "api_books_show",
- *       parameters = { "id" = "expr(object.getId())" }
- *     )
+ *   "self",
+ *   href=@Hateoas\Route(
+ *     "api_books_show",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
  * )
  * @Hateoas\Relation(
- *     "authors",
- *     href=@Hateoas\Route(
- *         "api_books_authors_list",
- *         parameters = { "id" = "expr(object.getId())" }
- *     )
+ *   "authors",
+ *   href=@Hateoas\Route(
+ *     "api_books_authors_list",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
  * )
  * @Hateoas\Relation(
- *     "reviews",
- *     href=@Hateoas\Route(
- *         "api_books_reviews_list",
- *         parameters = { "id" = "expr(object.getId())" }
- *     )
+ *   "reviews",
+ *   href=@Hateoas\Route(
+ *     "api_books_reviews_list",
+ *     parameters = { "id" = "expr(object.getId())" }
+ *   )
  * )
  *
  * @ORM\Table(name="books", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
@@ -180,6 +180,30 @@ class Book
      * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.")
      */
     private $averageRating = null;
+
+    /**
+     * @Serializer\SerializedName("_links")
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     *
+     * @SWG\Property(
+     *   type="object",
+     *   description="A series of resource urls conforming to application/hal+json standards",
+     *   @SWG\Property(type="string", property="self", description="A relative url to this resource."),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="authors",
+     *     description="A relative url to the authors associated with this resource.",
+     *   ),
+     *   @SWG\Property(
+     *     type="string",
+     *     property="reviews",
+     *     description="A relative url to the reviews associated with this resource.",
+     *   ),
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $links;
 
     public function __construct()
     {
