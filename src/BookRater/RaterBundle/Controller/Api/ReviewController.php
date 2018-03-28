@@ -47,7 +47,7 @@ class ReviewController extends BaseApiController
      *   summary="Create a new review",
      *   description="Creates a new review resource.
                       <strong>Requires user authorization.</strong>",
-     *   @SWG\Parameter(in="body", name="review", @Model(type=ReviewType::class),),
+     *   @SWG\Parameter(in="body", name="review", @Model(type=Review::class, groups={"reviews_send"}),),
      *   @SWG\Response(
      *     response=201,
      *     description="Creates a new review.",
@@ -186,7 +186,7 @@ class ReviewController extends BaseApiController
      *   description="Updates a review, requiring a full representation of the resource.
      *                <strong>Requires owner or admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
-     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the review resource updated.",
@@ -204,7 +204,7 @@ class ReviewController extends BaseApiController
      *   description="Updates a review, requiring a full representation of the resource.
      *                <strong>Requires owner or admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
-     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the review resource updated.",

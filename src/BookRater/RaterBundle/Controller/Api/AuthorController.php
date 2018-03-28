@@ -34,7 +34,7 @@ class AuthorController extends BaseApiController
      *   summary="Create a new author",
      *   description="Creates a new author resource.
                       <strong>Requires user authorization.</strong>",
-     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
      *   @SWG\Response(
      *     response=201,
      *     description="A representation of the author resource created.",
@@ -183,7 +183,7 @@ class AuthorController extends BaseApiController
                       <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
-     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the author resource updated.",
@@ -199,7 +199,7 @@ class AuthorController extends BaseApiController
                       <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
-     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the author resource updated.",

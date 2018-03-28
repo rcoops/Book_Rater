@@ -64,7 +64,7 @@ class Review
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
      *
      * @SWG\Property(description="A short description summarising the review.")
      */
@@ -76,7 +76,7 @@ class Review
      * @ORM\Column(type="text")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
      *
      * @SWG\Property(description="A commentary of the book being reviewed.")
      */
@@ -92,9 +92,9 @@ class Review
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
      *
-     * @SWG\Property(description="The review's rating of the book from 1 to 5.")
+     * @SWG\Property(description="The review's rating of the book from 1 to 5.", minimum="1", maximum="5")
      */
     private $rating;
 
@@ -169,6 +169,18 @@ class Review
      */
     // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
     private $links;
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\Groups({"reviews_send"})
+     *
+     * @SWG\Property(
+     *   type="integer",
+     *   description="The book id for which this book has been written.",
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $bookId;
 
     /**
      * @return int

@@ -35,11 +35,11 @@ class BookController extends BaseApiController
      *   summary="Create a new book",
      *   description="Creates a new book resource.
                       <strong>Requires user authorization.</strong>",
-     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
      *     response=201,
      *     description="A representation of the book resource created.",
-     *     @Model(type=Book::class, groups={"books"},)
+     *     @Model(type=Book::class, groups={"books"},),
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      * )
@@ -175,7 +175,7 @@ class BookController extends BaseApiController
      *   description="Updates a book, requiring a full representation of the resource.
                       <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
-     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource updated.",
@@ -190,7 +190,7 @@ class BookController extends BaseApiController
      *   description="Updates a book, requiring only a part representation of the resource.
                       <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
-     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource updated.",

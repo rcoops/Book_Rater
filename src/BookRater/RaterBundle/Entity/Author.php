@@ -67,7 +67,7 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
      */
     private $firstName;
 
@@ -84,7 +84,7 @@ class Author
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
      *
      * @SWG\Property(description="The author's last name.")
      */
@@ -96,7 +96,7 @@ class Author
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
      *
      * @SWG\Property(description="The author's initial(s) if they have any.")
      */
@@ -133,6 +133,19 @@ class Author
      */
     // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
     private $links;
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\Groups({"authors_send"})
+     *
+     * @SWG\Property(
+     *   type="array",
+     *   description="A collection of existing book ids belonging to books written by this author.",
+     *   @SWG\Items(type="integer", description="An existing book id.")
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $bookIds;
 
     public function __construct()
     {

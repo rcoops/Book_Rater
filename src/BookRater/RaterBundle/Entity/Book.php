@@ -64,7 +64,7 @@ class Book
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      *
      * @SWG\Property(description="The book's full title.")
      */
@@ -83,7 +83,7 @@ class Book
      * @ORM\Column(type="string", length=15, unique=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      *
      * @SWG\Property(description="The book's unique 10 digit International Standard Book Number.")
      */
@@ -101,7 +101,7 @@ class Book
      * @ORM\Column(name="isbn_13", type="string", length=15, nullable=true, unique=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      *
      * @SWG\Property(description="The book's unique 13 digit International Standard Book Number.")
      */
@@ -113,7 +113,7 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      *
      * @SWG\Property(description="The company that published this edition of the book.")
      */
@@ -125,11 +125,11 @@ class Book
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\Type("DateTime<'Y-m-d'>")
      *
      * @SWG\Property(description="The date that this publication of the book was published.")
      *
-     * @Serializer\Type("DateTime<'Y-m-d'>")
      */
     private $publishDate = null;
 
@@ -139,7 +139,7 @@ class Book
      * @ORM\Column(type="integer", nullable=true)
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      *
      * @SWG\Property(description="The edition number for this publication of the book.")
      */
@@ -204,6 +204,19 @@ class Book
      */
     // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
     private $links;
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\Groups({"books_send"})
+     *
+     * @SWG\Property(
+     *   type="array",
+     *   description="A collection of existing author ids belonging to the authors of the book.",
+     *   @SWG\Items(type="integer", description="An existing author id.")
+     * )
+     */
+    // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
+    private $authorIds;
 
     public function __construct()
     {
