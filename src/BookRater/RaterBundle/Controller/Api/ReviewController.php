@@ -146,6 +146,15 @@ class ReviewController extends BaseApiController
      *         type="array",
      *         @Model(type=Review::class, groups={"reviews"},),
      *       ),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      * )

@@ -89,7 +89,7 @@ class User extends BaseUser
      * @SWG\Property(
      *   type="object",
      *   description="A series of resource urls conforming to application/hal+json standards",
-     *   @SWG\Property(type="string", property="self", description="A relative url to this resource."),
+     *   @SWG\Property(type="string", property="self", description="A relative url to this resource.",),
      *   @SWG\Property(
      *     type="string",
      *     property="reviews",

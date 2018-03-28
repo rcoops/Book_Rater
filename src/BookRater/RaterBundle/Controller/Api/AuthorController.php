@@ -137,6 +137,15 @@ class AuthorController extends BaseApiController
      *         type="array",
      *         @Model(type=Author::class, groups={"authors"},),
      *       ),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      * )
@@ -282,6 +291,15 @@ class AuthorController extends BaseApiController
      *     @SWG\Schema(
      *       type="object",
      *       @SWG\Property(property="items", type="array", @Model(type=Author::class, groups={"authors"},),),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),

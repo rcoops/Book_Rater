@@ -133,6 +133,15 @@ class BookController extends BaseApiController
      *         type="array",
      *         @Model(type=Book::class, groups={"books"},),
      *       ),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      * )
@@ -265,6 +274,15 @@ class BookController extends BaseApiController
      *     @SWG\Schema(
      *       type="object",
      *       @SWG\Property(property="items", type="array", @Model(type=Author::class, groups={"books"},),),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
@@ -303,6 +321,15 @@ class BookController extends BaseApiController
      *     @SWG\Schema(
      *       type="object",
      *       @SWG\Property(property="items", type="array", @Model(type=Review::class, groups={"books"},),),
+     *       @SWG\Property(property="total", type="integer", description="The total number of items in the pagination.",),
+     *       @SWG\Property(property="count", type="integer", description="The total number of items in the current page.",),
+     *       @SWG\Property(
+     *         property="_links",
+     *         @SWG\Property(property="self", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="first", type="string", description="A relative url to the first page of the pagination.",),
+     *         @SWG\Property(property="last", type="string", description="A relative url to the current page of the pagination.",),
+     *         @SWG\Property(property="next", type="string", description="A relative url to the current page of the pagination.",),
+     *       ),
      *     ),
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
