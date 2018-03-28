@@ -108,6 +108,7 @@ class BookControllerTest extends ApiTestCase
         ]);
         $this->createReview([
             'title' => 'It was ok',
+            'user' => $this->createUser('mr_test'),
             'book' => $book,
         ]);
 
@@ -124,11 +125,21 @@ class BookControllerTest extends ApiTestCase
             'authors',
             'reviews',
             'averageRating',
+            'authors[0].firstName',
+            'reviews[0].title',
+            'reviews[0].book'
         ]);
-        $this->asserter()->assertResponsePropertyExists($response, 'authors[0].firstName');
         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'authors[0].booksAuthored');
         $this->asserter()->assertResponsePropertyExists($response, 'reviews[0].title');
-        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'reviews[0].book');
+        $this->asserter()->assertResponsePropertyEquals($response,
+            'authors[0].firstName',
+            'Bruce'
+        );
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'reviews[0].book',
+            'A Great Book'
+        );
     }
 
     /**

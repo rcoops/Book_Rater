@@ -40,7 +40,6 @@ class ReviewControllerTest extends ApiTestCase
             'book',
             'book.title',
             'user',
-            'user.username',
         ]);
         $this->asserter()->assertResponsePropertyEquals(
             $response,
@@ -54,7 +53,7 @@ class ReviewControllerTest extends ApiTestCase
         );
         $this->asserter()->assertResponsePropertyEquals($response, 'rating', 5);
         $this->asserter()->assertResponsePropertyEquals($response, 'book.title', 'A Great Book');
-        $this->asserter()->assertResponsePropertyEquals($response, 'user.username', 'mr_test');
+        $this->asserter()->assertResponsePropertyEquals($response, 'user', 'mr_test');
     }
 
     /**
@@ -86,7 +85,6 @@ class ReviewControllerTest extends ApiTestCase
             'book',
             'book.title',
             'user',
-            'user.username',
         ]);
         $this->asserter()->assertResponsePropertyEquals(
             $response,
@@ -100,7 +98,7 @@ class ReviewControllerTest extends ApiTestCase
         );
         $this->asserter()->assertResponsePropertyEquals($response, 'rating', 5);
         $this->asserter()->assertResponsePropertyEquals($response, 'book.title', 'A Great Book');
-        $this->asserter()->assertResponsePropertyEquals($response, 'user.username', 'mr_test');
+        $this->asserter()->assertResponsePropertyEquals($response, 'user', 'mr_test');
     }
 
     /**

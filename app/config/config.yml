@@ -44,10 +44,13 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
-        host: '%database_host%'
-        port: '%database_port%'
-        dbname: '%database_name%'
+        # swap line comments of following block to use mysql
+        driver: '%database_driver%'
+        path: '%database_path%'
+#        host: '%database_host%'
+#        port: '%database_port%'
+#        dbname: '%database_name%'
+
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
