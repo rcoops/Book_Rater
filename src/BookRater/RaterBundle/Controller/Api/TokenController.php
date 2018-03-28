@@ -14,6 +14,7 @@ use Swagger\Annotations as SWG;
 
 class TokenController extends BaseApiController
 {
+
     /**
      * @param Request $request
      *
@@ -25,10 +26,13 @@ class TokenController extends BaseApiController
      *
      * @SWG\Post(
      *   tags={"Tokens"},
-     *   description="Retrieves an auth token to be used in additional api requests. Requires Basic auth: ('Basic' followed by base 64 encoded 'username:password' e.g. 'Basic dXNlcjpwYXNzd29yZA==')",
+     *   summary="Create a new Auth Token",
+     *   description="Creates a JWT Bearer token to be used for additional api requests.
+                      <strong>Requires Basic auth:</strong>
+                      'Basic' followed by base 64 encoded 'username:password' e.g. 'Basic dXNlcjpwYXNzd29yZA=='",
      *   @SWG\Response(
      *     response="201",
-     *     description="A JWT Bearer token to be used for authorization.",
+     *     description="A JWT Bearer token to be used for authentication.",
      *     @SWG\Schema(
      *       type="object",
      *       @SWG\Property(property="token", type="string"),
@@ -44,7 +48,6 @@ class TokenController extends BaseApiController
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the password provided is not correct.",),
      * )
      */
-    //TODO additional (generic) responses
     public function newTokenAction(Request $request)
     {
         $user = $this->getDoctrine()

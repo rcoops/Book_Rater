@@ -44,7 +44,9 @@ class ReviewController extends BaseApiController
      *
      * @SWG\Post(
      *   tags={"Reviews"},
-     *   summary="Create a new review.",
+     *   summary="Create a new review",
+     *   description="Creates a new review resource.
+                      <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="body", name="review", @Model(type=ReviewType::class),),
      *   @SWG\Response(
      *     response=201,
@@ -85,8 +87,8 @@ class ReviewController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Reviews"},
-     *   summary="Retrieve a single review.",
-     *   description="Returns a representation of the review resource queried for.",
+     *   summary="Retrieve a single review",
+     *   description="Retrieves a representation of the review resource queried for.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Response(
      *     response=200,
@@ -120,8 +122,8 @@ class ReviewController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Reviews"},
-     *   summary="List a collection of reviews.",
-     *   description="Returns a (filtered) collection of review resources.",
+     *   summary="List a collection of reviews",
+     *   description="Retrieves a (filtered) collection of review resources.",
      *   @SWG\Parameter(
      *     in="query",
      *     name="filter",
@@ -136,7 +138,7 @@ class ReviewController extends BaseApiController
      *       @SWG\Property(
      *         property="items",
      *         type="array",
-     *         @Model(type=Review::class, groups={"reviews"}),
+     *         @Model(type=Review::class, groups={"reviews"},),
      *       ),
      *     ),
      *   ),
@@ -166,13 +168,14 @@ class ReviewController extends BaseApiController
      * @SWG\Put(
      *   tags={"Reviews"},
      *   summary="Update a review",
-     *   description="Updates a review, requiring a full representation of the resource. Requires authentication.",
+     *   description="Updates a review, requiring a full representation of the resource.
+     *                <strong>Requires owner or admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the review resource updated.",
-     *     @Model(type=Review::class, groups={"review"}),
+     *     @Model(type=Review::class, groups={"reviews"},),
      *   ),
      *   @SWG\Response(
      *     response=401,
@@ -181,15 +184,16 @@ class ReviewController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      * @SWG\Patch(
-     *   tags={"Books"},
+     *   tags={"Reviews"},
      *   summary="Update part(s) of a review",
-     *   description="Updates a review, requiring a full representation of the resource. Requires authentication.",
+     *   description="Updates a review, requiring a full representation of the resource.
+     *                <strong>Requires owner or admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the review resource updated.",
-     *     @Model(type=Review::class, groups={"review"}),
+     *     @Model(type=Review::class, groups={"reviews"},),
      *   ),
      *   @SWG\Response(
      *     response=401,
@@ -234,7 +238,8 @@ class ReviewController extends BaseApiController
      * @SWG\Delete(
      *   tags={"Reviews"},
      *   summary="Remove a review",
-     *   description="Removes a review resource from the system. Requires authentication (owner or admin).",
+     *   description="Removes a review resource from the system.
+     *                <strong>Requires owner or admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )

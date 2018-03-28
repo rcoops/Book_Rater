@@ -46,7 +46,9 @@ class UserControllerTest extends ApiTestCase
         $this->createUser('mr_test');
         $this->createUser('admin', 'admin', true);
 
-        $response = $this->get('/users');
+        $response = $this->get('/users', [
+            'headers' => $this->getAuthorizedHeaders('admin'),
+        ]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyIsArray($response, 'items');
         $this->asserter()->assertResponsePropertyCount($response, 'items', 2);
@@ -79,7 +81,9 @@ class UserControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyExists($response, '_links.next');
 
         $lastLink = $this->asserter()->readResponseProperty($response, '_links.last');
-        $response = $this->client->get($lastLink);
+        $response = $this->client->get($lastLink, [
+            'headers' => $this->getAuthorizedHeaders('admin'),
+        ]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyEquals(
             $response,
@@ -92,7 +96,9 @@ class UserControllerTest extends ApiTestCase
         // page 2
         $nextLink = $this->asserter()->readResponseProperty($response, '_links.prev');
         // Use unaltered client from here on as the links we get are correct
-        $response = $this->client->get($nextLink);
+        $response = $this->client->get($nextLink, [
+            'headers' => $this->getAuthorizedHeaders('admin'),
+        ]);
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyEquals(
             $response,

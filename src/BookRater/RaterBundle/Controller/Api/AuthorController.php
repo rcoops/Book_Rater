@@ -32,17 +32,17 @@ class AuthorController extends BaseApiController
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Post(
-     *     tags={"Authors"},
-     *             description="Creates a new author resource.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=201,
-     *             description="A representation of the author resource created.",
-     *             @SWG\Schema(
-     *                 @Model(type=Author::class, groups={"authors"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="Create a new author",
+     *   description="Creates a new author resource.
+                      <strong>Requires user authorization.</strong>",
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Response(
+     *     response=201,
+     *     description="A representation of the author resource created.",
+     *     @Model(type=Author::class, groups={"authors"},)
+     *   ),
+     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      * )
      */
     public function newAction(Request $request)
@@ -73,16 +73,17 @@ class AuthorController extends BaseApiController
      * @Rest\Get("/authors/{lastName}/{firstName}", name="api_authors_show")
      *
      * @SWG\Get(
-     *     tags={"Authors"},
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the author resource queried for.",
-     *             @SWG\Schema(
-     *                 @Model(type=Author::class, groups={"authors"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="Retrieve a single author",
+     *   description="Retrieves a representation of the author resource queried for.",
+     *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
+     *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the author resource queried for.",
+     *     @Model(type=Author::class, groups={"authors"},)
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
     public function showAction(string $lastName, string $firstName)
@@ -113,14 +114,27 @@ class AuthorController extends BaseApiController
      * @Rest\Get("/authors", name="api_authors_collection")
      *
      * @SWG\Get(
-     *     tags={"Authors"},
-     *     description="Returns a (filtered) collection of author resources.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A (filtered) collection of author resources."
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="List a collection of authors",
+     *   description="Retrieves a (filtered) collection of author resources.",
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="filter",
+     *     type="string",
+     *     description="An optional filter by first or last name."
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A (filtered) collection of author resources.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(
+     *         property="items",
+     *         type="array",
+     *         @Model(type=Author::class, groups={"authors"},),
+     *       ),
+     *     ),
+     *   ),
      * )
      */
     public function listAction(Request $request)
@@ -150,31 +164,36 @@ class AuthorController extends BaseApiController
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Put(
-     *     tags={"Authors"},
-     *     description="Updates an author, requiring a full representation of the resource.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the author resource updated.",
-     *             @SWG\Schema(
-     *                 @Model(type=Author::class, groups={"authors"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="Update an author",
+     *   description="Updates an author, requiring a full representation of the resource.
+                      <strong>Requires user authorization.</strong>",
+     *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
+     *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the author resource updated.",
+     *     @Model(type=Author::class, groups={"authors"},),
+     *   ),
+     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
-     *
      * @SWG\Patch(
-     *     tags={"Authors"},
-     *     description="Updates an author, requiring only a part representation of the resource.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the author resource updated.",
-     *             @SWG\Schema(
-     *                 @Model(type=Author::class, groups={"authors"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="Update part(s) of an author",
+     *   description="Updates an author, requiring only a part representation of the resource.
+                      <strong>Requires user authorization.</strong>",
+     *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
+     *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
+     *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors"},),),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the author resource updated.",
+     *     @Model(type=Author::class, groups={"authors"},),
+     *   ),
+     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
     public function updateAction(string $lastName, string $firstName, Request $request)
@@ -217,11 +236,13 @@ class AuthorController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @SWG\Delete(
-     *     tags={"Authors"},
-     *     description="Removes an author resource from the system.",
-     *     responses={
-     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
-     *     }
+     *   tags={"Authors"},
+     *   summary="Remove an author",
+     *   description="Removes an author resource from the system.
+                      <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
+     *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
+     *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
      */
     public function deleteAction(string $lastName, string $firstName)
@@ -247,14 +268,19 @@ class AuthorController extends BaseApiController
      * @Rest\Get("/authors/{lastName}/{firstName}/books", name="api_authors_books_list")
      *
      * @SWG\Get(
-     *     tags={"Authors"},
-     *     description="Returns a collection of books that the author has authored.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A collection of books that the author has authored."
-     *         )
-     *     }
+     *   tags={"Authors"},
+     *   summary="Retrieve an author's books",
+     *   description="Retrieves a collection of all of the books written by an author.",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the author."),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A collection of all of the books written by an author.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(property="items", type="array", @Model(type=Author::class, groups={"authors"},),),
+     *     ),
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
     public function booksListAction(Author $author, Request $request)

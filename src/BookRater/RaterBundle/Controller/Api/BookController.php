@@ -32,13 +32,14 @@ class BookController extends BaseApiController
      *
      * @SWG\Post(
      *   tags={"Books"},
-     *   summary="Create a new book.",
-     *   description="Creates a new book resource. Requires authentication.",
+     *   summary="Create a new book",
+     *   description="Creates a new book resource.
+                      <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
      *   @SWG\Response(
      *     response=201,
      *     description="A representation of the book resource created.",
-     *     @Model(type=Book::class, groups={"books"})
+     *     @Model(type=Book::class, groups={"books"},)
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      * )
@@ -72,13 +73,13 @@ class BookController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Books"},
-     *   summary="Retrieve a single book.",
-     *   description="Returns a representation of the book resource queried for.",
+     *   summary="Retrieve a single book",
+     *   description="Retrieves a representation of the book resource queried for.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource queried for.",
-     *     @Model(type=Book::class, groups={"books"})
+     *     @Model(type=Book::class, groups={"books"},)
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
@@ -108,8 +109,8 @@ class BookController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Books"},
-     *   summary="List a collection of books.",
-     *   description="Returns a (filtered) collection of book resources.",
+     *   summary="List a collection of books",
+     *   description="Retrieves a (filtered) collection of book resources.",
      *   @SWG\Parameter(
      *     in="query",
      *     name="filter",
@@ -124,7 +125,7 @@ class BookController extends BaseApiController
      *       @SWG\Property(
      *         property="items",
      *         type="array",
-     *         @Model(type=Book::class, groups={"books"}),
+     *         @Model(type=Book::class, groups={"books"},),
      *       ),
      *     ),
      *   ),
@@ -156,13 +157,14 @@ class BookController extends BaseApiController
      * @SWG\Put(
      *   tags={"Books"},
      *   summary="Update a book",
-     *   description="Updates a book, requiring a full representation of the resource. Requires authentication.",
+     *   description="Updates a book, requiring a full representation of the resource.
+                      <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource updated.",
-     *     @Model(type=Book::class, groups={"books"}),
+     *     @Model(type=Book::class, groups={"books"},),
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
@@ -170,13 +172,14 @@ class BookController extends BaseApiController
      * @SWG\Patch(
      *   tags={"Books"},
      *   summary="Update part(s) of a book",
-     *   description="Updates a book, requiring only a part representation of the resource. Requires authentication.",
+     *   description="Updates a book, requiring only a part representation of the resource.
+                      <strong>Requires user authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource updated.",
-     *     @Model(type=Book::class, groups={"books"}),
+     *     @Model(type=Book::class, groups={"books"},),
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
@@ -218,7 +221,8 @@ class BookController extends BaseApiController
      * @SWG\Delete(
      *   tags={"Books"},
      *   summary="Remove a book",
-     *   description="Removes a book resource from the system. Requires authentication.",
+     *   description="Removes a book resource from the system.
+                      <strong>Requires admin authorization.</strong>",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
@@ -246,15 +250,15 @@ class BookController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Books"},
-     *   summary="Retrieve the book's authors",
-     *   description="Returns a collection of all authors of the book.",
+     *   summary="Retrieve a book's authors",
+     *   description="Retrieves a collection of all of the book's authors.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of the book's authors.",
      *     @SWG\Schema(
      *       type="object",
-     *       @SWG\Property(property="items", type="array", @Model(type=Author::class, groups={"books"}),),
+     *       @SWG\Property(property="items", type="array", @Model(type=Author::class, groups={"books"},),),
      *     ),
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
@@ -284,15 +288,15 @@ class BookController extends BaseApiController
      *
      * @SWG\Get(
      *   tags={"Books"},
-     *   summary="Retrieves the book's reviews",
-     *   description="Returns a collection of all reviews made for this book.",
+     *   summary="Retrieves a book's reviews",
+     *   description="Retrieves a collection of all reviews made for this book.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book resource."),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of the book's reviews.",
      *     @SWG\Schema(
      *       type="object",
-     *       @SWG\Property(property="items", type="array", @Model(type=Review::class, groups={"books"}),),
+     *       @SWG\Property(property="items", type="array", @Model(type=Review::class, groups={"books"},),),
      *     ),
      *   ),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),

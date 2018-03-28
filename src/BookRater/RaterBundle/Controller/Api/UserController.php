@@ -2,6 +2,8 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use BookRater\RaterBundle\Entity\Message;
+use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Entity\User;
 use BookRater\RaterBundle\Pagination\PaginationFactory;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -39,17 +41,26 @@ class UserController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @SWG\Get(
-     *     tags={"Users"},
-     *     description="Returns a representation of the user resource queried for.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the user resource queried for.",
-     *             @SWG\Schema(
-     *                 @Model(type=User::class, groups={"admin"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Users"},
+     *   summary="Retrieve a single user",
+     *   description="Retrieves a representation of the user resource queried for.
+                      <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(
+     *     in="path",
+     *     name="identifier",
+     *     type="string",
+     *     description="A unique identifier for the user (id, email or username).",
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the user resource queried for.",
+     *     @SWG\Schema(@Model(type=User::class, groups={"admin"},),),
+     *   ),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the user does not have admin authorization.",
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -75,18 +86,29 @@ class UserController extends BaseApiController
      *
      * @Rest\Get("/users", name="api_users_collection")
      *
+     * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @SWG\Get(
-     *     tags={"Users"},
-     *     description="Returns a collection of user resources.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A collection of all user resources.",
-     *             @SWG\Schema(
-     *                 @Model(type=User::class, groups={"admin"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Users"},
+     *   summary="List all users",
+     *   description="Retrieves a collection of user resources.
+                      <strong>Requires admin authorization.</strong>",
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A collection of all user resources.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(
+     *         property="items",
+     *         type="array",
+     *         @Model(type=User::class, groups={"admin"},),
+     *       ),
+     *     ),
+     *   ),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the user does not have admin authorization.",
+     *   ),
      * )
      */
     public function listAction(Request $request)
@@ -108,11 +130,12 @@ class UserController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @SWG\Delete(
-     *     tags={"Users"},
-     *     description="Removes a user resource from the system.",
-     *     responses={
-     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
-     *     }
+     *   tags={"Users"},
+     *   summary="Remove a user.",
+     *   description="Removes a user resource from the system.
+                      <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
+     *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
      */
     public function deleteAction(int $id)
@@ -133,20 +156,28 @@ class UserController extends BaseApiController
      * @return Response
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
      * @Rest\Get("/users/{identifier}/reviews", name="api_users_reviews_list")
      *
      * @SWG\Get(
-     *     tags={"Users"},
-     *     description="Returns a collection of the user's reviews.",
-     *     parameters={
-     *         @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the user resource."),
-     *     },
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A collection of the user's reviews.",
-     *         )
-     *     }
+     *   tags={"Users"},
+     *   summary="Retrieves a user's reviews",
+     *   description="Retrieves a collection of all reviews created by a user.",
+     *   @SWG\Parameter(
+     *     in="path",
+     *     name="id",
+     *     type="string",
+     *     description="A unique identifier for the user (id, email or username).",
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A collection of all reviews created by the user.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(property="items", type="array", @Model(type=Review::class, groups={"admin"},),),
+     *     ),
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the user resource does not exist.",),
      * )
      */
     public function reviewsListAction($identifier, Request $request)
@@ -179,17 +210,29 @@ class UserController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @SWG\Get(
-     *     tags={"Users"},
-     *     description="Returns a collection of the user's messages.",
-     *     parameters={
-     *         @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the user resource."),
-     *     },
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A collection of the user's messages.",
-     *         )
-     *     }
+     *   tags={"Users"},
+     *   summary="Retrieves a user's messages",
+     *   description="Retrieves a collection of all messages created by a user.
+                      <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(
+     *     in="path",
+     *     name="id",
+     *     type="integer",
+     *     description="The unique id of a user.",
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A collection of all messages created by the user.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(property="items", type="array", @Model(type=Message::class, groups={"admin"},),),
+     *     ),
+     *   ),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the user does not have admin authorization.",
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the user resource does not exist.",),
      * )
      */
     public function messagesListAction(User $user, Request $request)
