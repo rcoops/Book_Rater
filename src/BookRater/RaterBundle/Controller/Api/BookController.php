@@ -169,7 +169,7 @@ class BookController extends BaseApiController
      * )
      * @SWG\Patch(
      *   tags={"Books"},
-     *   summary="Update a book",
+     *   summary="Update part(s) of a book",
      *   description="Updates a book, requiring only a part representation of the resource. Requires authentication.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books"},),),
@@ -260,7 +260,6 @@ class BookController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
-    // TODO schema for collection?
     public function authorsListAction(Book $book, Request $request)
     {
         $qb = $this->getAuthorRepository()

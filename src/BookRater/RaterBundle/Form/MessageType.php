@@ -36,7 +36,6 @@ class MessageType extends AbstractWebType
             ->add('Send', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary',
-                    'style' => 'margin-top:15px',
                 ],
                 'disabled' => $options['is_api'],
             ]);

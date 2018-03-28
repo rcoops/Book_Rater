@@ -26,9 +26,9 @@
                 {% set rating = book.averageRating|number_format %}
                 {% for i in 1..5 %}
                     {% if i <= rating %}
-                        <i class="fa fa-star" style="color: gold"></i>
+                        <i class="fa fa-star gold"></i>
                     {% else %}
-                        <i class="fa fa-star-o" style="color: gold"></i>
+                        <i class="fa fa-star-o gold"></i>
                     {% endif %}
                 {% endfor %}
             {% endif %}
@@ -43,7 +43,7 @@
                     {% for item in book.reviews %}
                         <li>
                             <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
-                            - {{ item.rating }} / 5 <i class="fa fa-star" style="color: gold"></i> -
+                            - {{ item.rating }} / 5 <i class="fa fa-star gold"></i> -
                             <small>{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
                         </li>
                     {% endfor %}

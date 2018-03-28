@@ -15,7 +15,10 @@
             <th>{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
-            <th>Rating (<i class="fa fa-star" style="color: gold"></i> / 5)</th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'Rating', 'book.averageRating') }}
+                (<i class="fa fa-star gold"></i> / 5)
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -45,7 +48,9 @@
                         Not yet rated!
                     {% else %}
                         {% set rating = book.averageRating|number_format %}
-                        {{ rating }} <i class="fa fa-star" style="color: gold"></i>
+                        {% for i in 1..rating %}
+                            <i class="fa fa-star gold"></i>
+                        {% endfor %}
                     {% endif %}
                 </td>
             </tr>

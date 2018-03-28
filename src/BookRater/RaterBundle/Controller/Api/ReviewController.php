@@ -9,12 +9,11 @@ use BookRater\RaterBundle\Pagination\PaginationFactory;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Psr\Http\Message\ResponseInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Swagger\Annotations as SWG;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -34,7 +33,6 @@ class ReviewController extends BaseApiController
 
         $this->authorizationChecker = $authorizationChecker;
     }
-
     /**
      * @param Request $request
      *
@@ -45,16 +43,16 @@ class ReviewController extends BaseApiController
      * @Security("is_granted('ROLE_USER')")
      *
      * @SWG\Post(
-     *     tags={"Reviews"},
-     *     responses={
-     *         @SWG\Response(
-     *             response=201,
-     *             description="Creates a new review.",
-     *             @SWG\Schema(
-     *                 @Model(type=Review::class, groups={"reviews"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Reviews"},
+     *   summary="Create a new review.",
+     *   @SWG\Parameter(in="body", name="review", @Model(type=ReviewType::class),),
+     *   @SWG\Response(
+     *     response=201,
+     *     description="Creates a new review.",
+     *     @SWG\Schema(@Model(type=Review::class, groups={"reviews"},),),
+     *   ),
+     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the review resource does not exist.",),
      * )
      */
     public function newAction(Request $request)
@@ -86,16 +84,16 @@ class ReviewController extends BaseApiController
      * @Rest\Get("/reviews/{id}", name="api_reviews_show")
      *
      * @SWG\Get(
-     *     tags={"Reviews"},
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="Returns a representation of a review resource.",
-     *             @SWG\Schema(
-     *                 @Model(type=Review::class, groups={"reviews"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Reviews"},
+     *   summary="Retrieve a single review.",
+     *   description="Returns a representation of the review resource queried for.",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the book resource queried for.",
+     *     @Model(type=Review::class, groups={"reviews"},),
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
     public function showAction(int $id)
@@ -121,16 +119,27 @@ class ReviewController extends BaseApiController
      * @Rest\Get("/reviews", name="api_reviews_collection")
      *
      * @SWG\Get(
-     *     tags={"Reviews"},
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="Returns a (filtered) collection of review representations.",
-     *             @SWG\Schema(
-     *                 @Model(type=Review::class, groups={"reviews"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Reviews"},
+     *   summary="List a collection of reviews.",
+     *   description="Returns a (filtered) collection of review resources.",
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="filter",
+     *     type="string",
+     *     description="An optional filter by book title, username, or review rating."
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A (filtered) collection of review resources.",
+     *     @SWG\Schema(
+     *       type="object",
+     *       @SWG\Property(
+     *         property="items",
+     *         type="array",
+     *         @Model(type=Review::class, groups={"reviews"}),
+     *       ),
+     *     ),
+     *   ),
      * )
      */
     public function listAction(Request $request)
@@ -155,30 +164,38 @@ class ReviewController extends BaseApiController
      * @Method({"PUT", "PATCH"})
      *
      * @SWG\Put(
-     *     tags={"Reviews"},
-     *     description="Updates a review, requiring a full representation of the resource.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the review resource updated.",
-     *             @SWG\Schema(
-     *                 @Model(type=Review::class, groups={"reviews"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Reviews"},
+     *   summary="Update a review",
+     *   description="Updates a review, requiring a full representation of the resource. Requires authentication.",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the review resource updated.",
+     *     @Model(type=Review::class, groups={"review"}),
+     *   ),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the user is not the owner of the resource or an admin.",
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      * @SWG\Patch(
-     *     tags={"Reviews"},
-     *     description="Updates a review, requiring only a part representation of the resource.",
-     *     responses={
-     *         @SWG\Response(
-     *             response=200,
-     *             description="A representation of the review resource updated.",
-     *             @SWG\Schema(
-     *                 @Model(type=Review::class, groups={"reviews"})
-     *             )
-     *         )
-     *     }
+     *   tags={"Books"},
+     *   summary="Update part(s) of a review",
+     *   description="Updates a review, requiring a full representation of the resource. Requires authentication.",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
+     *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews"},),),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="A representation of the review resource updated.",
+     *     @Model(type=Review::class, groups={"review"}),
+     *   ),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the user is not the owner of the resource or an admin.",
+     *   ),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
     public function updateAction(int $id, Request $request)
@@ -215,11 +232,11 @@ class ReviewController extends BaseApiController
      * @Rest\Delete("/reviews/{id}")
      *
      * @SWG\Delete(
-     *     tags={"Reviews"},
-     *     description="Removes a review resource from the system.",
-     *     responses={
-     *         @SWG\Response(response=204, description="Indicates that the resource is not present on the system.")
-     *     }
+     *   tags={"Reviews"},
+     *   summary="Remove a review",
+     *   description="Removes a review resource from the system. Requires authentication (owner or admin).",
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
+     *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
      */
     public function deleteAction(int $id)

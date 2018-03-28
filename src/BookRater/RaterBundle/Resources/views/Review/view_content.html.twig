@@ -17,9 +17,9 @@
         {% set rating = review.rating|number_format %}
         {% for i in 1..5 %}
             {% if i <= rating %}
-                <i class="fa fa-star" style="color: gold"></i>
+                <i class="fa fa-star gold"></i>
             {% else %}
-                <i class="fa fa-star-o" style="color: gold"></i>
+                <i class="fa fa-star-o gold"></i>
             {% endif %}
         {% endfor %}
     </p>
