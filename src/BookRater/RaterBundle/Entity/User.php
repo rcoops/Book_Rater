@@ -63,7 +63,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Review", mappedBy="user", cascade={"remove"})
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "authors", "messages", "admin"})
+     * @Serializer\Groups({"books", "authors", "admin"})
      *
      * @SWG\Property(description="A list of all reviews created by the user.")
      */
