@@ -30,6 +30,7 @@ class TokenController extends BaseApiController
      *   description="Creates a JWT Bearer token to be used for additional api requests.
                       <strong>Requires Basic auth:</strong>
                       'Basic' followed by base 64 encoded 'username:password' e.g. 'Basic dXNlcjpwYXNzd29yZA=='",
+     *   produces={"application/json"},
      *   @SWG\Response(
      *     response="201",
      *     description="A JWT Bearer token to be used for authentication.",

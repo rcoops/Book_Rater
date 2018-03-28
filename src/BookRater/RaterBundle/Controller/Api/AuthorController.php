@@ -34,6 +34,7 @@ class AuthorController extends BaseApiController
      *   summary="Create a new author",
      *   description="Creates a new author resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
      *   @SWG\Response(
      *     response=201,
@@ -75,6 +76,7 @@ class AuthorController extends BaseApiController
      *   tags={"Authors"},
      *   summary="Retrieve a single author",
      *   description="Retrieves a representation of the author resource queried for.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
@@ -117,6 +119,7 @@ class AuthorController extends BaseApiController
      *   tags={"Authors"},
      *   summary="List a collection of authors",
      *   description="Retrieves a (filtered) collection of author resources.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="query",
      *     name="filter",
@@ -184,6 +187,7 @@ class AuthorController extends BaseApiController
      *   summary="Update an author",
      *   description="Updates an author, requiring a full representation of the resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
      *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
@@ -200,6 +204,7 @@ class AuthorController extends BaseApiController
      *   summary="Update part(s) of an author",
      *   description="Updates an author, requiring only a part representation of the resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
      *   @SWG\Parameter(in="body", name="author", @Model(type=Author::class, groups={"authors_send"},),),
@@ -256,6 +261,7 @@ class AuthorController extends BaseApiController
      *   summary="Remove an author",
      *   description="Removes an author resource from the system.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"text/html"},
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
@@ -287,6 +293,7 @@ class AuthorController extends BaseApiController
      *   tags={"Authors"},
      *   summary="Retrieve an author's books",
      *   description="Retrieves a collection of all of the books written by an author.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the author."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(

@@ -138,7 +138,7 @@ abstract class BaseApiController extends Controller
     {
         $json = $this->serialize($data, $format, $groups);
 
-        $contentType = $format == 'xml' ? 'application/xml' : 'application/hal+json';
+        $contentType = $format == 'xml' ? 'application/hal+xml' : 'application/hal+json';
 
         return new Response($json, $statusCode, ['Content-Type' => $contentType]);
     }

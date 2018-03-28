@@ -35,6 +35,7 @@ class BookController extends BaseApiController
      *   summary="Create a new book",
      *   description="Creates a new book resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
      *     response=201,
@@ -76,6 +77,7 @@ class BookController extends BaseApiController
      *   tags={"Books"},
      *   summary="Retrieve a single book",
      *   description="Retrieves a representation of the book resource queried for.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
@@ -113,6 +115,7 @@ class BookController extends BaseApiController
      *   tags={"Books"},
      *   summary="List a collection of books",
      *   description="Retrieves a (filtered) collection of book resources.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="query",
      *     name="filter",
@@ -177,6 +180,7 @@ class BookController extends BaseApiController
      *   summary="Update a book",
      *   description="Updates a book, requiring a full representation of the resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
@@ -192,6 +196,7 @@ class BookController extends BaseApiController
      *   summary="Update part(s) of a book",
      *   description="Updates a book, requiring only a part representation of the resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Book::class, groups={"books_send"},),),
      *   @SWG\Response(
@@ -241,6 +246,7 @@ class BookController extends BaseApiController
      *   summary="Remove a book",
      *   description="Removes a book resource from the system.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"text/html"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
@@ -270,6 +276,7 @@ class BookController extends BaseApiController
      *   tags={"Books"},
      *   summary="Retrieve a book's authors",
      *   description="Retrieves a collection of all of the book's authors.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
@@ -318,6 +325,7 @@ class BookController extends BaseApiController
      *   tags={"Books"},
      *   summary="Retrieves a book's reviews",
      *   description="Retrieves a collection of all reviews made for this book.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book resource."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(

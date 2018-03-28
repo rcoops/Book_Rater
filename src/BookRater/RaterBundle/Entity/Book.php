@@ -39,6 +39,7 @@ use Swagger\Annotations as SWG;
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("book")
  */
 class Book
 {
@@ -51,6 +52,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The unique identifier of the book.")
      */
@@ -65,6 +67,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The book's full title.")
      */
@@ -84,6 +87,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The book's unique 10 digit International Standard Book Number.")
      */
@@ -102,6 +106,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The book's unique 13 digit International Standard Book Number.")
      */
@@ -114,6 +119,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The company that published this edition of the book.")
      */
@@ -127,6 +133,7 @@ class Book
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      * @Serializer\Type("DateTime<'Y-m-d'>")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The date that this publication of the book was published.")
      *
@@ -140,6 +147,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The edition number for this publication of the book.")
      */
@@ -152,6 +160,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "reviews", "messages"})
+     * @Serializer\XmlList(entry="author")
      *
      * @SWG\Property(description="The book's author or authors.")
      */
@@ -164,6 +173,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "messages", "admin"})
+     * @Serializer\XmlList(entry="review")
      *
      * @SWG\Property(description="All site reviews of this book.")
      */
@@ -176,6 +186,7 @@ class Book
      *
      * @Serializer\Expose
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.")
      */
@@ -208,6 +219,7 @@ class Book
     /**
      * @Serializer\Expose
      * @Serializer\Groups({"books_send"})
+     * @Serializer\XmlList(entry="author")
      *
      * @SWG\Property(
      *   type="array",
@@ -503,6 +515,7 @@ class Book
      * @Serializer\Groups({"authors", "admin"})
      * @Serializer\VirtualProperty(name="authors")
      * @Serializer\SerializedName("authors")
+     * @Serializer\XmlList(entry="author")
      */
     public function getAuthorNames()
     {

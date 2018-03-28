@@ -47,6 +47,7 @@ class ReviewController extends BaseApiController
      *   summary="Create a new review",
      *   description="Creates a new review resource.
                       <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="body", name="review", @Model(type=Review::class, groups={"reviews_send"}),),
      *   @SWG\Response(
      *     response=201,
@@ -90,6 +91,7 @@ class ReviewController extends BaseApiController
      *   tags={"Reviews"},
      *   summary="Retrieve a single review",
      *   description="Retrieves a representation of the review resource queried for.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
@@ -126,6 +128,7 @@ class ReviewController extends BaseApiController
      *   tags={"Reviews"},
      *   summary="List a collection of reviews",
      *   description="Retrieves a (filtered) collection of review resources.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="query",
      *     name="filter",
@@ -188,6 +191,7 @@ class ReviewController extends BaseApiController
      *   summary="Update a review",
      *   description="Updates a review, requiring a full representation of the resource.
      *                <strong>Requires owner or admin authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews_send"},),),
      *   @SWG\Response(
@@ -206,6 +210,7 @@ class ReviewController extends BaseApiController
      *   summary="Update part(s) of a review",
      *   description="Updates a review, requiring a full representation of the resource.
      *                <strong>Requires owner or admin authorization.</strong>",
+     *   produces={"application/hal+json"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Parameter(in="body", name="book", @Model(type=Review::class, groups={"reviews_send"},),),
      *   @SWG\Response(
@@ -258,6 +263,7 @@ class ReviewController extends BaseApiController
      *   summary="Remove a review",
      *   description="Removes a review resource from the system.
      *                <strong>Requires owner or admin authorization.</strong>",
+     *   produces={"text/html"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )

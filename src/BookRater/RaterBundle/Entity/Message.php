@@ -29,6 +29,7 @@ use Swagger\Annotations as SWG;
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\MessageRepository")
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("message")
  */
 class Message
 {
@@ -42,6 +43,7 @@ class Message
      *
      * @Serializer\Expose
      * @Serializer\Groups({"messages", "books", "authors", "reviews", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The unique identifier of the message.")
      */
@@ -66,6 +68,7 @@ class Message
      *
      * @Serializer\Expose
      * @Serializer\Groups({"messages", "books", "authors", "reviews", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="A brief description of the message content.")
      */
@@ -80,6 +83,7 @@ class Message
      *
      * @Serializer\Expose
      * @Serializer\Groups({"messages", "books", "authors", "reviews", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The message's main content.")
      */
@@ -92,6 +96,7 @@ class Message
      *
      * @Serializer\Expose
      * @Serializer\Groups({"messages", "books", "authors", "reviews", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The date and time on which the review was created.")
      */
@@ -104,6 +109,7 @@ class Message
      *
      * @Serializer\Expose
      * @Serializer\Groups({"messages", "books", "authors", "reviews", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="Whether or not the message has been marked as read by admin")
      */

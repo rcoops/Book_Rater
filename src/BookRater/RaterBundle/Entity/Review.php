@@ -38,6 +38,7 @@ use Swagger\Annotations as SWG;
  * @ORM\EntityListeners({"BookRater\RaterBundle\EventListener\ReviewListener"})
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("review")
  */
 class Review
 {
@@ -51,6 +52,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The unique identifier of the review.")
      */
@@ -65,6 +67,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="A short description summarising the review.")
      */
@@ -77,6 +80,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="A commentary of the book being reviewed.")
      */
@@ -93,6 +97,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin", "reviews_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The review's rating of the book from 1 to 5.", minimum="1", maximum="5")
      */
@@ -129,6 +134,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The date and time on which the review was created.")
      */
@@ -141,6 +147,7 @@ class Review
      *
      * @Serializer\Expose
      * @Serializer\Groups({"reviews", "books", "authors", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The date and time on which the review was last edited.")
      */
@@ -173,6 +180,7 @@ class Review
     /**
      * @Serializer\Expose
      * @Serializer\Groups({"reviews_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(
      *   type="integer",
@@ -337,6 +345,7 @@ class Review
      * @Serializer\Groups({"reviews", "books", "authors", "messages"})
      * @Serializer\VirtualProperty(name="user")
      * @Serializer\SerializedName("user")
+     * @Serializer\XmlElement(cdata=false)
      */
     public function getUsername()
     {
@@ -350,6 +359,7 @@ class Review
      * @Serializer\Groups({"books", "admin"})
      * @Serializer\VirtualProperty(name="book")
      * @Serializer\SerializedName("book")
+     * @Serializer\XmlElement(cdata=false)
      */
     public function getBookName()
     {

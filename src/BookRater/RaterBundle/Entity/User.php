@@ -40,6 +40,7 @@ use Swagger\Annotations as SWG;
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\UserRepository")
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("user")
  */
 class User extends BaseUser
 {
@@ -52,6 +53,7 @@ class User extends BaseUser
      *
      * @Serializer\Expose
      * @Serializer\Groups({"admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The unique identifier of the user.")
      */
@@ -64,6 +66,7 @@ class User extends BaseUser
      *
      * @Serializer\Expose
      * @Serializer\Groups({"admin"})
+     * @Serializer\XmlList(entry="review")
      *
      * @SWG\Property(description="A list of all reviews created by the user.")
      */
@@ -76,6 +79,7 @@ class User extends BaseUser
      *
      * @Serializer\Expose
      * @Serializer\Groups({"admin"})
+     * @Serializer\XmlList(entry="message")
      *
      * @SWG\Property(description="A list of all messages created by he user.")
      */

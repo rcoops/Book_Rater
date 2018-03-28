@@ -36,6 +36,7 @@ use Swagger\Annotations as SWG;
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\AuthorRepository")
  *
  * @Serializer\ExclusionPolicy("all")
+ * @Serializer\XmlRoot("author")
  */
 class Author
 {
@@ -49,6 +50,7 @@ class Author
      *
      * @Serializer\Expose
      * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The unique identifier of the author.")
      */
@@ -68,6 +70,9 @@ class Author
      *
      * @Serializer\Expose
      * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @SWG\Property(description="The author's first name.")
      */
     private $firstName;
 
@@ -85,6 +90,7 @@ class Author
      *
      * @Serializer\Expose
      * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The author's last name.")
      */
@@ -97,6 +103,7 @@ class Author
      *
      * @Serializer\Expose
      * @Serializer\Groups({"authors", "books", "reviews", "messages", "admin", "authors_send"})
+     * @Serializer\XmlElement(cdata=false)
      *
      * @SWG\Property(description="The author's initial(s) if they have any.")
      */
@@ -110,6 +117,7 @@ class Author
      *
      * @Serializer\Expose
      * @Serializer\Groups({"authors", "messages"})
+     * @Serializer\XmlList(entry="book")
      *
      * @SWG\Property(description="A collection of all books that the author has written.")
      */
@@ -137,6 +145,7 @@ class Author
     /**
      * @Serializer\Expose
      * @Serializer\Groups({"authors_send"})
+     * @Serializer\XmlList(entry="book")
      *
      * @SWG\Property(
      *   type="array",
@@ -283,6 +292,7 @@ class Author
      * @Serializer\Groups({"books", "admin"})
      * @Serializer\VirtualProperty(name="books")
      * @Serializer\SerializedName("books")
+     * @Serializer\XmlList(entry="book")
      */
     public function getBookNames()
     {

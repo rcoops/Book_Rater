@@ -34,8 +34,10 @@ class UserController extends BaseApiController
     /**
      * @param $identifier
      *
+     * @param Request $request
      * @return Response
      *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      * @Rest\Get("/users/{identifier}", name="api_users_show")
      *
      * @Security("is_granted('ROLE_ADMIN')")
@@ -45,6 +47,7 @@ class UserController extends BaseApiController
      *   summary="Retrieve a single user",
      *   description="Retrieves a representation of the user resource queried for.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="path",
      *     name="identifier",
@@ -64,7 +67,6 @@ class UserController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function showAction($identifier, Request $request)
     {
@@ -94,6 +96,7 @@ class UserController extends BaseApiController
      *   summary="List all users",
      *   description="Retrieves a collection of user resources.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Parameter(
      *     in="query",
@@ -151,6 +154,7 @@ class UserController extends BaseApiController
      *   summary="Remove a user.",
      *   description="Removes a user resource from the system.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"text/html"},
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
      *   @SWG\Response(response=204, description="Indicates that the resource is not present on the system.",),
      * )
@@ -180,6 +184,7 @@ class UserController extends BaseApiController
      *   tags={"Users"},
      *   summary="Retrieves a user's reviews",
      *   description="Retrieves a collection of all reviews created by a user.",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="path",
      *     name="identifier",
@@ -241,6 +246,7 @@ class UserController extends BaseApiController
      *   summary="Retrieves a user's messages",
      *   description="Retrieves a collection of all messages created by a user.
                       <strong>Requires admin authorization.</strong>",
+     *   produces={"application/hal+json", "application/hal+xml"},
      *   @SWG\Parameter(
      *     in="path",
      *     name="id",
