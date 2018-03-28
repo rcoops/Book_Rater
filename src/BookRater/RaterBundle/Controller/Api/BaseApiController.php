@@ -138,7 +138,9 @@ abstract class BaseApiController extends Controller
     {
         $json = $this->serialize($data, $format, $groups);
 
-        return new Response($json, $statusCode, ['Content-Type' => 'application/hal+json']);
+        $contentType = $format == 'xml' ? 'application/xml' : 'application/hal+json';
+
+        return new Response($json, $statusCode, ['Content-Type' => $contentType]);
     }
 
     protected function serialize($data, $format, array $groups = [])
@@ -218,6 +220,16 @@ abstract class BaseApiController extends Controller
     protected function setLocationHeader(Response $response, string $route, array $routeParams): void
     {
         $response->headers->set('Location', $this->generateUrl($route, $routeParams));
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed|string
+     */
+    protected function getFormatFromRequest(Request $request)
+    {
+        $queryFormat = $request->query->get('format');
+        return $queryFormat ? $queryFormat : 'json';
     }
 
 }

@@ -67,6 +67,7 @@ class BookController extends BaseApiController
     /**
      * @param int $id
      *
+     * @param Request $request
      * @return Response
      *
      * @Rest\Get("/books/{id}", name="api_books_show")
@@ -76,6 +77,7 @@ class BookController extends BaseApiController
      *   summary="Retrieve a single book",
      *   description="Retrieves a representation of the book resource queried for.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource queried for.",
@@ -84,7 +86,7 @@ class BookController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
-    public function showAction(int $id)
+    public function showAction(int $id, Request $request)
     {
         $book = $this->getBookRepository()->find($id);
 
@@ -92,7 +94,7 @@ class BookController extends BaseApiController
             $this->throwBookNotFoundException($id);
         }
 
-        $response = $this->createApiResponse($book);
+        $response = $this->createApiResponse($book, 200, $this->getFormatFromRequest($request));
         $this->setLocationHeader($response, 'api_books_show', [
             'id' => $book->getId(),
         ]);
@@ -117,6 +119,7 @@ class BookController extends BaseApiController
      *     type="string",
      *     description="An optional filter by book title or author first/last name."
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Parameter(
      *     in="query",
      *     name="page",
@@ -155,7 +158,7 @@ class BookController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_books_collection');
 
-        return $this->createApiResponse($paginatedCollection);
+        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
@@ -268,6 +271,7 @@ class BookController extends BaseApiController
      *   summary="Retrieve a book's authors",
      *   description="Retrieves a collection of all of the book's authors.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of the book's authors.",
@@ -300,7 +304,7 @@ class BookController extends BaseApiController
                 'id' => $book->getId(),
             ]
         );
-        return $this->createApiResponse($collection);
+        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
@@ -315,6 +319,7 @@ class BookController extends BaseApiController
      *   summary="Retrieves a book's reviews",
      *   description="Retrieves a collection of all reviews made for this book.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book resource."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of the book's reviews.",
@@ -347,7 +352,7 @@ class BookController extends BaseApiController
                 'id' => $book->getId(),
             ]
         );
-        return $this->createApiResponse($collection);
+        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
     }
 
     /**

@@ -81,6 +81,7 @@ class ReviewController extends BaseApiController
     /**
      * @param int $id
      *
+     * @param Request $request
      * @return Response
      *
      * @Rest\Get("/reviews/{id}", name="api_reviews_show")
@@ -90,6 +91,7 @@ class ReviewController extends BaseApiController
      *   summary="Retrieve a single review",
      *   description="Retrieves a representation of the review resource queried for.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the review."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the book resource queried for.",
@@ -98,7 +100,7 @@ class ReviewController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
-    public function showAction(int $id)
+    public function showAction(int $id, Request $request)
     {
         $review = $this->getReviewRepository()->find($id);
 
@@ -106,7 +108,7 @@ class ReviewController extends BaseApiController
             $this->throwReviewNotFoundException($id);
         }
 
-        $response = $this->createApiResponse($review);
+        $response = $this->createApiResponse($review, 200, $this->getFormatFromRequest($request));
         $this->setLocationHeader($response, 'api_reviews_show', ['id' => $review->getId()]);
 
         return $response;
@@ -130,6 +132,7 @@ class ReviewController extends BaseApiController
      *     type="string",
      *     description="An optional filter by book title, username, or review rating."
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Parameter(
      *     in="query",
      *     name="page",
@@ -168,7 +171,7 @@ class ReviewController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_reviews_collection');
 
-        return $this->createApiResponse($paginatedCollection);
+        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
     }
 
     /**

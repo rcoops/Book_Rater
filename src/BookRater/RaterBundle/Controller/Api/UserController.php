@@ -51,6 +51,7 @@ class UserController extends BaseApiController
      *     type="string",
      *     description="A unique identifier for the user (id, email or username).",
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the user resource queried for.",
@@ -65,13 +66,13 @@ class UserController extends BaseApiController
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function showAction($identifier)
+    public function showAction($identifier, Request $request)
     {
         $user = $this->getUserRepository()->findByIdentifier($identifier);
         if (!$user) {
             $this->throwUserNotFoundException($identifier);
         }
-        $response = $this->createApiResponse($user);
+        $response = $this->createApiResponse($user, 200, $this->getFormatFromRequest($request));
         $this->setLocationHeader($response, 'api_users_show', [
             'identifier' => $user->getId(),
         ]);
@@ -93,6 +94,7 @@ class UserController extends BaseApiController
      *   summary="List all users",
      *   description="Retrieves a collection of user resources.
                       <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Parameter(
      *     in="query",
      *     name="page",
@@ -133,7 +135,7 @@ class UserController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_users_collection');
 
-        return $this->createApiResponse($paginatedCollection);
+        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
@@ -184,6 +186,7 @@ class UserController extends BaseApiController
      *     type="string",
      *     description="A unique identifier for the user (id, email or username).",
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of all reviews created by the user.",
@@ -221,7 +224,7 @@ class UserController extends BaseApiController
                 'identifier' => $user->getId(),
             ]
         );
-        return $this->createApiResponse($collection);
+        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
@@ -244,6 +247,7 @@ class UserController extends BaseApiController
      *     type="integer",
      *     description="The unique id of a user.",
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of all messages created by the user.",
@@ -280,7 +284,7 @@ class UserController extends BaseApiController
                 'id' => $user->getId(),
             ]
         );
-        return $this->createApiResponse($collection);
+        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
     }
 
     private function throwUserNotFoundException($identifier)

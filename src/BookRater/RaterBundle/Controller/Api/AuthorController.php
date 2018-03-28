@@ -66,6 +66,7 @@ class AuthorController extends BaseApiController
      * @param string $lastName
      * @param string $firstName
      *
+     * @param Request $request
      * @return Response
      *
      * @Rest\Get("/authors/{lastName}/{firstName}", name="api_authors_show")
@@ -76,6 +77,7 @@ class AuthorController extends BaseApiController
      *   description="Retrieves a representation of the author resource queried for.",
      *   @SWG\Parameter(in="path", name="lastName", type="string", description="The author's last name."),
      *   @SWG\Parameter(in="path", name="firstName", type="string", description="The author's first name."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A representation of the author resource queried for.",
@@ -84,7 +86,7 @@ class AuthorController extends BaseApiController
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
      */
-    public function showAction(string $lastName, string $firstName)
+    public function showAction(string $lastName, string $firstName, Request $request)
     {
         $author = $this->getAuthorRepository()->findOneBy([
             'lastName' => $lastName,
@@ -95,7 +97,7 @@ class AuthorController extends BaseApiController
             $this->throwAuthorNotFoundException($lastName, $firstName);
         }
 
-        $response = $this->createApiResponse($author);
+        $response = $this->createApiResponse($author, 200, $this->getFormatFromRequest($request));
         $this->setLocationHeader($response, 'api_authors_show', [
             'lastName' => $author->getLastName(),
             'firstName' => $author->getFirstName(),
@@ -121,6 +123,7 @@ class AuthorController extends BaseApiController
      *     type="string",
      *     description="An optional filter by first or last name."
      *   ),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Parameter(
      *     in="query",
      *     name="page",
@@ -159,7 +162,7 @@ class AuthorController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_authors_collection');
 
-        return $this->createApiResponse($paginatedCollection);
+        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
@@ -285,6 +288,7 @@ class AuthorController extends BaseApiController
      *   summary="Retrieve an author's books",
      *   description="Retrieves a collection of all of the books written by an author.",
      *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the author."),
+     *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of all of the books written by an author.",
@@ -318,7 +322,8 @@ class AuthorController extends BaseApiController
                 'firstName' => $author->getFirstName(),
             ]
         );
-        return $this->createApiResponse($collection);
+
+        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
     }
 
     /**
