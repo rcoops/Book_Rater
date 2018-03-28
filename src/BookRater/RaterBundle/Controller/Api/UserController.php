@@ -93,6 +93,12 @@ class UserController extends BaseApiController
      *   summary="List all users",
      *   description="Retrieves a collection of user resources.
                       <strong>Requires admin authorization.</strong>",
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="page",
+     *     type="integer",
+     *     description="An optional page number for paginated results."
+     *   ),
      *   @SWG\Response(
      *     response=200,
      *     description="A collection of all user resources.",

@@ -130,6 +130,12 @@ class ReviewController extends BaseApiController
      *     type="string",
      *     description="An optional filter by book title, username, or review rating."
      *   ),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="page",
+     *     type="integer",
+     *     description="An optional page number for paginated results."
+     *   ),
      *   @SWG\Response(
      *     response=200,
      *     description="A (filtered) collection of review resources.",

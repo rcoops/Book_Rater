@@ -121,6 +121,12 @@ class AuthorController extends BaseApiController
      *     type="string",
      *     description="An optional filter by first or last name."
      *   ),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="page",
+     *     type="integer",
+     *     description="An optional page number for paginated results."
+     *   ),
      *   @SWG\Response(
      *     response=200,
      *     description="A (filtered) collection of author resources.",
