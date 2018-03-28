@@ -105,7 +105,7 @@ class Author
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="authors")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"authors", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"authors", "messages"})
      *
      * @SWG\Property(description="A collection of all books that the author has written.")
      */
@@ -238,6 +238,21 @@ class Author
         $this->booksAuthored->removeElement($bookAuthored);
 
         return $this;
+    }
+
+    /**
+     * @return string
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "admin"})
+     * @Serializer\VirtualProperty(name="books")
+     * @Serializer\SerializedName("books")
+     */
+    public function getBookNames()
+    {
+        return $this->booksAuthored->map(function (Book $book) {
+            return $book->getTitle();
+        });
     }
 
     /**

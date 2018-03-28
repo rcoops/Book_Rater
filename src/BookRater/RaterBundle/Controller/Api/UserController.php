@@ -165,7 +165,7 @@ class UserController extends BaseApiController
      *   description="Retrieves a collection of all reviews created by a user.",
      *   @SWG\Parameter(
      *     in="path",
-     *     name="id",
+     *     name="identifier",
      *     type="string",
      *     description="A unique identifier for the user (id, email or username).",
      *   ),

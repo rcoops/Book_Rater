@@ -38,9 +38,6 @@ class Message
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
-     * @Serializer\Expose
-     * @Serializer\Groups({"messages", "books", "authors", "reviews"})
-     *
      * @SWG\Property(description="The creator of the message.")
      */
     private $user;
@@ -219,6 +216,19 @@ class Message
         $this->isRead = $isRead;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"messages", "admin"})
+     * @Serializer\VirtualProperty(name="user")
+     * @Serializer\SerializedName("user")
+     */
+    public function getUsername()
+    {
+        return $this->user->getUsername();
     }
 
     /**

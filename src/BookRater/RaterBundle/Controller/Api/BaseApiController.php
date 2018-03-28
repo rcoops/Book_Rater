@@ -134,7 +134,7 @@ abstract class BaseApiController extends Controller
             ->getRepository('BookRaterRaterBundle:ApiToken');
     }
 
-    private function createApiResponseWithGroups($data, $statusCode = 200, $format = 'json', array $groups = [])
+    protected function createApiResponseWithGroups($data, $statusCode = 200, $format = 'json', array $groups = [])
     {
         $json = $this->serialize($data, $format, $groups);
 

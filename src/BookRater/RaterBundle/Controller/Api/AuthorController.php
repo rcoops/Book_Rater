@@ -2,18 +2,16 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Form\Api\AuthorType;
 use BookRater\RaterBundle\Form\Api\Update\UpdateAuthorType;
-use BookRater\RaterBundle\Pagination\PaginationFactory;
 use Doctrine\ORM\NonUniqueResultException;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
-use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swagger\Annotations as SWG;
-use BookRater\RaterBundle\Entity\Author;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

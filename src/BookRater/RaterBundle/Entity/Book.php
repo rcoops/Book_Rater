@@ -151,7 +151,7 @@ class Book
      * @ORM\ManyToMany(targetEntity="Author", mappedBy="booksAuthored")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"books", "reviews", "messages", "admin"})
+     * @Serializer\Groups({"books", "reviews", "messages"})
      *
      * @SWG\Property(description="The book's author or authors.")
      */
@@ -457,6 +457,21 @@ class Book
         $this->averageRating = (int) $averageRating;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"authors", "admin"})
+     * @Serializer\VirtualProperty(name="authors")
+     * @Serializer\SerializedName("authors")
+     */
+    public function getAuthorNames()
+    {
+        return $this->authors->map(function (Author $author) {
+            return $author->getLastName() . ", " . $author->getFirstName();
+        });
     }
 
     /**

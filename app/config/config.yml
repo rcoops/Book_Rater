@@ -152,12 +152,12 @@ nelmio_api_doc:
             Bearer:
                 type: apiKey
                 description: 'Value: Bearer {jwt}'
-                name: Token Authorization
+                name: Authorization
                 in: header
             Basic:
                 type: basic
                 description: 'Value: Basic {base64encode(username:password)}'
-                name: Basic Authorization
+                name: Authorization
                 in: header
         security:
             - Bearer: []

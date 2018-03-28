@@ -98,7 +98,7 @@ class Review
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="reviews")
      *
      * @Serializer\Expose
-     * @Serializer\Groups({"reviews", "authors", "messages", "admin"})
+     * @Serializer\Groups({"reviews", "authors", "messages"})
      *
      * @SWG\Property(description="The book being reviewed.")
      */
@@ -108,9 +108,6 @@ class Review
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reviews")
-     *
-     * @Serializer\Expose
-     * @Serializer\Groups({"reviews", "books", "authors", "messages"})
      *
      * @SWG\Property(description="The creator of the review.")
      */
@@ -287,6 +284,32 @@ class Review
         $this->edited = $edited;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"reviews", "books", "authors", "messages"})
+     * @Serializer\VirtualProperty(name="user")
+     * @Serializer\SerializedName("user")
+     */
+    public function getUsername()
+    {
+        return $this->user->getUsername();
+    }
+
+    /**
+     * @return string
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "admin"})
+     * @Serializer\VirtualProperty(name="book")
+     * @Serializer\SerializedName("book")
+     */
+    public function getBookName()
+    {
+        return $this->book->getTitle();
     }
 
     /**
