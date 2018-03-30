@@ -19,6 +19,10 @@
                 {{ knp_pagination_sortable(pagination, 'Rating', 'book.averageRating') }}
                 (<i class="fa fa-star gold"></i> / 5)
             </th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'Rating (Google Books)', 'book.googleBooksRating') }}<br/>
+                (<i class="fa fa-star gold"></i> / 5)
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +52,16 @@
                         Not yet rated!
                     {% else %}
                         {% set rating = book.averageRating|number_format %}
+                        {% for i in 1..rating %}
+                            <i class="fa fa-star gold"></i>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if book.googleBooksRating is null %}
+                        Not rated!
+                    {% else %}
+                        {% set rating = book.googleBooksRating|number_format %}
                         {% for i in 1..rating %}
                             <i class="fa fa-star gold"></i>
                         {% endfor %}

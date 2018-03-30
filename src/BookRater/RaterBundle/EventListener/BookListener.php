@@ -138,7 +138,7 @@ class BookListener
         }
         if (!$book->getGoogleBooksUrl()) {
             $book->setGoogleBooksUrl($volumeInfo->getCanonicalVolumeLink());
-            $book->setGoogleBooksReviewsUrl($volumeInfo->getCanonicalVolumeLink().'&sitesec=reviews');
+            $book->setGoogleBooksReviewsUrl($volumeInfo->getCanonicalVolumeLink() . '&sitesec=reviews');
         }
         if (!$book->getDescription()) {
             $book->setDescription($volumeInfo->getDescription());

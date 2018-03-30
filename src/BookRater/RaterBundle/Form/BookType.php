@@ -8,8 +8,10 @@ use BookRater\RaterBundle\Repository\AuthorRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,6 +42,11 @@ class BookType extends AbstractWebType
                     'min' => 1,
                 ]
             ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'rows' => 4,
+                ],
+            ])
             ->add('authors', EntityType::class, [
                 'class' => Author::class,
                 'required' => false,
@@ -48,6 +55,18 @@ class BookType extends AbstractWebType
                 'query_builder' => function (AuthorRepository $ar) {
                     return $ar->findAllOrderedByNameQB();
                 },
+                'disabled' => $options['is_api'],
+            ])
+            ->add('googleBooksId', HiddenType::class, [
+                'disabled' => $options['is_api'],
+            ])
+            ->add('googleBooksRating', HiddenType::class, [
+                'disabled' => $options['is_api'],
+            ])
+            ->add('googleBooksReviewsUrl', HiddenType::class, [
+                'disabled' => $options['is_api'],
+            ])
+            ->add('googleBooksUrl', HiddenType::class, [
                 'disabled' => $options['is_api'],
             ])
             ->add('submit', SubmitType::class, [
