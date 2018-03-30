@@ -29,7 +29,7 @@ class ReviewType extends AbstractWebType
                     return $ar->findAllOrderedByNameQB();
                 },
                 'placeholder' => 'Choose Book...',
-                'disabled' => $options['is_api'],
+                'disabled' => $options['is_api'] || $options['specific_book'],
             ])
             ->add('rating', RangeType::class, [
                 'attr' => [
@@ -61,6 +61,8 @@ class ReviewType extends AbstractWebType
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'data_class' => Review::class,
+            'specific_book' => false,
+            'book' => null,
         ]);
     }
 

@@ -58,7 +58,18 @@
                 {{ book.description }}
             {% endif %}
         </p>
-        <a href="{{ path('bookrater_book_edit', {'id': book.id }) }}" class="btn btn-primary">Edit</a>
+        <div class="row">
+            <div class="col-xs-6">
+                <a href="{{ path('bookrater_book_edit', {'id': book.id }) }}" class="btn btn-primary">
+                    Edit
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <a href="{{ path('bookrater_book_create_review', {'id': book.id }) }}" class="btn btn-primary">
+                    Add Review
+                </a>
+            </div>
+        </div>
     </section>
     <section class="well well-sm">
         <header>

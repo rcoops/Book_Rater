@@ -3,7 +3,10 @@
 namespace BookRater\RaterBundle\Controller\Web;
 
 use BookRater\RaterBundle\Entity\Book;
+use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\BookType;
+use BookRater\RaterBundle\Form\ReviewForSpecificBookType;
+use DateTime;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,8 +41,7 @@ class BookController extends EntityController
 
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             try {
                 $this->entityManager->persist($book);
                 $this->entityManager->flush();
@@ -55,6 +57,32 @@ class BookController extends EntityController
         return $this->render('BookRaterRaterBundle:Book:create.html.twig', ['form' => $form->createView()]);
     }
 
+    public function addReviewAction(int $id, Request $request)
+    {
+        $book = $this->bookRepository->find($id);
+        $review = new Review();
+        $form = $this->createForm(ReviewForSpecificBookType::class, $review, [
+                'action' => $request->getUri(),
+                'book' => $book,
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $review->setUser($this->getUser());
+            $review->setCreated(new DateTime());
+            $this->entityManager->persist($review);
+            $this->entityManager->flush();
+
+            return $this->redirect($this->generateUrl('bookrater_book_view', [
+                'title' => $book->getTitle()
+            ]));
+        }
+        return $this->render('@BookRaterRater/Review/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     public function editAction(int $id, Request $request)
     {
         $book = $this->bookRepository->find($id);
@@ -62,7 +90,7 @@ class BookController extends EntityController
         $form = $this->createForm(BookType::class, $book, ['action' => $request->getUri()]);
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));
@@ -79,7 +107,7 @@ class BookController extends EntityController
 
         $pagination = $this->paginate($query, $request);
 
-        return $this->render('@BookRaterRater/Book/list.html.twig',[
+        return $this->render('@BookRaterRater/Book/list.html.twig', [
             'pagination' => $pagination
         ]);
     }
@@ -87,8 +115,7 @@ class BookController extends EntityController
     public function filter(string $filter = '', Request $request)
     {
         $params = $request->query->all();
-        if ($filter)
-        {
+        if ($filter) {
             $params = array_merge($params, ['filter' => $filter]);
         }
 

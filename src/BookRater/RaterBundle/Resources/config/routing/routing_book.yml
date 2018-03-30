@@ -17,3 +17,9 @@ bookrater_book_edit:
     defaults: { _controller: BookRaterRaterBundle:Web\Book:edit }
     requirements:
         id: \d+
+
+bookrater_book_create_review:
+    path:     /edit/{id}/review
+    defaults: { _controller: BookRaterRaterBundle:Web\Book:addReview }
+    requirements:
+        id: \d+

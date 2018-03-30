@@ -64,19 +64,21 @@ class ReviewController extends EntityController
     {
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review, ['action' => $request->getUri()]);
-
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             $review->setUser($this->getUser());
             $review->setCreated(new DateTime());
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 
-            return $this->redirect($this->generateUrl('bookrater_review_edit', ['id' => $review->getId()]));
+            return $this->redirect($this->generateUrl('bookrater_review_edit', [
+                'id' => $review->getId()])
+            );
         }
-        return $this->render('BookRaterRaterBundle:Review:create.html.twig', ['form' => $form->createView()]);
+        return $this->render('BookRaterRaterBundle:Review:create.html.twig', [
+                'form' => $form->createView()]
+        );
     }
 
     public function deleteAction(int $id)
