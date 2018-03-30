@@ -5,6 +5,7 @@ namespace BookRater\RaterBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,7 +33,7 @@ use Swagger\Annotations as SWG;
  *   )
  * )
  *
- * @ORM\Table(name="authors")
+ * @ORM\Table(name="authors", uniqueConstraints={@UniqueConstraint(name="unique_author", columns={"last_name", "first_name", "initial"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\AuthorRepository")
  *
  * @Serializer\ExclusionPolicy("all")
@@ -166,7 +167,7 @@ class Author
      *
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -176,7 +177,7 @@ class Author
      *
      * @return string|null
      */
-    public function getFirstName() : ?string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -188,7 +189,7 @@ class Author
      *
      * @return Author
      */
-    public function setFirstName(string $firstName) : Author
+    public function setFirstName(string $firstName): Author
     {
         $this->firstName = $firstName;
 
@@ -200,7 +201,7 @@ class Author
      *
      * @return string|null
      */
-    public function getLastName() : ?string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -212,7 +213,7 @@ class Author
      *
      * @return Author
      */
-    public function setLastName(string $lastName) : Author
+    public function setLastName(string $lastName): Author
     {
         $this->lastName = $lastName;
 
@@ -224,7 +225,7 @@ class Author
      *
      * @return string|null
      */
-    public function getInitial() : ?string
+    public function getInitial(): ?string
     {
         return $this->initial;
     }
@@ -236,7 +237,7 @@ class Author
      *
      * @return Author
      */
-    public function setInitial(?string $initial) : Author
+    public function setInitial(?string $initial): Author
     {
         $this->initial = $initial;
 
@@ -246,7 +247,7 @@ class Author
     /**
      * @return Collection|Book[]
      */
-    public function getBooksAuthored() : Collection
+    public function getBooksAuthored(): Collection
     {
         return $this->booksAuthored;
     }
@@ -258,7 +259,7 @@ class Author
      *
      * @return Author
      */
-    public function addBooksAuthored(Book $bookAuthored) : Author
+    public function addBooksAuthored(Book $bookAuthored): Author
     {
         if (!$this->booksAuthored->contains($bookAuthored)) {
             $this->booksAuthored[] = $bookAuthored;
@@ -274,7 +275,7 @@ class Author
      *
      * @return Author
      */
-    public function removeBooksAuthored(Book $bookAuthored) : Author
+    public function removeBooksAuthored(Book $bookAuthored): Author
     {
         if ($this->booksAuthored->contains($bookAuthored)) {
             $bookAuthored->getAuthors()->removeElement($this);
@@ -304,7 +305,7 @@ class Author
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         $name = $this->getLastName() . ', ' . $this->getFirstName();
         if ($this->initial) {

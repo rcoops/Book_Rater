@@ -4,17 +4,11 @@ namespace BookRater\RaterBundle\EventListener;
 
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Entity\Review;
-use BookRater\RaterBundle\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping\PostPersist;
 use Doctrine\ORM\Mapping\PostRemove;
 use Doctrine\ORM\Mapping\PostUpdate;
-use Doctrine\ORM\Mapping\PrePersist;
-use Doctrine\ORM\Mapping\PreRemove;
-use Doctrine\ORM\Mapping\PreUpdate;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class ReviewListener
 {

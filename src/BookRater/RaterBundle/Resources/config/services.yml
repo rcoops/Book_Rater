@@ -34,3 +34,15 @@ services:
         tags:
             - { name: doctrine.orm.entity_listener }
             - { name: doctrine.orm.entity_listener, entity_manager: custom }
+
+    BookRater\RaterBundle\EventListener\BookListener:
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener, entity_manager: custom }
+
+    Google\Google_Client:
+        class: Google_Client
+        arguments: ['%google_client_config%']
+
+    Google\Google_Books_Service:
+        class: Google_Service_Books

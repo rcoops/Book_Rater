@@ -49,6 +49,61 @@ class BookControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyIsArray($response, 'authors');
         $this->asserter()->assertResponsePropertyCount($response, 'authors', 1);
         $this->asserter()->assertResponsePropertyEquals($response, 'authors[0].lastName', 'Freeley');
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            '_links.self',
+            $this->adjustUri('/api/v1/books/1')
+        );
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            '_links.authors',
+            $this->adjustUri('/api/v1/books/1/authors')
+        );
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            '_links.reviews',
+            $this->adjustUri('/api/v1/books/1/reviews')
+        );
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testPOSTUsingGoogleBooks()
+    {
+        // https://books.google.co.uk/books/about/The_lion_the_witch_and_the_wardrobe.html?hl=&id=amIsPRgRJDkC&redir_esc=y
+        $this->createUser('mr_test');
+
+        $data = [
+            'title' => 'The Lion, the Witch and the Wardrobe',
+            'isbn' => '0006716636',
+            'publishDate' => '1997-04-30',
+            'edition' => 1,
+        ];
+        $response = $this->post('/books', [
+            'body' => json_encode($data),
+            'headers' => $this->getAuthorizedHeaders('mr_test'),
+        ]);
+
+        $this->assertEquals(201, $response->getStatusCode());
+        $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/books/1');
+        $this->asserter()->assertResponseHeaderEquals($response, 'Content-Type', 'application/hal+json');
+        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'The Lion, the Witch and the Wardrobe');
+        $this->asserter()->assertResponsePropertyEquals($response, 'isbn', '0006716636');
+        $this->asserter()->assertResponsePropertyEquals($response, 'isbn13', '9780006716631');
+        $this->asserter()->assertResponsePropertyEquals($response, 'publisher', 'Collins');
+        $this->asserter()->assertResponsePropertyEquals($response, 'edition', 1);
+        $this->asserter()->assertResponsePropertyIsArray($response, 'authors');
+        $this->asserter()->assertResponsePropertyCount($response, 'authors', 1);
+        $this->asserter()->assertResponsePropertyEquals($response, 'authors[0].lastName', 'Lewis');
+        $this->asserter()->assertResponsePropertyExists($response, 'description');
+        $this->asserter()->assertResponsePropertyExists($response, 'googleBooksRating');
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            '_links.google_books',
+            'https://books.google.com/books/about/The_lion_the_witch_and_the_wardrobe.html?hl=&id=amIsPRgRJDkC'
+        );
+        $this->asserter()->assertResponsePropertyExists($response, '_links.google_reviews');
     }
 
     /**

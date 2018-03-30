@@ -28,6 +28,7 @@
         "friendsofsymfony/jsrouting-bundle": "^2.1",
         "friendsofsymfony/rest-bundle": "^2.3",
         "friendsofsymfony/user-bundle": "~2.0",
+        "google/apiclient": "^2.2",
         "guzzlehttp/guzzle": "^6.3",
         "javiereguiluz/easyadmin-bundle": "^1.17",
         "jms/serializer-bundle": "^2.3",

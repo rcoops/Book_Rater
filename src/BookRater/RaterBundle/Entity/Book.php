@@ -34,9 +34,12 @@ use Swagger\Annotations as SWG;
  *     parameters = { "id" = "expr(object.getId())" }
  *   )
  * )
+ * @Hateoas\Relation("google_books", href="expr(object.getGoogleBooksUrl())")
+ * @Hateoas\Relation("google_reviews", href="expr(object.getGoogleBooksReviewsUrl())")
  *
  * @ORM\Table(name="books", uniqueConstraints={@UniqueConstraint(name="unique_book", columns={"title", "edition"})})
  * @ORM\Entity(repositoryClass="BookRater\RaterBundle\Repository\BookRepository")
+ * @ORM\EntityListeners({"BookRater\RaterBundle\EventListener\BookListener"})
  *
  * @Serializer\ExclusionPolicy("all")
  * @Serializer\XmlRoot("book")
@@ -89,7 +92,10 @@ class Book
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      * @Serializer\XmlElement(cdata=false)
      *
-     * @SWG\Property(description="The book's unique 10 digit International Standard Book Number.")
+     * @SWG\Property(
+     *   description="The book's unique 10 digit International Standard Book Number.",
+     *   example={"0123456789"}
+     * )
      */
     private $isbn;
 
@@ -108,7 +114,10 @@ class Book
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
      * @Serializer\XmlElement(cdata=false)
      *
-     * @SWG\Property(description="The book's unique 13 digit International Standard Book Number.")
+     * @SWG\Property(
+     *   description="The book's unique 13 digit International Standard Book Number.",
+     *   example={"9780123456789"}
+     * )
      */
     private $isbn13 = null;
 
@@ -135,7 +144,7 @@ class Book
      * @Serializer\Type("DateTime<'Y-m-d'>")
      * @Serializer\XmlElement(cdata=false)
      *
-     * @SWG\Property(description="The date that this publication of the book was published.")
+     * @SWG\Property(description="The date that this publication of the book was published.", example="1990-10-25")
      *
      */
     private $publishDate = null;
@@ -152,6 +161,19 @@ class Book
      * @SWG\Property(description="The edition number for this publication of the book.")
      */
     private $edition = null;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin", "books_send"})
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @SWG\Property(description="A short synopsis of the book.")
+     */
+    private $description;
 
     /**
      * @var Collection|Author[]
@@ -188,9 +210,47 @@ class Book
      * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
      * @Serializer\XmlElement(cdata=false)
      *
-     * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.")
+     * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.", minimum="1", maximum="5")
      */
     private $averageRating = null;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="google_books_id", type="string", nullable=true, unique=true)
+     */
+    private $googleBooksId;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="google_books_url", type="string", nullable=true)
+     *
+     * @SWG\Property(description="A url to google books for this book")
+     */
+    private $googleBooksUrl;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="google_books_reviews_url", type="string", nullable=true)
+     *
+     * @SWG\Property(description="A url to the google books reviews for this book")
+     */
+    private $googleBooksReviewsUrl;
+
+    /**
+     * @var int|null
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @ORM\Column(name="google_books_rating", type="integer", nullable=true)
+     *
+     * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.", minimum="1", maximum="5")
+     */
+    private $googleBooksRating;
 
     /**
      * @Serializer\SerializedName("_links")
@@ -241,7 +301,7 @@ class Book
      *
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -251,7 +311,7 @@ class Book
      *
      * @return string|null
      */
-    public function getTitle() : ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -263,7 +323,7 @@ class Book
      *
      * @return Book
      */
-    public function setTitle(string $title) : Book
+    public function setTitle(string $title): Book
     {
         $this->title = $title;
 
@@ -275,7 +335,7 @@ class Book
      *
      * @return string|null
      */
-    public function getIsbn() : ?string
+    public function getIsbn(): ?string
     {
         return $this->isbn;
     }
@@ -287,7 +347,7 @@ class Book
      *
      * @return Book
      */
-    public function setIsbn(string $isbn) : Book
+    public function setIsbn(string $isbn): Book
     {
         $this->isbn = $isbn;
 
@@ -299,7 +359,7 @@ class Book
      *
      * @return string|null
      */
-    public function getIsbn13() : ?string
+    public function getIsbn13(): ?string
     {
         return $this->isbn13;
     }
@@ -311,7 +371,7 @@ class Book
      *
      * @return Book
      */
-    public function setIsbn13(?string $isbn13) : Book
+    public function setIsbn13(?string $isbn13): Book
     {
         $this->isbn13 = $isbn13;
 
@@ -323,7 +383,7 @@ class Book
      *
      * @return string|null
      */
-    public function getPublisher() : ?string
+    public function getPublisher(): ?string
     {
         return $this->publisher;
     }
@@ -335,7 +395,7 @@ class Book
      *
      * @return Book
      */
-    public function setPublisher(?string $publisher) : Book
+    public function setPublisher(?string $publisher): Book
     {
         $this->publisher = $publisher;
 
@@ -347,7 +407,7 @@ class Book
      *
      * @return DateTime|null
      */
-    public function getPublishDate() : ?DateTime
+    public function getPublishDate(): ?DateTime
     {
         return $this->publishDate;
     }
@@ -359,7 +419,7 @@ class Book
      *
      * @return Book
      */
-    public function setPublishDate(?DateTime $publishDate) : Book
+    public function setPublishDate(?DateTime $publishDate): Book
     {
         $this->publishDate = $publishDate;
 
@@ -371,7 +431,7 @@ class Book
      *
      * @return int|null
      */
-    public function getEdition() : ?int
+    public function getEdition(): ?int
     {
         return $this->edition;
     }
@@ -379,7 +439,7 @@ class Book
     /**
      * @return string
      */
-    public function displayEdition() : string
+    public function displayEdition(): string
     {
         $postFix = 'th';
         switch ($this->edition) {
@@ -404,7 +464,7 @@ class Book
      *
      * @return Book
      */
-    public function setEdition(?int $edition) : Book
+    public function setEdition(?int $edition): Book
     {
         $this->edition = $edition;
 
@@ -416,7 +476,7 @@ class Book
      *
      * @return Collection|Author[]
      */
-    public function getAuthors() : Collection
+    public function getAuthors(): Collection
     {
         return $this->authors;
     }
@@ -428,7 +488,7 @@ class Book
      *
      * @return Book
      */
-    public function addAuthor(Author $author) : Book
+    public function addAuthor(Author $author): Book
     {
         $author->addBooksAuthored($this);
         $this->authors[] = $author;
@@ -443,7 +503,7 @@ class Book
      *
      * @return Book
      */
-    public function removeAuthor(Author $author) : Book
+    public function removeAuthor(Author $author): Book
     {
         $author->removeBooksAuthored($this);
 
@@ -455,7 +515,7 @@ class Book
      *
      * @return Collection|Review[]
      */
-    public function getReviews() : Collection
+    public function getReviews(): Collection
     {
         return $this->reviews;
     }
@@ -467,7 +527,7 @@ class Book
      *
      * @return Book
      */
-    public function addReview(Review $review) : Book
+    public function addReview(Review $review): Book
     {
         $this->reviews[] = $review;
 
@@ -481,7 +541,7 @@ class Book
      *
      * @return Book
      */
-    public function removeReview(Review $review) : Book
+    public function removeReview(Review $review): Book
     {
         $this->reviews->removeElement($review);
 
@@ -491,7 +551,7 @@ class Book
     /**
      * @return int|null
      */
-    public function getAverageRating() : ?int
+    public function getAverageRating(): ?int
     {
         return $this->averageRating;
     }
@@ -501,9 +561,104 @@ class Book
      *
      * @return Book
      */
-    public function setAverageRating(?float $averageRating) : Book
+    public function setAverageRating(?float $averageRating): Book
     {
-        $this->averageRating = (int) $averageRating;
+        $this->averageRating = (int)$averageRating;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getGoogleBooksId(): ?string
+    {
+        return $this->googleBooksId;
+    }
+
+    /**
+     * @param null|string $googleBooksId
+     * @return Book
+     */
+    public function setGoogleBooksId(?string $googleBooksId): Book
+    {
+        $this->googleBooksId = $googleBooksId;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGoogleBooksRating(): ?int
+    {
+        return $this->googleBooksRating;
+    }
+
+    /**
+     * @param int|null $googleBooksRating
+     * @return Book
+     */
+    public function setGoogleBooksRating(?int $googleBooksRating): Book
+    {
+        $this->googleBooksRating = $googleBooksRating;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Book
+     */
+    public function setDescription(?string $description): Book
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGoogleBooksUrl(): ?string
+    {
+        return $this->googleBooksUrl;
+    }
+
+    /**
+     * @param string|null $googleBooksUrl
+     * @return Book
+     */
+    public function setGoogleBooksUrl(?string $googleBooksUrl): Book
+    {
+        $this->googleBooksUrl = $googleBooksUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getGoogleBooksReviewsUrl(): ?string
+    {
+        return $this->googleBooksReviewsUrl;
+    }
+
+    /**
+     * @param null|string $googleBooksReviewsUrl
+     * @return Book
+     */
+    public function setGoogleBooksReviewsUrl(?string $googleBooksReviewsUrl): Book
+    {
+        $this->googleBooksReviewsUrl = $googleBooksReviewsUrl;
 
         return $this;
     }
@@ -527,7 +682,7 @@ class Book
     /**
      * @return string|null
      */
-    public function __toString() : ?string
+    public function __toString(): ?string
     {
         return $this->title;
     }

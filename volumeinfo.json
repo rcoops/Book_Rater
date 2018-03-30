@@ -1,0 +1,49 @@
+{
+  "allowAnonLogging": false,
+  "authors": [
+    "Clive Staples Lewis"
+  ],
+  "averageRating": 4,
+    "canonicalVolumeLink": "https:\/\/books.google.com\/books\/about\/The_lion_the_witch_and_the_wardrobe.html?hl=&id=amIsPRgRJDkC",
+  "categories": [
+    "Fiction"
+  ],
+  "contentVersion": "preview-1.0.0",
+  "description": "Four English schoolchildren find their way through the back of a wardrobe into the magic land of Narnia and assist Aslan, the golden lion, to triumph over the White Witch, who has cursed the land with eternal winter.",
+  "infoLink": "http:\/\/books.google.co.uk\/books?id=amIsPRgRJDkC&dq=isbn:0006716636&hl=&source=gbs_api",
+  "language": "en",
+  "mainCategory": null,
+  "maturityRating": "NOT_MATURE",
+  "pageCount": 171,
+  "previewLink": "http:\/\/books.google.co.uk\/books?id=amIsPRgRJDkC&dq=isbn:0006716636&hl=&cd=1&source=gbs_api",
+  "printType": "BOOK",
+  "printedPageCount": null,
+  "publishedDate": "1997-04",
+  "publisher": "Collins",
+  "ratingsCount": 2765,
+  "readingModes": {
+    "text": false,
+    "image": false
+  },
+  "samplePageCount": null,
+  "subtitle": null,
+  "title": "The lion, the witch and the wardrobe",
+  "industryIdentifiers": [
+    {
+      "identifier": "0006716636",
+      "type": "ISBN_10"
+    },
+    {
+      "identifier": "9780006716631",
+      "type": "ISBN_13"
+    }
+  ],
+  "imageLinks": {
+    "extraLarge": null,
+    "large": null,
+    "medium": null,
+    "small": null,
+    "smallThumbnail": "http:\/\/books.google.com\/books\/content?id=amIsPRgRJDkC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+    "thumbnail": "http:\/\/books.google.com\/books\/content?id=amIsPRgRJDkC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  }
+}

@@ -23,13 +23,13 @@ BookRater\RaterBundle\Entity\User:
         plainPassword: '<password()>'
 
 BookRater\RaterBundle\Entity\Author:
-    author_{1..40}:
+    author_{1..35}:
         firstName (unique): '<firstName()>'
         lastName (unique): '<lastName()>'
         initial: "50%? <regexify('^[A-Z]$')> : 50%? <regexify('^[A-Z] [A-Z]$')>"
 
 BookRater\RaterBundle\Entity\Book:
-    book_{1..50}:
+    book_{1..40}:
         title (unique): '<sentence($nbWords = 4, $variableNbWords = true)>'
         isbn (unique): '<isbn10()>'
         isbn13 (unique): '<isbn13()>'
@@ -37,6 +37,7 @@ BookRater\RaterBundle\Entity\Book:
         publishDate: "<dateTime($max = 'now', $timezone = null)>"
         edition: '<numberBetween(1, 5)>'
         authors: '<numberBetween(1, 2)>x @author*'
+        description: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
 
 BookRater\RaterBundle\Entity\Review:
     review_{1..186}:

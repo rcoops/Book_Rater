@@ -10,7 +10,7 @@ class CustomFormEventSubscriber implements EventSubscriberInterface
 {
 
     /**
-     * Parses date string format 'd-m-Y' on rest form submission to array format recognisable by symfony forms.
+     * Parses date string format 'Y-m-d' on rest form submission to array format recognisable by symfony forms.
      * @param FormEvent $event
      */
     public function preSubmit(FormEvent $event)

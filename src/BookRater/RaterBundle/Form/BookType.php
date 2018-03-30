@@ -32,7 +32,7 @@ class BookType extends AbstractWebType
             ->add('isbn13')
             ->add('publisher')
             ->add('publishDate', DateType::class, [
-                'format' => 'dd-MM-yyyy',
+                'format' => 'yyyy-MM-dd',
                 'years' => range(date('Y'), 1500),
             ])
             ->add('edition', IntegerType::class, [
