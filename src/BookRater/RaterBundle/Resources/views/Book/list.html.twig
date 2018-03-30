@@ -10,16 +10,16 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ knp_pagination_sortable(pagination, 'Title', 'book.title') }}</th>
-            <th>Authors</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
-            <th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Title', 'book.title') }}</th>
+            <th class="align-middle">Authors</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
+            <th class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'Rating', 'book.averageRating') }}
                 (<i class="fa fa-star gold"></i> / 5)
             </th>
-            <th>
+            <th class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'Rating (Google Books)', 'book.googleBooksRating') }}<br/>
                 (<i class="fa fa-star gold"></i> / 5)
             </th>
