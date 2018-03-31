@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\EventListener;
 
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -60,6 +61,7 @@ class BookListener
                 $volumeInfo = $bestMatch->getVolumeInfo();
 
                 $book->setGoogleBooksId($bestMatch->getId());
+                $this->updateGoogleUrls($book, $bestMatch);
                 $this->updateBookFromVolumeInfo($book, $volumeInfo);
 
                 $this->persistBook($book);
@@ -133,12 +135,9 @@ class BookListener
     private function updateBookFromVolumeInfo(Book $book, Google_Service_Books_VolumeVolumeInfo $volumeInfo): void
     {
         $this->setISBNNumbers($book, $volumeInfo);
+        $book->setPublishDate(new DateTime($volumeInfo->publishedDate));
         if ($book->getAuthors()->isEmpty()) {
             $this->setAuthors($book, $volumeInfo);
-        }
-        if (!$book->getGoogleBooksUrl()) {
-            $book->setGoogleBooksUrl($volumeInfo->getCanonicalVolumeLink());
-            $book->setGoogleBooksReviewsUrl($volumeInfo->getCanonicalVolumeLink() . '&sitesec=reviews');
         }
         if (!$book->getDescription()) {
             $book->setDescription($volumeInfo->getDescription());
@@ -229,6 +228,18 @@ class BookListener
     private function hasInitials($authorNameArray): bool
     {
         return count($authorNameArray) > 2;
+    }
+
+    /**
+     * @param Book $book
+     * @param $bestMatch
+     */
+    private function updateGoogleUrls(Book $book, $bestMatch): void
+    {
+        if (!$book->getGoogleBooksUrl()) {
+            $book->setGoogleBooksUrl('http://books.google.co.uk/books?id=' . $bestMatch->getId());
+            $book->setGoogleBooksReviewsUrl($book->getGoogleBooksUrl() . '&sitesec=reviews');
+        }
     }
 
 }

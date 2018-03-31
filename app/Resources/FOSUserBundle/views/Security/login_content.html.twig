@@ -3,27 +3,45 @@
 {% if error %}
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-    {% endif %}
-    <div class="form-group">
-        <label for="username">{{ 'security.login.username'|trans }} / {{ 'profile.show.email'|trans }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
-    </div>
+<form action="{{ path("fos_user_security_check") }}" method="post" class="card bg-light">
+    <section class="card-body">
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        {% endif %}
+        <div class="card-text">
+            <div class="form-group">
+                <label for="username">{{ 'security.login.username'|trans }} / {{ 'profile.show.email'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"
+                       class="form-control"/>
+            </div>
+        </div>
+        <div class="card-text">
+            <div class="form-group">
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required" class="form-control"/>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label for="password">{{ 'security.login.password'|trans }}</label>
-        <input type="password" id="password" name="_password" required="required" class="form-control"/>
-    </div>
-    <div class="form-check col-xs-10">
-        <label for="remember_me" class="form-check-label">{{ 'security.login.remember_me'|trans }}</label>
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="form-check-input"/>
-    </div>
-    <div class="col-xs-2">
-        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-success btn-block" />
-    </div>
-    <div>
-        <a href="{{ path('fos_user_registration_register') }}">Not signed up? Click here to register</a>
-    </div>
+        <div class="card-text">
+            <div class="form-check">
+                <label for="remember_me" class="form-check-label">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="form-check-input"/>
+                    {{ 'security.login.remember_me'|trans }}
+                </label>
+            </div>
+        </div>
+    </section>
+    <section class="card-footer">
+        <div class="card-block">
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"
+                           class="btn btn-success btn-block"/>
+                </div>
+                <div class="col-5 flex align-self-center">
+                    <a href="{{ path('fos_user_registration_register') }}">Not signed up? Click here to register</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </form>

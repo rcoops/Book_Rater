@@ -3,17 +3,13 @@
 {% block title %}Create Book{% endblock %}
 
 {% block header %}
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-xs-6">
-                Add Book
-            </div>
-            <div class="col-xs-6 align-self-center">
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal"
-                        data-target="#googleSearchModal">
-                    Search Google Books
-                </button>
-            </div>
+    <div class="row justify-content-between">
+        <div class="col-xs-6">Create Book</div>
+        <div class="col-xs-6 align-self-center">
+            <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+                    data-target="#googleSearchModal">
+                Google Books Search
+            </button>
         </div>
     </div>
 {% endblock %}
@@ -30,69 +26,32 @@
                 </div>
                 <div class="modal-body">
                     <form class="mb-3">
-                        <div class="form-group row pr-3">
-                            <label for="search-term" class="col-sm-3 col-form-label">
+                        <div class="form-group row">
+                            <label for="search-term" class="col-2 col-form-label">
                                 <select id="query-type" class="form-control">
                                     <option value="isbn">ISBN-10</option>
                                     <option value="title">Title</option>
                                     <option value="author">Author</option>
                                 </select>
                             </label>
-                            <input name="search-term" id="search-term" type="text" class="col-sm-9" />
+                            <input name="search-term" id="search-term" type="text" class="col-8"/>
+                            <div class="col-1 flex align-self-center">
+                                <button type="button" class="btn btn-primary" onclick="getBooks()">Search</button>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-primary"
-                                onclick="getBooks($('#query-type').val(), $('#search-term').val())">
-                            Search
-                        </button>
                     </form>
                     <div class="form-group">
-                        <select id="search-results" class="form-control" style="display: none">
-                        </select>
-                    <p id="search-fail" style="display: none">No Results!</p>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal"
-                                onclick="getBooks($('#query-type').val(), $('#search-term').val())">
-                            Accept
-                        </button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <select title="Results" id="search-results" class="form-control" style="display: none"></select>
+                        <p id="search-fail" style="display: none">No Results!</p>
+                        <div class="modal-footer">
+                            <button id="accept" type="button" class="btn btn-success" data-dismiss="modal"
+                                    style="display: none" onclick="updateForm()">
+                                Accept
+                            </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script type="application/javascript">
-
-        function getBooks(key, value) {
-            console.log('https://www.googleapis.com/books/v1/volumes?q=' + key + ':' + value);
-
-            $.ajax({
-                url: 'https://www.googleapis.com/books/v1/volumes?q=' + key + ':' + value,
-                success: function (json) {
-                    console.log(json);
-                    var searchResults = $('#search-results');
-                    if (json.items.length === 0) {
-                        $('#search-fail').show();
-                        searchResults.hide();
-                    } else {
-                        $('#search-fail').hide();
-                        searchResults.show();
-                        searchResults
-                            .find('option')
-                            .remove()
-                            .end();
-                        $.each(json.items, function (i, item) {
-                            var author = "";
-                            if (typeof item.volumeInfo.authors !== 'undefined') {
-                                author = ", (" + item.volumeInfo.authors[0] + ")";
-                            }
-                            $('#search-results').append($('<option>', {
-                                value: item.volumeInfo.title,
-                                text: item.volumeInfo.title + author
-                            }));
-                        });
-                    }
-                }
-            });
-        }
-    </script>
 {% endblock %}

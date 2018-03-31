@@ -4,5 +4,12 @@
 {% block header %}Contact Us{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    <section class="card bg-light">
+        {{ form_start(form) }}
+        <section class="card-body">
+            <div class="card-text">{{ form_row(form.subject) }}</div>
+            <div class="card-text">{{ form_row(form.message) }}</div>
+        </section>
+        <footer class="card-footer">{{ form_widget(form.Send) }}</footer>
+    </section>
 {% endblock %}

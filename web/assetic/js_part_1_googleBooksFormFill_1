@@ -148,12 +148,3 @@ Array.prototype.swap = function(firstIndex, secondIndex) {
     input[secondIndex] = temp;
     return input;
 };
-
-function filterResults(url) {
-    var filter = document.getElementById('filter').value;
-    window.location.href = Routing.generate(url,
-        {'filter': filter});
-}
-function updateNum(num) {
-    $('#bookrater_raterbundle_review_ratingNum').val(num);
-}
