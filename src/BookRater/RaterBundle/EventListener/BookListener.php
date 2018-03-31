@@ -50,11 +50,6 @@ class BookListener
         if (!$book->getGoogleBooksId()) {
             /** @var Google_Service_Books_Volumes $volumes */
             $volumes = $this->booksClient->volumes->listVolumes('isbn:' . $book->getIsbn());
-            if (!$volumes->getItems()) {
-                /** @var Google_Service_Books_Volumes $volumes */
-                $query = 'intitle:' . $this->convertToQueryParam($book->getTitle());
-                $volumes = $this->booksClient->volumes->listVolumes($query);
-            }
             if ($volumes->getItems()) {
                 /** @var \Google_Service_Books_Volume $bestMatch */
                 $bestMatch = $volumes->getItems()[0];

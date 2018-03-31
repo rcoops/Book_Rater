@@ -23,7 +23,7 @@ class BookControllerTest extends ApiTestCase
 
         $data = [
             'title' => 'The Importance of Adequate Toilet Facilities',
-            'isbn' => '0123456789',
+            'isbn' => '999999999X',
             'isbn13' => '9780123456789',
             'publisher' => 'Cool Publishing Co.',
             'publishDate' => '24-08-1984',
@@ -41,7 +41,7 @@ class BookControllerTest extends ApiTestCase
         $this->asserter()->assertResponseLocationHeaderEndswith($response, self::BASE_API_URI.'/books/1');
         $this->asserter()->assertResponseHeaderEquals($response, 'Content-Type', 'application/hal+json');
         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'The Importance of Adequate Toilet Facilities');
-        $this->asserter()->assertResponsePropertyEquals($response, 'isbn', '0123456789');
+        $this->asserter()->assertResponsePropertyEquals($response, 'isbn', '999999999X');
         $this->asserter()->assertResponsePropertyEquals($response, 'isbn13', '9780123456789');
         $this->asserter()->assertResponsePropertyEquals($response, 'publisher', 'Cool Publishing Co.');
         $this->asserter()->assertResponsePropertyEquals($response, 'publishDate', '1984-08-24');
@@ -101,7 +101,7 @@ class BookControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals(
             $response,
             '_links.google_books',
-            'https://books.google.com/books/about/The_lion_the_witch_and_the_wardrobe.html?hl=&id=amIsPRgRJDkC'
+             'http://books.google.co.uk/books?id=amIsPRgRJDkC'
         );
         $this->asserter()->assertResponsePropertyExists($response, '_links.google_reviews');
     }
