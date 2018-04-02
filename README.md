@@ -52,3 +52,7 @@ You're good to go, finally just run:
 <code>bin/console server:run</code>
 
 and go to http://localhost:8000
+
+Useful Stuff
+------------
+Default admin details:- username: admin password: admin
