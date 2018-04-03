@@ -48,7 +48,7 @@ and go to http://localhost:8000
 
 ## Useful Stuff
 ##### Host site
-[rickcooper.ddns.net](rickcooper.ddns.net)
+[rickcooper.ddns.net](http://rickcooper.ddns.net)
 
 ##### Default admin details (for checking the API etc.)
 
