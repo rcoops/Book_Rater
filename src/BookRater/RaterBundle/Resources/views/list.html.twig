@@ -7,16 +7,24 @@
 {% endblock javascript %}
 {% block body %}
     {% block list_control %}
-        <div class="form-inline">
-            <span class="badge badge-pill">{{ pagination.getTotalItemCount }}</span>
-            <input id="filter" type="text" name="name" class="form-control" placeholder="{{ placeholder }}"/>
-            <button onclick="filterResults('{{ route }}')" class="btn btn-primary">Filter</button>
+        <div class="form-inline mb-3">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="count col-1 align-self-center">
+                        <span class="badge badge-pill badge-secondary">{{ pagination.getTotalItemCount }}</span>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <input id="filter" type="text" name="name" class="form-control" placeholder="{{ placeholder }}"/>
+                        <button onclick="filterResults('{{ route }}')" class="btn btn-primary ml-1">Filter</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="navigation">{{ knp_pagination_render(pagination) }}</div>
+        {{ knp_pagination_render(pagination,
+            '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
     {% endblock list_control %}
     {% block pagination_bottom %}
-        <div class="navigation">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+        {{ knp_pagination_render(pagination,
+            '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
     {% endblock pagination_bottom %}
 {% endblock body %}

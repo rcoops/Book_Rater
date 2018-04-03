@@ -23,29 +23,30 @@ BookRater\RaterBundle\Entity\User:
         plainPassword: '<password()>'
 
 BookRater\RaterBundle\Entity\Author:
-    author_{1..40}:
+    author_{1..35}:
         firstName (unique): '<firstName()>'
         lastName (unique): '<lastName()>'
-        initial: "<regexify('[A-Z ]{0,2}')>"
+        initial: "50%? <regexify('^[A-Z]$')> : 50%? <regexify('^[A-Z] [A-Z]$')>"
 
 BookRater\RaterBundle\Entity\Book:
-    book_{1..50}:
+    book_{1..40}:
         title (unique): '<sentence($nbWords = 4, $variableNbWords = true)>'
-        isbn (unique): "<regexify('[0-9]{10}')>"
-        isbn13 (unique): "<regexify('[0-9]{3}-[0-9]{10}')>"
+        isbn (unique): '<isbn10()>'
+        isbn13 (unique): '<isbn13()>'
         publisher: '<company()>'
         publishDate: "<dateTime($max = 'now', $timezone = null)>"
-        edition: '<numberBetween($min = 1, $max = 5)>'
+        edition: '<numberBetween(1, 5)>'
         authors: '<numberBetween(1, 2)>x @author*'
+        description: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
 
 BookRater\RaterBundle\Entity\Review:
     review_{1..186}:
-        reviewTitle: '<sentence($nbWords = 4, $variableNbWords = true)>'
-        reviewComments: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
+        title: '<sentence($nbWords = 4, $variableNbWords = true)>'
+        comments: '<paragraph($nbSentences = 5, $variableNbSentences = true)>'
         rating: "<numberBetween($min = 1, $max = 5)>"
+        book: '@book*'
         user: '@user*'
-        bookReviewed: '@book*'
-        created: "<dateTimeBetween($bookReviewed->getPublishDate(), 'now')>"
+        created: "<dateTimeBetween($book->getPublishDate(), 'now')>"
         edited: "30%? <dateTimeBetween($created, 'now')>"
 
 BookRater\RaterBundle\Entity\Message:
@@ -54,4 +55,4 @@ BookRater\RaterBundle\Entity\Message:
         subject: '<sentence($nbWords = 3, $variableNbWords = true)>'
         message: '<paragraph($nbSentences = 3, $variableNbSentences = true)>'
         created: "<dateTime($max = 'now', $timezone = null)>"
-        isRead: '50%? 1'
+        isRead: '<numberBetween(0, 1)>'

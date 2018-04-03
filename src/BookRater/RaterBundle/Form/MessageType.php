@@ -11,17 +11,34 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MessageType extends AbstractType
+class MessageType extends AbstractWebType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subject', TextType::class, ['label'=> 'Subject','attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
-            ->add('message', TextareaType::class, ['label'=> 'Message','attr' => ['class' => 'form-control']])
-            ->add('Send', SubmitType::class, ['attr' => ['class' => 'btn btn-primary', 'style' => 'margin-top:15px']]);
+            ->add('subject', TextType::class, [
+                'label' => 'Subject',
+                'attr' => [
+                    'class' => 'form-control',
+                    'style' => 'margin-bottom:15px',
+                ]
+            ])
+            ->add('message', TextareaType::class, [
+                'label' => 'Content',
+                'attr' => [
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('Send', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ],
+                'disabled' => $options['is_api'],
+            ]);
     }
 
     /**
@@ -29,8 +46,9 @@ class MessageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
         $resolver->setDefaults([
-            'data_class' => Message::class
+            'data_class' => Message::class,
         ]);
     }
 

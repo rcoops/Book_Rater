@@ -1,24 +1,30 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<h1 class="h1">Profile</h1>
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-<div>
-    <input type="submit" value="{{ 'profile.edit.submit' | trans }}" class="btn btn-success" />
-    <a href="{{ path('fos_user_change_password') }}" class="btn btn-danger pull-right">Change my password</a>
-</div>
-{{ form_end(form) }}
-<div class="well well-sm" style="margin-top: 1em">
-    <header><h3 class="h3">My Reviews</h3></header>
-    {% if form.vars.data.reviews is not empty %}
-        <ul>
-            {% for item in form.vars.data.reviews | sort %}
-                <li>
-                    <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.reviewTitle }}</a>
-                    <small>- Created {{ item.created|date('d-m-Y') }}</small>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No reviews yet!</p>
-    {% endif %}
-</div>
+<section class="card">
+    <header class="card-header">
+        <h1 class="h1">Profile</h1>
+    </header>
+    <div class="card-body">
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit' | trans }}" class="btn btn-success"/>
+            <a href="{{ path('fos_user_change_password') }}" class="btn btn-danger pull-right">Change my password</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="card-footer">
+        <header><h3 class="h3">My Reviews</h3></header>
+        {% if form.vars.data.reviews is not empty %}
+            <ul>
+                {% for item in form.vars.data.reviews | sort %}
+                    <li>
+                        <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
+                        <small>- Created {{ item.created|date('d-m-Y') }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reviews yet!</p>
+        {% endif %}
+    </div>
+</section>

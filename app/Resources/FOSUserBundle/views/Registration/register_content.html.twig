@@ -1,7 +1,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-<div>
-    <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
-</div>
-{{ form_end(form) }}
+<section class="card bg-light">
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    <section class="card-body">
+        <div class="card-text">{{ form_row(form.email) }}</div>
+        <div class="card-text">{{ form_row(form.username) }}</div>
+        <div class="card-text">{{ form_row(form.plainPassword) }}</div>
+        <div class="card-text">{{ form_row(form.plainPassword.second) }}</div>
+    </section>
+    <footer class="card-footer">
+        <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
+    </footer>
+
+    {{ form_end(form) }}
+</section>

@@ -1,26 +1,3 @@
 book_rater:
     resource: "@BookRaterRaterBundle/Resources/config/routing/routing.yml"
     prefix:   /
-
-book_rater_author:
-    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_author.yml"
-    prefix:   /author
-
-book_rater_book:
-    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_book.yml"
-    prefix:   /book
-
-book_rater_review:
-    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_review.yml"
-    prefix:   /review
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-easy_admin_bundle:
-    resource: "@EasyAdminBundle/Controller/AdminController.php"
-    type:     annotation
-    prefix:   /admin

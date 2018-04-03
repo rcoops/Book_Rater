@@ -5,11 +5,14 @@
 parameters:
 
 parameters:
+    database_driver: pdo_sqlite
+    database_path: '%kernel.project_dir%/var/db/bookrater.db3'
+
     database_host: helios.csesalford.com
     database_port: 3306
     database_name: stb098_bookrater
     database_user: stb098
-    database_password: '*stb098*'
+    database_password: ~
 
     mailer_transport: smtp
     mailer_host: smtp.gmail.com
@@ -21,3 +24,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    jwt_key_pass_phrase: ~
+
+    google_client_config:
+        application_name: ~
+        developer_key: ~

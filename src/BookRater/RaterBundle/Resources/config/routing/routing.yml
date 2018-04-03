@@ -1,15 +1,52 @@
 bookrater_home:
     path:     /
-    defaults: { _controller: BookRaterRaterBundle:Home:index }
+    defaults: { _controller: BookRaterRaterBundle:Web\Home:index }
 
 bookrater_about:
     path: /about
-    defaults: { _controller: BookRaterRaterBundle:Home:about }
+    defaults: { _controller: BookRaterRaterBundle:Web\Home:about }
 
 bookrater_contact:
     path: /contact
-    defaults: { _controller: BookRaterRaterBundle:Message:create }
+    defaults: { _controller: BookRaterRaterBundle:Web\Message:create }
 
 bookrater_messages:
     path: /admin/messages
-    defaults: { _controller: BookRaterRaterBundle:Message:list }
+    defaults: { _controller: BookRaterRaterBundle:Web\Message:list }
+
+book_rater_author:
+    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_author.yml"
+    prefix:   /author
+
+book_rater_book:
+    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_book.yml"
+    prefix:   /book
+
+book_rater_review:
+    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_review.yml"
+    prefix:   /review
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+book_rater_api:
+    resource: "@BookRaterRaterBundle/Resources/config/routing/routing_api.yml"
+    prefix: /api/v1
+
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }

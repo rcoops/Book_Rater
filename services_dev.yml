@@ -1,0 +1,2 @@
+imports:
+    - { resource: '@BookRaterFixturesBundle/Resources/config/services.yml' }

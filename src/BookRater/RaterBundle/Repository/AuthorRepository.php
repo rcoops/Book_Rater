@@ -2,7 +2,9 @@
 
 namespace BookRater\RaterBundle\Repository;
 
+use BookRater\RaterBundle\Entity\Book;
 use \Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * AuthorRepository
@@ -21,20 +23,61 @@ class AuthorRepository extends EntityRepository
             ->addOrderBy('author.initial');
     }
 
-    public function findAllByFilter($filter = null)
+    public function findAllByFilter($filter = '')
+    {
+        $qb = $this->findAllQueryBuilder($filter);
+
+        return $qb->getQuery();
+    }
+
+    public function findAllQueryBuilder($filter = '')
     {
         $qb = $this->findAllOrderedByNameQB();
 
         if ($filter) {
-            $qb->andWhere(
+            $qb
+                ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->like('author.firstName', ':filter'),
                         $qb->expr()->like('author.lastName', ':filter')
                     )
                 )
-                ->setParameter('filter', '%'.$filter.'%');
+                ->setParameter('filter', '%' . $filter . '%');
         }
-        return $qb->getQuery();
+
+        return $qb;
+    }
+
+    /**
+     * @param string $lastName
+     * @param string $firstName
+     * @return mixed
+     * @throws NonUniqueResultException
+     */
+    public function findOneByName(string $lastName, string $firstName)
+    {
+        $qb = $this->createQueryBuilder('author');
+        $qb
+            ->andWhere(
+                $qb->expr()->eq('author.lastName', ':lastName'),
+                $qb->expr()->eq('author.firstName', ':firstName')
+            )
+            ->setParameter('lastName', $lastName)
+            ->setParameter('firstName', $firstName);
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function createQueryBuilderForBook(Book $book)
+    {
+        $qb = $this->createQueryBuilder('author');
+        return $qb
+            ->innerJoin('author.booksAuthored', 'books')
+            ->andWhere(
+                $qb->expr()->eq('books.id', ':book')
+            )
+            ->setParameter('book', $book->getId());
     }
 
 }

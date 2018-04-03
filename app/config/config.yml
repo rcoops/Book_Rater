@@ -2,9 +2,11 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@BookRaterRaterBundle/Resources/config/services.yml" }
 
 parameters:
+    # a hack - should be configurable under jms_serializer, but the property_naming.id
+    # doesn't seem to be taken into account at all.
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
     locale: en
 
 framework:
@@ -37,15 +39,18 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes:
-        - bootstrap_3_layout.html.twig
+        - bootstrap_4_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        # swap line comments of following block to use mysql
+#        driver: '%database_driver%'
+#        path: '%database_path%'
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
+
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
@@ -107,7 +112,7 @@ knp_paginator:
         filter_value_name: filterValue  # filter value query paameter name
     template:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
-        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
+        sortable:   '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
 
 easy_admin:
@@ -125,3 +130,50 @@ easy_admin:
             class: BookRater\RaterBundle\Entity\User
         Message:
             class: BookRater\RaterBundle\Entity\Message
+
+fos_rest:
+    routing_loader:
+        default_format: json
+
+lexik_jwt_authentication:
+    private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
+    public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
+    pass_phrase:      '%jwt_key_pass_phrase%'
+    token_ttl:        3600
+
+bazinga_hateoas:
+    serializer:
+        json: custom_hateoas_json_serializer
+
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Book Rater
+            description: 'The Web Application for... Rating Books'
+            version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+            Basic:
+                type: basic
+                description: 'Username: \<username\> Password: \<password\>'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
+            - Basic: []
+
+    areas:
+        default:
+            path_patterns: # an array of regexps
+                - ^/api(?!/doc.*$)
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: FOS\UserBundle
+                path: '%kernel.root_dir%/config/serializer/FOSUB'

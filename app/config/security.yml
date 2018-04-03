@@ -17,6 +17,13 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api/
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - 'jwt_token_authenticator'
 
         main:
             pattern: ^/
@@ -25,6 +32,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
 
             logout:       true
+            logout_on_user_change: true
             anonymous:    true
             remember_me:
                 secret:   '%secret%'
@@ -43,3 +51,5 @@ security:
         - { path: ^/review/create, role: ROLE_USER }
         - { path: ^/review/edit, role: ROLE_USER }
         - { path: ^/contact, role: ROLE_USER }
+        # allow anonymous API - if auth is needed, it's handled in the controller
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }

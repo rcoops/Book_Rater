@@ -10,11 +10,19 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ knp_pagination_sortable(pagination, 'Title', 'book.title') }}</th>
-            <th>Authors</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Title', 'book.title') }}</th>
+            <th class="align-middle">Authors</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Edition', 'book.edition') }}</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Publisher', 'book.publisher') }}</th>
+            <th class="align-middle">{{ knp_pagination_sortable(pagination, 'Published', 'book.publishDate') }}</th>
+            <th class="align-middle">
+                {{ knp_pagination_sortable(pagination, 'Rating', 'book.averageRating') }}
+                (<i class="fa fa-star gold"></i> / 5)
+            </th>
+            <th class="align-middle">
+                {{ knp_pagination_sortable(pagination, 'Rating (Google Books)', 'book.googleBooksRating') }}<br/>
+                (<i class="fa fa-star gold"></i> / 5)
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -31,7 +39,7 @@
                 </td>
                 <td>
                     {% if book.authors is not empty %}
-                        {{ book.displayAuthors }}
+                        {{ book.authors|join('; ') }}
                     {% endif %}
                 </td>
                 <td>
@@ -39,6 +47,26 @@
                 </td>
                 <td>{{ book.publisher }}</td>
                 <td>{% if (book.publishDate) %} {{ book.publishDate|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    {% if book.averageRating is null %}
+                        Not yet rated!
+                    {% else %}
+                        {% set rating = book.averageRating|number_format %}
+                        {% for i in 1..rating %}
+                            <i class="fa fa-star gold"></i>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if book.googleBooksRating is null %}
+                        Not rated!
+                    {% else %}
+                        {% set rating = book.googleBooksRating|number_format %}
+                        {% for i in 1..rating %}
+                            <i class="fa fa-star gold"></i>
+                        {% endfor %}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

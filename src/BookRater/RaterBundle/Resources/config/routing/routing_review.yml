@@ -1,27 +1,27 @@
 bookrater_review_list:
     path:     /
-    defaults: { _controller: BookRaterRaterBundle:Review:list }
+    defaults: { _controller: BookRaterRaterBundle:Web\Review:list }
     options:
         expose: true
 
 bookrater_review_create:
     path:     /create
-    defaults: { _controller: BookRaterRaterBundle:Review:create }
+    defaults: { _controller: BookRaterRaterBundle:Web\Review:create }
 
 bookrater_review_view:
     path:     /{id}
-    defaults: { _controller: BookRaterRaterBundle:Review:view }
+    defaults: { _controller: BookRaterRaterBundle:Web\Review:view }
     requirements:
         id: \d+
 
 bookrater_review_edit:
     path:     /edit/{id}
-    defaults: { _controller: BookRaterRaterBundle:Review:edit }
+    defaults: { _controller: BookRaterRaterBundle:Web\Review:edit }
     requirements:
         id: \d+
 
 bookrater_review_delete:
     path:     /delete/{id}
-    defaults: { _controller: BookRaterRaterBundle:Review:delete }
+    defaults: { _controller: BookRaterRaterBundle:Web\Review:delete }
     requirements:
         id: \d+

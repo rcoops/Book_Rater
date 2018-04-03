@@ -1,35 +1,52 @@
 {# used in show, list and homepage #}
-<article class="well well-sm">
-    <header>
+<article class="card bg-light mb-3">
+    <header class="card-header">
         <h2 class="h2">
             <a href="{{ path('bookrater_review_view', {'id' : review.id }) }}">
-                {{ review.reviewTitle | title }}
+                {{ review.title | title }}
             </a>
         </h2>
     </header>
-    <p>Book:
-        <a href="{{ path('bookrater_book_view', {'title' : review.bookReviewed.title }) }}">
-            {{ review.bookReviewed.title| title }}
-        </a>
-    </p>
-    <p>
-        <strong>Rating:</strong>
-        {% for i in 1..review.rating %}<i class="fa fa-star"></i>{% endfor %}
-        {% for i in 1..(5 - review.rating) if review.rating < 5 %}
-            <i class="fa fa-star-o"></i>
-        {% endfor %}
-    </p>
-    <p>{{ review.reviewComments| nl2br }}</p>
-    <p>
-        <small>
-            Created by {{ review.user }} at {{ review.created | date('H:i d/m/y') -}}
-            {% if review.edited %}
-                {{- ', edited:' }} {{ review.edited | date('H:i d/m/y') }}
-            {% endif %}
-        </small>
-    </p>
-    {% if is_granted("ROLE_USER") and review.user.username == app.user.username or is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success">Edit</a>
-        <a href="{{ path('bookrater_review_delete', {'id': review.id}) }}" class="btn btn-danger">Delete</a>
-    {% endif %}
+    <div class="card-body">
+        <p class="card-title"><strong class="font-weight-bold">Book: </strong>
+            <a href="{{ path('bookrater_book_view', {'title' : review.book.title }) }}">
+                {{ review.book.title| title }}
+            </a>
+        </p>
+        <p class="card-text">
+            <strong class="font-weight-bold">Rating:</strong>
+            {% set rating = review.rating|number_format %}
+            {% for i in 1..5 %}
+                {% if i <= rating %}
+                    <i class="fa fa-star gold"></i>
+                {% else %}
+                    <i class="fa fa-star-o gold"></i>
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p class="card-text">
+            <strong class="font-weight-bold">Comments:</strong>
+            {{ review.comments| nl2br }}
+        </p>
+        <p class="card-text">
+            <small class="figure-caption">
+                Created by {{ review.user }} at {{ review.created | date('H:i d/m/y') -}}
+                {% if review.edited %}
+                    {{- ', edited:' }} {{ review.edited | date('H:i d/m/y') }}
+                {% endif %}
+            </small>
+        </p>
+        {% if is_granted("ROLE_USER") and review.user.username == app.user.username or is_granted("ROLE_ADMIN") %}
+            <div class="container">
+                <div class="row justify-content-between">
+                    <a href="{{ path('bookrater_review_edit', {'id': review.id }) }}" class="btn btn-success col-3">
+                        Update
+                    </a>
+                    <a href="{{ path('bookrater_review_delete', {'id': review.id}) }}" class="btn btn-danger col-3">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 </article>

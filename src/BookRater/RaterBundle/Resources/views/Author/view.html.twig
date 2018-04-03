@@ -2,26 +2,30 @@
 
 {% block title %}{{ author }}{% endblock %}
 {% block body %}
-    <section class="well well-sm">
-        <header>
-            <h2 class="h2">{{ author }}</h2>
-            <a href="{{ path('bookrater_author_edit', {
-                'firstName': author.firstName, 'lastName': author.lastName
-            }) }}" class="btn btn-primary">Edit</a>
+    <section class="card bg-light">
+        <header class="card-header">
+            <div class="row justify-content-between">
+                <h2 class="h2 col-10">{{ author }}</h2>
+                <div class="col-2 align-self-center">
+                    <a class="btn btn-success" href="{{ path('bookrater_author_edit',
+                        {'firstName': author.firstName, 'lastName': author.lastName}) }}">
+                        Edit
+                    </a>
+                </div>
+            </div>
         </header>
+        <section class="card-body">
+            <header><h4 class="h4">Books Authored</h4></header>
+            <ul>
+                {% if author.booksAuthored is not empty %}
+                    {% for book in author.booksAuthored %}
+                        <li><a href="{{ path('bookrater_book_view', {'title': book.title }) }}">{{ book.title }}</a>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>No books authored!</p>
+                {% endif %}
+            </ul>
+        </section>
     </section>
-    <section class="well well-sm">
-        <header><h3 class="h3">Books Authored</h3></header>
-        <ul>
-            {% if author.booksAuthored is not empty %}
-                {% for book in author.booksAuthored %}
-                    <li><a href="{{ path('bookrater_book_view', {'title': book.title }) }}">{{ book.title }}</a></li>
-                {%  endfor %}
-            {% else %}
-                <p>No books authored!</p>
-            {% endif %}
-        </ul>
-    </section>
-    <p>
-    </p>
 {% endblock %}

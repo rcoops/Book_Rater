@@ -1,0 +1,1 @@
+{"detail":"Unable to find the controller for path \u0022\/api\/tokens\u0022. The route is wrongly configured.","status":404,"type":"about:blank","title":"Not Found"}

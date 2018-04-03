@@ -20,7 +20,12 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new BookRater\RedirectBundle\BookRaterRedirectBundle(),
             new BookRater\RaterBundle\BookRaterRaterBundle(),
         ];
