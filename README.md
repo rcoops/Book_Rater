@@ -1,10 +1,10 @@
-#BookRater
+# BookRater
 
 A Symfony project created on November 2, 2017, 2:25 pm.
 
-##Local Project Setup
+## Local Project Setup
 
-#####Parameters
+##### Parameters
 copy parameters.yml.dist to config folder as parameters.yml
 
 enter anything you like into jwt_key_pass_phrase in parameters.yml
@@ -13,7 +13,7 @@ e.g. `jwt_key_pass_phrase: reallysecretkey`
 
 optionally you can also enter a `database_password`
 
-#####Database
+##### Database
 from command prompt in base project directory, run following commands:
 
 `mkdir var/db`
@@ -24,7 +24,7 @@ from command prompt in base project directory, run following commands:
 
 `bin/console doctrine:fixtures:load`
 
-#####Json Web Token Security
+##### Json Web Token Security
 from command prompt in base project directory, run following commands:
 
 `mkdir var/jwt`
@@ -36,26 +36,26 @@ from command prompt in base project directory, run following commands:
 
 `openssl rsa -pubout -in var/jwt/private.pem -out var/jwt/public.pem`
 
-#####Composer
+##### Composer
 
 run '`composer install`' from command prompt in base project directory
 
-#####Start App
+##### Start App
 You're good to go, finally just run: 
 
 `bin/console server:run`
 
 and go to http://localhost:8000
 
-##Useful Stuff
-#####Host site
+## Useful Stuff
+##### Host site
 [rickcooper.ddns.net](rickcooper.ddns.net)
 
-#####Default admin details (for checking the API etc.)
+##### Default admin details (for checking the API etc.)
 
 username: admin, password: admin
 
-#####API Authentication
+##### API Authentication
 Bearer token authentication is required for any non-GET requests. To authorize:
  
 - Use Basic auth on the token endpoint (padlock symbol) with a registered username and password, and copy the content of the "token" attribute from the response (shown in bold).
