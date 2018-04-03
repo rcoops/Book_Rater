@@ -45,10 +45,11 @@ twig:
 doctrine:
     dbal:
         # swap line comments of following block to use mysql
-#        driver: '%database_driver%'
-#        path: '%database_path%'
-        host: '%database_host%'
-        port: '%database_port%'
+        driver: '%database_driver%'
+        path: '%database_path%'
+#        host: '%database_host%'
+#        port: '%database_port%'
+
         dbname: '%database_name%'
 
         user: '%database_user%'
