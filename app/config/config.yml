@@ -149,7 +149,7 @@ nelmio_api_doc:
     documentation:
         info:
             title: Book Rater
-            description: The Web Application for... Rating Books
+            description: 'The Web Application for... Rating Books'
             version: 1.0.0
         securityDefinitions:
             Bearer:
@@ -159,7 +159,7 @@ nelmio_api_doc:
                 in: header
             Basic:
                 type: basic
-                description: 'Value: Basic {base64encode(username:password)}'
+                description: 'Username: \<username\> Password: \<password\>'
                 name: Authorization
                 in: header
         security:
