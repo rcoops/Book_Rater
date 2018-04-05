@@ -10,6 +10,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -75,7 +76,7 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $apiProblem = new ApiProblem(401);
+        $apiProblem = new ApiProblem(Response::HTTP_UNAUTHORIZED);
         // you could translate this
         $apiProblem->set('detail', $exception->getMessageKey());
 
@@ -97,7 +98,7 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
         // called when authentication info is missing from a
         // request that requires it
 
-        $apiProblem = new ApiProblem(401);
+        $apiProblem = new ApiProblem(Response::HTTP_UNAUTHORIZED);
         // you could translate this
         $message = $authException ? $authException->getMessageKey() : 'Missing credentials';
         $apiProblem->set('detail', $message);

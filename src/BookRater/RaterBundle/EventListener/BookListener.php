@@ -80,7 +80,6 @@ class BookListener
         $googleBooksId = $book->getGoogleBooksId();
 
         if ($googleBooksId) {
-            // TODO catch exceptions (503/403)
             $volume = $this->booksClient->volumes->get($googleBooksId);
             $book->setGoogleBooksRating($volume->getVolumeInfo()->getAverageRating());
 

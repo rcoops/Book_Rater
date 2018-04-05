@@ -40,9 +40,9 @@ services:
             - { name: doctrine.orm.entity_listener }
             - { name: doctrine.orm.entity_listener, entity_manager: custom }
 
-    Google\Google_Client:
+    Google_Client:
         class: Google_Client
         arguments: ['%google_client_config%']
 
-    Google\Google_Books_Service:
+    Google_Service_Books:
         class: Google_Service_Books

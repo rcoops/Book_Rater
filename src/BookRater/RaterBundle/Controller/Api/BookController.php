@@ -57,7 +57,7 @@ class BookController extends BaseApiController
 
         $this->persistBook($book);
 
-        $response = $this->createApiResponse($book, 201);
+        $response = $this->createApiResponse($book, Response::HTTP_CREATED);
         $this->setLocationHeader($response, 'api_books_show', [
             'id' => $book->getId(),
         ]);
@@ -96,7 +96,7 @@ class BookController extends BaseApiController
             $this->throwBookNotFoundException($id);
         }
 
-        $response = $this->createApiResponse($book, 200, $this->getFormatFromRequest($request));
+        $response = $this->createApiResponseUsingRequestedFormat($book, $request);
         $this->setLocationHeader($response, 'api_books_show', [
             'id' => $book->getId(),
         ]);
@@ -161,7 +161,7 @@ class BookController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_books_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -262,7 +262,7 @@ class BookController extends BaseApiController
         }
 
         // Doesn't matter if the book was there or not - because it isn't now which is what we wanted
-        return $this->createApiResponse(null, 204);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -303,7 +303,7 @@ class BookController extends BaseApiController
     {
         $qb = $this->getAuthorRepository()
             ->createQueryBuilderForBook($book);
-        $collection = $this->paginationFactory->createCollection(
+        $paginatedCollection = $this->paginationFactory->createCollection(
             $qb,
             $request,
             'api_books_authors_list',
@@ -311,7 +311,8 @@ class BookController extends BaseApiController
                 'id' => $book->getId(),
             ]
         );
-        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
+
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -352,7 +353,7 @@ class BookController extends BaseApiController
     {
         $qb = $this->getReviewRepository()
             ->createQueryBuilderForBook($book);
-        $collection = $this->paginationFactory->createCollection(
+        $paginatedCollection = $this->paginationFactory->createCollection(
             $qb,
             $request,
             'api_books_reviews_list',
@@ -360,7 +361,8 @@ class BookController extends BaseApiController
                 'id' => $book->getId(),
             ]
         );
-        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
+
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**

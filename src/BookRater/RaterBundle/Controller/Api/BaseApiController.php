@@ -4,6 +4,7 @@ namespace BookRater\RaterBundle\Controller\Api;
 
 use BookRater\RaterBundle\Api\ApiProblem;
 use BookRater\RaterBundle\Api\ApiProblemException;
+use BookRater\RaterBundle\Pagination\PaginatedCollection;
 use BookRater\RaterBundle\Pagination\PaginationFactory;
 use BookRater\RaterBundle\Repository\ApiTokenRepository;
 use BookRater\RaterBundle\Repository\AuthorRepository;
@@ -134,7 +135,8 @@ abstract class BaseApiController extends Controller
             ->getRepository('BookRaterRaterBundle:ApiToken');
     }
 
-    protected function createApiResponseWithGroups($data, $statusCode = 200, $format = 'json', array $groups = [])
+    protected function createApiResponseWithGroups($data, $statusCode = Response::HTTP_OK, $format = 'json',
+                                                   array $groups = [])
     {
         $json = $this->serialize($data, $format, $groups);
 
@@ -159,7 +161,10 @@ abstract class BaseApiController extends Controller
     {
         $data = json_decode($request->getContent(), true);
         if ($data === null) {
-            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+            $apiProblem = new ApiProblem(
+                Response::HTTP_BAD_REQUEST,
+                ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT
+            );
 
             throw new ApiProblemException($apiProblem);
         }
@@ -191,7 +196,7 @@ abstract class BaseApiController extends Controller
         $errors = $this->getErrorsFromForm($form);
 
         $apiProblem = new ApiProblem(
-            400,
+            Response::HTTP_BAD_REQUEST,
             ApiProblem::TYPE_VALIDATION_ERROR
         );
         $apiProblem->set('errors', $errors);
@@ -207,7 +212,7 @@ abstract class BaseApiController extends Controller
      * @param string $format
      * @return Response
      */
-    protected function createApiResponse($data, $statusCode = 200, $format = 'json')
+    protected function createApiResponse($data, $statusCode = Response::HTTP_OK, $format = 'json')
     {
         return $this->createApiResponseWithGroups($data, $statusCode, $format, $this->getGroups());
     }
@@ -226,10 +231,27 @@ abstract class BaseApiController extends Controller
      * @param Request $request
      * @return mixed|string
      */
-    protected function getFormatFromRequest(Request $request)
+    private function getFormatFromRequest(Request $request)
     {
         $queryFormat = $request->query->get('format');
         return $queryFormat ? $queryFormat : 'json';
+    }
+
+    protected function createApiPaginationResponse(PaginatedCollection $paginatedCollection, Request $request)
+    {
+        return $this->createApiResponseUsingRequestedFormat($paginatedCollection, $request);
+    }
+
+    /**
+     * @param mixed $data
+     * @param Request $request
+     * @param int $statusCode
+     * @return Response
+     */
+    protected function createApiResponseUsingRequestedFormat($data, Request $request,
+                                                             int $statusCode = Response::HTTP_OK)
+    {
+        return $this->createApiResponse($data, $statusCode, $this->getFormatFromRequest($request));
     }
 
 }

@@ -55,7 +55,7 @@ class AuthorController extends BaseApiController
         }
 
         $this->persistAuthor($author);
-        $response = $this->createApiResponse($author, 201);
+        $response = $this->createApiResponse($author, Response::HTTP_CREATED);
         $this->setLocationHeader($response, 'api_authors_show', [
             'lastName' => $author->getLastName(),
             'firstName' => $author->getFirstName(),
@@ -99,7 +99,7 @@ class AuthorController extends BaseApiController
             $this->throwAuthorNotFoundException($lastName, $firstName);
         }
 
-        $response = $this->createApiResponse($author, 200, $this->getFormatFromRequest($request));
+        $response = $this->createApiResponseUsingRequestedFormat($author, $request);
         $this->setLocationHeader($response, 'api_authors_show', [
             'lastName' => $author->getLastName(),
             'firstName' => $author->getFirstName(),
@@ -165,7 +165,7 @@ class AuthorController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_authors_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -279,7 +279,7 @@ class AuthorController extends BaseApiController
         }
 
         // Doesn't matter if the author was there or not - because it isn't now which is what we wanted
-        return $this->createApiResponse(null, 204);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -320,7 +320,7 @@ class AuthorController extends BaseApiController
     {
         $qb = $this->getBookRepository()
             ->createQueryBuilderForAuthor($author);
-        $collection = $this->paginationFactory->createCollection(
+        $paginatedCollection = $this->paginationFactory->createCollection(
             $qb,
             $request,
             'api_authors_books_list',
@@ -330,7 +330,7 @@ class AuthorController extends BaseApiController
             ]
         );
 
-        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**

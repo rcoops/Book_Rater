@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Swagger\Annotations as SWG;
 
@@ -72,7 +73,7 @@ class TokenController extends BaseApiController
                 'exp' => time() + 3600 // 1 hour expiration
             ]);
 
-        return new JsonResponse(['token' => $token], 201);
+        return new JsonResponse(['token' => $token], Response::HTTP_CREATED);
     }
 
     protected function getGroups()

@@ -73,7 +73,7 @@ class ReviewController extends BaseApiController
 
         $this->persistReview($review);
 
-        $response = $this->createApiResponse($review, 201);
+        $response = $this->createApiResponse($review, Response::HTTP_CREATED);
         $this->setLocationHeader($response, 'api_reviews_show', ['id' => $review->getId()]);
 
         return $response;
@@ -110,7 +110,7 @@ class ReviewController extends BaseApiController
             $this->throwReviewNotFoundException($id);
         }
 
-        $response = $this->createApiResponse($review, 200, $this->getFormatFromRequest($request));
+        $response = $this->createApiResponseUsingRequestedFormat($review, $request);
         $this->setLocationHeader($response, 'api_reviews_show', ['id' => $review->getId()]);
 
         return $response;
@@ -174,7 +174,7 @@ class ReviewController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_reviews_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -280,7 +280,7 @@ class ReviewController extends BaseApiController
             $em->flush();
         }
 
-        return $this->createApiResponse(null, 204);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**

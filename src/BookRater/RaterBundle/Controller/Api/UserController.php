@@ -74,7 +74,8 @@ class UserController extends BaseApiController
         if (!$user) {
             $this->throwUserNotFoundException($identifier);
         }
-        $response = $this->createApiResponse($user, 200, $this->getFormatFromRequest($request));
+
+        $response = $this->createApiResponseUsingRequestedFormat($user, $request);
         $this->setLocationHeader($response, 'api_users_show', [
             'identifier' => $user->getId(),
         ]);
@@ -138,7 +139,7 @@ class UserController extends BaseApiController
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_users_collection');
 
-        return $this->createApiResponse($paginatedCollection, 200, $this->getFormatFromRequest($request));
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -168,7 +169,7 @@ class UserController extends BaseApiController
             $em->flush();
         }
 
-        return $this->createApiResponse(null, 204);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -221,7 +222,7 @@ class UserController extends BaseApiController
 
         $qb = $this->getReviewRepository()
             ->createQueryBuilderForUser($user);
-        $collection = $this->paginationFactory->createCollection(
+        $paginatedCollection = $this->paginationFactory->createCollection(
             $qb,
             $request,
             'api_users_reviews_list',
@@ -229,7 +230,8 @@ class UserController extends BaseApiController
                 'identifier' => $user->getId(),
             ]
         );
-        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
+
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     /**
@@ -282,7 +284,7 @@ class UserController extends BaseApiController
     {
         $qb = $this->getMessageRepository()
             ->createQueryBuilderForUser($user);
-        $collection = $this->paginationFactory->createCollection(
+        $paginatedCollection = $this->paginationFactory->createCollection(
             $qb,
             $request,
             'api_users_messages_list',
@@ -290,7 +292,8 @@ class UserController extends BaseApiController
                 'id' => $user->getId(),
             ]
         );
-        return $this->createApiResponse($collection, 200, $this->getFormatFromRequest($request));
+
+        return $this->createApiPaginationResponse($paginatedCollection, $request);
     }
 
     private function throwUserNotFoundException($identifier)
