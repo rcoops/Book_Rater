@@ -85,10 +85,13 @@
     <footer class="footer">
         <div class="container">
             <div class="row justify-content-between">
-                <div class="col-8 d-flex align-items-center">
+                <div class="col-3 d-flex align-items-center">
                     <h4 class="h4 align-self-center mb-0">BookRater<sup><i class="fa fa-copyright"></i></sup> 2018</h4>
                 </div>
-                <div class="col-4">
+		<div class="col-3 d-flex align-items-center justify-content-center">
+		<a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/rickcooper.ddns.net"><img src="https://seal.beyondsecurity.com/verification-images/rickcooper.ddns.net/vulnerability-scanner-2.gif" alt="Website Security Test" border="0" /></a>
+		</div>
+                <div class="col-3">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <p class="text-right">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</p>
                     {% endif %}

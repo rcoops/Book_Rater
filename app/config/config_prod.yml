@@ -18,16 +18,14 @@ monolog:
 assetic:
     bundles:
         - FrameworkBundle
-        - SecurityBundle
         - TwigBundle
         - MonologBundle
         - SwiftmailerBundle
         - AsseticBundle
         - SensioFrameworkExtraBundle
-        - DoctrineBundle
         - KnpPaginatorBundle
         - FOSUserBundle
-        - FPSJsRoutingBundle
+        - FOSJsRoutingBundle
         - FOSRestBundle
         - EasyAdminBundle
         - JMSSerializerBundle
