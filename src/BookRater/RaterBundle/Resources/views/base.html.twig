@@ -6,28 +6,29 @@
     <title>{% block title %}Book Rater{% endblock %} - Book Rater</title>
     {% block stylesheets %}
         {% stylesheets
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
-        '@css' %}
-        <link href="{{ asset_url }} " type="text/css" rel="stylesheet"/>
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+            '@css' %}
+            <link href="{{ asset_url }} " type="text/css" rel="stylesheet"/>
         {% endstylesheets %}
     {% endblock %}
     {% block javascript %}
-        {% javascripts
-        'https://code.jquery.com/jquery-3.2.1.slim.min.js'
-        'https://use.fontawesome.com/fca4c72f10.js'
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'
-        'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'
-        '@js' %}
-        <script type="text/javascript" src="{{ asset_url }} "></script>
-        {% endjavascripts %}
-    {% endblock %}
+    {% javascripts
+    'https://code.jquery.com/jquery-3.2.1.slim.min.js'
+    'https://use.fontawesome.com/fca4c72f10.js'
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'
+    '@js' %}
+    <script type="text/javascript" src="{{ asset_url }} "></script>
+    {% endjavascripts %}
+{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
 </head>
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ path('bookrater_home') }}">Book Rater</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -62,7 +63,7 @@
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('fos_user_security_login') }}">
-                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }} <i class="fa fa-sign-in"></i>
+                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }} <i class="fa fa-sign-in"></i>
                         </a>
                     </li>
                 {% endif %}
@@ -88,9 +89,11 @@
                 <div class="col-3 d-flex align-items-center">
                     <h4 class="h4 align-self-center mb-0">BookRater<sup><i class="fa fa-copyright"></i></sup> 2018</h4>
                 </div>
-		<div class="col-3 d-flex align-items-center justify-content-center">
-		<a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/rickcooper.ddns.net"><img src="https://seal.beyondsecurity.com/verification-images/rickcooper.ddns.net/vulnerability-scanner-2.gif" alt="Website Security Test" border="0" /></a>
-		</div>
+                <div class="col-3 d-flex align-items-center justify-content-center">
+                    <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/rickcooper.ddns.net"><img
+                                src="https://seal.beyondsecurity.com/verification-images/rickcooper.ddns.net/vulnerability-scanner-2.gif"
+                                alt="Website Security Test" border="0"/></a>
+                </div>
                 <div class="col-3">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <p class="text-right">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</p>
