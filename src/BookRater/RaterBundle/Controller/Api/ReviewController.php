@@ -33,6 +33,7 @@ class ReviewController extends BaseApiController
 
         $this->authorizationChecker = $authorizationChecker;
     }
+
     /**
      * @param Request $request
      *
@@ -53,6 +54,10 @@ class ReviewController extends BaseApiController
      *     response=201,
      *     description="Creates a new review.",
      *     @SWG\Schema(@Model(type=Review::class, groups={"reviews"},),),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the review resource does not exist.",),
@@ -200,6 +205,10 @@ class ReviewController extends BaseApiController
      *     @Model(type=Review::class, groups={"reviews"},),
      *   ),
      *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
+     *   ),
+     *   @SWG\Response(
      *     response=401,
      *     description="An 'Unauthorized' error response, if the user is not the owner of the resource or an admin.",
      *   ),
@@ -217,6 +226,10 @@ class ReviewController extends BaseApiController
      *     response=200,
      *     description="A representation of the review resource updated.",
      *     @Model(type=Review::class, groups={"reviews"},),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
      *   ),
      *   @SWG\Response(
      *     response=401,

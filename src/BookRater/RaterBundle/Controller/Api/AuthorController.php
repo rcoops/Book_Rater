@@ -41,6 +41,10 @@ class AuthorController extends BaseApiController
      *     description="A representation of the author resource created.",
      *     @Model(type=Author::class, groups={"authors"},)
      *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
+     *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      * )
      */
@@ -196,6 +200,10 @@ class AuthorController extends BaseApiController
      *     description="A representation of the author resource updated.",
      *     @Model(type=Author::class, groups={"authors"},),
      *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
+     *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
@@ -212,6 +220,10 @@ class AuthorController extends BaseApiController
      *     response=200,
      *     description="A representation of the author resource updated.",
      *     @Model(type=Author::class, groups={"authors"},),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),

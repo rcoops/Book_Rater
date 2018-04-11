@@ -2,10 +2,13 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use BookRater\RaterBundle\Api\ApiProblem;
+use BookRater\RaterBundle\Api\ApiProblemException;
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Form\Api\BookType;
+use BookRater\RaterBundle\Form\Api\ReviewType;
 use BookRater\RaterBundle\Form\Api\Update\UpdateBookType;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
@@ -41,6 +44,10 @@ class BookController extends BaseApiController
      *     response=201,
      *     description="A representation of the book resource created.",
      *     @Model(type=Book::class, groups={"books"},),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      * )
@@ -188,6 +195,10 @@ class BookController extends BaseApiController
      *     description="A representation of the book resource updated.",
      *     @Model(type=Book::class, groups={"books"},),
      *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
+     *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
      * )
@@ -203,6 +214,10 @@ class BookController extends BaseApiController
      *     response=200,
      *     description="A representation of the book resource updated.",
      *     @Model(type=Book::class, groups={"books"},),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted.",
      *   ),
      *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
      *   @SWG\Response(response=404, description="A 'Not Found' error response, if the resource does not exist.",),
@@ -363,6 +378,50 @@ class BookController extends BaseApiController
         );
 
         return $this->createApiPaginationResponse($paginatedCollection, $request);
+    }
+
+    /**
+     * @param Book $book
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Rest\Post("/books/{id}/reviews")
+     *
+     * @Security("is_granted('ROLE_USER')")
+     *
+     * @SWG\Post(
+     *   tags={"Books"},
+     *   summary="Create a new review",
+     *   description="Creates a new review resource assigned to the specified book resource.
+                      <strong>Requires user authorization.</strong>",
+     *   produces={"application/hal+json"},
+     *   @SWG\Parameter(in="path", name="id", type="integer", description="The unique identifier of the book."),
+     *   @SWG\Parameter(in="body", name="review", @Model(type=Review::class, groups={"reviews_send"}),),
+     *   @SWG\Response(
+     *     response=201,
+     *     description="Returns a respresentation of the review created.",
+     *     @SWG\Schema(@Model(type=Review::class, groups={"reviews"},),),
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="A 'Bad Request' error response, if the request body is not correctly formatted,
+                        or if the book id in the post body does not match that in the path.",
+     *   ),
+     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the user is not authenticated.",),
+     *   @SWG\Response(response=404, description="A 'Not Found' error response, if the (book) resource does not exist.",),
+     * )
+     */
+    public function reviewsNewAction(Book $book, Request $request)
+    {
+        $review = new Review();
+        $form = $this->createForm(ReviewType::class, $review);
+        $this->processForm($request, $form);
+        if ($review->getBook() !== $book) {
+            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_NON_MATCHING_PATH_BODY);
+            throw new ApiProblemException($apiProblem);
+        }
+        return $this->forward('BookRaterRaterBundle:Api\Review:new');
     }
 
     /**
