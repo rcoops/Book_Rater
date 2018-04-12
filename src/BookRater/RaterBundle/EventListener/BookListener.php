@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\PostUpdate;
 use Google_Service_Books;
 use Google_Service_Books_Volumes;
 use Google_Service_Books_VolumeVolumeInfo;
+use GuzzleHttp\Client as GuzzleClient;
 
 class BookListener
 {
@@ -25,17 +26,33 @@ class BookListener
     /**
      * @var Google_Service_Books
      */
-    private $booksClient;
+    private $googleBooksClient;
+
+    /**
+     * @var GuzzleClient
+     */
+    private $guzzleClient;
+
+    /**
+     * @var string
+     */
+    private $goodBooksDeveloperKey;
 
     /**
      * ReviewListener constructor.
      * @param EntityManagerInterface $em
-     * @param Google_Service_Books $booksClient
+     * @param Google_Service_Books $googleBooksClient
+     * @param GuzzleClient $guzzleClient
+     * @param string $goodBooksDeveloperKey
      */
-    public function __construct(EntityManagerInterface $em, Google_Service_Books $booksClient)
+    public function __construct(EntityManagerInterface $em, Google_Service_Books $googleBooksClient,
+                                GuzzleClient $guzzleClient, string $goodBooksDeveloperKey)
     {
+        // TODO init GuzzleClient using
         $this->em = $em;
-        $this->booksClient = $booksClient;
+        $this->googleBooksClient = $googleBooksClient;
+        $this->guzzleClient = $guzzleClient;
+        $this->goodBooksDeveloperKey = $goodBooksDeveloperKey;
     }
 
     /**
@@ -47,21 +64,8 @@ class BookListener
      */
     public function postPersistHandler(Book $book, LifecycleEventArgs $event)
     {
-        if (!$book->getGoogleBooksId()) {
-            /** @var Google_Service_Books_Volumes $volumes */
-            $volumes = $this->booksClient->volumes->listVolumes('isbn:' . $book->getIsbn());
-            if ($volumes->getItems()) {
-                /** @var \Google_Service_Books_Volume $bestMatch */
-                $bestMatch = $volumes->getItems()[0];
-                $volumeInfo = $bestMatch->getVolumeInfo();
-
-                $book->setGoogleBooksId($bestMatch->getId());
-                $this->updateGoogleUrls($book, $bestMatch);
-                $this->updateBookFromVolumeInfo($book, $volumeInfo);
-
-                $this->persistBook($book);
-            }
-        }
+        $this->updateGoogleBooksInfo($book);
+        $this->updateGoodReadsInfo($book);
     }
 
     /**
@@ -75,15 +79,62 @@ class BookListener
         $this->updateGoogleBooksRating($book);
     }
 
+    private function updateGoodReadsRating(Book $book)
+    {
+        $goodBooksId = $book->getGoodReadsId();
+
+        if ($goodBooksId) {
+            $query = sprintf('show.json?key=%s&id=%s', $this->goodBooksDeveloperKey, $goodBooksId);
+            $reviewInfo = $this->guzzleClient->request('GET', 'https://www.goodreads.com/book/review_counts.json?isbns=')
+            $book->setGoogleBooksRating($volume->getVolumeInfo()->getAverageRating());
+
+            $this->persistBook($book);
+        } else {
+            $this->updateGoodReadsInfo($book);
+        }
+    }
+
     private function updateGoogleBooksRating(Book $book)
     {
         $googleBooksId = $book->getGoogleBooksId();
 
         if ($googleBooksId) {
-            $volume = $this->booksClient->volumes->get($googleBooksId);
+            $volume = $this->googleBooksClient->volumes->get($googleBooksId);
             $book->setGoogleBooksRating($volume->getVolumeInfo()->getAverageRating());
 
             $this->persistBook($book);
+        } else {
+            $this->updateGoogleBooksInfo($book);
+        }
+    }
+
+    /**
+     * @param Book $book
+     */
+    public function updateGoodReadsInfo(Book $book): void
+    {
+
+    }
+
+    /**
+     * @param Book $book
+     */
+    public function updateGoogleBooksInfo(Book $book): void
+    {
+        if (!$book->getGoogleBooksId()) {
+            /** @var Google_Service_Books_Volumes $volumes */
+            $volumes = $this->googleBooksClient->volumes->listVolumes('isbn:' . $book->getIsbn());
+            if ($volumes->getItems()) {
+                /** @var \Google_Service_Books_Volume $bestMatch */
+                $bestMatch = $volumes->getItems()[0];
+                $volumeInfo = $bestMatch->getVolumeInfo();
+
+                $book->setGoogleBooksId($bestMatch->getId());
+                $this->updateGoogleUrls($book, $bestMatch);
+                $this->updateBookFromVolumeInfo($book, $volumeInfo);
+
+                $this->persistBook($book);
+            }
         }
     }
 

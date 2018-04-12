@@ -32,3 +32,6 @@ parameters:
     google_client_config:
         application_name: ~
         developer_key: ~
+
+    good_books_api_config:
+        developer_key: ~
