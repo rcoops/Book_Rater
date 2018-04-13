@@ -10,11 +10,6 @@ class GoodReadsApiClient
 {
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    /**
      * @var GuzzleClient
      */
     private $guzzleClient;
@@ -27,13 +22,11 @@ class GoodReadsApiClient
 
     /**
      * GoodReadsApiClient constructor.
-     * @param EntityManagerInterface $em
      * @param GuzzleClient $guzzleClient
      * @param string $goodBooksDeveloperKey
      */
-    public function __construct(EntityManagerInterface $em, GuzzleClient $guzzleClient, string $goodBooksDeveloperKey)
+    public function __construct(GuzzleClient $guzzleClient, string $goodBooksDeveloperKey)
     {
-        $this->em = $em;
         $this->guzzleClient = $guzzleClient;
         $this->goodBooksDeveloperKey = $goodBooksDeveloperKey;
     }
@@ -55,10 +48,11 @@ class GoodReadsApiClient
             $response = $this->guzzleClient->request('GET', $query);
             if ($response && $response->getBody()) {
                 $data = json_decode($response->getBody());
-                if (isset($data['books']) && !empty($data['books'])) {
-                    $rating = round($data['books'][0]->average_rating);
+                if (isset($data->books) && !empty($data->books)) {
+                    $reviewInfo = $data->books[0];
+                    $rating = round($reviewInfo->average_rating);
                     $book->setGoodReadsRating($rating);
-                    $goodReadsId = round($data['books'][0]->id);
+                    $goodReadsId = round($reviewInfo->id);
                     $book->setGoodReadsId($goodReadsId);
                 }
             }

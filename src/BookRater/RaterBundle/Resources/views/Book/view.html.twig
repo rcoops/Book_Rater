@@ -18,8 +18,19 @@
                     {{ book.displayEdition -}}
                 {% endif %}
                 {{- '' -}}
-                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}{{ book.publishDate|date('d-m-Y') }}{% endif %}
+                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}Published: {{ book.publishDate|date('dS F, Y') }}{% endif %}
             </p>
+            {% if book.publisher is not null %}
+                <p class="card-text"><strong>Publisher: </strong>{{ book.publisher }}</p>
+            {% endif %}
+            <div class="card-block">
+                <div class="row justify-content-between">
+                    <p class="col-4"><strong>ISBN: </strong>{{ book.isbn }}</p>
+                    {% if book.isbn13 is not null %}
+                    <p class="col-4"><strong>ISBN-13: </strong>{{ book.isbn13 }}</p>
+                    {% endif %}
+                </div>
+            </div>
             <div class="card-block">
                 <div class="row justify-content-between">
                     <p class="col-4">
