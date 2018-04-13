@@ -9,16 +9,12 @@
         </header>
         <div class="card-body">
             <h5 class="card-text h5">
-                {% if book.authors is not empty %}
-                    {{ book.authors|join('; ') }}
-                {% endif %}
+                {% if book.authors is not empty %}{{ book.authors|join('; ') }}{% endif %}
             </h5>
             <p class="card-text">
-                {% if (book.edition) %}
-                    {{ book.displayEdition -}}
-                {% endif %}
+                {% if (book.edition) %}{{ book.displayEdition -}}{% endif %}
                 {{- '' -}}
-                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}Published: {{ book.publishDate|date('jS F, Y') }}{% endif %}
+                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}Published: {{ book.publishDate|date('jS F Y') }}{% endif %}
             </p>
             {% if book.publisher is not null %}
                 <p class="card-text"><strong>Publisher: </strong>{{ book.publisher }}</p>

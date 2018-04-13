@@ -37,6 +37,7 @@ class BookListener
      * @param LifecycleEventArgs $event
      *
      * @PrePersist
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function prePersistHandler(Book $book, LifecycleEventArgs $event)
     {
@@ -49,6 +50,7 @@ class BookListener
      * @param LifecycleEventArgs $event
      *
      * @PreUpdate
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function preUpdateHandler(Book $book, LifecycleEventArgs $event)
     {
