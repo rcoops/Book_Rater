@@ -2,7 +2,6 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 # This file is auto-generated during the composer install
-parameters:
 
 parameters:
     # sqlite params
@@ -33,5 +32,8 @@ parameters:
         application_name: ~
         developer_key: ~
 
-    good_books_api_config:
-        developer_key: ~
+    good_reads_guzzle_client_config:
+        base_uri: 'https://www.goodreads.com/book/'
+        timeout: 2.0
+
+    good_reads_api_key: ~

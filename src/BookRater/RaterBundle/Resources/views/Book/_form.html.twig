@@ -21,6 +21,7 @@
     </section>
     <footer class="card-footer">
         <div class="card-text">{{ form_widget(form.submit, { 'label': submitText }) }}</div>
+        {{ form_end(form) }}
     </footer>
 </section>
 {% for message in app.flashes('error') %}

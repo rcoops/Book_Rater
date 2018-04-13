@@ -36,6 +36,7 @@ services:
             - { name: doctrine.orm.entity_listener, entity_manager: custom }
 
     BookRater\RaterBundle\EventListener\BookListener:
+        arguments: ['@Doctrine\ORM\EntityManagerInterface', '@Google_Service_Books', '@BookRater\RaterBundle\Api\Client\GoodReadsApiClient']
         tags:
             - { name: doctrine.orm.entity_listener }
             - { name: doctrine.orm.entity_listener, entity_manager: custom }
@@ -46,3 +47,10 @@ services:
 
     Google_Service_Books:
         class: Google_Service_Books
+
+    GuzzleHttp\Client:
+        arguments: ['%good_reads_guzzle_client_config%']
+
+    BookRater\RaterBundle\Api\Client\GoodReadsApiClient:
+        arguments: ['@Doctrine\ORM\EntityManagerInterface', '@GuzzleHttp\Client', '%good_reads_api_key%']
+

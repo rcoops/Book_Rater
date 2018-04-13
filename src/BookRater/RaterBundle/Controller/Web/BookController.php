@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Controller\Web;
 
+use BookRater\RaterBundle\Api\Client\GoodReadsApiClient;
 use BookRater\RaterBundle\Entity\Book;
 use BookRater\RaterBundle\Entity\Review;
 use BookRater\RaterBundle\Form\BookType;
@@ -19,17 +20,30 @@ class BookController extends EntityController
      */
     protected $bookRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var GoodReadsApiClient
+     */
+    private $goodReadsApiClient;
+
+    public function __construct(EntityManagerInterface $entityManager, GoodReadsApiClient $goodReadsApiClient)
     {
         parent::__construct($entityManager);
         $this->bookRepository = $this->entityManager->getRepository('BookRaterRaterBundle:Book');
+        $this->goodReadsApiClient = $goodReadsApiClient;
     }
 
     public function viewAction(string $title)
     {
         $book = $this->bookRepository->findOneBy(['title' => $title]);
+        $viewParams = ['book' => $book];
 
-        return $this->render('BookRaterRaterBundle:Book:view.html.twig', ['book' => $book]);
+        $goodReadsId = $book->getGoodReadsId();
+        if ($goodReadsId) {
+            $goodReadsWidget = $this->goodReadsApiClient->getReviewsWidget($goodReadsId);
+            $viewParams['goodReadsWidget'] = $goodReadsWidget;
+        }
+
+        return $this->render('BookRaterRaterBundle:Book:view.html.twig', $viewParams);
     }
 
     public function createAction(Request $request)

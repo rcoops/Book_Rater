@@ -2,26 +2,22 @@
 
 namespace BookRater\RaterBundle\EventListener;
 
+use BookRater\RaterBundle\Api\Client\GoodReadsApiClient;
 use BookRater\RaterBundle\Entity\Author;
 use BookRater\RaterBundle\Entity\Book;
 use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Mapping\PostPersist;
-use Doctrine\ORM\Mapping\PostUpdate;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\NonUniqueResultException;
 use Google_Service_Books;
 use Google_Service_Books_Volumes;
 use Google_Service_Books_VolumeVolumeInfo;
-use GuzzleHttp\Client as GuzzleClient;
 
 class BookListener
 {
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
 
     /**
      * @var Google_Service_Books
@@ -29,69 +25,43 @@ class BookListener
     private $googleBooksClient;
 
     /**
-     * @var GuzzleClient
+     * @var GoodReadsApiClient
      */
-    private $guzzleClient;
-
-    /**
-     * @var string
-     */
-    private $goodBooksDeveloperKey;
+    private $goodReadsApiClient;
 
     /**
      * ReviewListener constructor.
-     * @param EntityManagerInterface $em
      * @param Google_Service_Books $googleBooksClient
-     * @param GuzzleClient $guzzleClient
-     * @param string $goodBooksDeveloperKey
+     * @param GoodReadsApiClient $goodReadsApiClient
      */
-    public function __construct(EntityManagerInterface $em, Google_Service_Books $googleBooksClient,
-                                GuzzleClient $guzzleClient, string $goodBooksDeveloperKey)
+    public function __construct(Google_Service_Books $googleBooksClient, GoodReadsApiClient $goodReadsApiClient)
     {
-        // TODO init GuzzleClient using
-        $this->em = $em;
         $this->googleBooksClient = $googleBooksClient;
-        $this->guzzleClient = $guzzleClient;
-        $this->goodBooksDeveloperKey = $goodBooksDeveloperKey;
+        $this->goodReadsApiClient = $goodReadsApiClient;
     }
 
     /**
      * @param Book $book
      * @param LifecycleEventArgs $event
      *
-     * @PostPersist
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @PrePersist
      */
-    public function postPersistHandler(Book $book, LifecycleEventArgs $event)
+    public function prePersistHandler(Book $book, LifecycleEventArgs $event)
     {
         $this->updateGoogleBooksInfo($book);
-        $this->updateGoodReadsInfo($book);
+        $this->goodReadsApiClient->updateGoodReadsInfo($book);
     }
 
     /**
      * @param Book $book
      * @param LifecycleEventArgs $event
      *
-     * @PostUpdate
+     * @PreUpdate
      */
-    public function postUpdateHandler(Book $book, LifecycleEventArgs $event)
+    public function preUpdateHandler(Book $book, LifecycleEventArgs $event)
     {
         $this->updateGoogleBooksRating($book);
-    }
-
-    private function updateGoodReadsRating(Book $book)
-    {
-        $goodBooksId = $book->getGoodReadsId();
-
-        if ($goodBooksId) {
-            $query = sprintf('show.json?key=%s&id=%s', $this->goodBooksDeveloperKey, $goodBooksId);
-            $reviewInfo = $this->guzzleClient->request('GET', 'https://www.goodreads.com/book/review_counts.json?isbns=')
-            $book->setGoogleBooksRating($volume->getVolumeInfo()->getAverageRating());
-
-            $this->persistBook($book);
-        } else {
-            $this->updateGoodReadsInfo($book);
-        }
+        $this->goodReadsApiClient->updateGoodReadsInfo($book);
     }
 
     private function updateGoogleBooksRating(Book $book)
@@ -101,19 +71,9 @@ class BookListener
         if ($googleBooksId) {
             $volume = $this->googleBooksClient->volumes->get($googleBooksId);
             $book->setGoogleBooksRating($volume->getVolumeInfo()->getAverageRating());
-
-            $this->persistBook($book);
         } else {
             $this->updateGoogleBooksInfo($book);
         }
-    }
-
-    /**
-     * @param Book $book
-     */
-    public function updateGoodReadsInfo(Book $book): void
-    {
-
     }
 
     /**
@@ -132,8 +92,6 @@ class BookListener
                 $book->setGoogleBooksId($bestMatch->getId());
                 $this->updateGoogleUrls($book, $bestMatch);
                 $this->updateBookFromVolumeInfo($book, $volumeInfo);
-
-                $this->persistBook($book);
             }
         }
     }
@@ -175,14 +133,17 @@ class BookListener
     /**
      * @param Book $book
      * @param Google_Service_Books_VolumeVolumeInfo $volumeInfo
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function updateBookFromVolumeInfo(Book $book, Google_Service_Books_VolumeVolumeInfo $volumeInfo): void
     {
         $this->setISBNNumbers($book, $volumeInfo);
         $book->setPublishDate(new DateTime($volumeInfo->publishedDate));
         if ($book->getAuthors()->isEmpty()) {
-            $this->setAuthors($book, $volumeInfo);
+            try {
+                $this->setAuthors($book, $volumeInfo);
+            } catch (NonUniqueResultException $e) {
+                // Actually can't throw due to constraints
+            }
         }
         if (!$book->getDescription()) {
             $book->setDescription($volumeInfo->getDescription());
