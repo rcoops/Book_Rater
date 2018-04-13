@@ -18,12 +18,23 @@
                     {{ book.displayEdition -}}
                 {% endif %}
                 {{- '' -}}
-                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}{{ book.publishDate|date('d-m-Y') }}{% endif %}
+                {% if (book.publishDate) %}{% if (book.edition) %}{{- ', ' }}{% endif %}Published: {{ book.publishDate|date('dS F, Y') }}{% endif %}
             </p>
+            {% if book.publisher is not null %}
+                <p class="card-text"><strong>Publisher: </strong>{{ book.publisher }}</p>
+            {% endif %}
+            <div class="card-block">
+                <div class="row justify-content-between">
+                    <p class="col-4"><strong>ISBN: </strong>{{ book.isbn }}</p>
+                    {% if book.isbn13 is not null %}
+                    <p class="col-4"><strong>ISBN-13: </strong>{{ book.isbn13 }}</p>
+                    {% endif %}
+                </div>
+            </div>
             <div class="card-block">
                 <div class="row justify-content-between">
                     <p class="col-4">
-                        <strong>Rating:</strong>
+                        <strong>Rating:</strong><br/>
                         {% if book.averageRating is null %}
                             Not yet rated!
                         {% else %}
@@ -37,12 +48,27 @@
                             {% endfor %}
                         {% endif %}
                     </p>
-                    <p class="col-6">
-                        <strong>Rating (Google Books):</strong>
+                    <p class="col-4">
+                        <strong>Rating (Google Books):</strong><br/>
                         {% if book.googleBooksRating is null %}
                             Not rated!
                         {% else %}
                             {% set rating = book.googleBooksRating|number_format %}
+                            {% for i in 1..5 %}
+                                {% if i <= rating %}
+                                    <i class="fa fa-star gold"></i>
+                                {% else %}
+                                    <i class="fa fa-star-o gold"></i>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    <p class="col-4">
+                        <strong>Rating (Good Reads):</strong><br/>
+                        {% if book.goodReadsRating is null %}
+                            Not rated!
+                        {% else %}
+                            {% set rating = book.goodReadsRating|number_format %}
                             {% for i in 1..5 %}
                                 {% if i <= rating %}
                                     <i class="fa fa-star gold"></i>
@@ -70,7 +96,8 @@
                         </a>
                     </div>
                     <div class="col-3">
-                        <a href="{{ path('bookrater_book_create_review', {'id': book.id }) }}" class="btn btn-primary card-link">
+                        <a href="{{ path('bookrater_book_create_review', {'id': book.id }) }}"
+                           class="btn btn-primary card-link">
                             Add Review
                         </a>
                     </div>
@@ -81,37 +108,48 @@
         <section class="card-footer">
             <header>
                 <h4 class="h4">Links</h4>
-                {% if book.googleBooksUrl is not null or book.googleBooksReviewsUrl is not null %}
-                    <ul>
-                        {% if book.googleBooksUrl is not null %}
-                            <li><a href="{{ book.googleBooksUrl }}">Google Books</a></li>
-                        {% endif %}
-                        {% if book.googleBooksReviewsUrl is not null %}
-                            <li><a href="{{ book.googleBooksReviewsUrl }}">Google Books Reviews</a></li>
-                        {% endif %}
-                    </ul>
-                {% else %}
-                    <p>No reviews yet!</p>
-                {% endif %}
             </header>
+            {% if book.googleBooksUrl is not null or book.googleBooksReviewsUrl is not null %}
+                <ul>
+                    {% if book.googleBooksUrl is not null %}
+                        <li><a href="{{ book.googleBooksUrl }}">Google Books</a></li>
+                    {% endif %}
+                    {% if book.googleBooksReviewsUrl is not null %}
+                        <li><a href="{{ book.googleBooksReviewsUrl }}">Google Books Reviews</a></li>
+                    {% endif %}
+                </ul>
+            {% else %}
+                <p>No links to google books found!</p>
+            {% endif %}
         </section>
         <section class="card-footer">
             <header>
                 <h4 class="h4">Site Reviews</h4>
-                {% if book.reviews is not empty %}
-                    <ul>
-                        {% for item in book.reviews %}
-                            <li>
-                                <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
-                                - {{ item.rating }} / 5 <i class="fa fa-star gold"></i> -
-                                <small class="figure-caption">{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No reviews yet!</p>
-                {% endif %}
             </header>
+            {% if book.reviews is not empty %}
+                <ul>
+                    {% for item in book.reviews %}
+                        <li>
+                            <a href="{{ path('bookrater_review_view', {'id': item.id }) }}">{{ item.title }}</a>
+                            - {{ item.rating }} / 5 <i class="fa fa-star gold"></i> -
+                            <small class="figure-caption">{{ item.user }} - {{ item.created|date('d-m-Y') }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews yet!</p>
+            {% endif %}
         </section>
+
+        {% if goodReadsWidget is defined %}
+            <section class="card-footer">
+                <header>
+                    <h4 class="h4">Good Reads Reviews</h4>
+                </header>
+                <div class="d-flex justify-content-center align-content-center">
+                    {{ goodReadsWidget|raw }}
+                </div>
+            </section>
+        {% endif %}
     </section>
 {% endblock %}

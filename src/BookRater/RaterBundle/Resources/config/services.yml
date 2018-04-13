@@ -46,3 +46,10 @@ services:
 
     Google_Service_Books:
         class: Google_Service_Books
+
+    GuzzleHttp\Client:
+        arguments: ['%good_reads_guzzle_client_config%']
+
+    BookRater\RaterBundle\Api\Client\GoodReadsApiClient:
+        arguments: ['@GuzzleHttp\Client', '%good_reads_api_key%']
+

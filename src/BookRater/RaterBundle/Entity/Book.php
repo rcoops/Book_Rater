@@ -248,9 +248,29 @@ class Book
      *
      * @ORM\Column(name="google_books_rating", type="integer", nullable=true)
      *
-     * @SWG\Property(description="The book's average rating from 1 to 5 based on its reviews.", minimum="1", maximum="5")
+     * @SWG\Property(description="The book's average rating from 1 to 5 based on its (google) reviews.", minimum="1", maximum="5")
      */
     private $googleBooksRating;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="good_reads_id", type="string", nullable=true, unique=true)
+     */
+    private $goodReadsId;
+
+    /**
+     * @var int|null
+     *
+     * @Serializer\Expose
+     * @Serializer\Groups({"books", "authors", "reviews", "messages", "admin"})
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @ORM\Column(name="good_reads_rating", type="integer", nullable=true)
+     *
+     * @SWG\Property(description="The book's average rating from 1 to 5 based on its (good reads) reviews.", minimum="1", maximum="5")
+     */
+    private $goodReadsRating;
 
     /**
      * @Serializer\SerializedName("_links")
@@ -602,6 +622,41 @@ class Book
     public function setGoogleBooksRating(?int $googleBooksRating): Book
     {
         $this->googleBooksRating = $googleBooksRating;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getGoodReadsId()
+    {
+        return $this->goodReadsId;
+    }
+
+    /**
+     * @param null|string $goodReadsId
+     */
+    public function setGoodReadsId($goodReadsId)
+    {
+        $this->goodReadsId = $goodReadsId;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGoodReadsRating()
+    {
+        return $this->goodReadsRating;
+    }
+
+    /**
+     * @param int|null $goodReadsRating
+     * @return Book
+     */
+    public function setGoodReadsRating($goodReadsRating): Book
+    {
+        $this->goodReadsRating = $goodReadsRating;
 
         return $this;
     }
