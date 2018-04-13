@@ -8,11 +8,11 @@
             <h2 class="h2">{{ book.title }}</h2>
         </header>
         <div class="card-body">
-            <p class="card-text">
+            <h5 class="card-text h5">
                 {% if book.authors is not empty %}
                     {{ book.authors|join('; ') }}
                 {% endif %}
-            </p>
+            </h5>
             <p class="card-text">
                 {% if (book.edition) %}
                     {{ book.displayEdition -}}
