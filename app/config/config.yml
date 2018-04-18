@@ -147,9 +147,11 @@ bazinga_hateoas:
 
 nelmio_api_doc:
     documentation:
+        host: rickcooper.ddns.net
+        schemes: [https]
         info:
             title: Book Rater
-            description: 'The Web Application for... Rating Books'
+            description: "The following pages describe each API call in detail along with models for successful and failed responses. All <strong>'User'</strong> requests are admin only, with the exception of retrieving a user's reviews. All <strong>DELETE</strong> requests are also admin only, with the exception of reviews, which can also be carried out by the 'owner' of the review. All requests to <strong>view (GET)</strong> information are open to the general public without authorization, but to <strong>create or alter (POST/PUT/PATCH)</strong> any other resources, a token must be retrieved using the token endpoint described below with basic (username/password) authentication, and sent with the request in an 'Authorization' header as shown: 'Bearer {token}'. The documentation also details the necessary authorization level required for each request."
             version: 1.0.0
         securityDefinitions:
             Bearer:
