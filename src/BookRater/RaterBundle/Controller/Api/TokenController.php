@@ -46,8 +46,13 @@ class TokenController extends BaseApiController
      *   @SWG\Response(
      *     response=404,
      *     description="A 'Not Found' error response, if no Authorization header is provided or the user does not exist.",
+     *     @Model(type=ApiError::class),
      *   ),
-     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the password provided is not correct.",),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the password provided is not correct.",
+     *     @Model(type=ApiError::class),
+     *   ),
      * )
      */
     public function newTokenAction(Request $request)
