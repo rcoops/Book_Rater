@@ -2,6 +2,7 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use BookRater\RaterBundle\Api\ApiProblem;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -46,12 +47,12 @@ class TokenController extends BaseApiController
      *   @SWG\Response(
      *     response=404,
      *     description="A 'Not Found' error response, if no Authorization header is provided or the user does not exist.",
-     *     @Model(type=ApiError::class),
+     *     @Model(type=ApiProblem::class),
      *   ),
      *   @SWG\Response(
      *     response=401,
      *     description="An 'Unauthorized' error response, if the password provided is not correct.",
-     *     @Model(type=ApiError::class),
+     *     @Model(type=ApiProblem::class),
      *   ),
      * )
      */
