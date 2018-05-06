@@ -233,7 +233,10 @@ abstract class BaseApiController extends Controller
      */
     private function getFormatFromRequest(Request $request)
     {
-        $queryFormat = $request->query->get('format');
+        $queryFormat = $request->headers->get('Accept');
+        if ($queryFormat === 'application/xml' || $queryFormat === 'application/hal+xml') {
+            $queryFormat = 'xml';
+        }
         return $queryFormat ? $queryFormat : 'json';
     }
 
