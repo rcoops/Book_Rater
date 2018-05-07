@@ -109,11 +109,7 @@ class ReviewController extends BaseApiController
      */
     public function showAction(int $id, Request $request)
     {
-        $review = $this->getReviewRepository()->find($id);
-
-        if (!$review) {
-            $this->throwReviewNotFoundException($id);
-        }
+        $review = $this->getReviewIfExists($id);
 
         $response = $this->createApiResponseUsingRequestedFormat($review, $request);
         $this->setLocationHeader($response, 'api_reviews_show', ['id' => $review->getId()]);
@@ -241,11 +237,9 @@ class ReviewController extends BaseApiController
     public function updateAction(int $id, Request $request)
     {
         /** @var Review $review */
-        $review = $this->getReviewRepository()->find($id);
+        $review = $this->getReviewIfExists($id);
 
-        if (!$review) {
-            $this->throwReviewNotFoundException($id);
-        } else if (!$this->authorizationChecker->isGranted('OWNER', $review)) {
+        if (!$this->authorizationChecker->isGranted('OWNER', $review)) {
             throw new AccessDeniedHttpException();
         }
 
@@ -312,6 +306,20 @@ class ReviewController extends BaseApiController
     private function throwReviewNotFoundException(int $id) : void
     {
         throw $this->createNotFoundException(sprintf('No review found with id: "%s"', $id));
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getReviewIfExists(int $id)
+    {
+        $review = $this->getReviewRepository()->find($id);
+
+        if (!$review) {
+            $this->throwReviewNotFoundException($id);
+        }
+        return $review;
     }
 
     protected function getGroups()
