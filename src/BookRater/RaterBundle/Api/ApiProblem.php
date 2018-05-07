@@ -32,15 +32,21 @@ class ApiProblem
 
     /**
      * @var string
-     * @SWG\Property()
+     * @SWG\Property(type="string")
      */
     private $type;
 
     /**
      * @var string
-     * @SWG\Property()
+     * @SWG\Property(type="string")
      */
     private $title;
+
+    /**
+     * @var string
+     * @SWG\Property(type="string")
+     */
+    private $detail;
 
     private $extraData = [];
 

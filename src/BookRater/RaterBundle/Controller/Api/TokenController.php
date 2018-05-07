@@ -2,16 +2,17 @@
 
 namespace BookRater\RaterBundle\Controller\Api;
 
+use BookRater\RaterBundle\Api\ApiProblem;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
-
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Swagger\Annotations as SWG;
 
 class TokenController extends BaseApiController
 {
@@ -46,8 +47,13 @@ class TokenController extends BaseApiController
      *   @SWG\Response(
      *     response=404,
      *     description="A 'Not Found' error response, if no Authorization header is provided or the user does not exist.",
+     *     @Model(type=ApiProblem::class),
      *   ),
-     *   @SWG\Response(response=401, description="An 'Unauthorized' error response, if the password provided is not correct.",),
+     *   @SWG\Response(
+     *     response=401,
+     *     description="An 'Unauthorized' error response, if the password provided is not correct.",
+     *     @Model(type=ApiProblem::class),
+     *   ),
      * )
      */
     public function newTokenAction(Request $request)
