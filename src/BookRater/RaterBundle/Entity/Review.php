@@ -191,6 +191,13 @@ class Review
     private $bookId;
 
     /**
+     * Seperate from edited as we need a value initialised on creation or caching
+     * @ORM\Column(name="last_modified", type="datetime")
+     * @var DateTime
+     */
+    private $lastModified;
+
+    /**
      * @return int
      */
     public function getId() : int
@@ -334,6 +341,26 @@ class Review
     public function setEdited(?DateTime $edited) : Review
     {
         $this->edited = $edited;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastModified(): \DateTime
+    {
+        return $this->lastModified;
+    }
+
+    /**
+     * @param mixed $lastModified
+     * @return Review
+     */
+    public function setLastModified($lastModified): Review
+    {
+        $this->lastModified = $lastModified;
+        $this->book->setLastModified($lastModified);
 
         return $this;
     }

@@ -94,6 +94,7 @@ class AuthorController extends BaseApiController
      */
     public function showAction(string $lastName, string $firstName, Request $request)
     {
+        /** @var Author $author */
         $author = $this->getAuthorRepository()->findOneBy([
             'lastName' => $lastName,
             'firstName' => $firstName
@@ -101,6 +102,10 @@ class AuthorController extends BaseApiController
 
         if (!$author) {
             $this->throwAuthorNotFoundException($lastName, $firstName);
+        }
+        $response = $this->getCachedResponseIfExistent($request, $author->getLastModified());
+        if ($response) {
+            return $response;
         }
 
         $response = $this->createApiResponseUsingRequestedFormat($author, $request);
@@ -350,6 +355,7 @@ class AuthorController extends BaseApiController
      */
     private function persistAuthor(Author $author): void
     {
+        $author->setLastModified(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->persist($author);
         foreach ($author->getBooksAuthored() as $book) {

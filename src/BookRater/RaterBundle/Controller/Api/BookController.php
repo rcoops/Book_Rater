@@ -100,6 +100,11 @@ class BookController extends BaseApiController
         /** @var Book $book */
         $book = $this->getBookIfExists($id);
 
+        $response = $this->getCachedResponseIfExistent($request, $book->getLastModified());
+        if ($response) {
+            return $response;
+        }
+
         $response = $this->createApiResponseUsingRequestedFormat($book, $request);
         $this->setLocationHeader($response, 'api_books_show', [
             'id' => $book->getId(),
@@ -422,6 +427,7 @@ class BookController extends BaseApiController
      */
     private function persistBook(Book $book): void
     {
+        $book->setLastModified(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->persist($book);
         foreach ($book->getAuthors() as $author) {

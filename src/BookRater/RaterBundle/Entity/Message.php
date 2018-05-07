@@ -135,6 +135,12 @@ class Message
     private $links;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="last_modified", type="datetime")
+     */
+    private $lastModified;
+
+    /**
      * Get id
      *
      * @return int
@@ -269,6 +275,25 @@ class Message
     public function getUsername()
     {
         return $this->user->getUsername();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastModified(): \DateTime
+    {
+        return $this->lastModified;
+    }
+
+    /**
+     * @param mixed $lastModified
+     * @return Message
+     */
+    public function setLastModified($lastModified): Message
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
     }
 
     /**

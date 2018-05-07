@@ -57,6 +57,7 @@ class BookController extends EntityController
 
         if ($form->isValid()) {
             try {
+                $book->setLastModified(new \DateTime());
                 $this->entityManager->persist($book);
                 $this->entityManager->flush();
 
@@ -83,8 +84,11 @@ class BookController extends EntityController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $lastModified = new DateTime();
+            $book->setLastModified($lastModified);
             $review->setUser($this->getUser());
-            $review->setCreated(new DateTime());
+            $review->setCreated($lastModified);
+            $review->setLastModified($lastModified);
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 
@@ -105,6 +109,8 @@ class BookController extends EntityController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            $book->setLastModified(new DateTime());
             $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('bookrater_book_view', ['title' => $book->getTitle()]));

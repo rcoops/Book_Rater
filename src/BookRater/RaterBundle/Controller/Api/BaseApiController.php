@@ -257,4 +257,17 @@ abstract class BaseApiController extends Controller
         return $this->createApiResponse($data, $statusCode, $this->getFormatFromRequest($request));
     }
 
+    /**
+     * @param Request $request
+     * @param \DateTime $lastModified
+     * @return null|Response
+     */
+    protected function getCachedResponseIfExistent(Request $request, \DateTime $lastModified) {
+        $response = new Response();
+        $response->setLastModified($lastModified);
+        $response->setPublic();
+
+        return $response->isNotModified($request) ? $response : null;
+    }
+
 }

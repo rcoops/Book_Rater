@@ -58,6 +58,7 @@ class AuthorController extends EntityController
 
         if ($form->isValid())
         {
+            $author->setLastModified(new \DateTime());
             $this->entityManager->persist($author);
             $this->entityManager->flush();
 
@@ -71,6 +72,7 @@ class AuthorController extends EntityController
 
     public function editAction(string $lastName, string $firstName, Request $request)
     {
+        /** @var Author $author */
         $author = $this->authorRepository->findOneBy([
             'lastName' => $lastName,
             'firstName' => $firstName
@@ -82,6 +84,8 @@ class AuthorController extends EntityController
         $form->handleRequest($request);
 
         if($form->isValid()) {
+            $lastModified = new \DateTime();
+            $author->setLastModified($lastModified);
             $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('bookrater_author_view', [

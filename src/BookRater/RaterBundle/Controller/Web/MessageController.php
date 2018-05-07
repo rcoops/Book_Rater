@@ -41,8 +41,10 @@ class MessageController extends EntityController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $lastModified = new DateTime();
             $message->setUser($this->getUser());
-            $message->setCreated(new DateTime());
+            $message->setCreated($lastModified);
+            $message->setLastModified($lastModified);
             $message->setIsRead();
 
             $this->entityManager->persist($message);

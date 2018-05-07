@@ -50,7 +50,9 @@ class ReviewController extends EntityController
         $form->handleRequest($request);
 
         if($form->isValid()) {
-            $review->setEdited(new DateTime());
+            $lastModified = new DateTime();
+            $review->setLastModified($lastModified);
+            $review->setEdited($lastModified);
 
             $this->entityManager->flush();
 
@@ -67,8 +69,11 @@ class ReviewController extends EntityController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $lastModified = new DateTime();
+            $review->setLastModified($lastModified);
+            $review->getBook()->setLastModified($lastModified);
+            $review->setCreated($lastModified);
             $review->setUser($this->getUser());
-            $review->setCreated(new DateTime());
             $this->entityManager->persist($review);
             $this->entityManager->flush();
 

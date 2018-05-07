@@ -310,6 +310,38 @@ class Book
     // This is a fake property and will be overridden dynamically during serialisation - here for swagger's benefit
     private $authorIds;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="last_modified", type="datetime")
+     */
+    private $lastModified;
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastModified(): \DateTime
+    {
+        return $this->lastModified;
+    }
+
+    /**
+     * @param mixed $lastModified
+     * @return Book
+     */
+    public function setLastModified($lastModified): Book
+    {
+        $this->lastModified = $lastModified;
+
+        foreach ($this->getAuthors() as $author) {
+            $author->setLastModified($lastModified);
+        }
+        foreach ($this->getReviews() as $review) {
+            $review->setLastModified($lastModified);
+        }
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();

@@ -111,6 +111,11 @@ class ReviewController extends BaseApiController
     {
         $review = $this->getReviewIfExists($id);
 
+        $response = $this->getCachedResponseIfExistent($request, $review->getLastModified());
+        if ($response) {
+            return $response;
+        }
+
         $response = $this->createApiResponseUsingRequestedFormat($review, $request);
         $this->setLocationHeader($response, 'api_reviews_show', ['id' => $review->getId()]);
 
@@ -295,6 +300,7 @@ class ReviewController extends BaseApiController
      */
     private function persistReview(Review $review): void
     {
+        $review->setLastModified(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->persist($review);
         $em->flush();
