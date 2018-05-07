@@ -169,8 +169,16 @@ class AuthorController extends BaseApiController
     {
         $filter = $request->query->get('filter');
 
+
         $qb = $this->getAuthorRepository()
             ->findAllQueryBuilder($filter);
+        $authors = $qb->getQuery()->getResult();
+        if ($authors) {
+            $response = $this->getCachedResponseIfExistent($request, $this->getMostRecentModified($authors));
+            if ($response) {
+                return $response;
+            }
+        }
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_authors_collection');
 

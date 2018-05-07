@@ -177,6 +177,13 @@ class ReviewController extends BaseApiController
 
         $qb = $this->getReviewRepository()
             ->findAllQueryBuilder($filter);
+        $reviews = $qb->getQuery()->getResult();
+        if ($reviews) {
+            $response = $this->getCachedResponseIfExistent($request, $this->getMostRecentModified($reviews));
+            if ($response) {
+                return $response;
+            }
+        }
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_reviews_collection');
 

@@ -270,4 +270,14 @@ abstract class BaseApiController extends Controller
         return $response->isNotModified($request) ? $response : null;
     }
 
+    protected function getMostRecentModified(array $entities) {
+        $lastModifieds = array_map(function($item) {
+            return $item->getLastModified();
+        }, $entities);
+        $latest = array_reduce($lastModifieds, function ($carry, $item) {
+            return $carry > $item ? $carry : $item;
+        });
+        return $latest;
+    }
+
 }

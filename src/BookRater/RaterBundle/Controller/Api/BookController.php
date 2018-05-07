@@ -167,6 +167,13 @@ class BookController extends BaseApiController
 
         $qb = $this->getBookRepository()
             ->findAllByFilterQueryBuilder($filter);
+        $books = $qb->getQuery()->getResult();
+        if ($books) {
+            $response = $this->getCachedResponseIfExistent($request, $this->getMostRecentModified($books));
+            if ($response) {
+                return $response;
+            }
+        }
         $paginatedCollection = $this->paginationFactory
             ->createCollection($qb, $request, 'api_books_collection');
 
