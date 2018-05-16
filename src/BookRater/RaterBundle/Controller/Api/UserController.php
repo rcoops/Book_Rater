@@ -192,6 +192,12 @@ class UserController extends BaseApiController
      *     type="string",
      *     description="A unique identifier for the user (id, email or username).",
      *   ),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="page",
+     *     type="integer",
+     *     description="An optional page number for paginated results."
+     *   ),
      *   @SWG\Parameter(in="query", name="format", type="string", enum={"xml", "json"}),
      *   @SWG\Response(
      *     response=200,
