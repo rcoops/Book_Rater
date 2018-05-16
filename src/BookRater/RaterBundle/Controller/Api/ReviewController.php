@@ -243,7 +243,7 @@ class ReviewController extends BaseApiController
             throw new AccessDeniedHttpException();
         }
 
-        $form = $this->createForm(ReviewType::class, $review);
+        $form = $this->createForm(UpdateReviewType::class, $review);
         $this->processForm($request, $form);
         if (!$form->isValid()) {
             $this->throwApiProblemValidationException($form);
