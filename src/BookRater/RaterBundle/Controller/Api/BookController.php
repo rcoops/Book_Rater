@@ -97,11 +97,8 @@ class BookController extends BaseApiController
      */
     public function showAction(int $id, Request $request)
     {
-        $book = $this->getBookRepository()->find($id);
-
-        if (!$book) {
-            $this->throwBookNotFoundException($id);
-        }
+        /** @var Book $book */
+        $book = $this->getBookIfExists($id);
 
         $response = $this->createApiResponseUsingRequestedFormat($book, $request);
         $this->setLocationHeader($response, 'api_books_show', [
@@ -226,11 +223,7 @@ class BookController extends BaseApiController
     public function updateAction(int $id, Request $request)
     {
         /** @var Book|null $book */
-        $book = $this->getBookRepository()->find($id);
-
-        if (!$book) {
-            $this->throwBookNotFoundException($id);
-        }
+        $book = $this->getBookIfExists($id);
 
         $form = $this->createForm(UpdateBookType::class, $book);
         $this->processForm($request, $form);
@@ -444,6 +437,20 @@ class BookController extends BaseApiController
     private function throwBookNotFoundException(int $id) : void
     {
         throw $this->createNotFoundException(sprintf('No book found with id: "%s"', $id));
+    }
+
+    /**
+     * @param int $id
+     * @return Book
+     */
+    public function getBookIfExists(int $id): Book
+    {
+        $book = $this->getBookRepository()->find($id);
+
+        if (!$book) {
+            $this->throwBookNotFoundException($id);
+        }
+        return $book;
     }
 
     protected function getGroups()
